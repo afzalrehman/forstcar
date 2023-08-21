@@ -33,10 +33,7 @@ if (isset($_POST['submit'])) {
         $sql_num = mysqli_num_rows($sql);
         if ($sql_num > 0) {
             $warning['warning'] = 'user already exists';
-        } 
-
-        
-         else {    
+        } else {
 
             $insert = "INSERT INTO admin_users(`userfullname` , `user_email` ,`user_password` ,`user_type` ,`user_contact` ,`registered_on`)
             VALUES('$name' , '$email', '$pass_hach', '$user_type', '$contact', NOW())";

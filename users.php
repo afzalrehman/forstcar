@@ -10,35 +10,54 @@ require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
 
-require 'db.php';
-$insertSuccess = false;
-$emailAlready = false;
-$noInserted = false;
-$passNoMatch = false;
+require 'config.php';
+$error = array();
+$succses = array();
+$warning = array();
+
 
 if (isset($_POST['submit'])) {
-    $username = mysqli_real_escape_string($conn, $_POST['username']);
-    $email = mysqli_real_escape_string($conn, $_POST['user_email']);
-    $password = mysqli_real_escape_string($conn, $_POST['user_password']);
-    $password = mysqli_real_escape_string($conn, $_POST['user_type']);
-    $mobile = mysqli_real_escape_string($conn, $_POST['user_contact']);
-    $cpassword = mysqli_real_escape_string($conn, $_POST['user_image']);
+    $user_fullname = mysqli_real_escape_string($conn, $_POST['user_fullname']);
+    $user_email = mysqli_real_escape_string($conn, $_POST['user_email']);
+    $user_password = mysqli_real_escape_string($conn, $_POST['user_password']);
+    $user_type = mysqli_real_escape_string($conn, $_POST['user_type']);
+    $user_contact = mysqli_real_escape_string($conn, $_POST['user_contact']);
+    $user_image = mysqli_real_escape_string($conn, $_POST['user_image']);
 
-    $pass = password_hash($password, PASSWORD_BCRYPT);
+    $pass = password_hash($user_password, PASSWORD_BCRYPT);
 
     $token = bin2hex(random_bytes(15));
 
-    $emailquery = "SELECT * FROM registrationemail WHERE email='$email' ";
-    $query = mysqli_query($conn, $emailquery);
-
-    $emailcount = mysqli_num_rows($query);
-    if ($emailcount > 0) {
-        $emailAlready = true;
+    if (empty($user_fullname)) {
+        $error['user_fullname'] = "Please Fill Name";
+    }
+    if (empty($user_email)) {
+        $error['user_email'] = "Please Fill Email";
+    }
+    if (empty($user_password)) {
+        $error['user_password'] = "Please Fill Passwrod";
+    }
+    if (empty($user_type)) {
+        $error['user_type'] = "Please Fill User Type";
+    }
+    if (empty($user_contact)) {
+        $error['user_contact'] = "Please Fill Contact";
+    }
+    if (empty($user_image)) {
+        $error['user_image'] = "Please Fill image";
     } else {
-        if ($password === $cpassword) {
 
-            $insertquery = "INSERT INTO `registrationemail`(`username`, `email`, `mobile`, `password`, `cpassword`, `token`, `status`) 
-            VALUES ('$username','$email','$mobile','$pass','$cpass', '$token', 'inactive')";
+
+        $emailquery = "SELECT * FROM `admin_users` WHERE `user_email` = '$user_email' ";
+        $query = mysqli_query($conn, $emailquery);
+
+        $emailcount = mysqli_num_rows($query);
+        if ($emailcount > 0) {
+            $warning['warning'] = 'user already exists';
+        } else {
+
+            $insertquery = "INSERT INTO `admin_users`(`user_fullname`, `user_email`, `user_password`, `user_type`, `user_contact`, `user_image`, `token`, `is_verified`, `registered_on`) 
+            VALUES ('$user_fullname', '$user_email', '$pass', '$user_contact', '$user_image', '$token', 'inactive', NOW())";
 
             $iquery = mysqli_query($conn, $insertquery);
             if ($iquery) {
@@ -55,25 +74,23 @@ if (isset($_POST['submit'])) {
                     $mail->Port = 587;
 
                     $mail->setFrom('hammadking427@gmail.com', 'Abu_Hammad');
-                    $mail->addAddress($email, $username);
+                    $mail->addAddress($user_email, $user_fullname);
 
                     $mail->Subject = 'Email Activation';
-                    $mail->Body = "Hi, $username. Click here too activate your account 
-                    http://localhost/cleint-1/activate.php?token=$token ";
+                    $mail->Body = "Hi, $user_fullname. Click here too activate your account 
+                    http://localhost/forstcar/activate.php?token=$token ";
                     $send_email = "From: hammadking427@gmail.com";
 
                     $mail->send();
                     $_SESSION['msg'] = "Check you mail to activate your account 
                     $email";
-                    header('location:login.php');
+                    $succses['succses'] = 'Please Check The Gmail And Acticated';
                 } catch (Exception $e) {
                     echo "Failed to send email. Error: {$mail->ErrorInfo}";
                 }
             } else {
-                $noInserted = true;
+                $warning['warning'] = 'No Inserted';
             }
-        } else {
-            $passNoMatch = true;
         }
     }
 }
@@ -178,87 +195,106 @@ if (isset($_POST['submit'])) {
         </div>
         <div id="layoutSidenav_content">
             <main>
-                <div class="container-fluid">
-                    <?php if (isset($succses['succses'])) echo $succses['succses']; ?>
-                    <?php if (isset($warning['warning'])) echo $warning['warning']; ?>
+                <div class="container-fluid my-3">
+
+
+                    <?php
+
+                    if (isset($succses['succses']))
+                        echo '
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>@Error!</strong> ' . $succses['succses'] . '
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>';
+
+                    if (isset($warning['warning']))
+                        echo '
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>@Error!</strong> ' . $warning['warning'] . '
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>';
+
+                    ?>
+
+
                     <div class="card  my-5 mein-card mb-5">
                         <h3 class=" font-inter text-center">Add New User</h3>
                         <div class="container-fluid course-card">
-                            <div class="row my-5 ">
-                                <div class="col-lg-6">
-                                    <form action="" method="post">
-                                        <!-- <div class="in py-3">
-                                            <input type="date" class=" input w-100 py-2 mt-3" placeholder="Date">
-                                        </div> -->
+                            <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST">
+                                <div class="row my-5 ">
+                                    <div class="col-lg-6">
 
                                         <div class="in">
-                                            <input type="text" name="name" class=" input w-100 py-2 mt-3" placeholder="User Name">
-                                            <span class='fw-bold text-danger '><?php if (isset($error['$name'])) {
-                                                                                    echo $error['$name'];
+                                            <input type="text" name="user_fullname" class=" input w-100 py-2 mt-3" placeholder="User FullName">
+                                            <span class='fw-bold text-danger '><?php if (isset($error['user_fullname'])) {
+                                                                                    echo $error['user_fullname'];
                                                                                 } ?></span>
                                         </div>
 
                                         <div class="in">
-                                            <input type="email" name="email" class=" input w-100 py-2 mt-3" placeholder="User Email">
-                                            <span class='fw-bold text-danger '><?php if (isset($error['$email'])) {
-                                                                                    echo $error['$email'];
+                                            <input type="email" name="user_email" class=" input w-100 py-2 mt-3" placeholder="User Email">
+                                            <span class='fw-bold text-danger '><?php if (isset($error['user_email'])) {
+                                                                                    echo $error['user_email'];
                                                                                 } ?></span>
                                         </div>
                                         <div class="in">
-                                            <input type="password" name="password" class=" input w-100 py-2 mt-3" placeholder="Passwrod ">
-                                            <span class='fw-bold text-danger '><?php if (isset($error['$password'])) {
-                                                                                    echo $error['$password'];
+                                            <input type="password" name="user_password" class=" input w-100 py-2 mt-3" placeholder="Passwrod ">
+                                            <span class='fw-bold text-danger '><?php if (isset($error['user_password'])) {
+                                                                                    echo $error['user_password'];
                                                                                 } ?></span>
                                         </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <select name="user_type" class="input  py-2 mt-3 w-100">
-                                        <option value="" selected> User Type</option>
-                                        <option value="Admin"> Admin</option>
-                                        <!-- <option value="Course type w-100 ">Admin</option>
-                                        <option value="Course type w-100 "> Admin</option> -->
-                                        <span class='fw-bold text-danger '><?php if (isset($error['$user_type'])) {
-                                                                                echo $error['$user_type'];
-                                                                            } ?></span>
-                                    </select>
-
-                                    <div class="in">
-                                        <input type="text" name="contact" class=" input w-100 py-2 mt-3" placeholder="Contact ">
-                                        <span class='fw-bold text-danger '><?php if (isset($error['$contact'])) {
-                                                                                echo $error['$contact'];
-                                                                            } ?></span>
                                     </div>
-                                    <!-- <div class="in">
-                                        <input type="file" name="image" class=" input w-100 py-2 mt-3" placeholder="Image ">
-                                        
-                                    </div> -->
-                                </div>
+                                    <div class="col-lg-6">
+                                        <select name="user_type" class="input  py-2 mt-3 w-100">
+                                            <option value="" selected> User Type</option>
+                                            <option value="Admin"> Admin</option>
+                                            <!-- <option value="Course type w-100 ">Admin</option>
+                                        <option value="Course type w-100 "> Admin</option> -->
+                                        </select>
+                                        <span class='fw-bold text-danger '><?php if (isset($error['user_type'])) {
+                                                                                echo $error['user_type'];
+                                                                            } ?></span>
+
+                                        <div class="in">
+                                            <input type="text" name="user_contact" class=" input w-100 py-2 mt-3" placeholder="Contact ">
+                                            <span class='fw-bold text-danger '><?php if (isset($error['user_contact'])) {
+                                                                                    echo $error['user_contact'];
+                                                                                } ?></span>
+                                        </div>
+                                        <div class="in">
+                                            <input type="file" name="user_image" class=" input w-100 py-2 mt-3" placeholder="Image ">
+                                            <span class='fw-bold text-danger '><?php if (isset($error['user_image'])) {
+                                                                                    echo $error['user_image'];
+                                                                                } ?></span>
+
+                                        </div>
+                                    </div>
 
 
-                                <button type="submit" name="submit" class="save py-2">Save</button>
-                                </form>
+                                    <button type="submit" name="submit" class="save py-2">Save</button>
+                            </form>
 
-                            </div>
                         </div>
-
-
-
                     </div>
+
+
+
                 </div>
-            </main>
-            <footer class="py-4 bg-light mt-auto">
-                <div class="container-fluid px-4">
-                    <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Your Website 2023</div>
-                        <div>
-                            <a href="#">Privacy Policy</a>
-                            &middot;
-                            <a href="#">Terms &amp; Conditions</a>
-                        </div>
-                    </div>
-                </div>
-            </footer>
         </div>
+        </main>
+        <footer class="py-4 bg-light mt-auto">
+            <div class="container-fluid px-4">
+                <div class="d-flex align-items-center justify-content-between small">
+                    <div class="text-muted">Copyright &copy; Your Website 2023</div>
+                    <div>
+                        <a href="#">Privacy Policy</a>
+                        &middot;
+                        <a href="#">Terms &amp; Conditions</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

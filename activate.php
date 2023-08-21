@@ -6,7 +6,7 @@ if (isset($_GET['token'])) {
     $token = $_GET['token'];
 
     // Prepare the update query using a prepared statement
-    $updatequery = "UPDATE `registrationemail` SET status = 'active' WHERE token = ?";
+    $updatequery = "UPDATE `admin_users` SET `email_verfied_at` = NOW() WHERE token = ?";
     $stmt = mysqli_prepare($conn, $updatequery);
     mysqli_stmt_bind_param($stmt, "s", $token);
     
