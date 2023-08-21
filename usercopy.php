@@ -18,10 +18,11 @@ $passNoMatch = false;
 
 if (isset($_POST['submit'])) {
     $username = mysqli_real_escape_string($conn, $_POST['username']);
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $mobile = mysqli_real_escape_string($conn, $_POST['mobile']);
-    $password = mysqli_real_escape_string($conn, $_POST['password']);
-    $cpassword = mysqli_real_escape_string($conn, $_POST['cpassword']);
+    $email = mysqli_real_escape_string($conn, $_POST['user_email']);
+    $password = mysqli_real_escape_string($conn, $_POST['user_password']);
+    $password = mysqli_real_escape_string($conn, $_POST['user_type']);
+    $mobile = mysqli_real_escape_string($conn, $_POST['user_contact']);
+    $cpassword = mysqli_real_escape_string($conn, $_POST['user_image']);
 
     $pass = password_hash($password, PASSWORD_BCRYPT);
 
