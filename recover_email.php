@@ -14,10 +14,10 @@ require 'db.php';
 $emailNoFound = false;
 
 if (isset($_POST['submit'])) {
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $user_email = mysqli_real_escape_string($conn, $_POST['user_email']);
 
 
-    $emailquery = "SELECT * FROM registrationemail WHERE email='$email' ";
+    $emailquery = "SELECT * FROM `admin_users` WHERE `user_email` = '$user_email' ";
     $query = mysqli_query($conn, $emailquery);
 
     $emailcount = mysqli_num_rows($query);
@@ -25,7 +25,7 @@ if (isset($_POST['submit'])) {
 
         $userdata = mysqli_fetch_array($query);
 
-        $username = $userdata['username'];
+        $user_fullname = $userdata['user_fullname'];
         $token = $userdata['token'];
 
                 $mail = new PHPMailer(true);
@@ -40,11 +40,11 @@ if (isset($_POST['submit'])) {
                     $mail->Port = 587;
 
                     $mail->setFrom('noorulahad606@gmail.com', 'Noor');
-                    $mail->addAddress($email, $username);
+                    $mail->addAddress($user_email, $user_fullname);
 
                     $mail->Subject = 'Password Reset';
-                    $mail->Body = "Hi, $username. Click here too activate your account 
-                    http://localhost/cleint-1/reset_password.php?token=$token ";
+                    $mail->Body = "Hi, $user_fullname. Click here too activate your account 
+                    http://localhost/forstcar/reset_password.php?token=$token ";
                     $send_email = "From: muhammadafzal1903@gmail.com";
 
                     $mail->send();
