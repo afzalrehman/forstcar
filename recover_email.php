@@ -34,18 +34,31 @@ if (isset($_POST['submit'])) {
                     $mail->isSMTP();
                     $mail->Host = 'smtp.gmail.com';
                     $mail->SMTPAuth = true;
+<<<<<<< HEAD
                     $mail->Username = 'hammadking427@gmail.com';
                     $mail->Password = 'gtohfmaaanqufdbn';
                     $mail->SMTPSecure = 'tls';
                     $mail->Port = 587;
 
                     $mail->setFrom('hammadking427@gmail.com', 'Abu_Hammad');
+=======
+                    $mail->Username = 'noorulahad606@gmail.com';
+                    $mail->Password = 'kulbbsejofmqiztc';
+                    $mail->SMTPSecure = 'tls';
+                    $mail->Port = 587;
+
+                    $mail->setFrom('noorulahad606@gmail.com', 'Noor');
+>>>>>>> 526eec4f27354a96f174aba105c148b25dd1a789
                     $mail->addAddress($email, $username);
 
                     $mail->Subject = 'Password Reset';
                     $mail->Body = "Hi, $username. Click here too activate your account 
                     http://localhost/cleint-1/reset_password.php?token=$token ";
+<<<<<<< HEAD
                     $send_email = "From: hammadking427@gmail.com";
+=======
+                    $send_email = "From: muhammadafzal1903@gmail.com";
+>>>>>>> 526eec4f27354a96f174aba105c148b25dd1a789
 
                     $mail->send();
                     $_SESSION['msg'] = "Check you mail to reset your password 

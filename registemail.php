@@ -49,18 +49,32 @@ if (isset($_POST['submit'])) {
                     $mail->isSMTP();
                     $mail->Host = 'smtp.gmail.com';
                     $mail->SMTPAuth = true;
+<<<<<<< HEAD
                     $mail->Username = 'hammadking427@gmail.com';
                     $mail->Password = 'gtohfmaaanqufdbn';
                     $mail->SMTPSecure = 'tls';
                     $mail->Port = 587;
 
                     $mail->setFrom('hammadking427@gmail.com', 'Abu_Hammad');
+=======
+                    $mail->Username = 'noorulahad606@gmail.com';
+                    $mail->Password = 'kulbbsejofmqiztc';
+                    $mail->SMTPSecure = 'tls';
+                    $mail->Port = 587;
+
+                    $mail->setFrom('muhammadafzal1903@gmail.com', 'Afzal');
+>>>>>>> 526eec4f27354a96f174aba105c148b25dd1a789
                     $mail->addAddress($email, $username);
 
                     $mail->Subject = 'Email Activation';
                     $mail->Body = "Hi, $username. Click here too activate your account 
+<<<<<<< HEAD
                     http://localhost/cleint-1/activate.php?token=$token ";
                     $send_email = "From: hammadking427@gmail.com";
+=======
+                    http://localhost/cleint/activate.php?token=$token";
+                    $send_email = "From: muhammadafzal1903@gmail.com";
+>>>>>>> 526eec4f27354a96f174aba105c148b25dd1a789
 
                     $mail->send();
                     $_SESSION['msg'] = "Check you mail to activate your account 
