@@ -29,85 +29,17 @@ if (!isset($_SESSION['user_fullname'])) {
 </head>
 
 <body class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-white shadow">
-        <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="index.html"><img width="200px" src="assets/img/cropped-frostcar_logo-2-1.png" alt=""></a>
-
-        <!-- Sidebar Toggle-->
-        <button class="btn text-black btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="text-dark fas fa-bars"></i></button> <!-- Navbar Search-->
-        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-            <div class="input-group">
-                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class=" fas fa-search"></i></button>
-            </div>
-        </form>
-        <!-- Navbar-->
-        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-dark" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="text-dark fs-5 fas fa-user fa-fw"></i></a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <!-- <li><a class="dropdown-item" href="#!">Settings</a></li> -->
-                    <!-- <li><a class="dropdown-item" href="#!">Activity Log</a></li> -->
-                    <li class="dropdown-item">
-                        <h6 class="mt-0 mb-0"><b>Name</b></h6>
-                        <p><?php echo $_SESSION['user_fullname']; ?></p>
-                        <h6 class="mt-0 mb-0"><b>Email</b></h6>
-                        <p><?php echo $_SESSION['user_email']; ?></p>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider mt-0 mb-0" />
-                    </li>
-                    <li><a class="dropdown-item" href="./logout.php">Logout</a></li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
+    <!-- navbar -->
+    <?php
+    require 'navbar.php';
+    ?>
+    <!-- navbar End -->
     <div id="layoutSidenav">
-        <div id="layoutSidenav_nav">
-            <nav class="sb-sidenav accordion sb-sidenav side-bg bg-nav  shadow" id="sidenavAccordion">
-                <div class="sb-sidenav-menu">
-                    <div class="nav">
-                        <div class="sb-sidenav-menu-heading"></div>
-                        <a class="nav-link hover active" href="index.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
-                            Dashboard
-                        </a>
-
-                        <a class="nav-link collapsed hover" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon "><i class="fa-solid fa-truck"></i></div>
-                            Truck
-                            <div class="sb-sidenav-collapse-arrow "><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse " id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link hover " href="company.html">Company</a>
-                                <a class="nav-link hover " href="add-truck.html">Add Truck Details</a>
-                                <a class="nav-link hover " href="tables.html">View Truck Details</a>
-                            </nav>
-                        </div>
-
-
-                        <a class="nav-link collapsed hover" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts1">
-                            <div class="sb-nav-link-icon "><i class="fa-solid fa-user"></i></div>
-                            Users
-                            <div class="sb-sidenav-collapse-arrow "><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse " id="collapseLayouts1" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link hover  " href="user.html">User Add</a>
-                                <a class="nav-link hover " href="uservewi.html">User Vewi</a>
-
-                            </nav>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="sb-sidenav-footer">
-                    <div class="small">Logged in as:</div>
-                    Start Bootstrap
-                </div>
-            </nav>
-        </div>
+        <!-- Sidebar -->
+        <?php
+        require 'sidebar.php';
+        ?>
+        <!-- Sidebar End -->
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
