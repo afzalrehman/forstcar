@@ -8,10 +8,10 @@ $emailError = false;
 $passError = false;
 
 if (isset($_POST['submit'])) {
-    $user_email = $_POST['user_email'];
-    $user_password = $_POST['user_password'];
+    $user_email = mysqli_real_escape_string($conn, $_POST['user_email']);
+    $user_password = mysqli_real_escape_string($conn, $_POST['user_password']);
 
-    $email_search = "SELECT * FROM `admin_users` WHERE `user_email` = '$user_email' AND is_verified = 'active' ";
+    $email_search = "SELECT * FROM `admin_users` WHERE `user_email` = '$user_email' AND `is_verified` = 'active' ";
     $query = mysqli_query($conn, $email_search);
 
     $email_count = mysqli_num_rows($query);
@@ -19,23 +19,23 @@ if (isset($_POST['submit'])) {
     if ($email_count) {
         $email_pass = mysqli_fetch_assoc($query);
 
-        $db_pass = $email_pass['password'];
+        $db_pass = $email_pass['user_password'];
 
         $_SESSION['user_fullname'] = $email_pass['user_fullname'];
         $_SESSION['user_email'] = $email_pass['user_email'];
 
-        $pass_decode = password_verify($password, $db_pass);
+        $pass_decode = password_verify($user_password, $db_pass);
 
         if ($pass_decode) {
 
             if (isset($_POST['rememberme'])) {
 
-                setcookie('emailcookie', $email, time() + 86400);
-                setcookie('passwordcookie', $password, time() + 86400);
+                setcookie('emailcookie', $user_email, time() + 86400);
+                setcookie('passwordcookie', $user_password, time() + 86400);
 
-                header('location:home.php');
+                header('location:index.php');
             } else {
-                header('location:home.php');
+                header('location:index.php');
             }
         } else {
             $passError = true;

@@ -56,8 +56,8 @@ if (isset($_POST['submit'])) {
             $warning['warning'] = 'user already exists';
         } else {
 
-            $insertquery = "INSERT INTO `admin_users`(`user_fullname`, `user_email`, `user_password`, `user_type`, `user_contact`, `user_image`, `token`, `is_verified`, `registered_on`) 
-            VALUES ('$user_fullname', '$user_email', '$pass', '$user_contact', '$user_image', '$token', 'inactive', NOW())";
+            $insertquery = "INSERT INTO `admin_users`(`user_fullname`, `user_email`, `user_password`, `user_type`, `user_contact`, `user_image`, `registered_on`,`token`, `is_verified`) 
+            VALUES ('$user_fullname', '$user_email', '$pass', '$user_type', '$user_contact', '$user_image', NOW(),'$token', 'inactive')";
 
             $iquery = mysqli_query($conn, $insertquery);
             if ($iquery) {
@@ -202,8 +202,8 @@ if (isset($_POST['submit'])) {
 
                     if (isset($succses['succses']))
                         echo '
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>@Error!</strong> ' . $succses['succses'] . '
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>@succsesfully!</strong> ' . $succses['succses'] . '
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>';
 
