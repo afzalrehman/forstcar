@@ -1,3 +1,8 @@
+<?php
+include 'config.php';
+global $con;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -65,53 +70,58 @@
                                                         <!-- <input class="chack" type="checkbox"> -->
                                                         <i class="fa-solid fa-plus "></i>
                                                     </th>
-                                                    <th>Date<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>Company Name <i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>Contact Name <i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>Address <i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>FEE PER MONTH <i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>City<i class="fa-solid fa-arrow-down px-2"></i>
-                                                    </th>
-                                                    <th>State<i class="fa-solid fa-arrow-down px-2"></i>
-                                                    </th>
-                                                    <th>Zip Code <i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>Telephone <i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>Email <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                    <th>User_Id<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                    <th>User_Fullname<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                    <th>User_Email<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                    <th>User_Password<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                    <th>User_Type<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                    <th>User_Contact<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                    <th>User_Image<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                    <th>Registered_On<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                    <th>Updated_On<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                    <th>Email_Verfied_at<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                    <th>Token<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                    <th>Reset_Expiration<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                    <th>Reset_Token<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                    <th>Is_Verified<i class="fa-solid fa-arrow-down px-2"></i></th>
 
 
                                                 </tr>
                                             </thead>
 
                                             <tbody>
-                                                <tr>
-                                                    <td><input type="checkbox" class="text-input"></td>
-                                                    <td class="font">Bold text column</td>
-                                                    <td>Regular text column</td>
-                                                    <td>Regular text column</td>
-                                                    <td>Regular text column</td>
-                                                    <td>Regular text column</td>
-                                                    <td>Regular text column</td>
-                                                    <td>Regular text column</td>
-                                                    <td>Regular text column</td>
-                                                    <td>Regular text column</td>
-                                                    <td>Regular text column</td>
+                                                    <!-- ==============select qurey============ -->
+                                                    <?php
+                                                    $select = "SELECT * FROM `admin_users`";
+                                                    $result = mysqli_query($conn, $select);
+                                                    $res_num = mysqli_num_rows($result);
 
-                                                </tr>
+                                                    $no = 1;
+                                                    while ($row = mysqli_fetch_assoc($result)) {
+                                                    ?>
+                                                        <tr>
+                                                            <td><input type="checkbox" name="chack_btn_delete[]" class="text-input" value=""></td>
+                                                            <td class="font"><?php echo  $no ?></td>
 
-                                                <tr>
-                                                    <td><input type="checkbox" class="text-input"></td>
-                                                    <td class="font">Bold text column</td>
-                                                    <td>Regular text column</td>
-                                                    <td>Regular text column</td>
-                                                    <td>Regular text column</td>
-                                                    <td>Regular text column</td>
-                                                    <td>Regular text column</td>
-                                                    <td>Regular text column</td>
-                                                    <td>Regular text column</td>
-                                                    <td>Regular text column</td>
-                                                    <td>Regular text column</td>
+                                                            <td><?php echo  $row['user_fullname']; ?></td>
+                                                            <td><?php echo  $row['user_email']; ?></td>
+                                                            <td><?php echo  $row['user_password']; ?></td>
+                                                            <td><?php echo  $row['user_type']; ?></td>
+                                                            <td><?php echo $row['user_contact']; ?></td>
+                                                            <td><?php echo $row['user_image']; ?></td>
+                                                            <td><?php echo $row['registered_on']; ?></td>
+                                                            <td><?php echo $row['updated_on']; ?></td>
+                                                            <td><?php echo $row['email_verfied_at']; ?></td>
+                                                            <td><?php echo $row['token']; ?></td>
+                                                            <td><?php echo $row['reset_expiration']; ?></td>
+                                                            <td><?php echo $row['reset_token']; ?></td>
+                                                            <td><?php echo $row['is_verified']; ?></td>
+                                                        </tr>
+                                                    <?php
+                                                        $no = $no + 1;
+                                                    }
 
-                                                </tr>
+                                                    ?>
 
 
                                             </tbody>
