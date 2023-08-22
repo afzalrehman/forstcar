@@ -3,6 +3,10 @@
 session_start();
 include "config.php";
 
+if (!isset($_SESSION['user_fullname'])) {
+    echo "You are logged out";
+    header('location:login.php');
+}
 $emty = array();
 $warning = array();
 $succses = array();
@@ -75,9 +79,9 @@ if (isset($_POST['submit'])) {
             // Duplicate data found
             $warning['WARNING'] = "Data already exists.";
         } else {
-            $insert = " INSERT INTO importer_details(`company_name`,`company_address`, `company_telephone`,`company_contact`,`company_city`,`company_state`, `company_direct`,`company_email`, `company_zipcode`,
-            `company_port_of_entry`,`company_vessel_detail`,`company_trucking`,`company_misc`,`total_cost`, `custom_frieght` ,`added_on`,`added_by` )
-            VALUES('$name','$address','$phone','$contact','$company_city', '$company_state','$direct','$email','$company_zipcode','$port','$vessel','$trucking','$misc','$total_cost','$custom',NOW() ,)";
+            $insert = " INSERT INTO importer_details(`company_name`, `company_contact`,`company_address`, `company_city`, `company_state`,  `company_zipcode`,`company_telephone`, `company_email`, `company_direct`, 
+            `company_port_of_entry`,`company_vessel_detail`,`company_trucking`,`company_misc`,`total_cost`, `custom_frieght` ,`added_on`)
+            VALUES('$name', '$contact', '$address', '$company_city', '$company_state', '$company_zipcode','$phone', '$email', '$direct','$port','$vessel','$trucking','$misc','$total_cost','$custom', NOW())";
             $insert_sql = mysqli_query($conn, $insert);
 
             if ($insert_sql) {
@@ -111,37 +115,10 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-white shadow">
-        <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="index.html"><img width="200px" src="assets/img/cropped-frostcar_logo-2-1.png" alt=""></a>
-
-        <!-- Sidebar Toggle-->
-        <button class="btn text-black btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="text-dark fas fa-bars"></i></button>
-        <!-- Navbar Search-->
-        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-            <div class="input-group">
-                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-            </div>
-        </form>
-        <!-- Navbar-->
-        <ul class="navbar-nav    ms-auto ms-md-0 me-3 me-lg-4">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-dark " id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="text-black fs-5 fas fa-user fa-fw"></i></a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#!">Settings</a></li>
-                    <li><a class="dropdown-item" href="#!">Activity Log</a></li>
-                    <li>
-                        <hr class="dropdown-divider" />
-                    </li>
-                    <li><a class="dropdown-item" href="#!">Logout</a></li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
+<?php require "navbar.php";?>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
-            <nav class="sb-sidenav accordion sb-sidenav side-bg bg-nav shadow" id="sidenavAccordion">
+            <!-- <nav class="sb-sidenav accordion sb-sidenav side-bg bg-nav shadow" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading"></div>
@@ -164,7 +141,7 @@ if (isset($_POST['submit'])) {
                         </div>
 
 
-                        <!-- <div class="sb-sidenav-menu-heading">Addons</div> -->
+                       
 
 
                         <a class="nav-link collapsed hover" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts1">
@@ -179,17 +156,15 @@ if (isset($_POST['submit'])) {
 
                             </nav>
                         </div>
-                        <!-- <a class="nav-link" href="tables.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Tables
-                            </a> -->
+                       
                     </div>
                 </div>
                 <div class="sb-sidenav-footer  bg-side-foter text-light">
                     <div class="small">Logged in as:</div>
                     Start Bootstrap
                 </div>
-            </nav>
+            </nav> -->
+            <?php require "sidebar.php";?>
         </div>
         <div id="layoutSidenav_content">
             <main>
@@ -318,6 +293,7 @@ if (isset($_POST['submit'])) {
                                             <a href="">
                                                 <span class="fa-solid fa-cloud-arrow-down export export-btn"> </span>
                                             </a>
+                                            <a href="">Download</a>
                                         </div>
                                     </div>
                                 </div>
@@ -351,6 +327,7 @@ if (isset($_POST['submit'])) {
                                                     <th>Misc <i class="fa-solid fa-arrow-down px-2"></i></th>
                                                     <th>Total Cost <i class="fa-solid fa-arrow-down px-2"></i></th>
                                                     <th>Custom Freiht <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                    <th>added by <i class="fa-solid fa-arrow-down px-2"></i></th>
 
 
                                                 </tr>
@@ -386,6 +363,7 @@ if (isset($_POST['submit'])) {
                                                         <td><?php echo $row['company_misc'] ?></td>
                                                         <td><?php echo $row['total_cost'] ?></td>
                                                         <td><?php echo $row['custom_frieght'] ?></td>
+                                                        <td><?php echo $row['added_by'] ?></td>
                                                        
 
                                                     </tr>
