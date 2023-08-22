@@ -1,6 +1,6 @@
 <?php
 include 'config.php';
-global $con;
+global $conn;
 ?>
 
 <!DOCTYPE html>
