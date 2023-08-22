@@ -56,7 +56,7 @@ if (isset($_POST['submit'])) {
             $warning['warning'] = 'user already exists';
         } else {
 
-            $insertquery = "INSERT INTO admin_users (`userfullname`, `user_email`, `user_password`, `user_type`, `user_contact`, `user_image`, `registered_on`,`token`, `is_verified`) 
+            $insertquery = "INSERT INTO admin_users (`user_fullname`, `user_email`, `user_password`, `user_type`, `user_contact`, `user_image`, `registered_on`,`token`, `is_verified`) 
             VALUES ('$user_fullname', '$user_email', '$pass', '$user_type', '$user_contact', '$user_image', NOW(),'$token', 'inactive')";
 
             $iquery = mysqli_query($conn, $insertquery);
