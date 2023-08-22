@@ -15,9 +15,9 @@
                         </a>
                         <div class="collapse " id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link hover " href="./company.php">Company</a>
-                                <a class="nav-link hover " href="./add-truck.php">Add Truck Details</a>
-                                <a class="nav-link hover " href="./tables.php">View Truck Details</a>
+                                <a class="nav-link hover " href="company.php">Company</a>
+                                <a class="nav-link hover " href="add-truck.php">Add Truck Details</a>
+                                <a class="nav-link hover " href="tables.php">View Truck Details</a>
                             </nav>
                         </div>
 
@@ -29,8 +29,8 @@
                         </a>
                         <div class="collapse " id="collapseLayouts1" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link hover  " href="./users.php">User Add</a>
-                                <a class="nav-link hover " href="./uservewi.php">User Vewi</a>
+                                <a class="nav-link hover  " href="users.php">User Add</a>
+                                <a class="nav-link hover " href="uservewi.php">User Vewi</a>
 
                             </nav>
                         </div>
