@@ -188,44 +188,44 @@ if (isset($_POST['submit'])) {
 
                                         <div class="in">
                                             <input type="text" name="contact" id="contact" class=" input w-100 py-2 mt-3" placeholder="Contact Name ">
-                                            <span class="text-danger fs-6"><?php if(isset($emty['phone'])) echo $emty['phone']?></span>
+                                            <span class="text-danger fs-6"><?php if(isset($emty['contact'])) echo $emty['contact']?></span>
 
                                         </div>
 
                                         <div class="in">
                                             <input type="text" name="direct" id="direct" class=" input w-100 py-2 mt-3" placeholder="Direct ">
-                                            <span class="text-danger fs-6"><?php if(isset($emty['phone'])) echo $emty['phone']?></span>
+                                            <span class="text-danger fs-6"><?php if(isset($emty['direct'])) echo $emty['direct']?></span>
                                         </div>
                                         <div class="in">
                                             <input type="email" name="email" id="email" class=" input w-100 py-2 mt-3" placeholder="Email ">
-                                            <span class="text-danger fs-6"><?php if(isset($emty['phone'])) echo $emty['phone']?></span>
+                                            <span class="text-danger fs-6"><?php if(isset($emty['email'])) echo $emty['email']?></span>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
 
                                         <div class="in">
                                             <input type="text" name="port" id="port" class=" input w-100 py-2 mt-3" placeholder="Port Of Entry ">
-                                            <span class="text-danger fs-6"><?php if(isset($emty['phone'])) echo $emty['phone']?></span>
+                                            <span class="text-danger fs-6"><?php if(isset($emty['port'])) echo $emty['port']?></span>
                                         </div>
                                         <div class="in">
                                             <input type="text" name="vessel" id="vessel" class=" input w-100 py-2 mt-3" placeholder="Vessel Details">
-                                            <span class="text-danger fs-6"><?php if(isset($emty['phone'])) echo $emty['phone']?></span>
+                                            <span class="text-danger fs-6"><?php if(isset($emty['vessel'])) echo $emty['vessel']?></span>
                                         </div>
                                         <div class="in">
                                             <input type="text" name="trucking" id="trucking" class=" input w-100 py-2 mt-3" placeholder="Trucking">
-                                            <span class="text-danger fs-6"><?php if(isset($emty['phone'])) echo $emty['phone']?></span>
+                                            <span class="text-danger fs-6"><?php if(isset($emty['trucking'])) echo $emty['trucking']?></span>
                                         </div>
                                         <div class="in">
                                             <input type="text" name="misc" id="misc" class=" input w-100 py-2 mt-3" placeholder="Misc">
-                                            <span class="text-danger fs-6"><?php if(isset($emty['phone'])) echo $emty['phone']?></span>
+                                            <span class="text-danger fs-6"><?php if(isset($emty['misc'])) echo $emty['misc']?></span>
                                         </div>
                                         <div class="in">
                                             <input type="text" name="total_cost" id="total_cost" class=" input w-100 py-2 mt-3" placeholder="Total Cost">
-                                            <span class="text-danger fs-6"><?php if(isset($emty['phone'])) echo $emty['phone']?></span>
+                                            <span class="text-danger fs-6"><?php if(isset($emty['total_cost'])) echo $emty['total_cost']?></span>
                                         </div>
                                         <div class="in">
                                             <input type="text" name="custom" id="custom" class=" input w-100 py-2 mt-3" placeholder="Custom Freiht">
-                                            <span class="text-danger fs-6"><?php if(isset($emty['phone'])) echo $emty['phone']?></span>
+                                            <span class="text-danger fs-6"><?php if(isset($emty['custom'])) echo $emty['custom']?></span>
                                         </div>
 
 
