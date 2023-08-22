@@ -1,6 +1,34 @@
 <?php
+session_start();
 include 'config.php';
 global $conn;
+
+
+//  ===============DElete qurey=============== 
+if (isset($_POST['delete_btn'])) {
+    if (!isset($_POST['chack_btn_delete']) || empty($_POST['chack_btn_delete'])) {
+        $_SESSION['delete_chacke'] = "Please check the checkboxes to delete";
+
+        // You might want to redirect back to the previous page or handle this case accordingly.
+    } else {
+        $all_id = $_POST['chack_btn_delete'];
+        $extrext_id = implode(',', $all_id);
+
+        $delete_query = "DELETE FROM `admin_users` WHERE user_id IN ($extrext_id)";
+        $sql = mysqli_query($conn, $delete_query);
+
+        if ($sql) {
+            $_SESSION['Delete'] = "Data Delete Successfully!";
+        } else {
+            $_SESSION['Delete'] = "Failed to delete data!";
+        }
+    }
+}
+
+
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -40,56 +68,84 @@ global $conn;
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid">
+
+                    <?php
+                    if (isset($_SESSION['Delete'])) {
+                        echo '
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>!</strong> ' . $_SESSION['Delete'] . '.
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>';
+                        unset($_SESSION['Delete']);
+                    }
+                    if (isset($_SESSION['delete_chacke'])) {
+                        echo '
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>!WARNING</strong> ' . $_SESSION['delete_chacke'] . '.
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>';
+                        unset($_SESSION['delete_chacke']);
+                    }
+                    ?>
+
+
                     <div class="row my-5">
                         <div class="col-lg-12 ">
                             <div class="card">
-                                <div class="row">
-                                    <div class="col-lg-3 col-md-3 text-start py-3 px-4">
-                                        <p class="font student"> User Vewi Details</p>
-                                    </div>
-                                    <div class="col-lg-9 col-md-9 py-3 ">
-                                        <div class="btn-edit-delete1 text-end px-1">
-                                            <a href="">
-                                                <span class="fa-regular fa-trash-can export-btn delete">
-                                                </span></a>
-                                            <a href=""> <span class="fa-solid fa-pen-to-square edit export-btn"></span></a>
-                                            <a href="">
-                                                <span class="fa-solid fa-cloud-arrow-down export export-btn"> </span>
-                                            </a>
+                                <form action="POST">
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-3 text-start py-3 px-4">
+                                            <p class="font student"> User Vewi Details</p>
+                                        </div>
+                                        <div class="col-lg-9 col-md-9 py-3 ">
+                                            <div class="btn-edit-delete1 text-end px-1">
+                                                <button type="submit" class="export-btn delete" name="delete_btn">
+                                                    <span class="fa-regular fa-trash-can "></span>
+                                                </button>
+                                                <button type="submit" class="edit export-btn" name="">
+                                                    <span class="fa-solid fa-pen-to-square"></span>
+                                                </button>
+                                                <button type="submit" class="export export-btn" name="">
+                                                    <span class="fa-solid fa-cloud-arrow-down"> </span>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <hr class="m-0 ">
+                                    <hr class="m-0 ">
 
-                                <div class="dov ">
-                                    <div class="table-wrapper">
-                                        <table class="contain-table">
-                                            <thead>
-                                                <tr>
-                                                    <th>
-                                                        <!-- <input class="chack" type="checkbox"> -->
-                                                        <i class="fa-solid fa-plus "></i>
-                                                    </th>
-                                                    <th>User Id<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>User Fullname<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>User Email<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>User Password<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>User Type<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>User Contact<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>User Image<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>Registered On<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>Updated On<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>Email Verfied_at<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>Token<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>Reset Expiration<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>Reset Token<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>Is Verified<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                    <div class="dov ">
+                                        <div class="table-wrapper">
+                                            <table class="contain-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            <!-- <input class="chack" type="checkbox"> -->
+                                                            <i class="fa-solid fa-plus "></i>
+                                                        </th>
+                                                        <th>User Id<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <th>User Fullname<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <th>User Email<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <th>User Password<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <th>User Type<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <th>User Contact<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <th>User Image<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <th>Registered On<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <th>Updated On<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <th>Email Verfied_at<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <th>Token<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <th>Reset Expiration<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <th>Reset Token<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <th>Is Verified<i class="fa-solid fa-arrow-down px-2"></i></th>
 
 
-                                                </tr>
-                                            </thead>
+                                                    </tr>
+                                                </thead>
 
-                                            <tbody>
+                                                <tbody>
                                                     <!-- ==============select qurey============ -->
                                                     <?php
                                                     $select = "SELECT * FROM `admin_users`";
@@ -100,7 +156,7 @@ global $conn;
                                                     while ($row = mysqli_fetch_assoc($result)) {
                                                     ?>
                                                         <tr>
-                                                            <td><input type="checkbox" name="chack_btn_delete[]" class="text-input" value=""></td>
+                                                            <td><input type="checkbox" name="chack_btn_delete[]" class="text-input" value="<?php echo $row['user_id']; ?>"></td>
                                                             <td class="font"><?php echo  $no ?></td>
 
                                                             <td><?php echo  $row['user_fullname']; ?></td>
@@ -124,14 +180,16 @@ global $conn;
                                                     ?>
 
 
-                                            </tbody>
-                                        </table>
+                                                </tbody>
+                                            </table>
 
+                                        </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </main>
             <footer class="py-4 bg-light mt-auto">
