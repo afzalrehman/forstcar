@@ -132,7 +132,7 @@ if (isset($_POST['submit'])) {
     }
 
     .inputDesign:focus {
-        border-color: #f30303;
+        border-color: #0055b8;
         animation: inputFocusAnimation 0.3s;
     }
 
