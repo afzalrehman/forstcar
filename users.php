@@ -122,6 +122,34 @@ if (isset($_POST['submit'])) {
 
     <link rel="stylesheet" href="css/main.css">
 </head>
+<style>
+    .inputDesign {
+        padding: 10px;
+        border: 2px solid #ccc;
+        border-radius: 7px;
+        font-size: 16px;
+        outline: none;
+    }
+
+    .inputDesign:focus {
+        border-color: #f30303;
+        animation: inputFocusAnimation 0.3s;
+    }
+
+    @keyframes inputFocusAnimation {
+        0% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.05);
+        }
+
+        100% {
+            transform: scale(1);
+        }
+    }
+</style>
 
 <body class="sb-nav-fixed">
     <!-- navbar -->
@@ -167,27 +195,27 @@ if (isset($_POST['submit'])) {
                                     <div class="col-lg-6">
 
                                         <div class="in">
-                                            <input type="text" name="user_fullname" class=" input w-100 py-2 mt-3" placeholder="User FullName">
+                                            <input type="text" name="user_fullname" class="inputDesign w-100 py-2 mt-3" placeholder="User FullName">
                                             <span class='fw-bold text-danger '><?php if (isset($error['user_fullname'])) {
                                                                                     echo $error['user_fullname'];
                                                                                 } ?></span>
                                         </div>
 
                                         <div class="in">
-                                            <input type="email" name="user_email" class=" input w-100 py-2 mt-3" placeholder="User Email">
+                                            <input type="email" name="user_email" class="inputDesign w-100 py-2 mt-3" placeholder="User Email">
                                             <span class='fw-bold text-danger '><?php if (isset($error['user_email'])) {
                                                                                     echo $error['user_email'];
                                                                                 } ?></span>
                                         </div>
                                         <div class="in">
-                                            <input type="password" name="user_password" class=" input w-100 py-2 mt-3" placeholder="Passwrod" minlength="8">
+                                            <input type="password" name="user_password" class="inputDesign w-100 py-2 mt-3" placeholder="Passwrod" minlength="8">
                                             <span class='fw-bold text-danger '><?php if (isset($error['user_password'])) {
                                                                                     echo $error['user_password'];
                                                                                 } ?></span>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
-                                        <select name="user_type" class="input  py-2 mt-3 w-100">
+                                        <select name="user_type" class="inputDesign py-2 mt-3 w-100">
                                             <option value="" selected> User Type</option>
                                             <option value="Admin"> Admin</option>
                                             <!-- <option value="Course type w-100 ">Admin</option>
@@ -198,13 +226,13 @@ if (isset($_POST['submit'])) {
                                                                             } ?></span>
 
                                         <div class="in">
-                                            <input type="text" name="user_contact" class=" input w-100 py-2 mt-3" placeholder="Contact ">
+                                            <input type="text" name="user_contact" class="inputDesign w-100 py-2 mt-3" placeholder="Contact ">
                                             <span class='fw-bold text-danger '><?php if (isset($error['user_contact'])) {
                                                                                     echo $error['user_contact'];
                                                                                 } ?></span>
                                         </div>
                                         <div class="in">
-                                            <input type="file" name="user_image" class=" input w-100 py-2 mt-3" placeholder="Image ">
+                                            <input type="file" name="user_image" class="inputDesign w-100 py-2 mt-3" placeholder="Image ">
                                             <span class='fw-bold text-danger '><?php if (isset($error['user_image'])) {
                                                                                     echo $error['user_image'];
                                                                                 } ?></span>
