@@ -52,20 +52,20 @@
 
                                                     <div class="col-lg-4 mt-3">
                                                         <p>Body Length in Feet</p>
-                                                        <input class="form-check-input" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
-                                                        <label class="form-check-label" for="flexRadioDefault1">
+                                                        <input class="form-check-input bodyFeetCheck" type="checkbox" name="bodyFeetCheck" id="bodyFeetCheck">
+                                                        <label class="form-check-label" for="bodyFeetCheck">
                                                             14
                                                         </label>
-                                                        <input class="form-check-input ms-3" type="checkbox" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                                                        <label class="form-check-label" for="flexRadioDefault2">
+                                                        <input class="form-check-input bodyFeetCheck ms-3" type="checkbox" name="bodyFeetCheck" id="bodyFeetCheck">
+                                                        <label class="form-check-label" for="bodyFeetCheck">
                                                             15
                                                         </label>
-                                                        <input class="form-check-input ms-3" type="checkbox" name="flexRadioDefault" id="flexRadioDefault3">
-                                                        <label class="form-check-label" for="flexRadioDefault3">
+                                                        <input class="form-check-input bodyFeetCheck ms-3" type="checkbox" name="bodyFeetCheck" id="bodyFeetCheck">
+                                                        <label class="form-check-label" for="bodyFeetCheck">
                                                             14
                                                         </label>
-                                                        <input class="form-check-input ms-3" type="checkbox" name="flexRadioDefault" id="flexRadioDefault4" checked>
-                                                        <label class="form-check-label" for="flexRadioDefault4">
+                                                        <input class="form-check-input bodyFeetCheck ms-3" type="checkbox" name="bodyFeetCheck" id="bodyFeetCheck">
+                                                        <label class="form-check-label" for="bodyFeetCheck">
                                                             15
                                                         </label>
                                                     </div>
@@ -318,10 +318,12 @@
             </footer>
         </div>
     </div>
+
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <script src="js/scripts.js"></script>
+    <script src="./js/scripts.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
     <script src="assets/demo/chart-area-demo.js"></script>
     <script src="assets/demo/chart-bar-demo.js"></script>

@@ -172,7 +172,7 @@ if (isset($_POST['submit'])) {
                                                                                 } ?></span>
                                         </div>
                                         <div class="in">
-                                            <input type="password" name="user_password" class=" input w-100 py-2 mt-3" placeholder="Passwrod ">
+                                            <input type="password" name="user_password" class=" input w-100 py-2 mt-3" placeholder="Passwrod" minlength="8">
                                             <span class='fw-bold text-danger '><?php if (isset($error['user_password'])) {
                                                                                     echo $error['user_password'];
                                                                                 } ?></span>
