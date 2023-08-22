@@ -5,25 +5,7 @@ global $conn;
 
 
 //  ===============DElete qurey=============== 
-if (isset($_POST['delete_btn'])) {
-    if (!isset($_POST['chack_btn_delete']) || empty($_POST['chack_btn_delete'])) {
-        $_SESSION['delete_chacke'] = "Please check the checkboxes to delete";
 
-        // You might want to redirect back to the previous page or handle this case accordingly.
-    } else {
-        $all_id = $_POST['chack_btn_delete'];
-        $extrext_id = implode(',', $all_id);
-
-        $delete_query = "DELETE FROM `admin_users` WHERE user_id IN ($extrext_id)";
-        $sql = mysqli_query($conn, $delete_query);
-
-        if ($sql) {
-            $_SESSION['Delete'] = "Data Delete Successfully!";
-        } else {
-            $_SESSION['Delete'] = "Failed to delete data!";
-        }
-    }
-}
 
 
 
