@@ -70,20 +70,20 @@ global $con;
                                                         <!-- <input class="chack" type="checkbox"> -->
                                                         <i class="fa-solid fa-plus "></i>
                                                     </th>
-                                                    <th>User_Id<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>User_Fullname<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>User_Email<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>User_Password<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>User_Type<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>User_Contact<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>User_Image<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>Registered_On<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>Updated_On<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>Email_Verfied_at<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                    <th>User Id<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                    <th>User Fullname<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                    <th>User Email<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                    <th>User Password<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                    <th>User Type<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                    <th>User Contact<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                    <th>User Image<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                    <th>Registered On<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                    <th>Updated On<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                    <th>Email Verfied_at<i class="fa-solid fa-arrow-down px-2"></i></th>
                                                     <th>Token<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>Reset_Expiration<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>Reset_Token<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>Is_Verified<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                    <th>Reset Expiration<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                    <th>Reset Token<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                    <th>Is Verified<i class="fa-solid fa-arrow-down px-2"></i></th>
 
 
                                                 </tr>
