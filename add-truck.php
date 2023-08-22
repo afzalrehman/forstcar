@@ -52,19 +52,19 @@
 
                                                     <div class="col-lg-4 mt-3">
                                                         <p>Body Length in Feet</p>
-                                                        <input class="form-check-input bodyFeetCheck" type="checkbox" name="bodyFeetCheck" id="bodyFeetCheck">
+                                                        <input class="form-check-input bodyFeetCheck" type="checkbox" name="bodyFeetCheck">
                                                         <label class="form-check-label" for="bodyFeetCheck">
                                                             14
                                                         </label>
-                                                        <input class="form-check-input bodyFeetCheck ms-3" type="checkbox" name="bodyFeetCheck" id="bodyFeetCheck">
+                                                        <input class="form-check-input bodyFeetCheck ms-3" type="checkbox" name="bodyFeetCheck">
                                                         <label class="form-check-label" for="bodyFeetCheck">
                                                             15
                                                         </label>
-                                                        <input class="form-check-input bodyFeetCheck ms-3" type="checkbox" name="bodyFeetCheck" id="bodyFeetCheck">
+                                                        <input class="form-check-input bodyFeetCheck ms-3" type="checkbox" name="bodyFeetCheck">
                                                         <label class="form-check-label" for="bodyFeetCheck">
                                                             14
                                                         </label>
-                                                        <input class="form-check-input bodyFeetCheck ms-3" type="checkbox" name="bodyFeetCheck" id="bodyFeetCheck">
+                                                        <input class="form-check-input bodyFeetCheck ms-3" type="checkbox" name="bodyFeetCheck">
                                                         <label class="form-check-label" for="bodyFeetCheck">
                                                             15
                                                         </label>
@@ -73,14 +73,14 @@
                                                     <div class="col-lg-4 mt-3">
                                                         <p>Refrigeration</p>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                            <label class="form-check-label" for="flexCheckDefault">
+                                                            <input class="form-check-input refriCheck" type="checkbox" name="refriCheck">
+                                                            <label class="form-check-label" for="refriCheck">
                                                                 Low Temp - IceCream/Frozen
                                                             </label>
                                                         </div>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                                                            <label class="form-check-label" for="flexCheckChecked">
+                                                            <input class="form-check-input refriCheck" type="checkbox" name="refriCheck">
+                                                            <label class="form-check-label" for="refriCheck">
                                                                 Mid Temp - Fresh/Cold
                                                             </label>
                                                         </div>
@@ -89,20 +89,20 @@
                                                     <div class="col-lg-4 mt-3">
                                                         <p>Rear Door</p>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                            <input class="form-check-input rearCheck" type="checkbox" name="rearCheck">
                                                             <label class="form-check-label" for="flexCheckDefault">
                                                                 Center Door
                                                             </label>
                                                         </div>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                                                            <input class="form-check-input rearCheck" type="checkbox" name="rearCheck">
                                                             <label class="form-check-label" for="flexCheckChecked">
                                                                 Double Door
                                                             </label>
                                                         </div>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                                                            <label class="form-check-label" for="flexCheckChecked">
+                                                            <input class="form-check-input rearCheck" type="checkbox" name="rearCheck">
+                                                            <label class="form-check-label" for="rearCheck">
                                                                 Tri-fold Door
                                                             </label>
                                                         </div>
@@ -111,14 +111,14 @@
                                                     <div class="col-lg-4 mt-5">
                                                         <p>Side Door</p>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault5">
-                                                            <label class="form-check-label" for="flexRadioDefault5">
+                                                            <input class="form-check-input sideCheck" type="radio" name="sideCheck">
+                                                            <label class="form-check-label" for="sideCheck">
                                                                 Yes
                                                             </label>
                                                         </div>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault6" checked>
-                                                            <label class="form-check-label" for="flexRadioDefault6">
+                                                            <input class="form-check-input sideCheck" type="radio" name="sideCheck">
+                                                            <label class="form-check-label" for="sideCheck">
                                                                 No
                                                             </label>
                                                         </div>
@@ -127,14 +127,14 @@
                                                     <div class="col-lg-4 mt-5">
                                                         <p>E-Track (Tall Body Cargo Control)</p>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault7">
-                                                            <label class="form-check-label" for="flexRadioDefault7">
+                                                            <input class="form-check-input eTrackCheck" type="radio" name="eTrackCheck">
+                                                            <label class="form-check-label" for="eTrackCheck">
                                                                 Yes
                                                             </label>
                                                         </div>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault8" checked>
-                                                            <label class="form-check-label" for="flexRadioDefault8">
+                                                            <input class="form-check-input eTrackCheck" type="radio" name="eTrackCheck">
+                                                            <label class="form-check-label" for="eTrackCheck">
                                                                 No
                                                             </label>
                                                         </div>
@@ -143,20 +143,20 @@
                                                     <div class="col-lg-4 mt-5">
                                                         <p>Floor</p>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                            <label class="form-check-label" for="flexCheckDefault">
+                                                            <input class="form-check-input floorCheck" type="checkbox" name="floorCheck">
+                                                            <label class="form-check-label" for="floorCheck">
                                                                 Non-Slip Textured
                                                             </label>
                                                         </div>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                                                            <label class="form-check-label" for="flexCheckChecked">
+                                                            <input class="form-check-input floorCheck" type="checkbox" name="floorCheck">
+                                                            <label class="form-check-label" for="floorCheck">
                                                                 Taised Channel
                                                             </label>
                                                         </div>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                                                            <label class="form-check-label" for="flexCheckChecked">
+                                                            <input class="form-check-input floorCheck" type="checkbox" name="floorCheck">
+                                                            <label class="form-check-label" for="floorCheck">
                                                                 Steel Reinforced Diamond Palte
                                                             </label>
                                                         </div>
@@ -173,14 +173,14 @@
                                                     <div class="col-lg-4 mt-3">
                                                         <p>Temperature</p>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
-                                                            <label class="form-check-label" for="flexCheckDefault">
+                                                            <input class="form-check-input temperaCheck" type="checkbox" name="temperaCheck">
+                                                            <label class="form-check-label" for="temperaCheck">
                                                                 Low & Mid Temp
                                                             </label>
                                                         </div>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                                                            <label class="form-check-label" for="flexCheckChecked">
+                                                            <input class="form-check-input temperaCheck" type="checkbox" name="temperaCheck">
+                                                            <label class="form-check-label" for="temperaCheck">
                                                                 Low & Mid Temp & Dry
                                                             </label>
                                                         </div>
@@ -196,38 +196,38 @@
                                                     <div class="col-lg-4 mt-5">
                                                         <p>Accessories</p>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault5">
+                                                            <input class="form-check-input accessorCheck" type="radio" name="accessorCheck">
                                                             <label class="form-check-label" for="flexRadioDefault5">
                                                                 Shelving
                                                             </label>
                                                         </div>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault6" checked>
+                                                            <input class="form-check-input accessorCheck" type="radio" name="accessorCheck">
                                                             <label class="form-check-label" for="flexRadioDefault6">
                                                                 Grab Handles
                                                             </label>
                                                         </div>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault6" checked>
+                                                            <input class="form-check-input accessorCheck" type="radio" name="accessorCheck">
                                                             <label class="form-check-label" for="flexRadioDefault6">
                                                                 Roll Carts
                                                             </label>
                                                         </div>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault6" checked>
-                                                            <label class="form-check-label" for="flexRadioDefault6">
+                                                            <input class="form-check-input accessorCheck" type="radio" name="accessorCheck">
+                                                            <label class="form-check-label" for="accessorCheck">
                                                                 Steps
                                                             </label>
                                                         </div>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault6" checked>
-                                                            <label class="form-check-label" for="flexRadioDefault6">
+                                                            <input class="form-check-input accessorCheck" type="radio" name="accessorCheck">
+                                                            <label class="form-check-label" for="accessorCheck">
                                                                 Dolly Rack
                                                             </label>
                                                         </div>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault6" checked>
-                                                            <label class="form-check-label" for="flexRadioDefault6">
+                                                            <input class="form-check-input accessorCheck" type="radio" name="accessorCheck">
+                                                            <label class="form-check-label" for="accessorCheck">
                                                                 Remote Compressor
                                                             </label>
                                                         </div>
@@ -275,14 +275,14 @@
                                                         <div class="mb-5">
                                                             <p>Fuel Type</p>
 
-                                                            <input class="form-check-input" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
-                                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                            <input class="form-check-input fuelCheck" type="checkbox" name="fuelCheck">
+                                                            <label class="form-check-label" for="fuelCheck">
                                                                 Gas
                                                             </label>
 
 
-                                                            <input class="form-check-input ms-3" type="checkbox" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                                                            <label class="form-check-label" for="flexRadioDefault2">
+                                                            <input class="form-check-input fuelCheck ms-3" type="checkbox" name="fuelCheck">
+                                                            <label class="form-check-label" for="fuelCheck">
                                                                 Diesel
                                                             </label>
                                                         </div>
