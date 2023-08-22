@@ -30,48 +30,49 @@ if (isset($_POST['submit'])) {
     if (empty($name)) {
         $emty['name'] = 'Please Fill The Company Name';
     }
-    if (empty($address)) {
-        $emty['address'] = 'Please Fill The Company address';
-    }
-    if (empty($phone)) {
-        $emty['phone'] = 'Please Fill The Company phone';
-    }
-    if (empty($contact)) {
-        $emty['contact'] = 'Please Fill The Company contact';
-    }
-    if (empty($company_city)) {
-        $emty['company_city'] = 'Please Fill The Company city';
-    }
-    if (empty($company_state)) {
-        $emty['company_state'] = 'Please Fill The Company stat';
-    }
-    if (empty($direct)) {
-        $emty['direct'] = 'Please Fill The Company direct';
-    }
-    if (empty($email)) {
-        $emty['email'] = 'Please Fill The Company email';
-    }
-    if (empty($company_zipcode)) {
-        $emty['company_zipcode'] = 'Please Fill The Company ZipCode';
-    }
-    if (empty($port)) {
-        $emty['port'] = 'Please Fill The Company port';
-    }
-    if (empty($vessel)) {
-        $emty['vessel'] = 'Please Fill The Company vessel';
-    }
-    if (empty($trucking)) {
-        $emty['trucking'] = 'Please Fill The Company trucking';
-    }
-    if (empty($misc)) {
-        $emty['misc'] = 'Please Fill The Company misc';
-    }
-    if (empty($total_cost)) {
-        $emty['total_cost'] = 'Please Fill The Company total cost';
-    }
-    if (empty($custom)) {
-        $emty['custom'] = 'Please Fill The Company cuctom';
-    } else {
+    // if (empty($address)) {
+    //     $emty['address'] = 'Please Fill The Company address';
+    // }
+    // if (empty($phone)) {
+    //     $emty['phone'] = 'Please Fill The Company phone';
+    // }
+    // if (empty($contact)) {
+    //     $emty['contact'] = 'Please Fill The Company contact';
+    // }
+    // if (empty($company_city)) {
+    //     $emty['company_city'] = 'Please Fill The Company city';
+    // }
+    // if (empty($company_state)) {
+    //     $emty['company_state'] = 'Please Fill The Company stat';
+    // }
+    // if (empty($direct)) {
+    //     $emty['direct'] = 'Please Fill The Company direct';
+    // }
+    // if (empty($email)) {
+    //     $emty['email'] = 'Please Fill The Company email';
+    // }
+    // if (empty($company_zipcode)) {
+    //     $emty['company_zipcode'] = 'Please Fill The Company ZipCode';
+    // }
+    // if (empty($port)) {
+    //     $emty['port'] = 'Please Fill The Company port';
+    // }
+    // if (empty($vessel)) {
+    //     $emty['vessel'] = 'Please Fill The Company vessel';
+    // }
+    // if (empty($trucking)) {
+    //     $emty['trucking'] = 'Please Fill The Company trucking';
+    // }
+    // if (empty($misc)) {
+    //     $emty['misc'] = 'Please Fill The Company misc';
+    // }
+    // if (empty($total_cost)) {
+    //     $emty['total_cost'] = 'Please Fill The Company total cost';
+    // }
+    // if (empty($custom)) {
+    //     $emty['custom'] = 'Please Fill The Company cuctom';
+    // }
+     else {
         $query = "SELECT COUNT(*) FROM importer_details WHERE company_name= '$name'";
         $sql = mysqli_query($conn, $query);
         $row = mysqli_fetch_array($sql);
@@ -198,41 +199,36 @@ if (isset($_POST['submit'])) {
                                         </div> -->
 
                                         <div class="in">
-                                            <input type="text" name="name" id="name" class=" input w-100 py-2 mt-3" placeholder="Company Name">
+                                            <input type="text" name="name" id="name" class=" input w-100 py-2 mt-3" placeholder="Company Name" value="<?php if (isset($emty['name'])) echo $name  ?>">
                                             <span class="text-danger fs-6 "><?php if (isset($emty['name'])) echo $emty['name'] ?></span>
                                         </div>
 
                                         <div class="in">
                                             <input type="text" name="address" id="address" class=" input w-100 py-2 mt-3" placeholder="Address">
-                                            <span class="text-danger fs-6 "><?php if (isset($emty['address'])) echo $emty['address'] ?></span>
+                                           
                                         </div>
                                         <div class="in">
                                             <input type="text" name="phone" id="phone" class=" input w-100 py-2 mt-3" placeholder="Telephone ">
-                                            <span class="text-danger fs-6"><?php if (isset($emty['phone'])) echo $emty['phone'] ?></span>
+                                           
                                         </div>
 
                                         <div class="in">
                                             <input type="text" name="contact" id="contact" class=" input w-100 py-2 mt-3" placeholder="Contact Name ">
-                                            <span class="text-danger fs-6"><?php if (isset($emty['contact'])) echo $emty['contact'] ?></span>
                                         </div>
                                         <div class="in">
                                             <input type="text" name="company_city" id="company_city" class=" input w-100 py-2 mt-3" placeholder="Company City ">
-                                            <span class="text-danger fs-6"><?php if (isset($emty['company_city'])) echo $emty['company_city'] ?></span>
                                         </div>
 
                                         <div class="in">
                                             <input type="text" name="company_state" id="company_state" class=" input w-100 py-2 mt-3" placeholder="Company State">
-                                            <span class="text-danger fs-6"><?php if (isset($emty['company_state'])) echo $emty['company_state'] ?></span>
                                         </div>
 
                                         <div class="in">
                                             <input type="text" name="direct" id="direct" class=" input w-100 py-2 mt-3" placeholder="Direct ">
-                                            <span class="text-danger fs-6"><?php if (isset($emty['direct'])) echo $emty['direct'] ?></span>
                                         </div>
 
                                         <div class="in">
                                             <input type="email" name="email" id="email" class=" input w-100 py-2 mt-3" placeholder="Email ">
-                                            <span class="text-danger fs-6"><?php if (isset($emty['email'])) echo $emty['email'] ?></span>
                                         </div>
 
 
@@ -240,32 +236,25 @@ if (isset($_POST['submit'])) {
                                     <div class="col-lg-6">
                                         <div class="in">
                                             <input type="text" name="company_zipcode" id="company_zipcode" class=" input w-100 py-2 mt-3" placeholder="Company ZipCode ">
-                                            <span class="text-danger fs-6"><?php if (isset($emty['company_zipcode'])) echo $emty['company_zipcode'] ?></span>
                                         </div>
 
                                         <div class="in">
                                             <input type="text" name="port" id="port" class=" input w-100 py-2 mt-3" placeholder="Port Of Entry ">
-                                            <span class="text-danger fs-6"><?php if (isset($emty['port'])) echo $emty['port'] ?></span>
                                         </div>
                                         <div class="in">
                                             <input type="text" name="vessel" id="vessel" class=" input w-100 py-2 mt-3" placeholder="Vessel Details">
-                                            <span class="text-danger fs-6"><?php if (isset($emty['vessel'])) echo $emty['vessel'] ?></span>
                                         </div>
                                         <div class="in">
                                             <input type="text" name="trucking" id="trucking" class=" input w-100 py-2 mt-3" placeholder="Trucking">
-                                            <span class="text-danger fs-6"><?php if (isset($emty['trucking'])) echo $emty['trucking'] ?></span>
                                         </div>
                                         <div class="in">
                                             <input type="text" name="misc" id="misc" class=" input w-100 py-2 mt-3" placeholder="Misc">
-                                            <span class="text-danger fs-6"><?php if (isset($emty['misc'])) echo $emty['misc'] ?></span>
                                         </div>
                                         <div class="in">
                                             <input type="text" name="total_cost" id="total_cost" class=" input w-100 py-2 mt-3" placeholder="Total Cost">
-                                            <span class="text-danger fs-6"><?php if (isset($emty['total_cost'])) echo $emty['total_cost'] ?></span>
                                         </div>
                                         <div class="in">
                                             <input type="text" name="custom" id="custom" class=" input w-100 py-2 mt-3" placeholder="Custom Freiht">
-                                            <span class="text-danger fs-6"><?php if (isset($emty['custom'])) echo $emty['custom'] ?></span>
                                         </div>
 
 
