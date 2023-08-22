@@ -1,6 +1,4 @@
 <?php
-
-
 session_start();
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -14,7 +12,6 @@ require 'config.php';
 $error = array();
 $succses = array();
 $warning = array();
-
 
 if (isset($_POST['submit'])) {
     $user_fullname = mysqli_real_escape_string($conn, $_POST['user_fullname']);
@@ -46,7 +43,6 @@ if (isset($_POST['submit'])) {
     if (empty($user_image)) {
         $error['user_image'] = "Please Fill image";
     } else {
-
 
         $emailquery = "SELECT * FROM admin_users WHERE `user_email` = '$user_email' ";
         $query = mysqli_query($conn, $emailquery);

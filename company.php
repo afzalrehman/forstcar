@@ -1,15 +1,21 @@
 <?php
+
+session_start();
 include "config.php";
 
-
-$emty =array();
+$emty = array();
+$warning = array();
+$succses = array();
 if (isset($_POST['submit'])) {
     $name = mysqli_real_escape_string($conn, $_POST['name']);
     $address = mysqli_real_escape_string($conn, $_POST['address']);
     $phone = mysqli_real_escape_string($conn, $_POST['phone']);
     $contact = mysqli_real_escape_string($conn, $_POST['contact']);
+    $company_city = mysqli_real_escape_string($conn, $_POST['company_city']);
+    $company_state = mysqli_real_escape_string($conn, $_POST['company_state']);
     $direct = mysqli_real_escape_string($conn, $_POST['direct']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $company_zipcode = mysqli_real_escape_string($conn, $_POST['company_zipcode']);
     $port = mysqli_real_escape_string($conn, $_POST['port']);
     $vessel = mysqli_real_escape_string($conn, $_POST['vessel']);
     $trucking = mysqli_real_escape_string($conn, $_POST['trucking']);
@@ -29,11 +35,20 @@ if (isset($_POST['submit'])) {
     if (empty($contact)) {
         $emty['contact'] = 'Please Fill The Company contact';
     }
+    if (empty($company_city)) {
+        $emty['company_city'] = 'Please Fill The Company city';
+    }
+    if (empty($company_state)) {
+        $emty['company_state'] = 'Please Fill The Company stat';
+    }
     if (empty($direct)) {
         $emty['direct'] = 'Please Fill The Company direct';
     }
     if (empty($email)) {
         $emty['email'] = 'Please Fill The Company email';
+    }
+    if (empty($company_zipcode)) {
+        $emty['company_zipcode'] = 'Please Fill The Company ZipCode';
     }
     if (empty($port)) {
         $emty['port'] = 'Please Fill The Company port';
@@ -52,6 +67,23 @@ if (isset($_POST['submit'])) {
     }
     if (empty($custom)) {
         $emty['custom'] = 'Please Fill The Company cuctom';
+    } else {
+        $query = "SELECT COUNT(*) FROM importer_details WHERE company_name= '$name'";
+        $sql = mysqli_query($conn, $query);
+        $row = mysqli_fetch_array($sql);
+        if ($row[0] > 0) {
+            // Duplicate data found
+            $warning['WARNING'] = "Data already exists.";
+        } else {
+            $insert = " INSERT INTO importer_details(`company_name`,`company_address`, `company_telephone`,`company_contact`,`company_city`,`company_state`, `company_direct`,`company_email`, `company_zipcode`,
+            `company_port_of_entry`,`company_vessel_detail`,`company_trucking`,`company_misc`,`total_cost`, `custom_frieght` ,`added_on`,`added_by` )
+            VALUES('$name','$address','$phone','$contact','$company_city', '$company_state','$direct','$email','$company_zipcode','$port','$vessel','$trucking','$misc','$total_cost','$custom',NOW() ,)";
+            $insert_sql = mysqli_query($conn, $insert);
+
+            if ($insert_sql) {
+                $succses['succses'] = 'insert data sucsses';
+            }
+        }
     }
 }
 ?>
@@ -162,6 +194,24 @@ if (isset($_POST['submit'])) {
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid">
+
+                    <?php
+                    if (isset($succses['succses']))
+                        echo '
+                            <div class="mt-5 alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>@INSERT</strong> ' . $succses['succses'] . '
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>';
+                    ?>
+                    <?php
+                    if (isset($warning['WARNING']))
+                        echo '
+                            <div class="mt-2 alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>@Warning</strong> ' . $warning['WARNING'] . '
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>';
+                    ?>
+
                     <div class="  mein-card mb-5">
                         <div class="container-fluid card my-5 pb-5">
                             <h3 class=" font-inter text-center">Add New Company</h3>
@@ -174,58 +224,73 @@ if (isset($_POST['submit'])) {
 
                                         <div class="in">
                                             <input type="text" name="name" id="name" class=" input w-100 py-2 mt-3" placeholder="Company Name">
-                                            <span class= "text-danger fs-6 "><?php if(isset($emty['name'])) echo $emty['name']?></span>
+                                            <span class="text-danger fs-6 "><?php if (isset($emty['name'])) echo $emty['name'] ?></span>
                                         </div>
 
                                         <div class="in">
                                             <input type="text" name="address" id="address" class=" input w-100 py-2 mt-3" placeholder="Address">
-                                            <span class= "text-danger fs-6 "><?php if(isset($emty['address'])) echo $emty['address']?></span>
+                                            <span class="text-danger fs-6 "><?php if (isset($emty['address'])) echo $emty['address'] ?></span>
                                         </div>
                                         <div class="in">
                                             <input type="text" name="phone" id="phone" class=" input w-100 py-2 mt-3" placeholder="Telephone ">
-                                            <span class="text-danger fs-6"><?php if(isset($emty['phone'])) echo $emty['phone']?></span>
+                                            <span class="text-danger fs-6"><?php if (isset($emty['phone'])) echo $emty['phone'] ?></span>
                                         </div>
 
                                         <div class="in">
                                             <input type="text" name="contact" id="contact" class=" input w-100 py-2 mt-3" placeholder="Contact Name ">
-                                            <span class="text-danger fs-6"><?php if(isset($emty['contact'])) echo $emty['contact']?></span>
+                                            <span class="text-danger fs-6"><?php if (isset($emty['contact'])) echo $emty['contact'] ?></span>
+                                        </div>
+                                        <div class="in">
+                                            <input type="text" name="company_city" id="company_city" class=" input w-100 py-2 mt-3" placeholder="Company City ">
+                                            <span class="text-danger fs-6"><?php if (isset($emty['company_city'])) echo $emty['company_city'] ?></span>
+                                        </div>
 
+                                        <div class="in">
+                                            <input type="text" name="company_state" id="company_state" class=" input w-100 py-2 mt-3" placeholder="Company State">
+                                            <span class="text-danger fs-6"><?php if (isset($emty['company_state'])) echo $emty['company_state'] ?></span>
                                         </div>
 
                                         <div class="in">
                                             <input type="text" name="direct" id="direct" class=" input w-100 py-2 mt-3" placeholder="Direct ">
-                                            <span class="text-danger fs-6"><?php if(isset($emty['direct'])) echo $emty['direct']?></span>
+                                            <span class="text-danger fs-6"><?php if (isset($emty['direct'])) echo $emty['direct'] ?></span>
                                         </div>
+
                                         <div class="in">
                                             <input type="email" name="email" id="email" class=" input w-100 py-2 mt-3" placeholder="Email ">
-                                            <span class="text-danger fs-6"><?php if(isset($emty['email'])) echo $emty['email']?></span>
+                                            <span class="text-danger fs-6"><?php if (isset($emty['email'])) echo $emty['email'] ?></span>
                                         </div>
+
+
                                     </div>
                                     <div class="col-lg-6">
+                                        <div class="in">
+                                            <input type="text" name="company_zipcode" id="company_zipcode" class=" input w-100 py-2 mt-3" placeholder="Company ZipCode ">
+                                            <span class="text-danger fs-6"><?php if (isset($emty['company_zipcode'])) echo $emty['company_zipcode'] ?></span>
+                                        </div>
 
                                         <div class="in">
                                             <input type="text" name="port" id="port" class=" input w-100 py-2 mt-3" placeholder="Port Of Entry ">
-                                            <span class="text-danger fs-6"><?php if(isset($emty['port'])) echo $emty['port']?></span>
+                                            <span class="text-danger fs-6"><?php if (isset($emty['port'])) echo $emty['port'] ?></span>
                                         </div>
                                         <div class="in">
                                             <input type="text" name="vessel" id="vessel" class=" input w-100 py-2 mt-3" placeholder="Vessel Details">
-                                            <span class="text-danger fs-6"><?php if(isset($emty['vessel'])) echo $emty['vessel']?></span>
+                                            <span class="text-danger fs-6"><?php if (isset($emty['vessel'])) echo $emty['vessel'] ?></span>
                                         </div>
                                         <div class="in">
                                             <input type="text" name="trucking" id="trucking" class=" input w-100 py-2 mt-3" placeholder="Trucking">
-                                            <span class="text-danger fs-6"><?php if(isset($emty['trucking'])) echo $emty['trucking']?></span>
+                                            <span class="text-danger fs-6"><?php if (isset($emty['trucking'])) echo $emty['trucking'] ?></span>
                                         </div>
                                         <div class="in">
                                             <input type="text" name="misc" id="misc" class=" input w-100 py-2 mt-3" placeholder="Misc">
-                                            <span class="text-danger fs-6"><?php if(isset($emty['misc'])) echo $emty['misc']?></span>
+                                            <span class="text-danger fs-6"><?php if (isset($emty['misc'])) echo $emty['misc'] ?></span>
                                         </div>
                                         <div class="in">
                                             <input type="text" name="total_cost" id="total_cost" class=" input w-100 py-2 mt-3" placeholder="Total Cost">
-                                            <span class="text-danger fs-6"><?php if(isset($emty['total_cost'])) echo $emty['total_cost']?></span>
+                                            <span class="text-danger fs-6"><?php if (isset($emty['total_cost'])) echo $emty['total_cost'] ?></span>
                                         </div>
                                         <div class="in">
                                             <input type="text" name="custom" id="custom" class=" input w-100 py-2 mt-3" placeholder="Custom Freiht">
-                                            <span class="text-danger fs-6"><?php if(isset($emty['custom'])) echo $emty['custom']?></span>
+                                            <span class="text-danger fs-6"><?php if (isset($emty['custom'])) echo $emty['custom'] ?></span>
                                         </div>
 
 
@@ -267,38 +332,67 @@ if (isset($_POST['submit'])) {
                                                         <!-- <input class="chack" type="checkbox"> -->
                                                         <i class="fa-solid fa-plus "></i>
                                                     </th>
+                                                    <th>S/no<i class="fa-solid fa-arrow-down px-2"></i></th>
                                                     <th>Date<i class="fa-solid fa-arrow-down px-2"></i></th>
                                                     <th>Company Name <i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>Contact Name <i class="fa-solid fa-arrow-down px-2"></i></th>
                                                     <th>Address <i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>FEE PER MONTH <i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>City<i class="fa-solid fa-arrow-down px-2"></i>
-                                                    </th>
+                                                    <th>Tele phone <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                    <th>Contact Name <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                    <th> City <i class="fa-solid fa-arrow-down px-2"></i></th>
                                                     <th>State<i class="fa-solid fa-arrow-down px-2"></i>
+                                                    <th>Direct<i class="fa-solid fa-arrow-down px-2"></i>
                                                     </th>
-                                                    <th>Zip Code <i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>Telephone <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                    </th>
                                                     <th>Email <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                    <th>Zip Code <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                    <th>Port Of Entry <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                    <th>Vessel Details <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                    <th>Trucking <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                    <th>Misc <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                    <th>Total Cost <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                    <th>Custom Freiht <i class="fa-solid fa-arrow-down px-2"></i></th>
 
 
                                                 </tr>
                                             </thead>
 
                                             <tbody>
-                                                <tr>
-                                                    <td><input type="checkbox" class="text-input"></td>
-                                                    <td class="font">Bold text column</td>
-                                                    <td>Regular text column</td>
-                                                    <td>Regular text column</td>
-                                                    <td>Regular text column</td>
-                                                    <td>Regular text column</td>
-                                                    <td>Regular text column</td>
-                                                    <td>Regular text column</td>
-                                                    <td>Regular text column</td>
-                                                    <td>Regular text column</td>
-                                                    <td>Regular text column</td>
 
-                                                </tr>
+                                                <?php
+                                                $select =   "SELECT * FROM  importer_details";
+                                                $sel_sql = mysqli_query($conn, $select);
+                                                $sel_num = mysqli_num_rows($sel_sql);
+                                                $no =1;
+                                                while ($row = mysqli_fetch_assoc($sel_sql)) {
+
+
+                                                ?>
+                                                    <tr>
+                                                        <td><input type="checkbox" class="text-input"></td>
+                                                        <td class="font"><?php echo $no ?></td>
+                                                        <td class="font"><?php echo $row['added_on'] ?></td>
+                                                        <td><?php echo $row['company_name'] ?></td>
+                                                        <td><?php echo $row['company_address'] ?></td>
+                                                        <td><?php echo $row['company_telephone'] ?></td>
+                                                        <td><?php echo $row['company_contact'] ?></td>
+                                                        <td><?php echo $row['company_city'] ?></td>
+                                                        <td><?php echo $row['company_state'] ?></td>
+                                                        <td><?php echo $row['company_direct'] ?></td>
+                                                        <td><?php echo $row['company_email'] ?></td>
+                                                        <td><?php echo $row['company_zipcode'] ?></td>
+                                                        <td><?php echo $row['company_port_of_entry'] ?></td>
+                                                        <td><?php echo $row['company_vessel_detail'] ?></td>
+                                                        <td><?php echo $row['company_trucking'] ?></td>
+                                                        <td><?php echo $row['company_misc'] ?></td>
+                                                        <td><?php echo $row['total_cost'] ?></td>
+                                                        <td><?php echo $row['custom_frieght'] ?></td>
+                                                       
+
+                                                    </tr>
+                                                <?php
+                                                $no = $no+ 1;
+                                                }
+                                                ?>
                                             </tbody>
                                         </table>
 
