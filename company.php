@@ -10,6 +10,7 @@ if (!isset($_SESSION['user_fullname'])) {
 $emty = array();
 $warning = array();
 $succses = array();
+$delete =array();
 if (isset($_POST['submit'])) {
     $name = mysqli_real_escape_string($conn, $_POST['name']);
     $address = mysqli_real_escape_string($conn, $_POST['address']);
@@ -72,11 +73,11 @@ if (isset($_POST['submit'])) {
     // if (empty($custom)) {
     //     $emty['custom'] = 'Please Fill The Company cuctom';
     // }
-     else {
-        $query = "SELECT COUNT(*) FROM importer_details WHERE company_name= '$name'";
+    else {
+        $query = "SELECT * FROM importer_details WHERE company_name= '$name'";
         $sql = mysqli_query($conn, $query);
-        $row = mysqli_fetch_array($sql);
-        if ($row[0] > 0) {
+        $row = mysqli_fetch_row($sql);
+        if ($row > 0) {
             // Duplicate data found
             $warning['WARNING'] = "Data already exists.";
         } else {
@@ -91,6 +92,29 @@ if (isset($_POST['submit'])) {
         }
     }
 }
+?>
+
+<?php
+if (isset($_POST['delete_btn'])) {
+    if (!isset($_POST['edit_delete']) || empty($_POST['edit_delete'])) {
+        $warning['chackbox'] = "Please check the checkboxes to delete";
+
+        // You might want to redirect back to the previous page or handle this case accordingly.
+    } else {
+        $all_id = $_POST['edit_delete'];
+        $extrext_id = implode(',', $all_id);
+
+        $delete_query = "DELETE FROM importer_details WHERE importer_id  IN ($extrext_id)";
+        $sql = mysqli_query($conn, $delete_query);
+
+        if ($sql) {
+            $delete['Delete'] = "Data Delete Successfully!";
+        } else {
+            $_SESSION['Delete'] = "Failed to delete data!";
+        }
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -116,7 +140,7 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body class="sb-nav-fixed">
-<?php require "navbar.php";?>
+    <?php require "navbar.php"; ?>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
             <!-- <nav class="sb-sidenav accordion sb-sidenav side-bg bg-nav shadow" id="sidenavAccordion">
@@ -165,7 +189,7 @@ if (isset($_POST['submit'])) {
                     Start Bootstrap
                 </div>
             </nav> -->
-            <?php require "sidebar.php";?>
+            <?php require "sidebar.php"; ?>
         </div>
         <div id="layoutSidenav_content">
             <main>
@@ -187,11 +211,27 @@ if (isset($_POST['submit'])) {
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>';
                     ?>
+                    <?php
+                    if (isset($warning['chackbox']))
+                        echo '
+                            <div class="mt-2 alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>@Warning</strong> ' . $warning['chackbox'] . '
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>';
+                    ?>
+                    <?php
+                    if (isset($delete['Delete'] ))
+                        echo '
+                            <div class="mt-2 alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>@Warning</strong> ' . $delete['Delete'] . '
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>';
+                    ?>
 
-                    <div class="  mein-card mb-5">
-                        <div class="container-fluid card my-5 pb-5">
-                            <h3 class=" font-inter text-center">Add New Company</h3>
-                            <form action="" method="post">
+                    <form action="" method="post">
+                        <div class="  mein-card mb-5">
+                            <div class="container-fluid card my-5 pb-5">
+                                <h3 class=" font-inter text-center">Add New Company</h3>
                                 <div class="row mt-5 ">
                                     <div class="col-lg-6  ">
                                         <!-- <div class="in py-3">
@@ -205,11 +245,11 @@ if (isset($_POST['submit'])) {
 
                                         <div class="in">
                                             <input type="text" name="address" id="address" class=" input w-100 py-2 mt-3" placeholder="Address">
-                                           
+
                                         </div>
                                         <div class="in">
                                             <input type="text" name="phone" id="phone" class=" input w-100 py-2 mt-3" placeholder="Telephone ">
-                                           
+
                                         </div>
 
                                         <div class="in">
@@ -263,126 +303,127 @@ if (isset($_POST['submit'])) {
                                         <button type="submit" name="submit" class="save py-2">Save</button>
                                     </div>
                                 </div>
-                            </form>
-                        </div>
+
+                            </div>
 
 
-                        <div class="col-lg-12 mt-5 ">
-                            <div class="card ">
-                                <div class="row">
-                                    <div class="col-lg-3 col-md-3 text-start py-3 px-4">
-                                        <p class="font student"> USA IMPORTANT Details</p>
+                            <div class="col-lg-12 mt-5 ">
+                                <div class="card ">
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-3 text-start py-3 px-4">
+                                            <p class="font student"> USA IMPORTANT Details</p>
+                                        </div>
+                                        <div class="col-lg-9 col-md-9 py-3 ">
+                                            <div class="btn-edit-delete1 text-end px-1">
+                                                <button type="submit" name="delete_btn">
+                                                    <span class="fa-regular fa-trash-can export-btn delete">
+                                                    </span></button>
+                                                <a href=""> <span class="fa-solid fa-pen-to-square edit export-btn"></span></a>
+                                                <a href="">
+                                                    <span class="fa-solid fa-cloud-arrow-down export export-btn"> </span>
+                                                </a>
+                                                <a href="excel.php">Download</a>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-lg-9 col-md-9 py-3 ">
-                                        <div class="btn-edit-delete1 text-end px-1">
-                                            <a href="">
-                                                <span class="fa-regular fa-trash-can export-btn delete">
-                                                </span></a>
-                                            <a href=""> <span class="fa-solid fa-pen-to-square edit export-btn"></span></a>
-                                            <a href="">
-                                                <span class="fa-solid fa-cloud-arrow-down export export-btn"> </span>
-                                            </a>
-                                            <a href="">Download</a>
+                                    <hr class="m-0 ">
+
+                                    <div class="dov ">
+                                        <div class="table-wrapper">
+                                            <table class="contain-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            <!-- <input class="chack" type="checkbox"> -->
+                                                            <i class="fa-solid fa-plus "></i>
+                                                        </th>
+                                                        <th>S/no<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <th>Date<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <th>Company Name <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <th>Address <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <th>Tele phone <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <th>Contact Name <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <th> City <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <th>State<i class="fa-solid fa-arrow-down px-2"></i>
+                                                        <th>Direct<i class="fa-solid fa-arrow-down px-2"></i>
+                                                        </th>
+                                                        </th>
+                                                        <th>Email <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <th>Zip Code <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <th>Port Of Entry <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <th>Vessel Details <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <th>Trucking <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <th>Misc <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <th>Total Cost <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <th>Custom Freiht <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <th>added by <i class="fa-solid fa-arrow-down px-2"></i></th>
+
+
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+
+                                                    <?php
+                                                    $select = "SELECT * FROM  importer_details";
+                                                    $sel_sql = mysqli_query($conn, $select);
+                                                    $sel_num = mysqli_num_rows($sel_sql);
+                                                    $no = 1;
+                                                    while ($row = mysqli_fetch_assoc($sel_sql)) {
+
+
+                                                    ?>
+                                                        <tr>
+                                                            <td><input type="checkbox" name="edit_delete[]" class="text-input" value="<?php echo $row['importer_id'] ?>"></td>
+                                                            <td class="font"><?php echo $no ?></td>
+                                                            <td class="font"><?php echo $row['added_on'] ?></td>
+                                                            <td><?php echo $row['company_name'] ?></td>
+                                                            <td><?php echo $row['company_address'] ?></td>
+                                                            <td><?php echo $row['company_telephone'] ?></td>
+                                                            <td><?php echo $row['company_contact'] ?></td>
+                                                            <td><?php echo $row['company_city'] ?></td>
+                                                            <td><?php echo $row['company_state'] ?></td>
+                                                            <td><?php echo $row['company_direct'] ?></td>
+                                                            <td><?php echo $row['company_email'] ?></td>
+                                                            <td><?php echo $row['company_zipcode'] ?></td>
+                                                            <td><?php echo $row['company_port_of_entry'] ?></td>
+                                                            <td><?php echo $row['company_vessel_detail'] ?></td>
+                                                            <td><?php echo $row['company_trucking'] ?></td>
+                                                            <td><?php echo $row['company_misc'] ?></td>
+                                                            <td><?php echo $row['total_cost'] ?></td>
+                                                            <td><?php echo $row['custom_frieght'] ?></td>
+                                                            <td><?php echo $row['added_by'] ?></td>
+
+
+                                                        </tr>
+                                                    <?php
+                                                        $no = $no + 1;
+                                                    }
+                                                    ?>
+                                                </tbody>
+                                            </table>
+
                                         </div>
                                     </div>
                                 </div>
-                                <hr class="m-0 ">
-
-                                <div class="dov ">
-                                    <div class="table-wrapper">
-                                        <table class="contain-table">
-                                            <thead>
-                                                <tr>
-                                                    <th>
-                                                        <!-- <input class="chack" type="checkbox"> -->
-                                                        <i class="fa-solid fa-plus "></i>
-                                                    </th>
-                                                    <th>S/no<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>Date<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>Company Name <i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>Address <i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>Tele phone <i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>Contact Name <i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th> City <i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>State<i class="fa-solid fa-arrow-down px-2"></i>
-                                                    <th>Direct<i class="fa-solid fa-arrow-down px-2"></i>
-                                                    </th>
-                                                    </th>
-                                                    <th>Email <i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>Zip Code <i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>Port Of Entry <i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>Vessel Details <i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>Trucking <i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>Misc <i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>Total Cost <i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>Custom Freiht <i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                    <th>added by <i class="fa-solid fa-arrow-down px-2"></i></th>
-
-
-                                                </tr>
-                                            </thead>
-
-                                            <tbody>
-
-                                                <?php
-                                                $select =   "SELECT * FROM  importer_details";
-                                                $sel_sql = mysqli_query($conn, $select);
-                                                $sel_num = mysqli_num_rows($sel_sql);
-                                                $no =1;
-                                                while ($row = mysqli_fetch_assoc($sel_sql)) {
-
-
-                                                ?>
-                                                    <tr>
-                                                        <td><input type="checkbox" class="text-input"></td>
-                                                        <td class="font"><?php echo $no ?></td>
-                                                        <td class="font"><?php echo $row['added_on'] ?></td>
-                                                        <td><?php echo $row['company_name'] ?></td>
-                                                        <td><?php echo $row['company_address'] ?></td>
-                                                        <td><?php echo $row['company_telephone'] ?></td>
-                                                        <td><?php echo $row['company_contact'] ?></td>
-                                                        <td><?php echo $row['company_city'] ?></td>
-                                                        <td><?php echo $row['company_state'] ?></td>
-                                                        <td><?php echo $row['company_direct'] ?></td>
-                                                        <td><?php echo $row['company_email'] ?></td>
-                                                        <td><?php echo $row['company_zipcode'] ?></td>
-                                                        <td><?php echo $row['company_port_of_entry'] ?></td>
-                                                        <td><?php echo $row['company_vessel_detail'] ?></td>
-                                                        <td><?php echo $row['company_trucking'] ?></td>
-                                                        <td><?php echo $row['company_misc'] ?></td>
-                                                        <td><?php echo $row['total_cost'] ?></td>
-                                                        <td><?php echo $row['custom_frieght'] ?></td>
-                                                        <td><?php echo $row['added_by'] ?></td>
-                                                       
-
-                                                    </tr>
-                                                <?php
-                                                $no = $no+ 1;
-                                                }
-                                                ?>
-                                            </tbody>
-                                        </table>
-
-                                    </div>
-                                </div>
                             </div>
-                        </div>
-                    </div>
+                    </form>
                 </div>
-            </main>
-            <footer class="py-4 bg-light mt-auto">
-                <div class="container-fluid px-4">
-                    <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Your Website 2023</div>
-                        <div>
-                            <a href="#">Privacy Policy</a>
-                            &middot;
-                            <a href="#">Terms &amp; Conditions</a>
-                        </div>
-                    </div>
-                </div>
-            </footer>
         </div>
+        </main>
+        <footer class="py-4 bg-light mt-auto">
+            <div class="container-fluid px-4">
+                <div class="d-flex align-items-center justify-content-between small">
+                    <div class="text-muted">Copyright &copy; Your Website 2023</div>
+                    <div>
+                        <a href="#">Privacy Policy</a>
+                        &middot;
+                        <a href="#">Terms &amp; Conditions</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
