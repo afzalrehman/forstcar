@@ -53,48 +53,56 @@ if (isset($_POST['submit'])) {
 
         $emailcount = mysqli_num_rows($query);
         if ($emailcount > 0) {
-            $warning['warning'] = 'user already exists';
+            $warning['warning'] = 'Email already exists';
         } else {
 
-            $insertquery = "INSERT INTO admin_users (`user_fullname`, `user_email`, `user_password`, `user_type`, `user_contact`, `user_image`, `registered_on`,`token`, `is_verified`) 
+            $contactquery = "SELECT * FROM admin_users WHERE `user_contact` = '$user_contact' ";
+            $query = mysqli_query($conn, $contactquery);
+
+            $contactcount = mysqli_num_rows($query);
+            if ($contactcount > 0) {
+                $warning['warning'] = 'Contact Number already exists';
+            } else {
+
+                $insertquery = "INSERT INTO admin_users (`user_fullname`, `user_email`, `user_password`, `user_type`, `user_contact`, `user_image`, `registered_on`,`token`, `is_verified`) 
             VALUES ('$user_fullname', '$user_email', '$pass', '$user_type', '$user_contact', '$user_image', NOW(),'$token', 'inactive')";
 
-            $iquery = mysqli_query($conn, $insertquery);
-            if ($iquery) {
+                $iquery = mysqli_query($conn, $insertquery);
+                if ($iquery) {
 
-                $mail = new PHPMailer(true);
-                try {
-                    $mail->SMTPDebug = 0;
-                    $mail->isSMTP();
-                    $mail->Host = 'smtp.gmail.com';
-                    $mail->SMTPAuth = true;
-                    $mail->Username = 'hammadking427@gmail.com';
-                    $mail->Password = 'gtohfmaaanqufdbn';
-                    $mail->SMTPSecure = 'tls';
-                    $mail->Port = 587;
+                    $mail = new PHPMailer(true);
+                    try {
+                        $mail->SMTPDebug = 0;
+                        $mail->isSMTP();
+                        $mail->Host = 'smtp.gmail.com';
+                        $mail->SMTPAuth = true;
+                        $mail->Username = 'hammadking427@gmail.com';
+                        $mail->Password = 'gtohfmaaanqufdbn';
+                        $mail->SMTPSecure = 'tls';
+                        $mail->Port = 587;
 
-                    $mail->setFrom('hammadking427@gmail.com', 'Abu_Hammad');
-                    $mail->addAddress($user_email, $user_fullname);
+                        $mail->setFrom('hammadking427@gmail.com', 'Abu_Hammad');
+                        $mail->addAddress($user_email, $user_fullname);
 
-                    $mail->Subject = 'Email Activation';
-                    $mail->Body = "Hi, $user_fullname. Click here too activate your account 
+                        $mail->Subject = 'Email Activation';
+                        $mail->Body = "Hi, $user_fullname. Click here too activate your account 
                     http://localhost/forstcar/activate.php?token=$token ";
-                    $send_email = "From: hammadking427@gmail.com";
+                        $send_email = "From: hammadking427@gmail.com";
 
-                    $mail->send();
-                    $_SESSION['msg'] = "Check you mail to activate your account 
+                        $mail->send();
+                        $_SESSION['msg'] = "Check you mail to activate your account 
                     $email";
-                    $succses['succses'] = 'Please Check The Gmail And Acticated';
-                } catch (Exception $e) {
-                    echo "Failed to send email. Error: {$mail->ErrorInfo}";
+                        $succses['succses'] = 'Please Check The Gmail And Acticated';
+                    } catch (Exception $e) {
+                        echo "Failed to send email. Error: {$mail->ErrorInfo}";
+                    }
+                } else {
+                    $warning['warning'] = 'No Inserted';
                 }
-            } else {
-                $warning['warning'] = 'No Inserted';
             }
         }
     }
 }
-
 ?>
 
 <!DOCTYPE html>
