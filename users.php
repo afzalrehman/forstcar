@@ -88,7 +88,7 @@ if (isset($_POST['submit'])) {
                         $mail->send();
                         $_SESSION['msg'] = "Check you mail to activate your account 
                     $email";
-                        $succses['succses'] = 'Please Check The Gmail And Acticated';
+                        $succses['succses'] = 'Please Check The Gmail And Activated';
                     } catch (Exception $e) {
                         echo "Failed to send email. Error: {$mail->ErrorInfo}";
                     }
@@ -132,7 +132,7 @@ if (isset($_POST['submit'])) {
     }
 
     .inputDesign:focus {
-        border-color: #f30303;
+        border-color: #0055b8;
         animation: inputFocusAnimation 0.3s;
     }
 

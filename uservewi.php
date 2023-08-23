@@ -2,10 +2,29 @@
 session_start();
 include 'config.php';
 global $conn;
-
+$succses = array();
+$warning = array();
 
 //  ===============DElete qurey=============== 
+if (isset($_POST['delete_btn'])) {
+    if (!isset($_POST['chack_btn_delete']) || empty($_POST['chack_btn_delete'])) {
+        $_SESSION['delete_chacke'] = "Please check the checkboxes to delete";
 
+        // You might want to redirect back to the previous page or handle this case accordingly.
+    } else {
+        $all_id = $_POST['chack_btn_delete'];
+        $extrext_id = implode(',', $all_id);
+
+        $delete_query = "DELETE FROM `admin_users` WHERE user_id IN ($extrext_id)";
+        $sql = mysqli_query($conn, $delete_query);
+
+        if ($sql) {
+            $succses['succses'] = 'Data Delete Successfully!';
+        } else {
+            $warning['warning'] = 'Failed to delete data!';
+        }
+    }
+}
 
 
 
@@ -49,36 +68,29 @@ global $conn;
         <!-- Sidebar End -->
         <div id="layoutSidenav_content">
             <main>
-                <div class="container-fluid">
+                <div class="container-fluid my-3">
 
                     <?php
-                    if (isset($_SESSION['Delete'])) {
+                    if (isset($succses['succses']))
                         echo '
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <strong>!</strong> ' . $_SESSION['Delete'] . '.
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>';
-                        unset($_SESSION['Delete']);
-                    }
-                    if (isset($_SESSION['delete_chacke'])) {
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>@succsesfully!</strong> ' . $succses['succses'] . '
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>';
+
+                    if (isset($warning['warning']))
                         echo '
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <strong>!WARNING</strong> ' . $_SESSION['delete_chacke'] . '.
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>';
-                        unset($_SESSION['delete_chacke']);
-                    }
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>@Error!</strong> ' . $warning['warning'] . '
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>';
                     ?>
 
 
                     <div class="row my-5">
                         <div class="col-lg-12 ">
                             <div class="card">
-                                <form action="POST">
+                                <form action="" method="POST">
                                     <div class="row">
                                         <div class="col-lg-3 col-md-3 text-start py-3 px-4">
                                             <p class="font student"> User Vewi Details</p>
