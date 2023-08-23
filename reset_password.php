@@ -26,7 +26,7 @@ if (isset($_POST['submit'])) {
         $pass = password_hash($newPassword, PASSWORD_BCRYPT);
 
 
-        $updatequery = " UPDATE `admin_users` SET `user_password` = '$pass', `updated_on` = NOW() WHERE `token` = '$token' ";
+        $updatequery = " UPDATE `admin_users` SET `user_password` = '$pass', `reset_expiration` = NOW() WHERE `token` = '$token' ";
 
 
         $iquery = mysqli_query($conn, $updatequery);
