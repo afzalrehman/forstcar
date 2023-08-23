@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+// if (!isset($_SESSION['user_fullname'])) {
+//     echo "You are logged out";
+//     header('location:login.php');
+// }
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -86,8 +90,8 @@ if (isset($_POST['submit'])) {
                         $send_email = "From: hammadking427@gmail.com";
 
                         $mail->send();
-                        $_SESSION['msg'] = "Check you mail to activate your account 
-                    $email";
+                        $_SESSION['msg'] = "Check you mail to activate your account $email
+                    ";
                         $succses['succses'] = 'Please Check The Gmail And Activated';
                     } catch (Exception $e) {
                         echo "Failed to send email. Error: {$mail->ErrorInfo}";
