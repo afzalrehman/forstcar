@@ -34,12 +34,12 @@ if (isset($_POST['submit'])) {
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'noorulahad606@gmail.com';
-            $mail->Password = 'kulbbsejofmqiztc';
+            $mail->Username = 'hammadking427@gmail.com';
+            $mail->Password = 'gtohfmaaanqufdbn';
             $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
 
-            $mail->setFrom('noorulahad606@gmail.com', 'Noor');
+            $mail->setFrom('hammadking427@gmail.com', 'ABu_Hammad');
             $mail->addAddress($user_email, $user_fullname);
 
             $mail->Subject = 'Password Reset';

@@ -193,7 +193,7 @@ if (isset($_POST['submit'])) {
 
                                     <div class="mb-3">
                                         <label for="" class="form-label">Email</label>
-                                        <input type="email" class="form-control inputDesign" id="" name="user_email" placeholder="User Email" value="<?php
+                                        <input type="email" class="w-100 inputDesign" id="" name="user_email" placeholder="User Email" value="<?php
                                                                                                                                     if (isset($_COOKIE['emailcookie'])) {
                                                                                                                                         echo $_COOKIE['emailcookie'];
                                                                                                                                     }
@@ -201,7 +201,7 @@ if (isset($_POST['submit'])) {
                                     </div>
                                     <div class="mb-4">
                                         <label for="" class="form-label">Password</label>
-                                        <input type="password" class="form-control inputDesign" id="" name="user_password" placeholder="User Password" value="<?php
+                                        <input type="password" class="w-100 inputDesign" id="" name="user_password" placeholder="User Password" value="<?php
                                                                                                                                                 if (isset($_COOKIE['passwordcookie'])) {
                                                                                                                                                     echo $_COOKIE['passwordcookie'];
                                                                                                                                                 }

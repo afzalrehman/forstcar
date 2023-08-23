@@ -239,62 +239,62 @@ if (isset($_POST['delete_btn'])) {
                                         </div> -->
 
                                         <div class="in">
-                                            <input type="text" name="name" id="name" class=" input w-100 py-2 mt-3" placeholder="Company Name" value="<?php if (isset($emty['name'])) echo $name  ?>">
+                                            <input type="text" name="name" id="name" class=" w-100 py-2 mt-3" placeholder="Company Name" value="<?php if (isset($emty['name'])) echo $name  ?>">
                                             <span class="text-danger fs-6 "><?php if (isset($emty['name'])) echo $emty['name'] ?></span>
                                         </div>
 
-                                        <div class="in">
-                                            <input type="text" name="address" id="address" class=" input w-100 py-2 mt-3" placeholder="Address">
+                                        <div class="i
+                                            <input type="text" name="address" id="address" class=" w-100 py-2 mt-3" placeholder="Address">
 
                                         </div>
                                         <div class="in">
-                                            <input type="text" name="phone" id="phone" class=" input w-100 py-2 mt-3" placeholder="Telephone ">
+                                            <input type="text" name="phone" id="phone" class=" w-100 py-2 mt-3" placeholder="Telephone ">
 
                                         </div>
 
                                         <div class="in">
-                                            <input type="number" name="contact" id="contact" class=" input w-100 py-2 mt-3" placeholder="Contact Number ">
+                                            <input type="number" name="contact" id="contact" class=" w-100 py-2 mt-3" placeholder="Contact Number ">
                                         </div>
                                         <div class="in">
-                                            <input type="text" name="company_city" id="company_city" class=" input w-100 py-2 mt-3" placeholder="Company City ">
-                                        </div>
-
-                                        <div class="in">
-                                            <input type="text" name="company_state" id="company_state" class=" input w-100 py-2 mt-3" placeholder="Company State">
+                                            <input type="text" name="company_city" id="company_city" class="put w-100 py-2 mt-3" placeholder="Company City ">
                                         </div>
 
                                         <div class="in">
-                                            <input type="text" name="direct" id="direct" class=" input w-100 py-2 mt-3" placeholder="Direct ">
+                                            <input type="text" name="company_state" id="company_state" class=" w-100 py-2 mt-3" placeholder="Company State">
                                         </div>
 
                                         <div class="in">
-                                            <input type="email" name="email" id="email" class=" input w-100 py-2 mt-3" placeholder="Email ">
+                                            <input type="text" name="direct" id="direct" class=" w-100 py-2 mt-3" placeholder="Direct ">
+                                        </div>
+
+                                        <div class="in">
+                                            <input type="email" name="email" id="email" class=" w-100 py-2 mt-3" placeholder="Email ">
                                         </div>
 
 
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="in">
-                                            <input type="number" name="company_zipcode" id="company_zipcode" class=" input w-100 py-2 mt-3" placeholder="Company ZipCode ">
+                                            <input type="number" name="company_zipcode" id="company_zipcode" class=" w-100 py-2 mt-3" placeholder="Company ZipCode ">
                                         </div>
 
                                         <div class="in">
-                                            <input type="text" name="port" id="port" class=" input w-100 py-2 mt-3" placeholder="Port Of Entry ">
+                                            <input type="text" name="port" id="port" class=" w-100 py-2 mt-3" placeholder="Port Of Entry ">
                                         </div>
                                         <div class="in">
-                                            <input type="text" name="vessel" id="vessel" class=" input w-100 py-2 mt-3" placeholder="Vessel Details">
+                                            <input type="text" name="vessel" id="vessel" class=" w-100 py-2 mt-3" placeholder="Vessel Details">
                                         </div>
                                         <div class="in">
-                                            <input type="text" name="trucking" id="trucking" class=" input w-100 py-2 mt-3" placeholder="Trucking">
+                                            <input type="text" name="trucking" id="trucking" class=" w-100 py-2 mt-3" placeholder="Trucking">
                                         </div>
                                         <div class="in">
-                                            <input type="text" name="misc" id="misc" class=" input w-100 py-2 mt-3" placeholder="Misc">
+                                            <input type="text" name="misc" id="misc" class=" w-100 py-2 mt-3" placeholder="Misc">
                                         </div>
                                         <div class="in">
-                                            <input type="text" name="total_cost" id="total_cost" class=" input w-100 py-2 mt-3" placeholder="Total Cost">
+                                            <input type="text" name="total_cost" id="total_cost" class=" w-100 py-2 mt-3" placeholder="Total Cost">
                                         </div>
                                         <div class="in">
-                                            <input type="text" name="custom" id="custom" class=" input w-100 py-2 mt-3" placeholder="Custom Freiht">
+                                            <input type="text" name="custom" id="custom" class=" w-100 py-2 mt-3" placeholder="Custom Freiht">
                                         </div>
 
 
