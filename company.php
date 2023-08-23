@@ -10,7 +10,7 @@ if (!isset($_SESSION['user_fullname'])) {
 $emty = array();
 $warning = array();
 $succses = array();
-$delete =array();
+$delete = array();
 if (isset($_POST['submit'])) {
     $name = mysqli_real_escape_string($conn, $_POST['name']);
     $address = mysqli_real_escape_string($conn, $_POST['address']);
@@ -220,7 +220,7 @@ if (isset($_POST['delete_btn'])) {
                         </div>';
                     ?>
                     <?php
-                    if (isset($delete['Delete'] ))
+                    if (isset($delete['Delete']))
                         echo '
                             <div class="mt-2 alert alert-danger alert-dismissible fade show" role="alert">
                         <strong>@Warning</strong> ' . $delete['Delete'] . '
@@ -253,7 +253,7 @@ if (isset($_POST['delete_btn'])) {
                                         </div>
 
                                         <div class="in">
-                                            <input type="text" name="contact" id="contact" class=" input w-100 py-2 mt-3" placeholder="Contact Name ">
+                                            <input type="number" name="contact" id="contact" class=" input w-100 py-2 mt-3" placeholder="Contact Number ">
                                         </div>
                                         <div class="in">
                                             <input type="text" name="company_city" id="company_city" class=" input w-100 py-2 mt-3" placeholder="Company City ">
@@ -275,7 +275,7 @@ if (isset($_POST['delete_btn'])) {
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="in">
-                                            <input type="text" name="company_zipcode" id="company_zipcode" class=" input w-100 py-2 mt-3" placeholder="Company ZipCode ">
+                                            <input type="number" name="company_zipcode" id="company_zipcode" class=" input w-100 py-2 mt-3" placeholder="Company ZipCode ">
                                         </div>
 
                                         <div class="in">
@@ -335,7 +335,7 @@ if (isset($_POST['delete_btn'])) {
                                                     <tr>
                                                         <th>
                                                             <!-- <input class="chack" type="checkbox"> -->
-                                                            <i class="fa-solid fa-plus "></i>
+                                                            <i class="fa-solid fa-plus toggle-checkbox "></i>
                                                         </th>
                                                         <th>S/no<i class="fa-solid fa-arrow-down px-2"></i></th>
                                                         <th>Date<i class="fa-solid fa-arrow-down px-2"></i></th>
@@ -434,6 +434,25 @@ if (isset($_POST['delete_btn'])) {
     <script src="assets/demo/chart-bar-demo.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
     <script src="js/datatables-simple-demo.js"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+           document.addEventListener("DOMContentLoaded", function() {
+        var toggleIcons = document.querySelectorAll(".toggle-checkbox");
+
+        toggleIcons.forEach(function(icon) {
+            icon.addEventListener("click", function() {
+                var checkboxId = this.getAttribute("data-checkbox-id");
+                var checkbox = document.querySelector('input[type="checkbox"][value="' + checkboxId + '"]');
+                
+                if (checkbox) {
+                    checkbox.checked = !checkbox.checked;
+                }
+            });
+        });
+    });
+    </script>
 </body>
 
 </html>
