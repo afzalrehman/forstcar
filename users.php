@@ -88,7 +88,7 @@ if (isset($_POST['submit'])) {
                         $mail->send();
                         $_SESSION['msg'] = "Check you mail to activate your account 
                     $email";
-                        $succses['succses'] = 'Please Check The Gmail And Acticated';
+                        $succses['succses'] = 'Please Check The Gmail And Activated';
                     } catch (Exception $e) {
                         echo "Failed to send email. Error: {$mail->ErrorInfo}";
                     }

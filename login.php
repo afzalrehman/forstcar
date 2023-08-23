@@ -110,6 +110,33 @@ if (isset($_POST['submit'])) {
         text-align: center;
         padding-top: 10px;
     }
+    .inputDesign {
+        padding: 10px;
+        border: 2px solid #ccc;
+        border-radius: 7px;
+        font-size: 16px;
+        outline: none;
+    }
+
+    .inputDesign:focus {
+        border-color: #0055b8;
+        animation: inputFocusAnimation 0.3s;
+    }
+
+    @keyframes inputFocusAnimation {
+        0% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.05);
+        }
+
+        100% {
+            transform: scale(1);
+        }
+    }
+    
 </style>
 
 
@@ -132,7 +159,7 @@ if (isset($_POST['submit'])) {
                                 </div>
 
                                 <div>
-                                    <p class="msg pb-5 bg-success text-white px-5">
+                                    <p class="msg pb-5 text-white px-5 fs-5" style="background-color: #98A0A5; ">
                                         <?php
                                         if (isset($_SESSION['msg'])) {
                                             echo $_SESSION['msg'];
@@ -166,7 +193,7 @@ if (isset($_POST['submit'])) {
 
                                     <div class="mb-3">
                                         <label for="" class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="" name="user_email" placeholder="User Email" value="<?php
+                                        <input type="email" class="form-control inputDesign" id="" name="user_email" placeholder="User Email" value="<?php
                                                                                                                                     if (isset($_COOKIE['emailcookie'])) {
                                                                                                                                         echo $_COOKIE['emailcookie'];
                                                                                                                                     }
@@ -174,7 +201,7 @@ if (isset($_POST['submit'])) {
                                     </div>
                                     <div class="mb-4">
                                         <label for="" class="form-label">Password</label>
-                                        <input type="password" class="form-control" id="" name="user_password" placeholder="User Password" value="<?php
+                                        <input type="password" class="form-control inputDesign" id="" name="user_password" placeholder="User Password" value="<?php
                                                                                                                                                 if (isset($_COOKIE['passwordcookie'])) {
                                                                                                                                                     echo $_COOKIE['passwordcookie'];
                                                                                                                                                 }
