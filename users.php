@@ -86,9 +86,14 @@ if (isset($_POST['submit'])) {
                         $send_email = "From: hammadking427@gmail.com";
 
                         $mail->send();
-                        $_SESSION['msg'] = "Check you mail to activate your account 
-                    $email";
                         $succses['succses'] = 'Please Check The Gmail And Activated';
+                        $user_fullname = '';
+                        $user_email = '';
+                        $user_password = '';
+                        $user_contact = '';
+                        $user_image = '';
+                        $_SESSION['msg'] = "Check you mail to activate your account 
+                    $user_email";
                     } catch (Exception $e) {
                         echo "Failed to send email. Error: {$mail->ErrorInfo}";
                     }
@@ -195,20 +200,26 @@ if (isset($_POST['submit'])) {
                                     <div class="col-lg-6">
 
                                         <div class="in">
-                                            <input type="text" name="user_fullname" class="inputDesign w-100 py-2 mt-3" placeholder="User FullName">
+                                            <input type="text" name="user_fullname" class="inputDesign w-100 py-2 mt-3" placeholder="User FullName" value="<?php if (isset($_POST['submit'])) {
+                                                                                                                                                                echo $user_fullname;
+                                                                                                                                                            } ?>">
                                             <span class='fw-bold text-danger '><?php if (isset($error['user_fullname'])) {
                                                                                     echo $error['user_fullname'];
                                                                                 } ?></span>
                                         </div>
 
                                         <div class="in">
-                                            <input type="email" name="user_email" class="inputDesign w-100 py-2 mt-3" placeholder="User Email">
+                                            <input type="email" name="user_email" class="inputDesign w-100 py-2 mt-3" placeholder="User Email" value="<?php if (isset($_POST['submit'])) {
+                                                                                                                                                            echo $user_email;
+                                                                                                                                                        } ?>">
                                             <span class='fw-bold text-danger '><?php if (isset($error['user_email'])) {
                                                                                     echo $error['user_email'];
                                                                                 } ?></span>
                                         </div>
                                         <div class="in">
-                                            <input type="password" name="user_password" class="inputDesign w-100 py-2 mt-3" placeholder="Passwrod" minlength="8">
+                                            <input type="password" name="user_password" class="inputDesign w-100 py-2 mt-3" placeholder="Passwrod" minlength="8" value="<?php if (isset($_POST['submit'])) {
+                                                                                                                                                                            echo $user_password;
+                                                                                                                                                                        } ?>">
                                             <span class='fw-bold text-danger '><?php if (isset($error['user_password'])) {
                                                                                     echo $error['user_password'];
                                                                                 } ?></span>
@@ -226,13 +237,17 @@ if (isset($_POST['submit'])) {
                                                                             } ?></span>
 
                                         <div class="in">
-                                            <input type="text" name="user_contact" class="inputDesign w-100 py-2 mt-3" placeholder="Contact ">
+                                            <input type="text" name="user_contact" class="inputDesign w-100 py-2 mt-3" placeholder="Contact " value="<?php if (isset($_POST['submit'])) {
+                                                                                                                                                            echo $user_contact;
+                                                                                                                                                        } ?>">
                                             <span class='fw-bold text-danger '><?php if (isset($error['user_contact'])) {
                                                                                     echo $error['user_contact'];
                                                                                 } ?></span>
                                         </div>
                                         <div class="in">
-                                            <input type="file" name="user_image" class="inputDesign w-100 py-2 mt-3" placeholder="Image ">
+                                            <input type="file" name="user_image" class="inputDesign w-100 py-2 mt-3" placeholder="Image" value="<?php if (isset($_POST['submit'])) {
+                                                                                                                                                    echo $user_image;
+                                                                                                                                                } ?>">
                                             <span class='fw-bold text-danger '><?php if (isset($error['user_image'])) {
                                                                                     echo $error['user_image'];
                                                                                 } ?></span>
