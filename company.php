@@ -123,7 +123,7 @@ if (isset($_POST['delete_btn'])) {
 //         if (count($_POST['edit_delete']) == 1 && is_array($_POST['edit_delete'])) {
 //             echo '<script>alert("Edit success");</script>';
 
-           
+
 //         } else {
 //             echo '<script>alert("Please check only one checkbox!");</script>';
 //         }
@@ -342,7 +342,7 @@ if (isset($_POST['delete_btn'])) {
                                                 <button type="submit" name="delete_btn">
                                                     <span class="fa-regular fa-trash-can export-btn delete">
                                                     </span></button>
-                                                <button type="submit" name="edit" ><span class="fa-solid fa-pen-to-square edit export-btn"></span></button>
+                                                <button type="submit" name="edit"><span class="fa-solid fa-pen-to-square edit export-btn"></span></button>
                                                 <a href="">
                                                     <span class="fa-solid fa-cloud-arrow-down export export-btn"> </span>
                                                 </a>
