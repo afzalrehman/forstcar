@@ -108,9 +108,9 @@ if (isset($_POST['delete_btn'])) {
                                                 <button type="submit" class="edit export-btn" name="">
                                                     <span class="fa-solid fa-pen-to-square"></span>
                                                 </button>
-                                                <button type="submit" class="export export-btn" name="">
+                                                <a href="./exportuservewi.php" type="submit" class="export export-btn " name="">
                                                     <span class="fa-solid fa-cloud-arrow-down"> </span>
-                                                </button>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
