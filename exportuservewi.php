@@ -31,9 +31,10 @@
         <th style="width:200px">Reset Token</th>
         <th style="width:200px">Is Verified</th>
     </tr>';
+    $no = 1;
     while ($data = mysqli_fetch_assoc($res)) {
         $html .= '<tr style="height:100px">
-                    <td>' . $data['user_id'] . '</td>
+                    <td>' . $no . '</td>
                     <td>' . $data['user_fullname'] . '</td>
                     <td>' . $data['user_email'] . '</td>
                     <td>' . $data['user_password'] . '</td>
@@ -48,6 +49,7 @@
                     <td>' . $data['reset_token'] . '</td>
                     <td>' . $data['is_verified'] . '</td>
                 </tr>';
+                $no = $no + 1;
     }
 
     $html .= '</table>';
