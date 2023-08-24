@@ -261,7 +261,7 @@ input {
 
 
 input:focus {
-    border-color:  #024795;
+    border-color: #024795;
     animation: inputFocusAnimation 0.3s;
 }
 
@@ -277,5 +277,4 @@ input:focus {
     100% {
         transform: scale(1);
     }
-} 
-
+}
