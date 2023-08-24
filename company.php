@@ -115,6 +115,22 @@ if (isset($_POST['delete_btn'])) {
     }
 }
 
+// if (isset($_POST['edit'])) {
+//     if (!isset($_POST['edit_delete']) || empty($_POST['edit_delete'])) {
+//         $warning['checkboxcheck'] = "Please check the checkboxes to delete";
+//         // You might want to redirect back to the previous page or handle this case accordingly.
+//     } else {
+//         if (count($_POST['edit_delete']) == 1 && is_array($_POST['edit_delete'])) {
+//             echo '<script>alert("Edit success");</script>';
+
+           
+//         } else {
+//             echo '<script>alert("Please check only one checkbox!");</script>';
+//         }
+//     }
+// }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -204,6 +220,14 @@ if (isset($_POST['delete_btn'])) {
                         </div>';
                     ?>
                     <?php
+                    if (isset($warning['checkboxcheck']))
+                        echo '
+                            <div class="mt-5 alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>@INSERT</strong> ' . $warning['checkboxcheck'] . '
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>';
+                    ?>
+                    <?php
                     if (isset($warning['WARNING']))
                         echo '
                             <div class="mt-2 alert alert-danger alert-dismissible fade show" role="alert">
@@ -244,7 +268,7 @@ if (isset($_POST['delete_btn'])) {
                                         </div>
 
                                         <div class="i
-                                            <input type="text" name="address" id="address" class=" w-100 py-2 mt-3" placeholder="Address">
+                                            <input type=" text" name="address" id="address" class=" w-100 py-2 mt-3" placeholder="Address">
 
                                         </div>
                                         <div class="in">
@@ -318,7 +342,7 @@ if (isset($_POST['delete_btn'])) {
                                                 <button type="submit" name="delete_btn">
                                                     <span class="fa-regular fa-trash-can export-btn delete">
                                                     </span></button>
-                                                <a href=""> <span class="fa-solid fa-pen-to-square edit export-btn"></span></a>
+                                                <button type="submit" name="edit" ><span class="fa-solid fa-pen-to-square edit export-btn"></span></button>
                                                 <a href="">
                                                     <span class="fa-solid fa-cloud-arrow-down export export-btn"> </span>
                                                 </a>
@@ -438,20 +462,20 @@ if (isset($_POST['delete_btn'])) {
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-           document.addEventListener("DOMContentLoaded", function() {
-        var toggleIcons = document.querySelectorAll(".toggle-checkbox");
+        document.addEventListener("DOMContentLoaded", function() {
+            var toggleIcons = document.querySelectorAll(".toggle-checkbox");
 
-        toggleIcons.forEach(function(icon) {
-            icon.addEventListener("click", function() {
-                var checkboxId = this.getAttribute("data-checkbox-id");
-                var checkbox = document.querySelector('input[type="checkbox"][value="' + checkboxId + '"]');
-                
-                if (checkbox) {
-                    checkbox.checked = !checkbox.checked;
-                }
+            toggleIcons.forEach(function(icon) {
+                icon.addEventListener("click", function() {
+                    var checkboxId = this.getAttribute("data-checkbox-id");
+                    var checkbox = document.querySelector('input[type="checkbox"][value="' + checkboxId + '"]');
+
+                    if (checkbox) {
+                        checkbox.checked = !checkbox.checked;
+                    }
+                });
             });
         });
-    });
     </script>
 </body>
 

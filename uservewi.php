@@ -1,10 +1,10 @@
 <?php
 session_start();
 include "config.php";
-if (!isset($_SESSION['user_fullname'])) {
-    echo "You are logged out";
-    header('location:login.php');
-}
+// if (!isset($_SESSION['user_fullname'])) {
+//     echo "You are logged out";
+//     header('location:login.php');
+// }
 
 global $conn;
 $succses = array();
