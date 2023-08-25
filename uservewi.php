@@ -13,7 +13,7 @@ $warning = array();
 //  ===============DElete qurey=============== 
 if (isset($_POST['delete_btn'])) {
     if (!isset($_POST['chack_btn_delete']) || empty($_POST['chack_btn_delete'])) {
-        $_SESSION['delete_chacke'] = "Please check the checkboxes to delete";
+        $warning['warning'] = "Please check the checkboxes to delete";
 
         // You might want to redirect back to the previous page or handle this case accordingly.
     } else {
@@ -27,6 +27,25 @@ if (isset($_POST['delete_btn'])) {
             $succses['succses'] = 'Data Delete Successfully!';
         } else {
             $warning['warning'] = 'Failed to delete data!';
+        }
+    }
+}
+
+
+
+//  ===============Edit qurey=============== 
+if (isset($_POST['edit'])) {
+    if (!isset($_POST['chack_btn_delete']) || empty($_POST['chack_btn_delete'])) {
+        $warning['warning'] = "Please check the checkboxes to delete";
+        // You might want to redirect back to the previous page or handle this case accordingly.
+    } else {
+        if (count($_POST['chack_btn_delete']) == 1 && is_array($_POST['chack_btn_delete'])) {
+
+            echo '<script>alert("Edit success");</script>';
+
+        } else {
+            $warning['warning'] = "Please check only one checkbox!";
+            // echo '<script>alert("Please check only one checkbox!");</script>';
         }
     }
 }
@@ -60,6 +79,40 @@ if (isset($_POST['delete_btn'])) {
 </head>
 
 <body class="sb-nav-fixed">
+
+    <!-- Edit Modal -->
+    <!-- <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit this Note</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <form action="../crud-application/application.php" method="POST">
+                    <div class="modal-body">
+                        <input type="hidden" name="snoEdit" id="snoEdit">
+                        <div class="form-group">
+                            <label for="title">Note Title</label>
+                            <input type="text" class="form-control" id="titleEdit" name="titleEdit" aria-describedby="emailHelp">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="desc">Note Description</label>
+                            <textarea class="form-control" id="descriptionEdit" name="descriptionEdit" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer d-block mr-auto">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div> -->
+
+
     <!-- navbar -->
     <?php
     require 'navbar.php';
@@ -92,10 +145,10 @@ if (isset($_POST['delete_btn'])) {
                     ?>
 
 
-                    <div class="row my-5">
-                        <div class="col-lg-12 ">
-                            <div class="card">
-                                <form action="" method="POST">
+                    <form action="" method="POST">
+                        <div class="row my-5">
+                            <div class="col-lg-12 ">
+                                <div class="card">
                                     <div class="row">
                                         <div class="col-lg-3 col-md-3 text-start py-3 px-4">
                                             <p class="font student"> User Vewi Details</p>
@@ -105,7 +158,7 @@ if (isset($_POST['delete_btn'])) {
                                                 <button type="submit" class="export-btn delete" name="delete_btn">
                                                     <span class="fa-regular fa-trash-can "></span>
                                                 </button>
-                                                <button type="submit" class="edit export-btn" name="">
+                                                <button type="submit" class="edit export-btn" name="edit">
                                                     <span class="fa-solid fa-pen-to-square"></span>
                                                 </button>
                                                 <a href="./exportuservewi.php" type="submit" class="export export-btn " name="">
@@ -184,27 +237,29 @@ if (isset($_POST['delete_btn'])) {
 
                                         </div>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
+                    </form>
                 </div>
             </main>
-            <footer class="py-4 bg-light mt-auto">
-                <div class="container-fluid px-4">
-                    <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Your Website 2023</div>
-                        <div>
-                            <a href="#">Privacy Policy</a>
-                            &middot;
-                            <a href="#">Terms &amp; Conditions</a>
-                        </div>
-                    </div>
-                </div>
-            </footer>
         </div>
+
     </div>
+    <footer class="py-4 bg-light mt-auto">
+        <div class="container-fluid px-4">
+            <div class="d-flex align-items-center justify-content-between small">
+                <div class="text-muted">Copyright &copy; Your Website 2023</div>
+                <div>
+                    <a href="#">Privacy Policy</a>
+                    &middot;
+                    <a href="#">Terms &amp; Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
