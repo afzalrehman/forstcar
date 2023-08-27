@@ -74,24 +74,24 @@ if (isset($_POST['submit'])) {
     //     $emty['custom'] = 'Please Fill The Company cuctom';
     // }
     else {
-        $query = "SELECT * FROM importer_details WHERE company_name= '$name'";
-        $sql = mysqli_query($conn, $query);
-        $row = mysqli_fetch_row($sql);
-        if ($row > 0) {
-            // Duplicate data found
-            $warning['WARNING'] = "Data already exists.";
-        } else {
-            $insert = " INSERT INTO importer_details(`company_name`, `company_contact`,`company_address`, `company_city`, `company_state`,  `company_zipcode`,`company_telephone`, `company_email`, `company_direct`, 
+        // $query = "SELECT * FROM importer_details WHERE company_name= '$name'";
+        // $sql = mysqli_query($conn, $query);
+        // $row = mysqli_fetch_row($sql);
+        // if ($row > 0) {
+        //     // Duplicate data found
+        //     $warning['WARNING'] = "Data already exists.";
+
+        $insert = " INSERT INTO importer_details(`company_name`, `company_contact`,`company_address`, `company_city`, `company_state`,  `company_zipcode`,`company_telephone`, `company_email`, `company_direct`, 
             `company_port_of_entry`,`company_vessel_detail`,`company_trucking`,`company_misc`,`total_cost`, `custom_frieght` ,`added_on`)
             VALUES('$name', '$contact', '$address', '$company_city', '$company_state', '$company_zipcode','$phone', '$email', '$direct','$port','$vessel','$trucking','$misc','$total_cost','$custom', NOW())";
-            $insert_sql = mysqli_query($conn, $insert);
+        $insert_sql = mysqli_query($conn, $insert);
 
-            if ($insert_sql) {
-                $succses['succses'] = 'insert data sucsses';
-            }
+        if ($insert_sql) {
+            $succses['succses'] = 'insert data sucsses';
         }
     }
 }
+
 ?>
 
 <?php
@@ -114,37 +114,97 @@ if (isset($_POST['delete_btn'])) {
         }
     }
 }
+// Initialize variables
+$edit = array();
+// Check if the edit button is clicked
+if (isset($_POST['edit'])) {
+    // Check if at least one checkbox is checked
+    if (isset($_POST['edit_delete']) && !empty($_POST['edit_delete']) && count($_POST['edit_delete']) == 1) {
+        // Get the selected ID
+        $selectedId = $_POST['edit_delete'][0];
 
-// $edit_name = ""; // Initialize these variables with empty values
-// $edit_address = "";
-// $edit_phone = "";
+        // Establish a database connection (replace with your database connection code)
 
-// if (isset($_POST['edit'])) {
-//     if (!isset($_POST['edit_delete']) || empty($_POST['edit_delete'])) {
-//         $warning['checkboxcheck'] = "Please check the checkboxes to delete";
-//         // You might want to redirect back to the previous page or handle this case accordingly.
-//     } else {
-//         if (count($_POST['edit_delete']) == 1 && is_array($_POST['edit_delete'])) {
-//             // echo '<script>alert("Edit success");</script>';
 
-//             $importer_id = $_POST['edit_delete'][0]; // Assuming you want to edit the first selected importer_id
-//             $sql = "SELECT `company_name`, `company_address`, `company_contact` FROM importer_details WHERE importer_id = $importer_id";
-//             $result = mysqli_query($conn, $sql);
-//             if ($result->num_rows > 0) {
-//                 // Output data of the selected row (assuming one row is selected)
-//                 $row = $result->fetch_assoc();
-//                 $edit_name = $row["company_name"];
-//                 $edit_address = $row["company_address"];
-//                 $edit_phone = $row["company_contact"];
-//             }
-//         } else {
-//             echo '<script>alert("Please check only one checkbox!");</script>';
-//         }
-//     }
-// }
+        // Prepare and execute SQL query
+        $sql = "SELECT * FROM importer_details WHERE importer_id = $selectedId";
+        $result = mysqli_query($conn, $sql);
 
+        if ($result) {
+            // Fetch the data
+            $row = mysqli_fetch_assoc($result);
+            $edit['edit_company_name'] = $row['company_name'];
+            $edit['company_contact'] = $row['company_contact'];
+            $edit['company_address'] = $row['company_address'];
+            $edit['company_city'] = $row['company_city'];
+            $edit['company_state'] = $row['company_state'];
+            $edit['company_zipcode'] = $row['company_zipcode'];
+            $edit['company_telephone'] = $row['company_telephone'];
+            $edit['company_email'] = $row['company_email'];
+            $edit['company_direct'] = $row['company_direct'];
+            $edit['company_port_of_entry'] = $row['company_port_of_entry'];
+            $edit['company_vessel_detail'] = $row['company_vessel_detail'];
+            $edit['company_trucking'] = $row['company_trucking'];
+            $edit['company_misc'] = $row['company_misc'];
+            $edit['total_cost'] = $row['total_cost'];
+            $edit['custom_frieght'] = $row['custom_frieght'];
+        } else {
+            echo "Error: " . mysqli_error($conn);
+        }
+
+        // Close the database connection
+        mysqli_close($conn);
+    } else {
+        echo '<script>alert("Please check exactly one checkbox!");</script>';
+    }
+}
+?>
+
+
+<!-- =========================update====================== -->
+<?php
+ $edit_company_name ="" ;
+ $edit_company_contact = "";
+if (isset($_POST['update'])) {
+    // Assuming you have already retrieved the data you want to update
+    $edit_company_name = $_POST['name'];
+    $edit_company_contact = $_POST['contact'];
+    // Add other fields as needed
+
+    // Get the selected ID
+    $selectedId = $_POST['edit_id']; // Add this input field to your HTML form
+
+    // Establish a database connection (replace with your database connection code)
+    $conn = mysqli_connect("localhost", "root", "", "forstcarusa");
+
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+
+    // Prepare and execute an UPDATE query
+    $update_query = "UPDATE importer_details SET 
+        company_name = '$edit_company_name',
+        company_contact = '$edit_company_contact'
+        -- Add other fields here
+        WHERE importer_id = $selectedId";
+
+    if (mysqli_query($conn, $update_query)) {
+        echo "Record updated successfully!";
+    } else {
+        echo "Error updating record: " . mysqli_error($conn);
+    }
+
+    // Close the database connection
+    mysqli_close($conn);
+}
 
 ?>
+
+
+
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -166,6 +226,13 @@ if (isset($_POST['delete_btn'])) {
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <link rel="stylesheet" href="css/main.css">
+    <style>
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none !important;
+            /* margin: 0; */
+        }
+    </style>
 </head>
 
 <body class="sb-nav-fixed">
@@ -240,14 +307,7 @@ if (isset($_POST['delete_btn'])) {
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>';
                     ?>
-                    <?php
-                    if (isset($warning['WARNING']))
-                        echo '
-                            <div class="mt-2 alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>@Warning</strong> ' . $warning['WARNING'] . '
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>';
-                    ?>
+
                     <?php
                     if (isset($warning['chackbox']))
                         echo '
@@ -276,68 +336,110 @@ if (isset($_POST['delete_btn'])) {
                                         </div> -->
 
                                         <div class="in">
-                                            <input type="text" name="name" id="name" class=" w-100 py-2 mt-3" placeholder="Company Name" value=" <?php if(!empty($_POST['edit'])) echo $edit_name; ?>">
+                                            <input type="text" name="name" id="name" class=" w-100 py-2 mt-3" placeholder="Company Name" value="<?php
+                                                                                                                                                if (isset($edit['edit_company_name'])) {
+                                                                                                                                                    echo $edit['edit_company_name'];
+                                                                                                                                                } elseif (isset($emty['name'])) {
+                                                                                                                                                    echo $name;
+                                                                                                                                                } ?>">
                                             <span class="text-danger fs-6 "><?php if (isset($emty['name'])) echo $emty['name'] ?></span>
                                         </div>
 
                                         <div class="in">
-                                            <input type="text" name="address" id="address" class=" w-100 py-2 mt-3" placeholder="Address" value=" <?php echo  $edit_address; ?>">
+                                            <input type=" text" name="address" id="address" class=" w-100 py-2 mt-3" placeholder="Address" value="<?php if (isset($edit['company_address'])) {
+                                                                                                                                                        echo $edit['company_address'];
+                                                                                                                                                    } ?>">
 
                                         </div>
                                         <div class="in">
-                                            <input type="text" name="phone" id="phone" class=" w-100 py-2 mt-3" placeholder="Telephone " value=" <?php echo $edit_phone; ?>">
+                                            <input type="number" name="phone" id="phone" class=" w-100 py-2 mt-3" placeholder="Telephone " value="<?php if (isset($edit['company_telephone'])) {
+                                                                                                                                                        echo $edit['company_telephone'];
+                                                                                                                                                    } ?>">
 
                                         </div>
 
                                         <div class="in">
-                                            <input type="number" name="contact" id="contact" class=" w-100 py-2 mt-3" placeholder="Contact Number ">
+                                            <input type="number" name="contact" id="contact" class="w-100 py-2 mt-3" placeholder="Contact Number" value="<?php if (isset($edit['company_contact'])) {
+                                                                                                                                                                echo $edit['company_contact'];
+                                                                                                                                                            } ?>">
                                         </div>
                                         <div class="in">
-                                            <input type="text" name="company_city" id="company_city" class="put w-100 py-2 mt-3" placeholder="Company City ">
-                                        </div>
-
-                                        <div class="in">
-                                            <input type="text" name="company_state" id="company_state" class=" w-100 py-2 mt-3" placeholder="Company State">
-                                        </div>
-
-                                        <div class="in">
-                                            <input type="text" name="direct" id="direct" class=" w-100 py-2 mt-3" placeholder="Direct ">
+                                            <input type="text" name="company_city" id="company_city" class="put w-100 py-2 mt-3" placeholder="Company City " value="<?php if (isset($edit['company_city'])) {
+                                                                                                                                                                        echo $edit['company_city'];
+                                                                                                                                                                    } ?>">
                                         </div>
 
                                         <div class="in">
-                                            <input type="email" name="email" id="email" class=" w-100 py-2 mt-3" placeholder="Email ">
+                                            <input type="text" name="company_state" id="company_state" class=" w-100 py-2 mt-3" placeholder="Company State" value="<?php if (isset($edit['company_state'])) {
+                                                                                                                                                                        echo $edit['company_state'];
+                                                                                                                                                                    } ?>">
+                                        </div>
+
+                                        <div class="in">
+                                            <input type="text" name="direct" id="direct" class=" w-100 py-2 mt-3" placeholder="Direct " value="<?php if (isset($edit['company_direct'])) {
+                                                                                                                                                    echo $edit['company_direct'];
+                                                                                                                                                } ?>">
+                                        </div>
+
+                                        <div class="in">
+                                            <input type="email" name="email" id="email" class=" w-100 py-2 mt-3" placeholder="Email " value="<?php if (isset($edit['company_email'])) {
+                                                                                                                                                    echo $edit['company_email'];
+                                                                                                                                                } ?>">
                                         </div>
 
 
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="in">
-                                            <input type="number" name="company_zipcode" id="company_zipcode" class=" w-100 py-2 mt-3" placeholder="Company ZipCode ">
+                                            <input type="number" name="company_zipcode" id="company_zipcode" class=" w-100 py-2 mt-3" placeholder="Company ZipCode " value="<?php if (isset($edit['company_zipcode'])) {
+                                                                                                                                                                                echo $edit['company_zipcode'];
+                                                                                                                                                                            } ?>">
                                         </div>
 
                                         <div class="in">
-                                            <input type="text" name="port" id="port" class=" w-100 py-2 mt-3" placeholder="Port Of Entry ">
+                                            <input type="text" name="port" id="port" class=" w-100 py-2 mt-3" placeholder="Port Of Entry " value="<?php if (isset($edit['company_port_of_entry'])) {
+                                                                                                                                                        echo $edit['company_port_of_entry'];
+                                                                                                                                                    } ?>">
                                         </div>
                                         <div class="in">
-                                            <input type="text" name="vessel" id="vessel" class=" w-100 py-2 mt-3" placeholder="Vessel Details">
+                                            <input type="text" name="vessel" id="vessel" class=" w-100 py-2 mt-3" placeholder="Vessel Details" value="<?php if (isset($edit['company_vessel_detail'])) {
+                                                                                                                                                            echo $edit['company_vessel_detail'];
+                                                                                                                                                        } ?>">
                                         </div>
                                         <div class="in">
-                                            <input type="text" name="trucking" id="trucking" class=" w-100 py-2 mt-3" placeholder="Trucking">
+                                            <input type="text" name="trucking" id="trucking" class=" w-100 py-2 mt-3" placeholder="Trucking" value="<?php if (isset($edit['company_trucking'])) {
+                                                                                                                                                        echo $edit['company_trucking'];
+                                                                                                                                                    } ?>">
                                         </div>
                                         <div class="in">
-                                            <input type="text" name="misc" id="misc" class=" w-100 py-2 mt-3" placeholder="Misc">
+                                            <input type="text" name="misc" id="misc" class=" w-100 py-2 mt-3" placeholder="Misc" value="<?php if (isset($edit['company_misc'])) {
+                                                                                                                                            echo $edit['company_misc'];
+                                                                                                                                        } ?>">
                                         </div>
                                         <div class="in">
-                                            <input type="text" name="total_cost" id="total_cost" class=" w-100 py-2 mt-3" placeholder="Total Cost">
+                                            <input type="number" name="total_cost" id="total_cost" class=" w-100 py-2 mt-3" placeholder="Total Cost" value="<?php if (isset($edit['total_cost'])) {
+                                                                                                                                                                echo $edit['total_cost'];
+                                                                                                                                                            } ?>">
                                         </div>
                                         <div class="in">
-                                            <input type="text" name="custom" id="custom" class=" w-100 py-2 mt-3" placeholder="Custom Freiht">
+                                            <input type="text" name="custom" id="custom" class=" w-100 py-2 mt-3" placeholder="Custom Freiht" value="<?php if (isset($edit['custom_frieght'])) {
+                                                                                                                                                            echo $edit['custom_frieght'];
+                                                                                                                                                        } ?>">
                                         </div>
 
 
 
 
-                                        <button type="submit" name="submit" class="save py-2">Save</button>
+                                        <button type="submit" name="<?php if (isset($_POST['edit_delete']) && !empty($_POST['edit_delete']) && count($_POST['edit_delete']) == 1) {
+                                                                        echo "update";
+                                                                    } else {
+                                                                        echo 'submit';
+                                                                    }
+                                                                    ?>" class="save py-2"><?php if (isset($_POST['edit_delete']) && !empty($_POST['edit_delete']) && count($_POST['edit_delete']) == 1) {
+                                                                                                echo "update";
+                                                                                            } else {
+                                                                                                echo 'save';
+                                                                                            } ?></button>
                                     </div>
                                 </div>
 
@@ -352,14 +454,16 @@ if (isset($_POST['delete_btn'])) {
                                         </div>
                                         <div class="col-lg-9 col-md-9 py-3 ">
                                             <div class="btn-edit-delete1 text-end px-1">
-                                                <button type="submit" name="delete_btn">
-                                                    <span class="fa-regular fa-trash-can export-btn delete">
-                                                    </span></button>
-                                                <button type="submit" name="edit"><span class="fa-solid fa-pen-to-square edit export-btn"></span></button>
-                                                <a href="">
-                                                    <span class="fa-solid fa-cloud-arrow-down export export-btn"> </span>
-                                                </a>
-                                                <a href="excel.php">Download</a>
+                                                <button type="submit" class="export-btn delete" name="delete_btn">
+                                                    <span class="fa-regular fa-trash-can "></span>
+                                                </button>
+                                                <button type="submit" class="edit export-btn" name="edit">
+                                                    <span class="fa-solid fa-pen-to-square"></span>
+                                                </button>
+                                                <button href="" type="submit" class="export export-btn " name="">
+                                                    <span class="fa-solid fa-cloud-arrow-down"> </span>
+                                                </button>
+
                                             </div>
                                         </div>
                                     </div>
@@ -402,16 +506,33 @@ if (isset($_POST['delete_btn'])) {
                                                 <tbody>
 
                                                     <?php
-                                                    $select = "SELECT * FROM  importer_details";
+                                                    // Establish a database connection (replace with your database connection code)
+                                                    $conn = mysqli_connect("localhost", "root", "", "forstcarusa");
+
+                                                    if (!$conn) {
+                                                        die("Connection failed: " . mysqli_connect_error());
+                                                    }
+
+                                                    $select = "SELECT * FROM importer_details";
                                                     $sel_sql = mysqli_query($conn, $select);
+
+                                                    if (!$sel_sql) {
+                                                        die("Query failed: " . mysqli_error($conn));
+                                                    }
+
                                                     $sel_num = mysqli_num_rows($sel_sql);
                                                     $no = 1;
-                                                    while ($row = mysqli_fetch_assoc($sel_sql)) {
 
+                                                    while ($row = mysqli_fetch_assoc($sel_sql)) {
+                                                        // Process your query results here
 
                                                     ?>
                                                         <tr>
-                                                            <td><input type="checkbox" name="edit_delete[]" class="text-input" value="<?php echo $row['importer_id'] ?>"></td>
+                                                            <td>
+                                                                <input type="checkbox" name="edit_delete[] " class="text-input" value="<?php echo $row['importer_id'] ?>">
+                                                                <input type="checkbox" name="edit_id" value="<?php echo $row['importer_id'] ?>">
+                                                            </td>
+
                                                             <td class="font"><?php echo $no ?></td>
                                                             <td class="font"><?php echo $row['added_on'] ?></td>
                                                             <td><?php echo $row['company_name'] ?></td>
@@ -436,6 +557,7 @@ if (isset($_POST['delete_btn'])) {
                                                     <?php
                                                         $no = $no + 1;
                                                     }
+
                                                     ?>
                                                 </tbody>
                                             </table>
@@ -489,7 +611,35 @@ if (isset($_POST['delete_btn'])) {
                 });
             });
         });
+
+
+        let user_phonenumber = document.getElementById('contact');
+        let company_zipcode = document.getElementById('company_zipcode');
+        let phone = document.getElementById('phone');
+        let total_cost = document.getElementById('total_cost');
+
+        user_phonenumber.addEventListener("input", function() {
+            if (user_phonenumber.value.length > 11) {
+                user_phonenumber.value = user_phonenumber.value.slice(0, 11);
+            }
+        });
+        company_zipcode.addEventListener("input", function() {
+            if (company_zipcode.value.length > 11) {
+                company_zipcode.value = company_zipcode.value.slice(0, 11);
+            }
+        });
+        phone.addEventListener("input", function() {
+            if (phone.value.length > 11) {
+                phone.value = phone.value.slice(0, 11);
+            }
+        });
+        total_cost.addEventListener("input", function() {
+            if (total_cost.value.length > 11) {
+                total_cost.value = total_cost.value.slice(0, 11);
+            }
+        });
     </script>
+
 </body>
 
 </html>
