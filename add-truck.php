@@ -1,3 +1,118 @@
+<?php
+
+session_start();
+require 'config.php';
+global $conn;
+if (!isset($_SESSION['user_fullname'])) {
+    echo "You are logged out";
+    header('location:login.php');
+}
+$succses = array();
+$warning = array();
+$emty = array();
+
+
+if (isset($_POST['submit'])) {
+    $model_no = mysqli_real_escape_string($conn, $_POST['model_no']);
+    $year = mysqli_real_escape_string($conn, $_POST['year']);
+    $fc_body = mysqli_real_escape_string($conn, $_POST['fc_body']);
+    $body_length = mysqli_real_escape_string($conn, $_POST['body_length']);
+    $body_dimension = mysqli_real_escape_string($conn, $_POST['body_dimension']);
+    $body_side_door = mysqli_real_escape_string($conn, $_POST['body_side_door']);
+    $body_rear_door = mysqli_real_escape_string($conn, $_POST['body_rear_door']);
+    $body_weight = mysqli_real_escape_string($conn, $_POST['body_weight']);
+    $body_volume = mysqli_real_escape_string($conn, $_POST['body_volume']);
+    $body_temp = mysqli_real_escape_string($conn, $_POST['body_temp']);
+    $floor = mysqli_real_escape_string($conn, $_POST['floor']);
+    $e_track = mysqli_real_escape_string($conn, $_POST['e_track']);
+    $e_plate = mysqli_real_escape_string($conn, $_POST['e_plate']);
+    $body_accessories = mysqli_real_escape_string($conn, $_POST['body_accessories']);
+    $gvwr = mysqli_real_escape_string($conn, $_POST['gvwr']);
+    $wbl = mysqli_real_escape_string($conn, $_POST['wbl']);
+    $cal = mysqli_real_escape_string($conn, $_POST['cal']);
+    $no_of_units = mysqli_real_escape_string($conn, $_POST['no_of_units']);
+    $chassis_frame = mysqli_real_escape_string($conn, $_POST['chassis_frame']);
+    $cost_quoted = mysqli_real_escape_string($conn, $_POST['cost_quoted']);
+    $misc = mysqli_real_escape_string($conn, $_POST['misc']);
+    $eutectic_plates = mysqli_real_escape_string($conn, $_POST['eutectic_plates']);
+    $refrigeration = mysqli_real_escape_string($conn, $_POST['refrigeration']);
+    $additional_details = mysqli_real_escape_string($conn, $_POST['additional_details']);
+    $special_requirements = mysqli_real_escape_string($conn, $_POST['special_requirements']);
+    $fuel_Type = mysqli_real_escape_string($conn, $_POST['fuel_Type']);
+    $unit_Custom = mysqli_real_escape_string($conn, $_POST['unit_Custom']);
+
+    $condensor = mysqli_real_escape_string($conn, $_POST['condensor']);
+    $condensor_unit = mysqli_real_escape_string($conn, $_POST['condensor_unit']);
+    $power = mysqli_real_escape_string($conn, $_POST['power']);
+    $refrigerant = mysqli_real_escape_string($conn, $_POST['refrigerant']);
+    $compressor = mysqli_real_escape_string($conn, $_POST['compressor']);
+    $volt = mysqli_real_escape_string($conn, $_POST['volt']);
+    $co2_eq = mysqli_real_escape_string($conn, $_POST['co2_eq']);
+    $press_max = mysqli_real_escape_string($conn, $_POST['press_max']);
+    $decible = mysqli_real_escape_string($conn, $_POST['decible']);
+    $GWP = mysqli_real_escape_string($conn, $_POST['GWP']);
+    $KG_LB = mysqli_real_escape_string($conn, $_POST['KG/LB']);
+    $oil = mysqli_real_escape_string($conn, $_POST['oil']);
+    $pressmen = mysqli_real_escape_string($conn, $_POST['pressmen']);
+    $export = mysqli_real_escape_string($conn, $_POST['export']);
+    $disp_m3_h = mysqli_real_escape_string($conn, $_POST['disp_m3/h']);
+    $moA_Amp = mysqli_real_escape_string($conn, $_POST['moA/Amp']);
+    $Mcc_Amp = mysqli_real_escape_string($conn, $_POST['Mcc/Amp']);
+    $LRA_Amp = mysqli_real_escape_string($conn, $_POST['LRA/Amp']);
+    $MRA_Amp = mysqli_real_escape_string($conn, $_POST['MRA/Amp']);
+    $RLAA_Amp = mysqli_real_escape_string($conn, $_POST['RLAA/Amp']);
+
+    // if (empty($name)) {
+    //     $emty['model_no'] = 'Please Fill The Model No';
+    // } else {
+
+    $query = "SELECT * FROM `body_details` WHERE `model_no` = '$model_no'";
+    $sql = mysqli_query($conn, $query);
+    $row = mysqli_fetch_row($sql);
+    if ($row > 0) {
+        // Duplicate data found
+        $warning['warning'] = "Model No already exists in Body Details.";
+    } else {
+
+        $query = "SELECT * FROM `eutectic_details` WHERE `model_no` = '$model_no'";
+        $sql = mysqli_query($conn, $query);
+        $row = mysqli_fetch_row($sql);
+        if ($row > 0) {
+            // Duplicate data found
+            $warning['warning'] = "Model No already exists in Eutectic Details.";
+        } else {
+            $insertBody = "INSERT INTO `body_details`(`model_no`, `year`, `fc_body`, `body_length`, `body_dimension`, `body_side_door`, `body_rear_door`, `body_weight`, 
+            `body_volume`, `body_temp`, `floor`, `e_track`, `e_plate`, `body_accessories`, `gvwr`, `wbl`, `cal`, `no_of_units`, `manufactured_on`, `chassis_frame`, 
+            `cost_quoted`, `misc`, `eutectic_plates`, `refrigeration`, `additional_details`, `special_requirements`, `fuel_Type`, `unit_Custom`, `added_on`, `added_by`) 
+            VALUES ('$model_no', '$year',  '$fc_body', '$body_length', '$body_dimension', '$body_side_door', '$body_rear_door', '$body_weight', '$body_volume', 
+            '$body_temp', '$floor', '$e_track', '$e_plate', '$body_accessories', '$gvwr', '$wbl', '$cal', '$no_of_units', NOW(), '$chassis_frame', '$cost_quoted', '$misc',
+            '$eutectic_plates', '$refrigeration', '$additional_details', '$special_requirements', '$fuel_Type', '$unit_Custom', NOW(), 'admin')";
+
+            $bodyInsert = mysqli_query($conn, $insertBody);
+
+            if ($bodyInsert) {
+                $insertEutectic = "INSERT INTO `eutectic_details`(`condensor`, `condensor_unit`, `power`, `refrigerant`, `compressor`, `volt`, `co2_eq`, `press_max`, 
+                `decible`, `production_date`, `model_no`, `GWP`, `KG/LB`, `oil`, `pressmen`, `export`, `disp_m3/h`, `moA/Amp`, `Mcc/Amp`, `LRA/Amp`, `MRA/Amp`, `RLAA/Amp`) 
+                VALUES ('$condensor', '$condensor_unit', '$power', '$refrigerant', '$compressor', '$volt', '$co2_eq', '$press_max', '$decible', NOW(), '$model_no', '$GWP',
+                '$KG_LB', '$oil', '$pressmen', '$export', '$disp_m3_h', '$moA_Amp', '$Mcc_Amp', '$LRA_Amp', '$MRA_Amp', '$RLAA_Amp')";
+
+                $eutecticInsert = mysqli_query($conn, $insertEutectic);
+
+                if ($eutecticInsert) {
+                    $succses['succses'] = "Data Inserted Successfully.";
+                }
+            } else {
+                $warning['warning'] = "Data Not Inserted Successfully.";
+            }
+        }
+    }
+}
+
+
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,135 +130,43 @@
     <!-- --------------google font----------- -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <link rel="stylesheet" href="css/main.css">
 </head>
-<style>
-    /* .designInput {
-        padding: 10px;
-        border: 2px solid #ccc;
-        border-radius: 7px;
-        font-size: 16px;
-        outline: none;
-    }
-
-    .designInput:focus {
-        border-color: #0055b8;
-        animation: inputFocusAnimation 0.3s;
-    }
-
-    @keyframes inputFocusAnimation {
-        0% {
-            transform: scale(1);
-        }
-
-        50% {
-            transform: scale(1.05);
-        }
-
-        100% {
-            transform: scale(1);
-        }
-    } */
-</style>
 
 <body class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-white shadow">
-        <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="index.html"><img width="200px" src="assets/img/cropped-frostcar_logo-2-1.png"
-                alt=""></a>
-
-        <!-- Sidebar Toggle-->
-        <button class="btn text-black btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
-                class="text-dark fas fa-bars"></i></button>
-        <!-- Navbar Search-->
-        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-            <div class="input-group">
-                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..."
-                    aria-describedby="btnNavbarSearch" />
-                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i
-                        class="fas fa-search"></i></button>
-            </div>
-        </form>
-        <!-- Navbar-->
-        <ul class="navbar-nav    ms-auto ms-md-0 me-3 me-lg-4">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-dark " id="navbarDropdown" href="#" role="button"
-                    data-bs-toggle="dropdown" aria-expanded="false"><i
-                        class="text-black fs-5 fas fa-user fa-fw"></i></a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#!">Settings</a></li>
-                    <li><a class="dropdown-item" href="#!">Activity Log</a></li>
-                    <li>
-                        <hr class="dropdown-divider" />
-                    </li>
-                    <li><a class="dropdown-item" href="#!">Logout</a></li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
+    <!-- navbar -->
+    <?php
+    require 'navbar.php';
+    ?>
+    <!-- navbar End -->
     <div id="layoutSidenav">
-        <div id="layoutSidenav_nav">
-            <nav class="sb-sidenav accordion sb-sidenav side-bg bg-nav shadow" id="sidenavAccordion">
-                <div class="sb-sidenav-menu">
-                    <div class="nav">
-                        <div class="sb-sidenav-menu-heading"></div>
-                        <a class="nav-link hover " href="index.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
-                            Dashboard
-                        </a>
+        <!-- Sidebar -->
+        <?php
+        require 'sidebar.php';
+        ?>
+        <!-- Sidebar End -->
 
-                        <a class="nav-link collapsed hover" href="#" data-bs-toggle="collapse"
-                            data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon "><i class="fa-solid fa-truck"></i></div>
-                            Truck
-                            <div class="sb-sidenav-collapse-arrow "><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse " id="collapseLayouts" aria-labelledby="headingOne"
-                            data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link hover active " href="company.html">Company</a>
-                                <a class="nav-link hover " href="add-truck.html">Add Truck Details</a>
-                                <a class="nav-link hover " href="tables.html">View Truck Details</a>
-                            </nav>
-                        </div>
-
-
-                        <!-- <div class="sb-sidenav-menu-heading">Addons</div> -->
-
-
-                        <a class="nav-link collapsed hover" href="#" data-bs-toggle="collapse"
-                            data-bs-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts1">
-                            <div class="sb-nav-link-icon "><i class="fa-solid fa-user"></i></div>
-                            Users
-                            <div class="sb-sidenav-collapse-arrow "><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse " id="collapseLayouts1" aria-labelledby="headingOne"
-                            data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link hover  " href="user.html">User Add</a>
-                                <a class="nav-link hover " href="uservewi.html">User Vewi</a>
-
-                            </nav>
-                        </div>
-                        <!-- <a class="nav-link" href="tables.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Tables
-                            </a> -->
-                    </div>
-                </div>
-                <div class="sb-sidenav-footer  bg-side-foter text-light">
-                    <div class="small">Logged in as:</div>
-                    Start Bootstrap
-                </div>
-            </nav>
-        </div>
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid my-5 pb-5">
+
+                    <?php
+                    if (isset($succses['succses']))
+                        echo '
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>@succsesfully!</strong> ' . $succses['succses'] . '
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>';
+
+                    if (isset($warning['warning']))
+                        echo '
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>@Error!</strong> ' . $warning['warning'] . '
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>';
+                    ?>
 
                     <div class="tab-content" id="pills-tabContent">
                         <div class="row">
@@ -151,389 +174,415 @@
                                 <div class="card my-5 w-100 position-relative overflow-hidden mb-0">
                                     <div class="card-body p-4">
 
-                                        <form>
+                                        <form action="" method="POST">
                                             <div class="row text-dark">
-                                                <div class="row my-5">
-                                                    <h5 class="card-title fw-semibold">2. Wakl-in/Rear-door Body
-                                                    </h5>
-                                                    <hr class="p-0">
 
-                                                    <div class="col-lg-4 mt-3">
-                                                        <p>Body Length in Feet</p>
-                                                        <input class="form-check-input bodyFeetCheck" type="checkbox"
-                                                            name="bodyFeetCheck">
-                                                        <label class="form-check-label" for="bodyFeetCheck">
-                                                            14
-                                                        </label>
-                                                        <input class="form-check-input bodyFeetCheck ms-3"
-                                                            type="checkbox" name="bodyFeetCheck">
-                                                        <label class="form-check-label" for="bodyFeetCheck">
-                                                            15
-                                                        </label>
-                                                        <input class="form-check-input bodyFeetCheck ms-3"
-                                                            type="checkbox" name="bodyFeetCheck">
-                                                        <label class="form-check-label" for="bodyFeetCheck">
-                                                            14
-                                                        </label>
-                                                        <input class="form-check-input bodyFeetCheck ms-3"
-                                                            type="checkbox" name="bodyFeetCheck">
-                                                        <label class="form-check-label" for="bodyFeetCheck">
-                                                            15
-                                                        </label>
-                                                    </div>
-
-                                                    <div class="col-lg-4 mt-3">
-                                                        <p>Refrigeration</p>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input refriCheck" type="checkbox"
-                                                                name="refriCheck">
-                                                            <label class="form-check-label" for="refriCheck">
-                                                                Low Temp - IceCream/Frozen
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input refriCheck" type="checkbox"
-                                                                name="refriCheck">
-                                                            <label class="form-check-label" for="refriCheck">
-                                                                Mid Temp - Fresh/Cold
-                                                            </label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-lg-4 mt-3">
-                                                        <p>Rear Door</p>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input rearCheck" type="checkbox"
-                                                                name="rearCheck">
-                                                            <label class="form-check-label" for="flexCheckDefault">
-                                                                Center Door
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input rearCheck" type="checkbox"
-                                                                name="rearCheck">
-                                                            <label class="form-check-label" for="flexCheckChecked">
-                                                                Double Door
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input rearCheck" type="checkbox"
-                                                                name="rearCheck">
-                                                            <label class="form-check-label" for="rearCheck">
-                                                                Tri-fold Door
-                                                            </label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-lg-4 mt-5">
-                                                        <p>Side Door</p>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input sideCheck" type="radio"
-                                                                name="sideCheck">
-                                                            <label class="form-check-label" for="sideCheck">
-                                                                Yes
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input sideCheck" type="radio"
-                                                                name="sideCheck">
-                                                            <label class="form-check-label" for="sideCheck">
-                                                                No
-                                                            </label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-lg-4 mt-5">
-                                                        <p>E-Track (Tall Body Cargo Control)</p>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input eTrackCheck" type="radio"
-                                                                name="eTrackCheck">
-                                                            <label class="form-check-label" for="eTrackCheck">
-                                                                Yes
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input eTrackCheck" type="radio"
-                                                                name="eTrackCheck">
-                                                            <label class="form-check-label" for="eTrackCheck">
-                                                                No
-                                                            </label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-lg-4 mt-5">
-                                                        <p>Floor</p>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input floorCheck" type="checkbox"
-                                                                name="floorCheck">
-                                                            <label class="form-check-label" for="floorCheck">
-                                                                Non-Slip Textured
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input floorCheck" type="checkbox"
-                                                                name="floorCheck">
-                                                            <label class="form-check-label" for="floorCheck">
-                                                                Taised Channel
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input floorCheck" type="checkbox"
-                                                                name="floorCheck">
-                                                            <label class="form-check-label" for="floorCheck">
-                                                                Steel Reinforced Diamond Palte
-                                                            </label>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                                <!-- End 2. Wakl-in/Rear-door Body -->
-
-
-                                                <div class="row my-5">
-                                                    <h5 class="card-title fw-semibold">3. Multi- Temp Body</h5>
-                                                    <hr class="p-0">
-
-                                                    <div class="col-lg-4 mt-3">
-                                                        <p>Temperature</p>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input temperaCheck" type="checkbox"
-                                                                name="temperaCheck">
-                                                            <label class="form-check-label" for="temperaCheck">
-                                                                Low & Mid Temp
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input temperaCheck" type="checkbox"
-                                                                name="temperaCheck">
-                                                            <label class="form-check-label" for="temperaCheck">
-                                                                Low & Mid Temp & Dry
-                                                            </label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-lg-4 mt-3 text-muted">
-                                                        <h4 class="text-muted  fw-bold">All Bodies</h4>
-                                                        <p class="m-0">Interior Light - LED Standard</p>
-                                                        <p class="m-0">Exterior Light - DOT Standard</p>
-
-                                                    </div>
-
-                                                    <div class="col-lg-4 mt-5">
-                                                        <p>Accessories</p>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input accessorCheck" type="radio"
-                                                                name="accessorCheck">
-                                                            <label class="form-check-label" for="flexRadioDefault5">
-                                                                Shelving
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input accessorCheck" type="radio"
-                                                                name="accessorCheck">
-                                                            <label class="form-check-label" for="flexRadioDefault6">
-                                                                Grab Handles
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input accessorCheck" type="radio"
-                                                                name="accessorCheck">
-                                                            <label class="form-check-label" for="flexRadioDefault6">
-                                                                Roll Carts
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input accessorCheck" type="radio"
-                                                                name="accessorCheck">
-                                                            <label class="form-check-label" for="accessorCheck">
-                                                                Steps
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input accessorCheck" type="radio"
-                                                                name="accessorCheck">
-                                                            <label class="form-check-label" for="accessorCheck">
-                                                                Dolly Rack
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input accessorCheck" type="radio"
-                                                                name="accessorCheck">
-                                                            <label class="form-check-label" for="accessorCheck">
-                                                                Remote Compressor
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!--  -->
-
-                                                <div class="row">
-                                                    <h5 class="card-title fw-semibold">Chassis information (if
-                                                        Known)</h5>
-                                                    <hr>
+                                                <h3 class="font-inter my-5">Eutectic Details</h3>
+                                                <div class="row mb-5">
 
                                                     <div class="col-lg-6">
                                                         <div class="mb-3">
-                                                            <label for="exampleInputPassword1"
-                                                                class="form-label fw-semibold">Make &
-                                                                Model</label>
-                                                            <input type="text" class="w-100"
-                                                                placeholder="Condensor">
+                                                            <label for="model_no" class="form-label fw-semibold">Model No</label>
+                                                            <input type="text" class="w-100" name="model_no" placeholder="Model No">
+                                                            <span class="text-danger fs-6 "><?php if (isset($emty['model_no'])) echo $emty['model_no'] ?></span>
+                                                        </div>
+                                                        <!-- <div class="mb-3">
+                                                            <label for="body_length" class="form-label fw-semibold">Body Size</label>
+                                                            <input type="text" class="w-100" name="body_length" placeholder="Body Size">
+                                                        </div> -->
+                                                        <div class="mb-3">
+                                                            <label for="unit_Custom" class="form-label fw-semibold">Unit: Custom</label>
+                                                            <input type="text" class="w-100" name="unit_Custom" placeholder="Unit: Custom">
                                                         </div>
                                                         <div class="mb-3">
-                                                            <label for="exampleInputPassword1"
-                                                                class="form-label fw-semibold">Year</label>
-                                                            <input type="text" class="w-100"
-                                                                placeholder="Condensor">
+                                                            <label for="additional_details" class="form-label fw-semibold">Additional Details</label>
+                                                            <input type="text" class="w-100" name="additional_details" placeholder="Additional Details">
                                                         </div>
                                                         <div class="mb-3">
-                                                            <label for="exampleInputPassword1"
-                                                                class="form-label fw-semibold">Gross Vehicle Wieght
-                                                                (GVWR) in Pounds
-                                                                <span>JazzCash</span></label>
-                                                            <input type="text" class="w-100"
-                                                                placeholder="Condensor">
+                                                            <label for="chassis_frame" class="form-label fw-semibold">Chassis Frame</label>
+                                                            <input type="text" class="w-100" name="chassis_frame" placeholder="Chassis Frame">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="compressor" class="form-label fw-semibold">Compressor</label>
+                                                            <input type="text" class="w-100" name="compressor" placeholder="Compressor">
                                                         </div>
                                                     </div>
-
                                                     <div class="col-lg-6">
                                                         <div class="mb-3">
-                                                            <label for="exampleInputPassword1"
-                                                                class="form-label fw-semibold">Wheelbase Length
-                                                                in
-                                                                Inches</label>
-                                                            <input type="text" class="w-100"
-                                                                placeholder="Condensor">
+                                                            <label for="refrigerant" class="form-label fw-semibold">refrigerant</label>
+                                                            <input type="text" class="w-100" name="refrigerant" placeholder="Refrigerant">
                                                         </div>
                                                         <div class="mb-3">
-                                                            <label for="exampleInputPassword1"
-                                                                class="form-label fw-semibold">Cab to Axie
-                                                                Length in
-                                                                Lanches</label>
-                                                            <input type="text" class="w-100"
-                                                                placeholder="Condensor">
+                                                            <label for="power" class="form-label fw-semibold">Power</label>
+                                                            <input type="text" class="w-100" name="power" placeholder="Power">
                                                         </div>
                                                         <div class="mb-3">
-                                                            <p>Fuel Type</p>
-
-                                                            <input class="form-check-input fuelCheck" type="checkbox"
-                                                                name="fuelCheck">
-                                                            <label class="form-check-label" for="fuelCheck">
-                                                                Gas
-                                                            </label>
-
-
-                                                            <input class="form-check-input fuelCheck ms-3"
-                                                                type="checkbox" name="fuelCheck">
-                                                            <label class="form-check-label" for="fuelCheck">
-                                                                Diesel
-                                                            </label>
+                                                            <label for="condensor" class="form-label fw-semibold">Condenser</label>
+                                                            <input type="text" class="w-100" name="condensor" placeholder="Condenser">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="eutectic_plates" class="form-label fw-semibold">Eutectic Plates</label>
+                                                            <input type="text" class="w-100" name="eutectic_plates" placeholder="Eutectic Plates">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="misc" class="form-label fw-semibold">MISC</label>
+                                                            <input type="text" class="w-100" name="misc" placeholder="MISC">
                                                         </div>
                                                     </div>
-                                                </div>
 
-                                                <!--  -->
-                                                <h3 class=" font-inter">Eutectic Details</h3>
-                                                <div class="row mb-5 ">
-                                                    <div class="col-lg-6  ">
-                                                        <!-- <div class="in py-3">
+
+                                                    <!-- 2. Wakl-in/Rear-door Body -->
+                                                    <div class="row my-5">
+                                                        <h5 class="card-title fw-semibold">2. Wakl-in/Rear-door Body</h5>
+                                                        <hr class="p-0">
+
+                                                        <div class="col-lg-4 mt-3">
+                                                            <p>Body Length in Feet</p>
+                                                            <input class="form-check-input bodyFeetCheck" type="checkbox" name="body_length" value="14">
+                                                            <label class="form-check-label" for="bodyFeetCheck">
+                                                                14
+                                                            </label>
+                                                            <input class="form-check-input bodyFeetCheck ms-3" type="checkbox" name="body_length" value="16">
+                                                            <label class="form-check-label" for="bodyFeetCheck">
+                                                                16
+                                                            </label>
+                                                            <input class="form-check-input bodyFeetCheck ms-3" type="checkbox" name="body_length" value="18">
+                                                            <label class="form-check-label" for="bodyFeetCheck">
+                                                                18
+                                                            </label>
+                                                            <input class="form-check-input bodyFeetCheck ms-3" type="checkbox" name="body_length" value="20">
+                                                            <label class="form-check-label" for="bodyFeetCheck">
+                                                                20
+                                                            </label>
+                                                        </div>
+
+                                                        <div class="col-lg-4 mt-3">
+                                                            <p>Refrigeration</p>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input refriCheck" type="checkbox" name="refrigeration" value="Low Temp - IceCream/Frozen">
+                                                                <label class="form-check-label" for="refriCheck">
+                                                                    Low Temp - IceCream/Frozen
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input refriCheck" type="checkbox" name="refrigeration" value="Mid Temp - Fresh/Cold">
+                                                                <label class="form-check-label" for="refriCheck">
+                                                                    Mid Temp - Fresh/Cold
+                                                                </label>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-lg-4 mt-3">
+                                                            <p>Rear Door</p>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input rearCheck" type="checkbox" name="body_rear_door" value="Center Door">
+                                                                <label class="form-check-label" for="flexCheckDefault">
+                                                                    Center Door
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input rearCheck" type="checkbox" name="body_rear_door" value="Double Door">
+                                                                <label class="form-check-label" for="flexCheckChecked">
+                                                                    Double Door
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input rearCheck" type="checkbox" name="body_rear_door" value="Tri-fold Door">
+                                                                <label class="form-check-label" for="rearCheck">
+                                                                    Tri-fold Door
+                                                                </label>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-lg-4 mt-5">
+                                                            <p>Side Door</p>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input sideCheck" type="radio" name="body_side_door" value="Yes">
+                                                                <label class="form-check-label" for="sideCheck">
+                                                                    Yes
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input sideCheck" type="radio" name="body_side_door" value="No">
+                                                                <label class="form-check-label" for="sideCheck">
+                                                                    No
+                                                                </label>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-lg-4 mt-5">
+                                                            <p>E-Track (Tall Body Cargo Control)</p>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input eTrackCheck" type="radio" name="e_track" value="Yes">
+                                                                <label class="form-check-label" for="e_track">
+                                                                    Yes
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input eTrackCheck" type="radio" name="e_track" value="No">
+                                                                <label class="form-check-label" for="e_track">
+                                                                    No
+                                                                </label>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-lg-4 mt-5">
+                                                            <p>Floor</p>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input floorCheck" type="checkbox" name="floor" value="Non-Slip Textured">
+                                                                <label class="form-check-label" for="floor">
+                                                                    Non-Slip Textured
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input floorCheck" type="checkbox" name="floor" value="Taised Channel">
+                                                                <label class="form-check-label" for="floor">
+                                                                    Taised Channel
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input floorCheck" type="checkbox" name="floor" value="Steel Reinforced Diamond Palte">
+                                                                <label class="form-check-label" for="floor">
+                                                                    Steel Reinforced Diamond Palte
+                                                                </label>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <!-- End 2. Wakl-in/Rear-door Body -->
+
+                                                    <!-- 3. Multi- Temp Body -->
+                                                    <div class="row my-5">
+                                                        <h5 class="card-title fw-semibold">3. Multi- Temp Body</h5>
+                                                        <hr class="p-0">
+
+                                                        <!-- Temperature Start -->
+                                                        <div class="col-lg-4 mt-3">
+                                                            <p>Temperature</p>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input temperaCheck" type="checkbox" name="body_temp" value="Low & Mid Temp">
+                                                                <label class="form-check-label" for="body_temp">
+                                                                    Low & Mid Temp
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input temperaCheck" type="checkbox" name="body_temp" value="Low & Mid Temp & Dry">
+                                                                <label class="form-check-label" for="body_temp">
+                                                                    Low & Mid Temp & Dry
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Temperature End -->
+
+                                                        <div class="col-lg-4 mt-3 text-muted">
+                                                            <h4 class="text-muted  fw-bold">All Bodies</h4>
+                                                            <p class="m-0">Interior Light - LED Standard</p>
+                                                            <p class="m-0">Exterior Light - DOT Standard</p>
+                                                        </div>
+
+                                                        <!-- Accessories -->
+                                                        <div class="col-lg-4 mt-5">
+                                                            <p>Accessories</p>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input accessorCheck" type="radio" name="body_accessories" value="Shelving">
+                                                                <label class="form-check-label" for="flexRadioDefault5">
+                                                                    Shelving
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input accessorCheck" type="radio" name="body_accessories" value="Grab Handles">
+                                                                <label class="form-check-label" for="flexRadioDefault6">
+                                                                    Grab Handles
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input accessorCheck" type="radio" name="body_accessories" value="Roll Carts">
+                                                                <label class="form-check-label" for="flexRadioDefault6">
+                                                                    Roll Carts
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input accessorCheck" type="radio" name="body_accessories" value="Steps">
+                                                                <label class="form-check-label" for="accessorCheck">
+                                                                    Steps
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input accessorCheck" type="radio" name="body_accessories" value="Dolly Rack">
+                                                                <label class="form-check-label" for="body_accessories">
+                                                                    Dolly Rack
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input accessorCheck" type="radio" name="body_accessories" value="Remote Compressor">
+                                                                <label class="form-check-label" for="body_accessories">
+                                                                    Remote Compressor
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--******  *********-->
+                                                    <div class="col-lg-6">
+                                                        <div class="mb-3">
+                                                            <label for="fc_body" class="form-label fw-semibold">FC Body</label>
+                                                            <input type="text" class="w-100" name="fc_body" placeholder="FC Body">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="body_dimension" class="form-label fw-semibold">Dimension</label>
+                                                            <input type="text" class="w-100" name="body_dimension" placeholder="Dimension">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="body_weight" class="form-label fw-semibold">Body Weight</label>
+                                                            <input type="text" class="w-100" name="body_weight" placeholder="Body Weight">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="mb-3">
+                                                            <label for="body_volume" class="form-label fw-semibold">Body Volume</label>
+                                                            <input type="text" class="w-100" name="body_volume" placeholder="Body Volume">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="e_plate" class="form-label fw-semibold">E Plate</label>
+                                                            <input type="text" class="w-100" name="e_plate" placeholder="E Plate">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="cost_quoted" class="form-label fw-semibold">Cost Quoted</label>
+                                                            <input type="text" class="w-100" name="cost_quoted" placeholder="Cost Quoted">
+                                                        </div>
+                                                    </div>
+
+
+                                                    <!-- Chassis information (if Known) -->
+                                                    <div class="row mt-3">
+                                                        <h5 class="card-title fw-semibold">Chassis information (if Known)</h5>
+                                                        <hr>
+
+                                                        <div class="col-lg-6">
+                                                            <div class="mb-3">
+                                                                <label for="year" class="form-label fw-semibold">Year</label>
+                                                                <input type="date" class="w-100" name="year" placeholder="Year">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="gvwr" class="form-label fw-semibold">Gross Vehicle Wieght(GVWR) in Pounds
+                                                                    <span>JazzCash</span></label>
+                                                                <input type="text" class="w-100" name="gvwr" placeholder="Gross Vehicle Wieght(GVWR) in Pounds JazzCash">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="no_of_units" class="form-label fw-semibold">Number of units in this quote
+                                                                </label>
+                                                                <input type="text" class="w-100" name="no_of_units" placeholder="Number of units in this quote">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <p>Fuel Type</p>
+                                                                <input class="form-check-input fuelCheck" type="checkbox" name="fuel_Type" value="Gas">
+                                                                <label class="form-check-label" for="fuelCheck">
+                                                                    Gas
+                                                                </label>
+                                                                <input class="form-check-input fuelCheck ms-3" type="checkbox" name="fuel_Type" value="Diesel">
+                                                                <label class="form-check-label" for="fuelCheck">
+                                                                    Diesel
+                                                                </label>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-lg-6">
+                                                            <div class="mb-3">
+                                                                <label for="wbl" class="form-label fw-semibold">Wheelbase Length in Inches</label>
+                                                                <input type="text" class="w-100" name="wbl" placeholder="Wheelbase Length in Inches">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="cal" class="form-label fw-semibold">Cab to Axie Length in Lanches</label>
+                                                                <input type="text" class="w-100" name="cal" placeholder="Cab to Axie Length in Lanches">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label class="form-label fw-semibold">Special Requirements</label>
+                                                                <input type="text" class="w-100" name="special_requirements" placeholder="Special Requirements">
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <!-- Eutectic Details -->
+                                                    <h3 class=" font-inter">Eutectic Details</h3>
+                                                    <div class="row mb-5">
+                                                        <div class="col-lg-6 mt-3">
+                                                            <!-- <div class="in py-3">
                                                             <input type="date" class=" input w-100 py-2 mt-3" placeholder="Date">
                                                         </div> -->
 
-                                                        <div class="">
-                                                            <input type="text" class="w-100 py-2 mt-3"
-                                                                placeholder="Condensor">
+                                                            <div class="in">
+                                                                <label class="form-label fw-semibold">Condensor Unit</label>
+                                                                <input type="text" class="w-100 py-2" name="condensor_unit" placeholder="Condensor Unit">
+                                                            </div>
+                                                            <div class="in">
+                                                                <label class="form-label fw-semibold mt-3">Volt</label>
+                                                                <input type="text" class="w-100 py-2" name="volt" placeholder="Volt">
+                                                            </div>
+                                                            <div class="in">
+                                                                <label class="form-label fw-semibold mt-3">Co2 Eq</label>
+                                                                <input type="text" class="w-100 py-2" name="co2_eq" placeholder="Co2 Eq">
+                                                            </div>
+                                                            <div class="in">
+                                                                <label class="form-label fw-semibold mt-3">Press Max</label>
+                                                                <input type="text" class="w-100 py-2" name="press_max" placeholder="Press Max">
+                                                            </div>
+                                                            <div class="in">
+                                                                <label class="form-label fw-semibold mt-3">Decible</label>
+                                                                <input type="text" class="w-100 py-2" name="decible" placeholder="Decible">
+                                                            </div>
+                                                            <div class="in">
+                                                                <label class="form-label fw-semibold mt-3">GWP</label>
+                                                                <input type="text" class="w-100 py-2" name="GWP" placeholder="GWP">
+                                                            </div>
+                                                            <div class="in">
+                                                                <label class="form-label fw-semibold mt-3">KG/LB</label>
+                                                                <input type="text" class="w-100 py-2" name="KG/LB" placeholder="KG/LB">
+                                                            </div>
+                                                            <div class="in">
+                                                                <label class="form-label fw-semibold mt-3">Oil</label>
+                                                                <input type="text" class="w-100 py-2" name="oil" placeholder="Oil">
+                                                            </div>
                                                         </div>
-                                                        <div class="in">
-                                                            <input type="text" class="w-100 py-2 mt-3"
-                                                                placeholder="Condensor Unit">
-                                                        </div>
-                                                        <div class="in">
-                                                            <input type="text" class="w-100 py-2 mt-3"
-                                                                placeholder="Power">
-                                                        </div>
-                                                        <div class="in">
-                                                            <input type="text" class="w-100 py-2 mt-3"
-                                                                placeholder="Refrigerant">
-                                                        </div>
-                                                        <div class="in">
-                                                            <input type="text" class="w-100 py-2 mt-3"
-                                                                placeholder="Compressor">
-                                                        </div>
-                                                        <div class="in">
-                                                            <input type="text" class="w-100 py-2 mt-3"
-                                                                placeholder="Volt">
-                                                        </div>
-                                                        <div class="in">
-                                                            <input type="text" class="w-100 py-2 mt-3"
-                                                                placeholder="Co2 Eq">
-                                                        </div>
-                                                        <div class="in">
-                                                            <input type="text" class="w-100 py-2 mt-3"
-                                                                placeholder="Press Max">
-                                                        </div>
-                                                        <div class="in">
-                                                            <input type="text" class="w-100 py-2 mt-3"
-                                                                placeholder="Decible">
-                                                        </div>
-                                                        <div class="in">
-                                                            <input type="text" class="w-100 py-2 mt-3"
-                                                                placeholder="Model No">
-                                                        </div>
-                                                        <div class="in">
-                                                            <input type="text" class="w-100 py-2 mt-3"
-                                                                placeholder="GWP">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <div class="in">
-                                                            <input type="text" class="w-100 py-2 mt-3"
-                                                                placeholder="KG/LB">
-                                                        </div>
-                                                        <div class="in">
-                                                            <input type="text" class="w-100 py-2 mt-3"
-                                                                placeholder="Oil">
-                                                        </div>
-                                                        <div class="in">
-                                                            <input type="text" class="w-100 py-2 mt-3"
-                                                                placeholder="Pressmen">
-                                                        </div>
-                                                        <div class="in">
-                                                            <input type="text" class="w-100 py-2 mt-3"
-                                                                placeholder="Export">
-                                                        </div>
-                                                        <div class="in">
-                                                            <input type="text" class="w-100 py-2 mt-3"
-                                                                placeholder="Disp m3/4">
-                                                        </div>
-                                                        <div class="in">
-                                                            <input type="text" class="w-100 py-2 mt-3"
-                                                                placeholder="MoA/Amp">
-                                                        </div>
-                                                        <div class="in">
-                                                            <input type="text" class="w-100 py-2 mt-3"
-                                                                placeholder="Mcc/Amp">
-                                                        </div>
-                                                        <div class="in">
-                                                            <input type="text" class="w-100 py-2 mt-3"
-                                                                placeholder="LRA/Amp">
-                                                        </div>
-                                                        <div class="in">
-                                                            <input type="text" class="w-100 py-2 mt-3"
-                                                                placeholder="MRA/Amp">
-                                                        </div>
-                                                        <div class="in">
-                                                            <input type="text" class="w-100 py-2 mt-3"
-                                                                placeholder="RLAA/Amp">
-                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="in">
+                                                                <label class="form-label fw-semibold mt-3">Pressmen</label>
+                                                                <input type="text" class="w-100 py-2" name="pressmen" placeholder="Pressmen">
+                                                            </div>
+                                                            <div class="in">
+                                                                <label class="form-label fw-semibold mt-3">Export</label>
+                                                                <input type="text" class="w-100 py-2" name="export" placeholder="Export">
+                                                            </div>
+                                                            <div class="in">
+                                                                <label class="form-label fw-semibold mt-3">Disp m3/4</label>
+                                                                <input type="text" class="w-100 py-2" name="disp_m3/h" placeholder="Disp m3/4">
+                                                            </div>
+                                                            <div class="in">
+                                                                <label class="form-label fw-semibold mt-3">MoA / Amp</label>
+                                                                <input type="text" class="w-100 py-2" name="moA/Amp" placeholder="MoA/Amp">
+                                                            </div>
+                                                            <div class="in">
+                                                                <label class="form-label fw-semibold mt-3">Mcc / Amp</label>
+                                                                <input type="text" class="w-100 py-2" name="Mcc/Amp" placeholder="Mcc/Amp">
+                                                            </div>
+                                                            <div class="in">
+                                                                <label class="form-label fw-semibold mt-3">LRA / Amp</label>
+                                                                <input type="text" class="w-100 py-2" name="LRA/Amp" placeholder="LRA/Amp">
+                                                            </div>
+                                                            <div class="in">
+                                                                <label class="form-label fw-semibold mt-3">MRA / Amp</label>
+                                                                <input type="text" class="w-100 py-2" name="MRA/Amp" placeholder="MRA/Amp">
+                                                            </div>
+                                                            <div class="in">
+                                                                <label class="form-label fw-semibold mt-3">RLAA / Amp</label>
+                                                                <input type="text" class="w-100 py-2" name="RLAA/Amp" placeholder="RLAA/Amp">
+                                                            </div>
 
-                                                        <button type="submit" name="submit"
-                                                            class="save py-2 ">Save</button>
+                                                            <button type="submit" name="submit" class="save py-2 ">Save</button>
+                                                        </div>
                                                     </div>
+
+
                                                 </div>
-
-
-                                            </div>
                                         </form>
                                     </div>
                                 </div>
@@ -559,16 +608,14 @@
             </footer>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <script src="js/scripts.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
     <script src="assets/demo/chart-area-demo.js"></script>
     <script src="assets/demo/chart-bar-demo.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
     <script src="js/datatables-simple-demo.js"></script>
 </body>
 

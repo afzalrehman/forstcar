@@ -239,52 +239,6 @@ if (isset($_POST['update'])) {
     <?php require "navbar.php"; ?>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
-            <!-- <nav class="sb-sidenav accordion sb-sidenav side-bg bg-nav shadow" id="sidenavAccordion">
-                <div class="sb-sidenav-menu">
-                    <div class="nav">
-                        <div class="sb-sidenav-menu-heading"></div>
-                        <a class="nav-link hover " href="index.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
-                            Dashboard
-                        </a>
-
-                        <a class="nav-link collapsed hover" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon "><i class="fa-solid fa-truck"></i></div>
-                            Truck
-                            <div class="sb-sidenav-collapse-arrow "><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse " id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link hover active " href="company.html">Company</a>
-                                <a class="nav-link hover " href="add-truck.html">Add Truck Details</a>
-                                <a class="nav-link hover " href="tables.html">View Truck Details</a>
-                            </nav>
-                        </div>
-
-
-                       
-
-
-                        <a class="nav-link collapsed hover" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts1">
-                            <div class="sb-nav-link-icon "><i class="fa-solid fa-user"></i></div>
-                            Users
-                            <div class="sb-sidenav-collapse-arrow "><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse " id="collapseLayouts1" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link hover  " href="user.html">User Add</a>
-                                <a class="nav-link hover " href="uservewi.html">User Vewi</a>
-
-                            </nav>
-                        </div>
-                       
-                    </div>
-                </div>
-                <div class="sb-sidenav-footer  bg-side-foter text-light">
-                    <div class="small">Logged in as:</div>
-                    Start Bootstrap
-                </div>
-            </nav> -->
             <?php require "sidebar.php"; ?>
         </div>
         <div id="layoutSidenav_content">
@@ -345,10 +299,8 @@ if (isset($_POST['update'])) {
                                             <span class="text-danger fs-6 "><?php if (isset($emty['name'])) echo $emty['name'] ?></span>
                                         </div>
 
-                                        <div class="in">
-                                            <input type=" text" name="address" id="address" class=" w-100 py-2 mt-3" placeholder="Address" value="<?php if (isset($edit['company_address'])) {
-                                                                                                                                                        echo $edit['company_address'];
-                                                                                                                                                    } ?>">
+                                        <div class="i
+                                            <input type=" text" name="address" id="address" class=" w-100 py-2 mt-3" placeholder="Address">
 
                                         </div>
                                         <div class="in">
@@ -454,16 +406,14 @@ if (isset($_POST['update'])) {
                                         </div>
                                         <div class="col-lg-9 col-md-9 py-3 ">
                                             <div class="btn-edit-delete1 text-end px-1">
-                                                <button type="submit" class="export-btn delete" name="delete_btn">
-                                                    <span class="fa-regular fa-trash-can "></span>
-                                                </button>
-                                                <button type="submit" class="edit export-btn" name="edit">
-                                                    <span class="fa-solid fa-pen-to-square"></span>
-                                                </button>
-                                                <button href="" type="submit" class="export export-btn " name="">
-                                                    <span class="fa-solid fa-cloud-arrow-down"> </span>
-                                                </button>
-
+                                                <button type="submit" name="delete_btn">
+                                                    <span class="fa-regular fa-trash-can export-btn delete">
+                                                    </span></button>
+                                                <button type="submit" name="edit"><span class="fa-solid fa-pen-to-square edit export-btn"></span></button>
+                                                <a href="">
+                                                    <span class="fa-solid fa-cloud-arrow-down export export-btn"> </span>
+                                                </a>
+                                                <a href="excel.php">Download</a>
                                             </div>
                                         </div>
                                     </div>

@@ -85,7 +85,9 @@
             </li>
         </ul>
     </nav>
+
     <div id="layoutSidenav">
+        
         <div id="layoutSidenav_nav">
             <nav class="sb-sidenav accordion sb-sidenav side-bg bg-nav shadow" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
@@ -141,298 +143,20 @@
                 </div>
             </nav>
         </div>
+
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid my-5 pb-5">
+                    <form>
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card my-5 w-100 position-relative overflow-hidden mb-0">
+                                        <div class="card-body p-4">
 
-                    <div class="tab-content" id="pills-tabContent">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card my-5 w-100 position-relative overflow-hidden mb-0">
-                                    <div class="card-body p-4">
-
-                                        <form>
                                             <div class="row text-dark">
-                                                <div class="row my-5">
-                                                    <h5 class="card-title fw-semibold">2. Wakl-in/Rear-door Body
-                                                    </h5>
-                                                    <hr class="p-0">
 
-                                                    <div class="col-lg-4 mt-3">
-                                                        <p>Body Length in Feet</p>
-                                                        <input class="form-check-input bodyFeetCheck" type="checkbox"
-                                                            name="bodyFeetCheck">
-                                                        <label class="form-check-label" for="bodyFeetCheck">
-                                                            14
-                                                        </label>
-                                                        <input class="form-check-input bodyFeetCheck ms-3"
-                                                            type="checkbox" name="bodyFeetCheck">
-                                                        <label class="form-check-label" for="bodyFeetCheck">
-                                                            15
-                                                        </label>
-                                                        <input class="form-check-input bodyFeetCheck ms-3"
-                                                            type="checkbox" name="bodyFeetCheck">
-                                                        <label class="form-check-label" for="bodyFeetCheck">
-                                                            14
-                                                        </label>
-                                                        <input class="form-check-input bodyFeetCheck ms-3"
-                                                            type="checkbox" name="bodyFeetCheck">
-                                                        <label class="form-check-label" for="bodyFeetCheck">
-                                                            15
-                                                        </label>
-                                                    </div>
-
-                                                    <div class="col-lg-4 mt-3">
-                                                        <p>Refrigeration</p>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input refriCheck" type="checkbox"
-                                                                name="refriCheck">
-                                                            <label class="form-check-label" for="refriCheck">
-                                                                Low Temp - IceCream/Frozen
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input refriCheck" type="checkbox"
-                                                                name="refriCheck">
-                                                            <label class="form-check-label" for="refriCheck">
-                                                                Mid Temp - Fresh/Cold
-                                                            </label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-lg-4 mt-3">
-                                                        <p>Rear Door</p>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input rearCheck" type="checkbox"
-                                                                name="rearCheck">
-                                                            <label class="form-check-label" for="flexCheckDefault">
-                                                                Center Door
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input rearCheck" type="checkbox"
-                                                                name="rearCheck">
-                                                            <label class="form-check-label" for="flexCheckChecked">
-                                                                Double Door
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input rearCheck" type="checkbox"
-                                                                name="rearCheck">
-                                                            <label class="form-check-label" for="rearCheck">
-                                                                Tri-fold Door
-                                                            </label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-lg-4 mt-5">
-                                                        <p>Side Door</p>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input sideCheck" type="radio"
-                                                                name="sideCheck">
-                                                            <label class="form-check-label" for="sideCheck">
-                                                                Yes
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input sideCheck" type="radio"
-                                                                name="sideCheck">
-                                                            <label class="form-check-label" for="sideCheck">
-                                                                No
-                                                            </label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-lg-4 mt-5">
-                                                        <p>E-Track (Tall Body Cargo Control)</p>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input eTrackCheck" type="radio"
-                                                                name="eTrackCheck">
-                                                            <label class="form-check-label" for="eTrackCheck">
-                                                                Yes
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input eTrackCheck" type="radio"
-                                                                name="eTrackCheck">
-                                                            <label class="form-check-label" for="eTrackCheck">
-                                                                No
-                                                            </label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-lg-4 mt-5">
-                                                        <p>Floor</p>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input floorCheck" type="checkbox"
-                                                                name="floorCheck">
-                                                            <label class="form-check-label" for="floorCheck">
-                                                                Non-Slip Textured
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input floorCheck" type="checkbox"
-                                                                name="floorCheck">
-                                                            <label class="form-check-label" for="floorCheck">
-                                                                Taised Channel
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input floorCheck" type="checkbox"
-                                                                name="floorCheck">
-                                                            <label class="form-check-label" for="floorCheck">
-                                                                Steel Reinforced Diamond Palte
-                                                            </label>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                                <!-- End 2. Wakl-in/Rear-door Body -->
-
-
-                                                <div class="row my-5">
-                                                    <h5 class="card-title fw-semibold">3. Multi- Temp Body</h5>
-                                                    <hr class="p-0">
-
-                                                    <div class="col-lg-4 mt-3">
-                                                        <p>Temperature</p>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input temperaCheck" type="checkbox"
-                                                                name="temperaCheck">
-                                                            <label class="form-check-label" for="temperaCheck">
-                                                                Low & Mid Temp
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input temperaCheck" type="checkbox"
-                                                                name="temperaCheck">
-                                                            <label class="form-check-label" for="temperaCheck">
-                                                                Low & Mid Temp & Dry
-                                                            </label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-lg-4 mt-3 text-muted">
-                                                        <h4 class="text-muted  fw-bold">All Bodies</h4>
-                                                        <p class="m-0">Interior Light - LED Standard</p>
-                                                        <p class="m-0">Exterior Light - DOT Standard</p>
-
-                                                    </div>
-
-                                                    <div class="col-lg-4 mt-5">
-                                                        <p>Accessories</p>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input accessorCheck" type="radio"
-                                                                name="accessorCheck">
-                                                            <label class="form-check-label" for="flexRadioDefault5">
-                                                                Shelving
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input accessorCheck" type="radio"
-                                                                name="accessorCheck">
-                                                            <label class="form-check-label" for="flexRadioDefault6">
-                                                                Grab Handles
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input accessorCheck" type="radio"
-                                                                name="accessorCheck">
-                                                            <label class="form-check-label" for="flexRadioDefault6">
-                                                                Roll Carts
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input accessorCheck" type="radio"
-                                                                name="accessorCheck">
-                                                            <label class="form-check-label" for="accessorCheck">
-                                                                Steps
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input accessorCheck" type="radio"
-                                                                name="accessorCheck">
-                                                            <label class="form-check-label" for="accessorCheck">
-                                                                Dolly Rack
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input accessorCheck" type="radio"
-                                                                name="accessorCheck">
-                                                            <label class="form-check-label" for="accessorCheck">
-                                                                Remote Compressor
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!--  -->
-
-                                                <div class="row">
-                                                    <h5 class="card-title fw-semibold">Chassis information (if
-                                                        Known)</h5>
-                                                    <hr>
-
-                                                    <div class="col-lg-6">
-                                                        <div class="mb-3">
-                                                            <label for="exampleInputPassword1"
-                                                                class="form-label fw-semibold">Make &
-                                                                Model</label>
-                                                            <input type="text" class="w-100"
-                                                                placeholder="Condensor">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label for="exampleInputPassword1"
-                                                                class="form-label fw-semibold">Year</label>
-                                                            <input type="text" class="w-100"
-                                                                placeholder="Condensor">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label for="exampleInputPassword1"
-                                                                class="form-label fw-semibold">Gross Vehicle Wieght
-                                                                (GVWR) in Pounds
-                                                                <span>JazzCash</span></label>
-                                                            <input type="text" class="w-100"
-                                                                placeholder="Condensor">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-lg-6">
-                                                        <div class="mb-3">
-                                                            <label for="exampleInputPassword1"
-                                                                class="form-label fw-semibold">Wheelbase Length
-                                                                in
-                                                                Inches</label>
-                                                            <input type="text" class="w-100"
-                                                                placeholder="Condensor">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label for="exampleInputPassword1"
-                                                                class="form-label fw-semibold">Cab to Axie
-                                                                Length in
-                                                                Lanches</label>
-                                                            <input type="text" class="w-100"
-                                                                placeholder="Condensor">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <p>Fuel Type</p>
-
-                                                            <input class="form-check-input fuelCheck" type="checkbox"
-                                                                name="fuelCheck">
-                                                            <label class="form-check-label" for="fuelCheck">
-                                                                Gas
-                                                            </label>
-
-
-                                                            <input class="form-check-input fuelCheck ms-3"
-                                                                type="checkbox" name="fuelCheck">
-                                                            <label class="form-check-label" for="fuelCheck">
-                                                                Diesel
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <!--  -->
+                                                <!-- Eutectic Details -->
                                                 <h3 class=" font-inter">Eutectic Details</h3>
                                                 <div class="row mb-5 ">
                                                     <div class="col-lg-6  ">
@@ -527,22 +251,129 @@
                                                                 placeholder="RLAA/Amp">
                                                         </div>
 
-                                                        <button type="submit" name="submit"
-                                                            class="save py-2 ">Save</button>
+                                                        <button type="submit" name="" class="save py-2 ">Save</button>
                                                     </div>
                                                 </div>
-
-
                                             </div>
-                                        </form>
+
+                                            <!--  -->
+
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 mt-5 ">
+                                        <div class="card ">
+                                            <div class="row">
+                                                <div class="col-lg-3 col-md-3 text-start py-3 px-4">
+                                                    <p class="font student"> USA IMPORTANT Details</p>
+                                                </div>
+                                                <div class="col-lg-9 col-md-9 py-3 ">
+                                                    <div class="btn-edit-delete1 text-end px-1">
+                                                        <button type="submit" class="export-btn delete"
+                                                            name="delete_btn">
+                                                            <span class="fa-regular fa-trash-can ">
+                                                            </span></button>
+                                                        <button type="submit" class="edit export-btn" name="edit">
+                                                            <span class="fa-solid fa-pen-to-square "></span>
+                                                        </button>
+                                                        <a href="" type="submit" class="export export-btn">
+                                                            <span class="fa-solid fa-cloud-arrow-down "> </span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr class="m-0 ">
+
+                                            <div class="dov ">
+                                                <div class="table-wrapper">
+                                                    <table class="contain-table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>
+                                                                    <!-- <input class="chack" type="checkbox"> -->
+                                                                    <i class="fa-solid fa-plus toggle-checkbox "></i>
+                                                                </th>
+                                                                <th>S/no<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                                <th>Date<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                                <th>Company Name <i
+                                                                        class="fa-solid fa-arrow-down px-2"></i>
+                                                                </th>
+                                                                <th>Address <i class="fa-solid fa-arrow-down px-2"></i>
+                                                                </th>
+                                                                <th>Tele phone <i
+                                                                        class="fa-solid fa-arrow-down px-2"></i>
+                                                                </th>
+                                                                <th>Contact Name <i
+                                                                        class="fa-solid fa-arrow-down px-2"></i>
+                                                                </th>
+                                                                <th> City <i class="fa-solid fa-arrow-down px-2"></i>
+                                                                </th>
+                                                                <th>State<i class="fa-solid fa-arrow-down px-2"></i>
+                                                                <th>Direct<i class="fa-solid fa-arrow-down px-2"></i>
+                                                                </th>
+                                                                </th>
+                                                                <th>Email <i class="fa-solid fa-arrow-down px-2"></i>
+                                                                </th>
+                                                                <th>Zip Code <i class="fa-solid fa-arrow-down px-2"></i>
+                                                                </th>
+                                                                <th>Port Of Entry <i
+                                                                        class="fa-solid fa-arrow-down px-2"></i></th>
+                                                                <th>Vessel Details <i
+                                                                        class="fa-solid fa-arrow-down px-2"></i></th>
+                                                                <th>Trucking <i class="fa-solid fa-arrow-down px-2"></i>
+                                                                </th>
+                                                                <th>Misc <i class="fa-solid fa-arrow-down px-2"></i>
+                                                                </th>
+                                                                <th>Total Cost <i
+                                                                        class="fa-solid fa-arrow-down px-2"></i>
+                                                                </th>
+                                                                <th>Custom Freiht <i
+                                                                        class="fa-solid fa-arrow-down px-2"></i></th>
+                                                                <th>added by <i class="fa-solid fa-arrow-down px-2"></i>
+                                                                </th>
+
+
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><input type="checkbox" name="edit_delete[]"
+                                                                        class="text-input" value=""></td>
+                                                                <td class="font"></td>
+                                                                <td class="font"></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+
+
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-
-
+                    </form>
                 </div>
             </main>
             <footer class="py-4 bg-light mt-auto">

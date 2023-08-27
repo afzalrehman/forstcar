@@ -17,7 +17,7 @@
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link hover " href="./company.php">Company</a>
                                 <a class="nav-link hover " href="./add-truck.php">Add Truck Details</a>
-                                <a class="nav-link hover " href="./tables.php">View Truck Details</a>
+                                <a class="nav-link hover " href="./view-truck-details.php">View Truck Details</a>
                             </nav>
                         </div>
 
