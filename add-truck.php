@@ -186,17 +186,17 @@ if (isset($_POST['submit'])) {
                                                             <input type="text" class="w-100" name="model_no" placeholder="Model No">
                                                             <span class="text-danger fs-6 "><?php if (isset($emty['model_no'])) echo $emty['model_no'] ?></span>
                                                         </div>
-                                                        <div class="mb-3">
+                                                        <!-- <div class="mb-3">
                                                             <label for="body_length" class="form-label fw-semibold">Body Size</label>
                                                             <input type="text" class="w-100" name="body_length" placeholder="Body Size">
-                                                        </div>
+                                                        </div> -->
                                                         <div class="mb-3">
                                                             <label for="unit_Custom" class="form-label fw-semibold">Unit: Custom</label>
                                                             <input type="text" class="w-100" name="unit_Custom" placeholder="Unit: Custom">
                                                         </div>
                                                         <div class="mb-3">
-                                                            <label for="additional_details" class="form-label fw-semibold">Add'l Details</label>
-                                                            <input type="text" class="w-100" name="additional_details" placeholder="Add'l Details">
+                                                            <label for="additional_details" class="form-label fw-semibold">Additional Details</label>
+                                                            <input type="text" class="w-100" name="additional_details" placeholder="Additional Details">
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="chassis_frame" class="form-label fw-semibold">Chassis Frame</label>
@@ -236,7 +236,7 @@ if (isset($_POST['submit'])) {
                                                         <h5 class="card-title fw-semibold">2. Wakl-in/Rear-door Body</h5>
                                                         <hr class="p-0">
 
-                                                        <!-- <div class="col-lg-4 mt-3">
+                                                        <div class="col-lg-4 mt-3">
                                                             <p>Body Length in Feet</p>
                                                             <input class="form-check-input bodyFeetCheck" type="checkbox" name="body_length" value="14">
                                                             <label class="form-check-label" for="bodyFeetCheck">
@@ -254,12 +254,12 @@ if (isset($_POST['submit'])) {
                                                             <label class="form-check-label" for="bodyFeetCheck">
                                                                 20
                                                             </label>
-                                                        </div> -->
+                                                        </div>
 
                                                         <div class="col-lg-4 mt-3">
                                                             <p>Refrigeration</p>
                                                             <div class="form-check">
-                                                                <input class="form-check-input refriCheck" type="checkbox" name="refrigeration" checked value="Low Temp - IceCream/Frozen">
+                                                                <input class="form-check-input refriCheck" type="checkbox" name="refrigeration" value="Low Temp - IceCream/Frozen">
                                                                 <label class="form-check-label" for="refriCheck">
                                                                     Low Temp - IceCream/Frozen
                                                                 </label>
@@ -275,7 +275,7 @@ if (isset($_POST['submit'])) {
                                                         <div class="col-lg-4 mt-3">
                                                             <p>Rear Door</p>
                                                             <div class="form-check">
-                                                                <input class="form-check-input rearCheck" type="checkbox" name="body_rear_door" checked value="Center Door">
+                                                                <input class="form-check-input rearCheck" type="checkbox" name="body_rear_door" value="Center Door">
                                                                 <label class="form-check-label" for="flexCheckDefault">
                                                                     Center Door
                                                                 </label>
@@ -297,7 +297,7 @@ if (isset($_POST['submit'])) {
                                                         <div class="col-lg-4 mt-5">
                                                             <p>Side Door</p>
                                                             <div class="form-check">
-                                                                <input class="form-check-input sideCheck" type="radio" name="body_side_door" checked value="Yes">
+                                                                <input class="form-check-input sideCheck" type="radio" name="body_side_door" value="Yes">
                                                                 <label class="form-check-label" for="sideCheck">
                                                                     Yes
                                                                 </label>
@@ -313,7 +313,7 @@ if (isset($_POST['submit'])) {
                                                         <div class="col-lg-4 mt-5">
                                                             <p>E-Track (Tall Body Cargo Control)</p>
                                                             <div class="form-check">
-                                                                <input class="form-check-input eTrackCheck" type="radio" name="e_track" checked value="Yes">
+                                                                <input class="form-check-input eTrackCheck" type="radio" name="e_track" value="Yes">
                                                                 <label class="form-check-label" for="e_track">
                                                                     Yes
                                                                 </label>
@@ -329,7 +329,7 @@ if (isset($_POST['submit'])) {
                                                         <div class="col-lg-4 mt-5">
                                                             <p>Floor</p>
                                                             <div class="form-check">
-                                                                <input class="form-check-input floorCheck" type="checkbox" name="floor" checked value="Non-Slip Textured">
+                                                                <input class="form-check-input floorCheck" type="checkbox" name="floor" value="Non-Slip Textured">
                                                                 <label class="form-check-label" for="floor">
                                                                     Non-Slip Textured
                                                                 </label>
@@ -351,15 +351,16 @@ if (isset($_POST['submit'])) {
                                                     </div>
                                                     <!-- End 2. Wakl-in/Rear-door Body -->
 
-
+                                                    <!-- 3. Multi- Temp Body -->
                                                     <div class="row my-5">
                                                         <h5 class="card-title fw-semibold">3. Multi- Temp Body</h5>
                                                         <hr class="p-0">
 
+                                                        <!-- Temperature Start -->
                                                         <div class="col-lg-4 mt-3">
                                                             <p>Temperature</p>
                                                             <div class="form-check">
-                                                                <input class="form-check-input temperaCheck" type="checkbox" checked name="body_temp" value="Low & Mid Temp">
+                                                                <input class="form-check-input temperaCheck" type="checkbox" name="body_temp" value="Low & Mid Temp">
                                                                 <label class="form-check-label" for="body_temp">
                                                                     Low & Mid Temp
                                                                 </label>
@@ -371,18 +372,19 @@ if (isset($_POST['submit'])) {
                                                                 </label>
                                                             </div>
                                                         </div>
+                                                        <!-- Temperature End -->
 
                                                         <div class="col-lg-4 mt-3 text-muted">
                                                             <h4 class="text-muted  fw-bold">All Bodies</h4>
                                                             <p class="m-0">Interior Light - LED Standard</p>
                                                             <p class="m-0">Exterior Light - DOT Standard</p>
-
                                                         </div>
 
+                                                        <!-- Accessories -->
                                                         <div class="col-lg-4 mt-5">
                                                             <p>Accessories</p>
                                                             <div class="form-check">
-                                                                <input class="form-check-input accessorCheck" type="radio" checked name="body_accessories" value="Shelving">
+                                                                <input class="form-check-input accessorCheck" type="radio" name="body_accessories" value="Shelving">
                                                                 <label class="form-check-label" for="flexRadioDefault5">
                                                                     Shelving
                                                                 </label>
@@ -456,13 +458,9 @@ if (isset($_POST['submit'])) {
                                                         <hr>
 
                                                         <div class="col-lg-6">
-                                                            <!-- <div class="mb-3">
-                                                                <label for="model_no" class="form-label fw-semibold">Make & Model</label>
-                                                                <input type="text" class="w-100" name="model_no" placeholder="Make & Model">
-                                                            </div> -->
                                                             <div class="mb-3">
                                                                 <label for="year" class="form-label fw-semibold">Year</label>
-                                                                <input type="text" class="w-100" name="year" placeholder="Year">
+                                                                <input type="date" class="w-100" name="year" placeholder="Year">
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label for="gvwr" class="form-label fw-semibold">Gross Vehicle Wieght(GVWR) in Pounds
@@ -476,7 +474,7 @@ if (isset($_POST['submit'])) {
                                                             </div>
                                                             <div class="mb-3">
                                                                 <p>Fuel Type</p>
-                                                                <input class="form-check-input fuelCheck" type="checkbox" checked name="fuel_Type" value="Gas">
+                                                                <input class="form-check-input fuelCheck" type="checkbox" name="fuel_Type" value="Gas">
                                                                 <label class="form-check-label" for="fuelCheck">
                                                                     Gas
                                                                 </label>
