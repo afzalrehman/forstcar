@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (!isset($_SESSION['user_fullname'])) {
+    echo "You are logged out";
+    header('location:login.php');
+}
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;

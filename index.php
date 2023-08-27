@@ -50,42 +50,32 @@ if (!isset($_SESSION['user_fullname'])) {
                     </ol>
                     <div class="row">
 
-                        <div class="col-xl-3 col-md-6">
-                            <div class="card bg-color text-white mb-4">
-                                <div class="card-body">Primary Card</div>
+                        <div class="col-xl-4 col-md-6">
+                            <div class="card mb-4">
+                                <div class="card-body">Total User</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="#">View Details</a>
-                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    <a class="small text-white stretched-link" href="#"></a>
+                                    <!-- <div class="small text-white"><i class="fas fa-angle-right"></i></div> -->
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-3 col-md-6">
-                            <div class="card bg-color text-white mb-4">
-                                <div class="card-body">Primary Card</div>
+                        <div class="col-xl-4 col-md-6">
+                            <div class="card   mb-4">
+                                <div class="card-body">Total Company</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
                                     <a class="small text-white stretched-link" href="#">View Details</a>
-                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-3 col-md-6">
-                            <div class="card bg-color text-white mb-4">
-                                <div class="card-body">Primary Card</div>
+                        <div class="col-xl-4 col-md-6">
+                            <div class="card  mb-4">
+                                <div class="card-body">Total Body Details</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
                                     <a class="small text-white stretched-link" href="#">View Details</a>
-                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-3 col-md-6">
-                            <div class="card bg-color text-white mb-4">
-                                <div class="card-body">Primary Card</div>
-                                <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="#">View Details</a>
-                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                </div>
-                            </div>
-                        </div>
+                       
 
                     </div>
                     <div class="row">

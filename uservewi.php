@@ -108,9 +108,9 @@ if (isset($_POST['delete_btn'])) {
                                                 <button type="submit" class="edit export-btn" name="">
                                                     <span class="fa-solid fa-pen-to-square"></span>
                                                 </button>
-                                                <a href="./exportuservewi.php" type="submit" class="export export-btn " name="">
+                                                <button href="./exportuservewi.php" type="submit" class="export export-btn " name="">
                                                     <span class="fa-solid fa-cloud-arrow-down"> </span>
-                                                </a>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -128,16 +128,14 @@ if (isset($_POST['delete_btn'])) {
                                                         <th>User Id<i class="fa-solid fa-arrow-down px-2"></i></th>
                                                         <th>User Fullname<i class="fa-solid fa-arrow-down px-2"></i></th>
                                                         <th>User Email<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>User Password<i class="fa-solid fa-arrow-down px-2"></i></th>
                                                         <th>User Type<i class="fa-solid fa-arrow-down px-2"></i></th>
                                                         <th>User Contact<i class="fa-solid fa-arrow-down px-2"></i></th>
                                                         <th>User Image<i class="fa-solid fa-arrow-down px-2"></i></th>
                                                         <th>Registered On<i class="fa-solid fa-arrow-down px-2"></i></th>
                                                         <th>Updated On<i class="fa-solid fa-arrow-down px-2"></i></th>
                                                         <th>Email Verfied_at<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>Token<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>Reset Expiration<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>Reset Token<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <th>Reset Password<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <!-- <th>Reset Token<i class="fa-solid fa-arrow-down px-2"></i></th> -->
                                                         <th>Is Verified<i class="fa-solid fa-arrow-down px-2"></i></th>
 
 
@@ -157,19 +155,15 @@ if (isset($_POST['delete_btn'])) {
                                                         <tr>
                                                             <td><input type="checkbox" name="chack_btn_delete[]" class="text-input" value="<?php echo $row['user_id']; ?>"></td>
                                                             <td class="font"><?php echo  $no ?></td>
-
                                                             <td><?php echo  $row['user_fullname']; ?></td>
                                                             <td><?php echo  $row['user_email']; ?></td>
-                                                            <td><?php echo  $row['user_password']; ?></td>
                                                             <td><?php echo  $row['user_type']; ?></td>
                                                             <td><?php echo $row['user_contact']; ?></td>
                                                             <td><?php echo $row['user_image']; ?></td>
                                                             <td><?php echo $row['registered_on']; ?></td>
                                                             <td><?php echo $row['updated_on']; ?></td>
                                                             <td><?php echo $row['email_verfied_at']; ?></td>
-                                                            <td><?php echo $row['token']; ?></td>
                                                             <td><?php echo $row['reset_expiration']; ?></td>
-                                                            <td><?php echo $row['reset_token']; ?></td>
                                                             <td><?php echo $row['is_verified']; ?></td>
                                                         </tr>
                                                     <?php
