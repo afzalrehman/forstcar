@@ -410,8 +410,6 @@ if (isset($_POST['update'])) {
                                                 <a href="exportViewTruckDetails.php">
                                                     <span class="fa-solid fa-cloud-arrow-down export export-btn "> </span>
                                                 </a>
-                                               
-                                                
                                             </div>
                                         </div>
                                     </div>
