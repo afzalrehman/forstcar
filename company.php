@@ -406,8 +406,8 @@ if (isset($_POST['update'])) {
                                                 <button type="submit" class="edit export-btn" name="edit">
                                                     <span class="fa-solid fa-pen-to-square"></span>
                                                 </button>
-                                                <a href="">
-                                                    <span class="fa-solid fa-cloud-arrow-down export export-btn"> </span>
+                                                <a href="exportViewTruckDetails.php">
+                                                    <span class="fa-solid fa-cloud-arrow-down export export-btn "> </span>
                                                 </a>
                                                
                                                 
