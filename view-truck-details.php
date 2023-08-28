@@ -127,10 +127,10 @@ if (isset($_POST['delete_btn'])) {
                                                     <span class="fa-regular fa-trash-can "></span>
                                                 </button>
                                                 <button type="submit" class="edit export-btn" name="edit">
-                                                    <span class="fa-solid fa-pen-to-square"></span>
+                                                    <span class="fa-solid fa-pen-to-square "></span>
                                                 </button>
-                                                <a href="./exportViewTruckDetails.php" type="submit" class="export export-btn " name="">
-                                                    <span class="fa-solid fa-cloud-arrow-down"> </span>
+                                                <a href="./exportViewTruckDetails.php">
+                                                    <span class="fa-solid fa-cloud-arrow-down export export-btn"> </span>
                                                 </a>
                                             </div>
                                         </div>

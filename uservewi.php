@@ -161,9 +161,9 @@ if (isset($_POST['edit'])) {
                                                 <button type="submit" class="edit export-btn" name="edit">
                                                     <span class="fa-solid fa-pen-to-square"></span>
                                                 </button>
-                                                <button href="./exportuservewi.php" type="submit" class="export export-btn " name="">
+                                                <a href="./exportuservewi.php" type="submit" class="export export-btn" name="">
                                                     <span class="fa-solid fa-cloud-arrow-down"> </span>
-                                                </button>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
