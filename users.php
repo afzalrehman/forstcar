@@ -23,91 +23,110 @@ if (isset($_POST['submit'])) {
     $user_password = mysqli_real_escape_string($conn, $_POST['user_password']);
     $user_type = mysqli_real_escape_string($conn, $_POST['user_type']);
     $user_contact = mysqli_real_escape_string($conn, $_POST['user_contact']);
-    $user_image = mysqli_real_escape_string($conn, $_POST['user_image']);
+    $user_image = $_FILES['user_image'];
 
     $pass = password_hash($user_password, PASSWORD_BCRYPT);
 
     $token = bin2hex(random_bytes(15));
 
-    if (empty($user_fullname)) {
-        $error['user_fullname'] = "Please Fill Name";
-    }
-    if (empty($user_email)) {
-        $error['user_email'] = "Please Fill Email";
-    }
-    if (empty($user_password)) {
-        $error['user_password'] = "Please Fill Passwrod";
-    }
-    if (empty($user_type)) {
-        $error['user_type'] = "Please Fill User Type";
-    }
-    if (empty($user_contact)) {
-        $error['user_contact'] = "Please Fill Contact";
-    }
-    if (empty($user_image)) {
-        $error['user_image'] = "Please Fill image";
-    } else {
+    // if (empty($user_fullname)) {
+    //     $error['user_fullname'] = "Please Fill Name";
+    // }
+    // if (empty($user_email)) {
+    //     $error['user_email'] = "Please Fill Email";
+    // }
+    // if (empty($user_password)) {
+    //     $error['user_password'] = "Please Fill Passwrod";
+    // }
+    // if (empty($user_type)) {
+    //     $error['user_type'] = "Please Fill User Type";
+    // }
+    // if (empty($user_contact)) {
+    //     $error['user_contact'] = "Please Fill Contact";
+    // }
+    // if (empty($user_image)) {
+    //     $error['user_image'] = "Please Fill image";
+    // } else {
 
-        $emailquery = "SELECT * FROM admin_users WHERE `user_email` = '$user_email' ";
-        $query = mysqli_query($conn, $emailquery);
+        $imagefilename = $user_image['name'];
 
-        $emailcount = mysqli_num_rows($query);
-        if ($emailcount > 0) {
-            $warning['warning'] = 'Email already exists';
-        } else {
+        $imagefileerror = $user_image['error'];
 
-            $contactquery = "SELECT * FROM admin_users WHERE `user_contact` = '$user_contact' ";
-            $query = mysqli_query($conn, $contactquery);
+        $imagefiletemp = $user_image['tmp_name'];
 
-            $contactcount = mysqli_num_rows($query);
-            if ($contactcount > 0) {
-                $warning['warning'] = 'Contact Number already exists';
+        $filename_separate = explode('.', $imagefilename);
+
+        $file_extension = strtolower(end($filename_separate));
+
+        $extension = array('jpeg', 'jpg', 'png');
+
+        if (in_array($file_extension, $extension)) {
+
+            $upload_image = 'upload_image/' . $imagefilename;
+            move_uploaded_file($imagefiletemp, $upload_image);
+
+
+            $emailquery = "SELECT * FROM admin_users WHERE `user_email` = '$user_email' ";
+            $query = mysqli_query($conn, $emailquery);
+
+            $emailcount = mysqli_num_rows($query);
+            if ($emailcount > 0) {
+                $warning['warning'] = 'Email already exists';
             } else {
 
-                $insertquery = "INSERT INTO admin_users (`user_fullname`, `user_email`, `user_password`, `user_type`, `user_contact`, `user_image`, `registered_on`,`token`, `is_verified`) 
-            VALUES ('$user_fullname', '$user_email', '$pass', '$user_type', '$user_contact', '$user_image', NOW(),'$token', 'inactive')";
+                $contactquery = "SELECT * FROM admin_users WHERE `user_contact` = '$user_contact' ";
+                $query = mysqli_query($conn, $contactquery);
 
-                $iquery = mysqli_query($conn, $insertquery);
-                if ($iquery) {
-
-                    $mail = new PHPMailer(true);
-                    try {
-                        $mail->SMTPDebug = 0;
-                        $mail->isSMTP();
-                        $mail->Host = 'smtp.gmail.com';
-                        $mail->SMTPAuth = true;
-                        $mail->Username = 'hammadking427@gmail.com';
-                        $mail->Password = 'gtohfmaaanqufdbn';
-                        $mail->SMTPSecure = 'tls';
-                        $mail->Port = 587;
-
-                        $mail->setFrom('hammadking427@gmail.com', 'Abu_Hammad');
-                        $mail->addAddress($user_email, $user_fullname);
-
-                        $mail->Subject = 'Email Activation';
-                        $mail->Body = "Hi, $user_fullname. Click here too activate your account 
-                    http://localhost/forstcar/activate.php?token=$token ";
-                        $send_email = "From: hammadking427@gmail.com";
-
-                        $mail->send();
-                        $succses['succses'] = 'Please Check The Gmail And Activated';
-                        $user_fullname = '';
-                        $user_email = '';
-                        $user_password = '';
-                        $user_contact = '';
-                        $user_image = '';
-                        $_SESSION['msg'] = "Check you mail to activate your account 
-                    $user_email";
-                    } catch (Exception $e) {
-                        echo "Failed to send email. Error: {$mail->ErrorInfo}";
-                    }
+                $contactcount = mysqli_num_rows($query);
+                if ($contactcount > 0) {
+                    $warning['warning'] = 'Contact Number already exists';
                 } else {
-                    $warning['warning'] = 'No Inserted';
+
+                    $insertquery = "INSERT INTO admin_users (`user_fullname`, `user_email`, `user_password`, `user_type`, `user_contact`, `user_image`, `registered_on`,`token`, `is_verified`) 
+            VALUES ('$user_fullname', '$user_email', '$pass', '$user_type', '$user_contact', '$upload_image', NOW(),'$token', 'inactive')";
+
+                    $iquery = mysqli_query($conn, $insertquery);
+                    if ($iquery) {
+
+                        $mail = new PHPMailer(true);
+                        try {
+                            $mail->SMTPDebug = 0;
+                            $mail->isSMTP();
+                            $mail->Host = 'smtp.gmail.com';
+                            $mail->SMTPAuth = true;
+                            $mail->Username = 'hammadking427@gmail.com';
+                            $mail->Password = 'gtohfmaaanqufdbn';
+                            $mail->SMTPSecure = 'tls';
+                            $mail->Port = 587;
+
+                            $mail->setFrom('hammadking427@gmail.com', 'Abu_Hammad');
+                            $mail->addAddress($user_email, $user_fullname);
+
+                            $mail->Subject = 'Email Activation';
+                            $mail->Body = "Hi, $user_fullname. Click here too activate your account 
+                    http://localhost/forstcar/activate.php?token=$token ";
+                            $send_email = "From: hammadking427@gmail.com";
+
+                            $mail->send();
+                            $succses['succses'] = 'Please Check The Gmail And Activated';
+                            $user_fullname = '';
+                            $user_email = '';
+                            $user_password = '';
+                            $user_contact = '';
+                            $user_image = '';
+                            $_SESSION['msg'] = "Check you mail to activate your account 
+                    $user_email";
+                        } catch (Exception $e) {
+                            echo "Failed to send email. Error: {$mail->ErrorInfo}";
+                        }
+                    } else {
+                        $warning['warning'] = 'No Inserted';
+                    }
                 }
             }
         }
     }
-}
+// }
 ?>
 
 <!DOCTYPE html>

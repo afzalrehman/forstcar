@@ -6,6 +6,62 @@ if (!isset($_SESSION['user_fullname'])) {
     echo "You are logged out";
     header('location:login.php');
 }
+
+
+
+// SELECT QUERY
+$sql = "SELECT * FROM `admin_users` WHERE user_id";
+$result = mysqli_query($conn, $sql);
+
+if ($result) {
+    // Fetch the data
+    $row = mysqli_fetch_assoc($result);
+    $user['user_fullname'] = $row['user_fullname'];
+    $user['user_contact'] = $row['user_contact'];
+    $user['user_image'] = $row['user_image'];
+} else {
+    echo "Error: " . mysqli_error($conn);
+}
+
+
+// =========================update======================
+if (isset($_POST['submit'])) {
+    $user_fullname = mysqli_real_escape_string($conn, $_POST['user_fullname']);
+    $user_contact = mysqli_real_escape_string($conn, $_POST['user_contact']);
+    // $user_image = $_FILES['user_image'];
+
+    // $imagefilename = $user_image['name'];
+
+    // $imagefileerror = $user_image['error'];
+
+    // $imagefiletemp = $user_image['tmp_name'];
+
+    // $filename_separate = explode('.', $imagefilename);
+    // $file_extension = strtolower(end($filename_separate));
+
+    // $extension = array('jpeg', 'jpg', 'png');
+
+    // if (in_array($file_extension, $extension)) {
+
+    //     $upload_image = 'upload_image/' . $imagefilename;
+    //     move_uploaded_file($imagefiletemp, $upload_image);
+
+        $update_query = "UPDATE `admin_users` SET `user_fullname` = '$user_fullname', `user_contact` = '$user_contact'
+    WHERE user_id";
+
+        if (mysqli_query($conn, $update_query)) {
+            echo "Record updated successfully!";
+        } else {
+            echo "Error updating record: " . mysqli_error($conn);
+        }
+    }
+// }
+
+
+
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,25 +131,31 @@ if (!isset($_SESSION['user_fullname'])) {
                     <div class="card  my-5 mein-card mb-5">
                         <h3 class=" font-inter text-center">PROFILE</h3>
                         <div class="container-fluid course-card">
-                            <form action="" method="POST">
+                            <form action="./profile.php" method="POST">
                                 <div class="row my-5 ">
                                     <div class="col-lg-6">
 
                                         <div class="in">
                                             <label for="user_fullname">You Full Name</label>
-                                            <input type="text" name="user_fullname" id="user_fullname" class="inputDesign w-100 py-2  mb-3" placeholder="User FullName">
-                                            
+                                            <input type="text" name="user_fullname" id="user_fullname" class="inputDesign w-100 py-2  mb-3" placeholder="User FullName" value="<?php if (isset($user['user_fullname'])) {
+                                                                                                                                                                                    echo $user['user_fullname'];
+                                                                                                                                                                                } ?>">
+
                                         </div>
                                         <div class="in">
                                             <label for="user_image">Image</label>
-                                            <input type="file" id="user_image" name="user_image" class="inputDesign w-100 py-2 " placeholder="Image">
+                                            <input type="file" id="user_image" name="user_image" class="inputDesign w-100 py-2 " placeholder="Image" value="<?php if (isset($user['user_image'])) {
+                                                                                                                                                                echo $user['user_image'];
+                                                                                                                                                            } ?>">
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6">
                                         <div class="in">
-                                            <label for="user_contact">Enter Your Image</label>
-                                            <input type="text" id="user_contact" name="user_contact" class="inputDesign w-100  " placeholder="Contact ">
+                                            <label for="user_contact">Enter Your Contact Number</label>
+                                            <input type="text" id="user_contact" name="user_contact" class="inputDesign w-100  " placeholder="Contact" value="<?php if (isset($user['user_contact'])) {
+                                                                                                                                                                    echo $user['user_contact'];
+                                                                                                                                                                } ?>">
                                         </div>
 
                                     </div>

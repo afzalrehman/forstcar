@@ -129,7 +129,7 @@ if (isset($_POST['delete_btn'])) {
                                                 <button type="submit" class="edit export-btn" name="edit">
                                                     <span class="fa-solid fa-pen-to-square"></span>
                                                 </button>
-                                                <a href="" type="submit" class="export export-btn " name="">
+                                                <a href="./exportViewTruckDetails.php" type="submit" class="export export-btn " name="">
                                                     <span class="fa-solid fa-cloud-arrow-down"> </span>
                                                 </a>
                                             </div>
@@ -163,7 +163,7 @@ if (isset($_POST['delete_btn'])) {
                                                         <th>body_accessories<i class="fa-solid fa-arrow-down px-2"></i></th>
                                                         <th>gvwr<i class="fa-solid fa-arrow-down px-2"></i></th>
                                                         <th>wbl<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>calno_of_units<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <th>cal<i class="fa-solid fa-arrow-down px-2"></i></th>
                                                         <th>no_of_units<i class="fa-solid fa-arrow-down px-2"></i></th>
                                                         <th>manufactured_on<i class="fa-solid fa-arrow-down px-2"></i></th>
                                                         <th>chassis_frame<i class="fa-solid fa-arrow-down px-2"></i></th>
@@ -210,23 +210,6 @@ if (isset($_POST['delete_btn'])) {
                                                 <tbody>
 
                                                     <?php
-
-
-
-                                                    // // Query to retrieve rows from the first table
-                                                    // $body_details = "SELECT * FROM  `body_details` WHERE `model_no`";
-                                                    // $body_result = $conn->query($body_details);
-
-                                                    // // Query to retrieve rows from the second table
-                                                    // $eutectic_details = "SELECT * FROM  `eutectic_details` WHERE `model_no`";
-                                                    // $eutectic_result = $conn->query($eutectic_details);
-
-                                                    // // Check if rows were found in both tables
-                                                    // if ($body_result->num_rows > 0 && $eutectic_result->num_rows > 0) {
-
-                                                    //     $no = 1;
-                                                    //     // Retrieve rows from the first table
-                                                    //     while ($row = $body_result->fetch_assoc()) {
 
                                                     $sql = "SELECT * FROM `body_details`
                                                             INNER JOIN `eutectic_details` ON body_details.model_no = eutectic_details.model_no";

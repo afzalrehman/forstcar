@@ -30,11 +30,10 @@
                 <li>
                     <hr class="dropdown-divider mt-0 mb-0" />
                 </li>
-                <a class="dropdown-item" href="" >
+                <a class="dropdown-item" href="./logout.php" >
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                     Logout
                 </a>
-               
             </ul>
         </li>
     </ul>
@@ -48,7 +47,7 @@
 
 
 <!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -65,4 +64,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->

@@ -163,8 +163,8 @@ if (isset($_POST['edit'])) {
 
 <!-- =========================update====================== -->
 <?php
- $edit_company_name ="" ;
- $edit_company_contact = "";
+$edit_company_name = "";
+$edit_company_contact = "";
 if (isset($_POST['update'])) {
     // Assuming you have already retrieved the data you want to update
     $edit_company_name = $_POST['name'];
@@ -299,8 +299,8 @@ if (isset($_POST['update'])) {
                                             <span class="text-danger fs-6 "><?php if (isset($emty['name'])) echo $emty['name'] ?></span>
                                         </div>
 
-                                        <div class="i
-                                            <input type=" text" name="address" id="address" class=" w-100 py-2 mt-3" placeholder="Address">
+                                        <div class="in">
+                                            <input type="text" name="address" id="address" class=" w-100 py-2 mt-3" placeholder="Address">
 
                                         </div>
                                         <div class="in">
