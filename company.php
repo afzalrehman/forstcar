@@ -148,6 +148,7 @@ if (isset($_POST['edit'])) {
             $edit['company_misc'] = $row['company_misc'];
             $edit['total_cost'] = $row['total_cost'];
             $edit['custom_frieght'] = $row['custom_frieght'];
+            
         } else {
             echo "Error: " . mysqli_error($conn);
         }
@@ -163,8 +164,8 @@ if (isset($_POST['edit'])) {
 
 <!-- =========================update====================== -->
 <?php
-$edit_company_name = "";
-$edit_company_contact = "";
+// $edit_company_name = "";
+// $edit_company_contact = "";
 if (isset($_POST['update'])) {
     // Assuming you have already retrieved the data you want to update
     $edit_company_name = $_POST['name'];
@@ -172,21 +173,21 @@ if (isset($_POST['update'])) {
     // Add other fields as needed
 
     // Get the selected ID
-    $selectedId = $_POST['edit_id']; // Add this input field to your HTML form
+    // $selectedId = $_POST['edit_id']; // Add this input field to your HTML form
 
     // Establish a database connection (replace with your database connection code)
-    $conn = mysqli_connect("localhost", "root", "", "forstcarusa");
+    // $conn = mysqli_connect("localhost", "root", "", "forstcarusa");
 
-    if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
-    }
+    // if (!$conn) {
+    //     die("Connection failed: " . mysqli_connect_error());
+    // }
 
     // Prepare and execute an UPDATE query
     $update_query = "UPDATE importer_details SET 
         company_name = '$edit_company_name',
         company_contact = '$edit_company_contact'
         -- Add other fields here
-        WHERE importer_id = $selectedId";
+        WHERE importer_id";
 
     if (mysqli_query($conn, $update_query)) {
         echo "Record updated successfully!";
@@ -400,14 +401,17 @@ if (isset($_POST['update'])) {
                                         </div>
                                         <div class="col-lg-9 col-md-9 py-3 ">
                                             <div class="btn-edit-delete1 text-end px-1">
-                                                <button type="submit" name="delete_btn">
-                                                    <span class="fa-regular fa-trash-can export-btn delete">
-                                                    </span></button>
-                                                <button type="submit" name="edit"><span class="fa-solid fa-pen-to-square edit export-btn"></span></button>
-                                                <a href="">
-                                                    <span class="fa-solid fa-cloud-arrow-down export export-btn"> </span>
+                                            <button type="submit" class="export-btn delete" name="delete_btn">
+                                                    <span class="fa-regular fa-trash-can "></span>
+                                                </button>
+                                                <button type="submit" class="edit export-btn" name="edit">
+                                                    <span class="fa-solid fa-pen-to-square"></span>
+                                                </button>
+                                                <a href="exportViewTruckDetails.php">
+                                                    <span class="fa-solid fa-cloud-arrow-down export export-btn "> </span>
                                                 </a>
-                                                <a href="excel.php">Download</a>
+                                               
+                                                
                                             </div>
                                         </div>
                                     </div>
