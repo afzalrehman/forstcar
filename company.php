@@ -200,12 +200,6 @@ if (isset($_POST['update'])) {
 
 ?>
 
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -480,7 +474,6 @@ if (isset($_POST['update'])) {
                                                         <tr>
                                                             <td>
                                                                 <input type="checkbox" name="edit_delete[] " class="text-input" value="<?php echo $row['importer_id'] ?>">
-                                                                <input type="checkbox" name="edit_id" value="<?php echo $row['importer_id'] ?>">
                                                             </td>
 
                                                             <td class="font"><?php echo $no ?></td>
