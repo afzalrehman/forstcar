@@ -30,7 +30,7 @@
                         <div class="collapse " id="collapseLayouts1" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link hover  " href="./users.php">User Add</a>
-                                <a class="nav-link hover " href="./uservewi.php">User Vewi</a>
+                                <a class="nav-link hover " href="./uservewi.php">User view</a>
 
                             </nav>
                         </div>
