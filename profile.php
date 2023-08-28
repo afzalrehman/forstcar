@@ -28,6 +28,12 @@ if ($result) {
 if (isset($_POST['submit'])) {
     $user_fullname = mysqli_real_escape_string($conn, $_POST['user_fullname']);
     $user_contact = mysqli_real_escape_string($conn, $_POST['user_contact']);
+
+    if (isset($_FILES['user_image'])) {
+        echo "<pre>";
+        print_r($_FILES);
+        echo " </pre>";
+    }
     // $user_image = $_FILES['user_image'];
 
     // $imagefilename = $user_image['name'];
@@ -132,7 +138,7 @@ if (isset($_POST['submit'])) {
                     <div class="card  my-5 mein-card mb-5">
                         <h3 class=" font-inter text-center">PROFILE</h3>
                         <div class="container-fluid course-card">
-                            <form action="" method="POST">
+                            <form action="" method="POST" enctype="multipart/form-data">
                                 <div class="row my-5 ">
                                     <div class="col-lg-6">
 
