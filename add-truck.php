@@ -238,7 +238,7 @@ if (isset($_POST['submit'])) {
 
                                                         <div class="col-lg-4 mt-3">
                                                             <p>Body Length in Feet</p>
-                                                            <input class="form-check-input bodyFeetCheck" type="checkbox" name="body_length" value="14">
+                                                            <input class="form-check-input bodyFeetCheck" type="checkbox" checked name="body_length" value="14">
                                                             <label class="form-check-label" for="bodyFeetCheck">
                                                                 14
                                                             </label>
@@ -259,7 +259,7 @@ if (isset($_POST['submit'])) {
                                                         <div class="col-lg-4 mt-3">
                                                             <p>Refrigeration</p>
                                                             <div class="form-check">
-                                                                <input class="form-check-input refriCheck" type="checkbox" name="refrigeration" value="Low Temp - IceCream/Frozen">
+                                                                <input class="form-check-input refriCheck" type="checkbox" checked name="refrigeration" value="Low Temp - IceCream/Frozen">
                                                                 <label class="form-check-label" for="refriCheck">
                                                                     Low Temp - IceCream/Frozen
                                                                 </label>
@@ -275,7 +275,7 @@ if (isset($_POST['submit'])) {
                                                         <div class="col-lg-4 mt-3">
                                                             <p>Rear Door</p>
                                                             <div class="form-check">
-                                                                <input class="form-check-input rearCheck" type="checkbox" name="body_rear_door" value="Center Door">
+                                                                <input class="form-check-input rearCheck" type="checkbox" checked name="body_rear_door" value="Center Door">
                                                                 <label class="form-check-label" for="flexCheckDefault">
                                                                     Center Door
                                                                 </label>
@@ -297,13 +297,13 @@ if (isset($_POST['submit'])) {
                                                         <div class="col-lg-4 mt-5">
                                                             <p>Side Door</p>
                                                             <div class="form-check">
-                                                                <input class="form-check-input sideCheck" type="radio" name="body_side_door" value="Yes">
+                                                                <input class="form-check-input sideCheck" type="checkbox" checked name="body_side_door" value="Yes">
                                                                 <label class="form-check-label" for="sideCheck">
                                                                     Yes
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input sideCheck" type="radio" name="body_side_door" value="No">
+                                                                <input class="form-check-input sideCheck" type="checkbox" name="body_side_door" value="No">
                                                                 <label class="form-check-label" for="sideCheck">
                                                                     No
                                                                 </label>
@@ -313,13 +313,13 @@ if (isset($_POST['submit'])) {
                                                         <div class="col-lg-4 mt-5">
                                                             <p>E-Track (Tall Body Cargo Control)</p>
                                                             <div class="form-check">
-                                                                <input class="form-check-input eTrackCheck" type="radio" name="e_track" value="Yes">
+                                                                <input class="form-check-input eTrackCheck" type="checkbox" checked name="e_track" value="Yes">
                                                                 <label class="form-check-label" for="e_track">
                                                                     Yes
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input eTrackCheck" type="radio" name="e_track" value="No">
+                                                                <input class="form-check-input eTrackCheck" type="checkbox" name="e_track" value="No">
                                                                 <label class="form-check-label" for="e_track">
                                                                     No
                                                                 </label>
@@ -329,7 +329,7 @@ if (isset($_POST['submit'])) {
                                                         <div class="col-lg-4 mt-5">
                                                             <p>Floor</p>
                                                             <div class="form-check">
-                                                                <input class="form-check-input floorCheck" type="checkbox" name="floor" value="Non-Slip Textured">
+                                                                <input class="form-check-input floorCheck" type="checkbox" checked name="floor" value="Non-Slip Textured">
                                                                 <label class="form-check-label" for="floor">
                                                                     Non-Slip Textured
                                                                 </label>
@@ -360,7 +360,7 @@ if (isset($_POST['submit'])) {
                                                         <div class="col-lg-4 mt-3">
                                                             <p>Temperature</p>
                                                             <div class="form-check">
-                                                                <input class="form-check-input temperaCheck" type="checkbox" name="body_temp" value="Low & Mid Temp">
+                                                                <input class="form-check-input temperaCheck" type="checkbox" checked name="body_temp" value="Low & Mid Temp">
                                                                 <label class="form-check-label" for="body_temp">
                                                                     Low & Mid Temp
                                                                 </label>
@@ -384,37 +384,37 @@ if (isset($_POST['submit'])) {
                                                         <div class="col-lg-4 mt-5">
                                                             <p>Accessories</p>
                                                             <div class="form-check">
-                                                                <input class="form-check-input accessorCheck" type="radio" name="body_accessories" value="Shelving">
+                                                                <input class="form-check-input accessorCheck" type="checkbox" checked name="body_accessories" value="Shelving">
                                                                 <label class="form-check-label" for="flexRadioDefault5">
                                                                     Shelving
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input accessorCheck" type="radio" name="body_accessories" value="Grab Handles">
+                                                                <input class="form-check-input accessorCheck" type="checkbox" name="body_accessories" value="Grab Handles">
                                                                 <label class="form-check-label" for="flexRadioDefault6">
                                                                     Grab Handles
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input accessorCheck" type="radio" name="body_accessories" value="Roll Carts">
+                                                                <input class="form-check-input accessorCheck" type="checkbox" name="body_accessories" value="Roll Carts">
                                                                 <label class="form-check-label" for="flexRadioDefault6">
                                                                     Roll Carts
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input accessorCheck" type="radio" name="body_accessories" value="Steps">
+                                                                <input class="form-check-input accessorCheck" type="checkbox" name="body_accessories" value="Steps">
                                                                 <label class="form-check-label" for="accessorCheck">
                                                                     Steps
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input accessorCheck" type="radio" name="body_accessories" value="Dolly Rack">
+                                                                <input class="form-check-input accessorCheck" type="checkbox" name="body_accessories" value="Dolly Rack">
                                                                 <label class="form-check-label" for="body_accessories">
                                                                     Dolly Rack
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input accessorCheck" type="radio" name="body_accessories" value="Remote Compressor">
+                                                                <input class="form-check-input accessorCheck" type="checkbox" name="body_accessories" value="Remote Compressor">
                                                                 <label class="form-check-label" for="body_accessories">
                                                                     Remote Compressor
                                                                 </label>
@@ -474,7 +474,7 @@ if (isset($_POST['submit'])) {
                                                             </div>
                                                             <div class="mb-3">
                                                                 <p>Fuel Type</p>
-                                                                <input class="form-check-input fuelCheck" type="checkbox" name="fuel_Type" value="Gas">
+                                                                <input class="form-check-input fuelCheck" type="checkbox" checked name="fuel_Type" value="Gas">
                                                                 <label class="form-check-label" for="fuelCheck">
                                                                     Gas
                                                                 </label>
