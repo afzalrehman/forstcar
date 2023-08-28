@@ -400,14 +400,17 @@ if (isset($_POST['update'])) {
                                         </div>
                                         <div class="col-lg-9 col-md-9 py-3 ">
                                             <div class="btn-edit-delete1 text-end px-1">
-                                                <button type="submit" name="delete_btn">
-                                                    <span class="fa-regular fa-trash-can export-btn delete">
-                                                    </span></button>
-                                                <button type="submit" name="edit"><span class="fa-solid fa-pen-to-square edit export-btn"></span></button>
+                                            <button type="submit" class="export-btn delete" name="delete_btn">
+                                                    <span class="fa-regular fa-trash-can "></span>
+                                                </button>
+                                                <button type="submit" class="edit export-btn" name="edit">
+                                                    <span class="fa-solid fa-pen-to-square"></span>
+                                                </button>
                                                 <a href="">
                                                     <span class="fa-solid fa-cloud-arrow-down export export-btn"> </span>
                                                 </a>
-                                                <a href="excel.php">Download</a>
+                                               
+                                                
                                             </div>
                                         </div>
                                     </div>
