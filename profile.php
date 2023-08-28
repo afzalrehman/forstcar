@@ -12,13 +12,13 @@ if (!isset($_SESSION['user_fullname'])) {
 // SELECT QUERY
 $sql = "SELECT * FROM `admin_users` WHERE user_id";
 $result = mysqli_query($conn, $sql);
-
+$user = array();
 if ($result) {
     // Fetch the data
     $row = mysqli_fetch_assoc($result);
-    $user['user_fullname'] = $row['user_fullname'];
+    $_SESSION['user_fullname'] = $row['user_fullname'];
     $user['user_contact'] = $row['user_contact'];
-    $user['user_image'] = $row['user_image'];
+    // $user['user_image'] = $row['user_image'];
 } else {
     echo "Error: " . mysqli_error($conn);
 }
@@ -46,15 +46,16 @@ if (isset($_POST['submit'])) {
     //     $upload_image = 'upload_image/' . $imagefilename;
     //     move_uploaded_file($imagefiletemp, $upload_image);
 
-        $update_query = "UPDATE `admin_users` SET `user_fullname` = '$user_fullname', `user_contact` = '$user_contact'
+    $update_query = "UPDATE `admin_users` SET `user_fullname` = '$user_fullname', `user_contact` = '$user_contact'
     WHERE user_id";
 
-        if (mysqli_query($conn, $update_query)) {
-            echo "Record updated successfully!";
-        } else {
-            echo "Error updating record: " . mysqli_error($conn);
-        }
+    if (mysqli_query($conn, $update_query)) {
+        echo "Record updated successfully!";
+        header("location:profile.php");
+    } else {
+        echo "Error updating record: " . mysqli_error($conn);
     }
+}
 // }
 
 
@@ -131,14 +132,14 @@ if (isset($_POST['submit'])) {
                     <div class="card  my-5 mein-card mb-5">
                         <h3 class=" font-inter text-center">PROFILE</h3>
                         <div class="container-fluid course-card">
-                            <form action="./profile.php" method="POST">
+                            <form action="" method="POST">
                                 <div class="row my-5 ">
                                     <div class="col-lg-6">
 
                                         <div class="in">
                                             <label for="user_fullname">You Full Name</label>
-                                            <input type="text" name="user_fullname" id="user_fullname" class="inputDesign w-100 py-2  mb-3" placeholder="User FullName" value="<?php if (isset($user['user_fullname'])) {
-                                                                                                                                                                                    echo $user['user_fullname'];
+                                            <input type="text" name="user_fullname" id="user_fullname" class="inputDesign w-100 py-2  mb-3" placeholder="User FullName" value="<?php if (isset($_SESSION['user_fullname'])) {
+                                                                                                                                                                                    echo $_SESSION['user_fullname'];
                                                                                                                                                                                 } ?>">
 
                                         </div>
