@@ -2,7 +2,7 @@
 
 session_start();
 include "config.php";
-
+// =============Insert Qury=============
 if (!isset($_SESSION['user_fullname'])) {
     echo "You are logged out";
     header('location:login.php');
@@ -74,13 +74,6 @@ if (isset($_POST['submit'])) {
     //     $emty['custom'] = 'Please Fill The Company cuctom';
     // }
     else {
-        // $query = "SELECT * FROM importer_details WHERE company_name= '$name'";
-        // $sql = mysqli_query($conn, $query);
-        // $row = mysqli_fetch_row($sql);
-        // if ($row > 0) {
-        //     // Duplicate data found
-        //     $warning['WARNING'] = "Data already exists.";
-
         $insert = " INSERT INTO importer_details(`company_name`, `company_contact`,`company_address`, `company_city`, `company_state`,  `company_zipcode`,`company_telephone`, `company_email`, `company_direct`, 
             `company_port_of_entry`,`company_vessel_detail`,`company_trucking`,`company_misc`,`total_cost`, `custom_frieght` ,`added_on`)
             VALUES('$company_name', '$contact', '$address', '$company_city', '$company_state', '$company_zipcode','$phone', '$email', '$direct','$port','$vessel','$trucking','$misc','$total_cost','$custom', NOW())";
@@ -96,18 +89,16 @@ if (isset($_POST['submit'])) {
 ?>
 
 <?php
+
+// =============Delete Qury=============
 if (isset($_POST['delete_btn'])) {
     if (!isset($_POST['edit_delete']) || empty($_POST['edit_delete'])) {
         $warning['chackbox'] = "Please check the checkboxes to delete";
-
-        // You might want to redirect back to the previous page or handle this case accordingly.
     } else {
         $all_id = $_POST['edit_delete'];
         $extrext_id = implode(',', $all_id);
-
         $delete_query = "DELETE FROM importer_details WHERE importer_id  IN ($extrext_id)";
         $sql = mysqli_query($conn, $delete_query);
-
         if ($sql) {
             $delete['Delete'] = "Data Delete Successfully!";
         } else {
@@ -116,25 +107,14 @@ if (isset($_POST['delete_btn'])) {
     }
 }
 
-
-// Initialize variables
+// =============Edit Qury=============
 $edit = array();
-// Check if the edit button is clicked
 if (isset($_POST['edit'])) {
-    // Check if at least one checkbox is checked
     if (isset($_POST['edit_delete']) && !empty($_POST['edit_delete']) && count($_POST['edit_delete']) == 1) {
-        // Get the selected ID
         $selectedId = $_POST['edit_delete'][0];
-
-        // Establish a database connection (replace with your database connection code)
-
-
-        // Prepare and execute SQL query
         $sql = "SELECT * FROM importer_details WHERE importer_id";
         $result = mysqli_query($conn, $sql);
-
         if ($result) {
-            // Fetch the data
             $row = mysqli_fetch_assoc($result);
             $edit['edit_company_name'] = $row['company_name'];
             $edit['company_contact'] = $row['company_contact'];
@@ -154,50 +134,46 @@ if (isset($_POST['edit'])) {
         } else {
             echo "Error: " . mysqli_error($conn);
         }
-
-        // Close the database connection
         mysqli_close($conn);
     } else {
         $warning['chackbox'] = 'Please check exactly one checkbox!';
     }
 }
 ?>
-
-
-<!-- =========================update====================== -->
+<!--  =============update qury============= -->
 <?php
-if (isset($_POST['update'])) {
-    $company_name = mysqli_real_escape_string($conn, $_POST['company_name']);
-    $company_address = mysqli_real_escape_string($conn, $_POST['address']);
-    $phone = mysqli_real_escape_string($conn, $_POST['phone']);
-    $company_contact = mysqli_real_escape_string($conn, $_POST['contact']);
-    $company_city = mysqli_real_escape_string($conn, $_POST['company_city']);
-    $company_state = mysqli_real_escape_string($conn, $_POST['company_state']);
-    $direct = mysqli_real_escape_string($conn, $_POST['direct']);
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $company_zipcode = mysqli_real_escape_string($conn, $_POST['company_zipcode']);
-    $port = mysqli_real_escape_string($conn, $_POST['port']);
-    $vessel = mysqli_real_escape_string($conn, $_POST['vessel']);
-    $trucking = mysqli_real_escape_string($conn, $_POST['trucking']);
-    $misc = mysqli_real_escape_string($conn, $_POST['misc']);
-    $total_cost = mysqli_real_escape_string($conn, $_POST['total_cost']);
-    $custom = mysqli_real_escape_string($conn, $_POST['custom']);
+// if (isset($_POST['update'])) {
+//     $company_name = mysqli_real_escape_string($conn, $_POST['company_name']);
+//     $company_address = mysqli_real_escape_string($conn, $_POST['address']);
+//     $phone = mysqli_real_escape_string($conn, $_POST['phone']);
+//     $company_contact = mysqli_real_escape_string($conn, $_POST['contact']);
+//     $company_city = mysqli_real_escape_string($conn, $_POST['company_city']);
+//     $company_state = mysqli_real_escape_string($conn, $_POST['company_state']);
+//     $direct = mysqli_real_escape_string($conn, $_POST['direct']);
+//     $email = mysqli_real_escape_string($conn, $_POST['email']);
+//     $company_zipcode = mysqli_real_escape_string($conn, $_POST['company_zipcode']);
+//     $port = mysqli_real_escape_string($conn, $_POST['port']);
+//     $vessel = mysqli_real_escape_string($conn, $_POST['vessel']);
+//     $trucking = mysqli_real_escape_string($conn, $_POST['trucking']);
+//     $misc = mysqli_real_escape_string($conn, $_POST['misc']);
+//     $total_cost = mysqli_real_escape_string($conn, $_POST['total_cost']);
+//     $custom = mysqli_real_escape_string($conn, $_POST['custom']);
 
-    // Prepare and execute an UPDATE query
-    $update_query = "UPDATE `importer_details` SET `company_name`='$company_name',`company_contact`='$company_contact',`company_address`='$company_address',
-    `company_city`='$company_city',`company_state`='$company_state',`company_zipcode`='$company_zipcode',`company_telephone`='$phone',`company_email`='$email',
-    `company_direct`='$direct',`company_port_of_entry`='$port',`company_vessel_detail`='$vessel',`company_trucking`='$trucking',`company_misc`='$misc',
-    `total_cost`='$total_cost',`custom_frieght`='$custom', `updated_on`=NOW(),`updated_by`='Admin' 
-    WHERE importer_id";
+//     // Prepare and execute an UPDATE query
+//     $update_query = "UPDATE `importer_details` SET `company_name`='$company_name',`company_contact`='$company_contact',`company_address`='$company_address',
+//     `company_city`='$company_city',`company_state`='$company_state',`company_zipcode`='$company_zipcode',`company_telephone`='$phone',`company_email`='$email',
+//     `company_direct`='$direct',`company_port_of_entry`='$port',`company_vessel_detail`='$vessel',`company_trucking`='$trucking',`company_misc`='$misc',
+//     `total_cost`='$total_cost',`custom_frieght`='$custom', `updated_on`=NOW(),`updated_by`='Admin' 
+//     WHERE importer_id";
 
-    if (mysqli_query($conn, $update_query)) {
-        $succses['succses'] = 'Data Updated Successfully';
-    } else {
-        $warning['chackbox'] = 'Data Is Not Updated.';
-    }
+//     if (mysqli_query($conn, $update_query)) {
+//         $succses['succses'] = 'Data Updated Successfully';
+//     } else {
+//         $warning['chackbox'] = 'Data Is Not Updated.';
+//     }
 
-    // Close the database connection
-}
+//     // Close the database connection
+// }
 
 ?>
 
@@ -225,7 +201,6 @@ if (isset($_POST['update'])) {
         input[type=number]::-webkit-inner-spin-button,
         input[type=number]::-webkit-outer-spin-button {
             -webkit-appearance: none !important;
-            /* margin: 0; */
         }
     </style>
 </head>
@@ -280,10 +255,6 @@ if (isset($_POST['update'])) {
                                 <h3 class=" font-inter text-center">Add New Company</h3>
                                 <div class="row mt-5 ">
                                     <div class="col-lg-6  ">
-                                        <!-- <div class="in py-3">
-                                            <input type="date" class=" input w-100 py-2 mt-3" placeholder="Date">
-                                        </div> -->
-
                                         <div class="in">
                                             <input type="text" name="company_name" id="name" class=" w-100 py-2 mt-3" placeholder="Company Name" value="<?php
                                                                                                                                                         if (isset($edit['edit_company_name'])) {
@@ -393,8 +364,6 @@ if (isset($_POST['update'])) {
                                 </div>
 
                             </div>
-
-
                             <div class="col-lg-12 mt-5 ">
                                 <div class="card ">
                                     <div class="row">
@@ -481,7 +450,7 @@ if (isset($_POST['update'])) {
                                                             $value =  $row['importer_id'];
                                                             ?>
                                                             <td>
-                                                                <input type="checkbox"<?php  ?>   name="edit_delete[] " class="text-input" value="<?php echo $value;  ?>">
+                                                                <input type="checkbox" <?php  ?> name="edit_delete[] " class="text-input" value="<?php echo $value;  ?>">
                                                             </td>
 
                                                             <td class="font"><?php echo $no ?></td>
@@ -544,8 +513,6 @@ if (isset($_POST['update'])) {
     <script src="assets/demo/chart-bar-demo.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
     <script src="js/datatables-simple-demo.js"></script>
-
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -555,7 +522,6 @@ if (isset($_POST['update'])) {
                 icon.addEventListener("click", function() {
                     var checkboxId = this.getAttribute("data-checkbox-id");
                     var checkbox = document.querySelector('input[type="checkbox"][value="' + checkboxId + '"]');
-
                     if (checkbox) {
                         checkbox.checked = !checkbox.checked;
                     }
