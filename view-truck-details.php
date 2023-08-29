@@ -9,33 +9,7 @@ if (!isset($_SESSION['user_fullname'])) {
 $succses = array();
 $warning = array();
 
-//  ===============DElete qurey=============== 
-// if (isset($_POST['delete_btn'])) {
-//     if (!isset($_POST['chack_btn_delete']) || empty($_POST['chack_btn_delete'])) {
-//         $warning['warning'] = "Please check the checkboxes to delete";
-
-//         // You might want to redirect back to the previous page or handle this case accordingly.
-//     } else {
-//         $all_id = $_POST['chack_btn_delete'];
-//         $extrext_id = implode(',', $all_id);
-
-//         // Delete from the first table
-//         $delete_query_body = "DELETE FROM `body_details` WHERE body_id IN ($extrext_id)";
-//         $sql_body = mysqli_query($conn, $delete_query_body);
-
-//         // Delete from the second table
-//         $delete_query_eutectic = "DELETE FROM `eutectic_details` WHERE eutectic_id IN ($extrext_id)";
-//         $sql_eutectic = mysqli_query($conn, $delete_query_eutectic);
-
-//         if ($sql_body && $sql_eutectic) {
-//             $success['success'] = 'Data Delete Successfully!';
-//         } else {
-//             $warning['warning'] = 'Failed to delete data!';
-//         }
-//     }
-// }
-
-
+// <!-- =========================update Query====================== -->
 if (isset($_POST['delete_btn'])) {
     if (isset($_POST['chack_btn_delete']) || !empty($_POST['chack_btn_delete'])) {
         $model_nos = $_POST['chack_btn_delete'];
@@ -54,6 +28,92 @@ if (isset($_POST['delete_btn'])) {
         $warning['warning'] = "Please check the checkboxes to delete.";
     }
 }
+
+
+// // <!-- =========================SELECT QUERY====================== -->
+// $edit = array();
+// // Check if the edit button is clicked
+// if (isset($_POST['edit'])) {
+//     // Check if at least one checkbox is checked
+//     if (isset($_POST['edit_delete']) && !empty($_POST['edit_delete']) && count($_POST['edit_delete']) == 1) {
+//         // Get the selected ID
+//         $selectedId = $_POST['edit_delete'][0];
+
+//         // Establish a database connection (replace with your database connection code)
+
+
+//         // Prepare and execute SQL query
+//         $selectsql = "SELECT * FROM `body_details`
+//         INNER JOIN `eutectic_details` ON body_details.model_no = eutectic_details.model_no";
+//         $resultselect = mysqli_query($conn, $selectsql);
+
+//         if ($resultselect) {
+//             // Fetch the data
+//             $row = mysqli_fetch_assoc($resultselect);
+//             $edit['model_no'] = $row['model_no'];
+//             $edit['year'] = $row['year'];
+//             $edit['fc_body'] = $row['fc_body'];
+//             $edit['body_length'] = $row['body_length'];
+//             $edit['body_dimension'] = $row['body_dimension'];
+//             $edit['body_side_door'] = $row['body_side_door'];
+//             $edit['body_rear_door'] = $row['body_rear_door'];
+//             $edit['body_weight'] = $row['body_weight'];
+//             $edit['body_volume'] = $row['body_volume'];
+//             $edit['body_temp'] = $row['body_temp'];
+//             $edit['floor'] = $row['floor'];
+//             $edit['e_track'] = $row['e_track'];
+//             $edit['e_plate'] = $row['e_plate'];
+//             $edit['body_accessories'] = $row['body_accessories'];
+//             $edit['gvwr'] = $row['gvwr'];
+//             $edit['wbl'] = $row['wbl'];
+//             $edit['cal'] = $row['cal'];
+//             $edit['no_of_units'] = $row['no_of_units'];
+//             $edit['manufactured_on'] = $row['manufactured_on'];
+//             $edit['chassis_frame'] = $row['chassis_frame'];
+//             $edit['cost_quoted'] = $row['cost_quoted'];
+//             $edit['misc'] = $row['misc'];
+//             $edit['eutectic_plates'] = $row['eutectic_plates'];
+//             $edit['refrigeration'] = $row['refrigeration'];
+//             $edit['additional_details'] = $row['additional_details'];
+//             $edit['special_requirements'] = $row['special_requirements'];
+//             $edit['fuel_Type'] = $row['fuel_Type'];
+//             $edit['unit_Custom'] = $row['unit_Custom'];
+//             $edit['condensor'] = $row['condensor'];
+//             $edit['condensor_unit'] = $row['condensor_unit'];
+//             $edit['power'] = $row['power'];
+//             $edit['refrigerant'] = $row['refrigerant'];
+//             $edit['compressor'] = $row['compressor'];
+//             $edit['volt'] = $row['volt'];
+//             $edit['co2_eq'] = $row['co2_eq'];
+//             $edit['press_max'] = $row['press_max'];
+//             $edit['decible'] = $row['decible'];
+//             $edit['production_date'] = $row['production_date'];
+//             $edit['model_no'] = $row['model_no'];
+//             $edit['GWP'] = $row['GWP'];
+//             $edit['KG/LB'] = $row['KG/LB'];
+//             $edit['oil'] = $row['oil'];
+//             $edit['pressmen'] = $row['pressmen'];
+//             $edit['export'] = $row['export'];
+//             $edit['disp_m3/h'] = $row['disp_m3/h'];
+//             $edit['moA/Amp'] = $row['moA/Amp'];
+//             $edit['Mcc/Amp'] = $row['Mcc/Amp'];
+//             $edit['LRA/Amp'] = $row['LRA/Amp'];
+//             $edit['MRA/Amp'] = $row['MRA/Amp'];
+//             $edit['RLAA/Amp'] = $row['RLAA/Amp'];
+
+//             header('location:add-truck.php');
+        
+//         } else {
+//             echo "Error: " . mysqli_error($conn);
+//         }
+
+//         // Close the database connection
+//         mysqli_close($conn);
+//     } else {
+//         echo '<script>alert("Please check exactly one checkbox!");</script>';
+//     }
+// }
+
 
 
 
@@ -126,11 +186,11 @@ if (isset($_POST['delete_btn'])) {
                                                 <button type="submit" class="export-btn delete" name="delete_btn">
                                                     <span class="fa-regular fa-trash-can "></span>
                                                 </button>
-                                                <button type="submit" class="edit export-btn" name="edit">
+                                                <!-- <button type="submit" class="edit export-btn" name="edit">
                                                     <span class="fa-solid fa-pen-to-square "></span>
-                                                </button>
+                                                </button> -->
                                                 <a href="./exportViewTruckDetails.php">
-                                                    <span class="fa-solid fa-cloud-arrow-down export export-btn"> </span>
+                                                    <span class="fa-solid fa-cloud-arrow-down export export-btn" style="padding-top: 10px;"> </span>
                                                 </a>
                                             </div>
                                         </div>
@@ -190,7 +250,7 @@ if (isset($_POST['delete_btn'])) {
                                                         <th>press_max<i class="fa-solid fa-arrow-down px-2"></i></th>
                                                         <th>decible<i class="fa-solid fa-arrow-down px-2"></i></th>
                                                         <th>production_date<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>model_no <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <!-- <th>model_no <i class="fa-solid fa-arrow-down px-2"></i></th> -->
                                                         <th>GWP<i class="fa-solid fa-arrow-down px-2"></i></th>
                                                         <th>KG/LB<i class="fa-solid fa-arrow-down px-2"></i></th>
                                                         <th>oil<i class="fa-solid fa-arrow-down px-2"></i></th>
@@ -225,7 +285,7 @@ if (isset($_POST['delete_btn'])) {
                                                                 // Assuming you have fetched data from both tables into $row1 and $row2
                                                                 $value = $row['body_id'] . '-' . $row['eutectic_id'];
                                                                 ?>
-                                                                <td><input type="checkbox" name="chack_btn_delete[]" class="text-input" value="<?php echo $value; ?>"></td>
+                                                                <td><input type="checkbox" name="edit_delete[]" class="text-input" value="<?php echo $value; ?>"></td>
                                                                 <td class="font"><?php echo $no ?></td>
                                                                 <td><?php echo $row['model_no']; ?></td>
                                                                 <td><?php echo $row['year']; ?></td>
@@ -271,7 +331,7 @@ if (isset($_POST['delete_btn'])) {
                                                                 <td><?php echo $row['press_max']; ?></td>
                                                                 <td><?php echo $row['decible']; ?></td>
                                                                 <td><?php echo $row['production_date']; ?></td>
-                                                                <td><?php echo $row['model_no']; ?></td>
+                                                                <!-- <td><?php echo $row['model_no']; ?></td> -->
                                                                 <td><?php echo $row['GWP']; ?></td>
                                                                 <td><?php echo $row['KG/LB']; ?></td>
                                                                 <td><?php echo $row['oil']; ?></td>
@@ -288,8 +348,7 @@ if (isset($_POST['delete_btn'])) {
                                                     <?php
                                                             $no = $no + 1;
                                                         }
-                                                    }
-                                                    else {
+                                                    } else {
                                                         echo "<tr><td class='text-start text-danger' colspan='40'>No Insert Data Please <a href='./add-truck.php'>Add Truck Details</a>.</td></tr>";
                                                     }
 
