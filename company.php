@@ -12,7 +12,7 @@ $warning = array();
 $succses = array();
 $delete = array();
 if (isset($_POST['submit'])) {
-    $name = mysqli_real_escape_string($conn, $_POST['name']);
+    $company_name = mysqli_real_escape_string($conn, $_POST['company_name']);
     $address = mysqli_real_escape_string($conn, $_POST['address']);
     $phone = mysqli_real_escape_string($conn, $_POST['phone']);
     $contact = mysqli_real_escape_string($conn, $_POST['contact']);
@@ -28,8 +28,8 @@ if (isset($_POST['submit'])) {
     $total_cost = mysqli_real_escape_string($conn, $_POST['total_cost']);
     $custom = mysqli_real_escape_string($conn, $_POST['custom']);
 
-    if (empty($name)) {
-        $emty['name'] = 'Please Fill The Company Name';
+    if (empty($company_name)) {
+        $emty['company_name'] = 'Please Fill The Company Name';
     }
     // if (empty($address)) {
     //     $emty['address'] = 'Please Fill The Company address';
@@ -83,12 +83,13 @@ if (isset($_POST['submit'])) {
 
         $insert = " INSERT INTO importer_details(`company_name`, `company_contact`,`company_address`, `company_city`, `company_state`,  `company_zipcode`,`company_telephone`, `company_email`, `company_direct`, 
             `company_port_of_entry`,`company_vessel_detail`,`company_trucking`,`company_misc`,`total_cost`, `custom_frieght` ,`added_on`)
-            VALUES('$name', '$contact', '$address', '$company_city', '$company_state', '$company_zipcode','$phone', '$email', '$direct','$port','$vessel','$trucking','$misc','$total_cost','$custom', NOW())";
+            VALUES('$company_name', '$contact', '$address', '$company_city', '$company_state', '$company_zipcode','$phone', '$email', '$direct','$port','$vessel','$trucking','$misc','$total_cost','$custom', NOW())";
         $insert_sql = mysqli_query($conn, $insert);
 
         if ($insert_sql) {
             $succses['succses'] = 'insert data sucsses';
         }
+        $warning['chackbox'] = 'Data Is Not Success';
     }
 }
 
@@ -114,6 +115,8 @@ if (isset($_POST['delete_btn'])) {
         }
     }
 }
+
+
 // Initialize variables
 $edit = array();
 // Check if the edit button is clicked
@@ -127,7 +130,7 @@ if (isset($_POST['edit'])) {
 
 
         // Prepare and execute SQL query
-        $sql = "SELECT * FROM importer_details WHERE importer_id = $selectedId";
+        $sql = "SELECT * FROM importer_details WHERE importer_id";
         $result = mysqli_query($conn, $sql);
 
         if ($result) {
@@ -148,7 +151,6 @@ if (isset($_POST['edit'])) {
             $edit['company_misc'] = $row['company_misc'];
             $edit['total_cost'] = $row['total_cost'];
             $edit['custom_frieght'] = $row['custom_frieght'];
-            
         } else {
             echo "Error: " . mysqli_error($conn);
         }
@@ -156,7 +158,7 @@ if (isset($_POST['edit'])) {
         // Close the database connection
         mysqli_close($conn);
     } else {
-        echo '<script>alert("Please check exactly one checkbox!");</script>';
+        $warning['chackbox'] = 'Please check exactly one checkbox!';
     }
 }
 ?>
@@ -164,39 +166,37 @@ if (isset($_POST['edit'])) {
 
 <!-- =========================update====================== -->
 <?php
-// $edit_company_name = "";
-// $edit_company_contact = "";
 if (isset($_POST['update'])) {
-    // Assuming you have already retrieved the data you want to update
-    $edit_company_name = $_POST['name'];
-    $edit_company_contact = $_POST['contact'];
-    // Add other fields as needed
-
-    // Get the selected ID
-    // $selectedId = $_POST['edit_id']; // Add this input field to your HTML form
-
-    // Establish a database connection (replace with your database connection code)
-    // $conn = mysqli_connect("localhost", "root", "", "forstcarusa");
-
-    // if (!$conn) {
-    //     die("Connection failed: " . mysqli_connect_error());
-    // }
+    $company_name = mysqli_real_escape_string($conn, $_POST['company_name']);
+    $company_address = mysqli_real_escape_string($conn, $_POST['address']);
+    $phone = mysqli_real_escape_string($conn, $_POST['phone']);
+    $company_contact = mysqli_real_escape_string($conn, $_POST['contact']);
+    $company_city = mysqli_real_escape_string($conn, $_POST['company_city']);
+    $company_state = mysqli_real_escape_string($conn, $_POST['company_state']);
+    $direct = mysqli_real_escape_string($conn, $_POST['direct']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $company_zipcode = mysqli_real_escape_string($conn, $_POST['company_zipcode']);
+    $port = mysqli_real_escape_string($conn, $_POST['port']);
+    $vessel = mysqli_real_escape_string($conn, $_POST['vessel']);
+    $trucking = mysqli_real_escape_string($conn, $_POST['trucking']);
+    $misc = mysqli_real_escape_string($conn, $_POST['misc']);
+    $total_cost = mysqli_real_escape_string($conn, $_POST['total_cost']);
+    $custom = mysqli_real_escape_string($conn, $_POST['custom']);
 
     // Prepare and execute an UPDATE query
-    $update_query = "UPDATE importer_details SET 
-        company_name = '$edit_company_name',
-        company_contact = '$edit_company_contact'
-        -- Add other fields here
-        WHERE importer_id";
+    $update_query = "UPDATE `importer_details` SET `company_name`='$company_name',`company_contact`='$company_contact',`company_address`='$company_address',
+    `company_city`='$company_city',`company_state`='$company_state',`company_zipcode`='$company_zipcode',`company_telephone`='$phone',`company_email`='$email',
+    `company_direct`='$direct',`company_port_of_entry`='$port',`company_vessel_detail`='$vessel',`company_trucking`='$trucking',`company_misc`='$misc',
+    `total_cost`='$total_cost',`custom_frieght`='$custom', `updated_on`=NOW(),`updated_by`='Admin' 
+    WHERE importer_id";
 
     if (mysqli_query($conn, $update_query)) {
-        echo "Record updated successfully!";
+        $succses['succses'] = 'Data Updated Successfully';
     } else {
-        echo "Error updating record: " . mysqli_error($conn);
+        $warning['chackbox'] = 'Data Is Not Updated.';
     }
 
     // Close the database connection
-    mysqli_close($conn);
 }
 
 ?>
@@ -285,17 +285,19 @@ if (isset($_POST['update'])) {
                                         </div> -->
 
                                         <div class="in">
-                                            <input type="text" name="name" id="name" class=" w-100 py-2 mt-3" placeholder="Company Name" value="<?php
-                                                                                                                                                if (isset($edit['edit_company_name'])) {
-                                                                                                                                                    echo $edit['edit_company_name'];
-                                                                                                                                                } elseif (isset($emty['name'])) {
-                                                                                                                                                    echo $name;
-                                                                                                                                                } ?>">
-                                            <span class="text-danger fs-6 "><?php if (isset($emty['name'])) echo $emty['name'] ?></span>
+                                            <input type="text" name="company_name" id="name" class=" w-100 py-2 mt-3" placeholder="Company Name" value="<?php
+                                                                                                                                                        if (isset($edit['edit_company_name'])) {
+                                                                                                                                                            echo $edit['edit_company_name'];
+                                                                                                                                                        } elseif (isset($emty['company_name'])) {
+                                                                                                                                                            echo $company_name;
+                                                                                                                                                        } ?>">
+                                            <span class="text-danger fs-6 "><?php if (isset($emty['company_name'])) echo $emty['company_name'] ?></span>
                                         </div>
 
                                         <div class="in">
-                                            <input type="text" name="address" id="address" class=" w-100 py-2 mt-3" placeholder="Address">
+                                            <input type="text" name="address" id="address" class=" w-100 py-2 mt-3" placeholder="Address" value="<?php if (isset($edit['company_address'])) {
+                                                                                                                                                        echo $edit['company_address'];
+                                                                                                                                                    } ?>">
 
                                         </div>
                                         <div class="in">
@@ -401,7 +403,7 @@ if (isset($_POST['update'])) {
                                         </div>
                                         <div class="col-lg-9 col-md-9 py-3 ">
                                             <div class="btn-edit-delete1 text-end px-1">
-                                            <button type="submit" class="export-btn delete" name="delete_btn">
+                                                <button type="submit" class="export-btn delete" name="delete_btn">
                                                     <span class="fa-regular fa-trash-can "></span>
                                                 </button>
                                                 <button type="submit" class="edit export-btn" name="edit">
