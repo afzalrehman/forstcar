@@ -23,7 +23,7 @@ if (isset($_POST['submit'])) {
     $user_password = mysqli_real_escape_string($conn, $_POST['user_password']);
     $user_type = mysqli_real_escape_string($conn, $_POST['user_type']);
     $user_contact = mysqli_real_escape_string($conn, $_POST['user_contact']);
-    $user_image = $_FILES['user_image'];
+    // $user_image = $_FILES['user_image'];
 
     $pass = password_hash($user_password, PASSWORD_BCRYPT);
 
@@ -48,22 +48,22 @@ if (isset($_POST['submit'])) {
     //     $error['user_image'] = "Please Fill image";
     // } else {
 
-        $imagefilename = $user_image['name'];
+        // $imagefilename = $user_image['name'];
 
-        $imagefileerror = $user_image['error'];
+        // $imagefileerror = $user_image['error'];
 
-        $imagefiletemp = $user_image['tmp_name'];
+        // $imagefiletemp = $user_image['tmp_name'];
 
-        $filename_separate = explode('.', $imagefilename);
+        // $filename_separate = explode('.', $imagefilename);
 
-        $file_extension = strtolower(end($filename_separate));
+        // $file_extension = strtolower(end($filename_separate));
 
-        $extension = array('jpeg', 'jpg', 'png');
+        // $extension = array('jpeg', 'jpg', 'png');
 
-        if (in_array($file_extension, $extension)) {
+        // if (in_array($file_extension, $extension)) {
 
-            $upload_image = 'upload_image/' . $imagefilename;
-            move_uploaded_file($imagefiletemp, $upload_image);
+        //     $upload_image = 'upload_image/' . $imagefilename;
+        //     move_uploaded_file($imagefiletemp, $upload_image);
 
 
             $emailquery = "SELECT * FROM admin_users WHERE `user_email` = '$user_email' ";
@@ -82,8 +82,8 @@ if (isset($_POST['submit'])) {
                     $warning['warning'] = 'Contact Number already exists';
                 } else {
 
-                    $insertquery = "INSERT INTO admin_users (`user_fullname`, `user_email`, `user_password`, `user_type`, `user_contact`, `user_image`, `registered_on`,`token`, `is_verified`) 
-            VALUES ('$user_fullname', '$user_email', '$pass', '$user_type', '$user_contact', '$upload_image', NOW(),'$token', 'inactive')";
+                    $insertquery = "INSERT INTO admin_users (`user_fullname`, `user_email`, `user_password`, `user_type`, `user_contact`, `registered_on`,`token`, `is_verified`) 
+            VALUES ('$user_fullname', '$user_email', '$pass', '$user_type', '$user_contact',  NOW(),'$token', 'inactive')";
 
                     $iquery = mysqli_query($conn, $insertquery);
                     if ($iquery) {
@@ -125,7 +125,7 @@ if (isset($_POST['submit'])) {
                 }
             }
         }
-    }
+    // }
 // }
 ?>
 
@@ -267,15 +267,13 @@ if (isset($_POST['submit'])) {
                                                                                     echo $error['user_contact'];
                                                                                 } ?></span>
                                         </div>
-                                        <div class="in">
+                                        <!-- <div class="in">
                                             <input type="file" name="user_image" class="inputDesign w-100 py-2 mt-3" placeholder="Image" value="<?php if (isset($_POST['submit'])) {
                                                                                                                                                     echo $user_image;
                                                                                                                                                 } ?>">
-                                            <span class='fw-bold text-danger '><?php if (isset($error['user_image'])) {
-                                                                                    echo $error['user_image'];
-                                                                                } ?></span>
+                                           
 
-                                        </div>
+                                        </div> -->
                                     </div>
 
 

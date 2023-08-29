@@ -476,8 +476,12 @@ if (isset($_POST['update'])) {
 
                                                     ?>
                                                         <tr>
+                                                            <?php
+                                                            // Assuming you have fetched data from both tables into $row1 and $row2
+                                                            $value =  $row['importer_id'];
+                                                            ?>
                                                             <td>
-                                                                <input type="checkbox" name="edit_delete[] " class="text-input" value="<?php echo $row['importer_id'] ?>">
+                                                                <input type="checkbox"<?php  ?>   name="edit_delete[] " class="text-input" value="<?php echo $value;  ?>">
                                                             </td>
 
                                                             <td class="font"><?php echo $no ?></td>
