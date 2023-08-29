@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-white shadow">
     <!-- Navbar Brand-->
     <a class="navbar-brand ps-3" href="./index.php"><img width="200px" src="assets/img/cropped-frostcar_logo-2-1.png" alt=""></a>

@@ -255,7 +255,9 @@ if (isset($_POST['submit'])) {
                                         </div>
                                         <div class="in">
                                             <label for="user_image">Image</label>
-                                            <input type="file" id="user_image" name="user_image" class="inputDesign w-100 py-2 " placeholder="Image">
+                                            <input type="file" id="user_image" name="user_image" class="inputDesign w-100 py-2 " placeholder="Image" value="<?php if (isset($_SESSION['user_image'])) {
+                                                                                                                                                                echo $_SESSION['user_image'];
+                                                                                                                                                            } ?>">
                                         </div>
                                     </div>
 
