@@ -50,33 +50,54 @@ if (!isset($_SESSION['user_fullname'])) {
                         <li class="breadcrumb-item ">Dashboard</li>
                     </ol>
                     <div class="row">
-
-                        <div class="col-xl-4 col-md-6">
-                            <div class="card mb-4 shadow">
-                                <div class="card-body">Total User</div>
-                                <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <!-- <a class="small text-white stretched-link" href="#"></a> -->
-                                    <!-- <div class="small text-white"><i class="fas fa-angle-right"></i></div> -->
-                                    <span><?php echo getCount('admin_users') ?></span>
+                        <div class="col-xl-4 col-md-6 mb-4">
+                            <div class="card  border-primary h-100 py-2">
+                                <div class="card-body ">
+                                    <div class="row no-gutters  align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs fw-bolder  text-primary text-uppercase mb-1">
+                                                Total User</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo getCount('admin_users') ?></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-user fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-4 col-md-6">
-                            <div class="card   mb-4">
-                                <div class="card-body">Total Company</div>
-                                <div class="card-footer d-flex align-items-center justify-content-between">
-                                <span><?php echo getCount('importer_details') ?></span>                                </div>
+                        <div class="col-xl-4 col-md-6 mb-4">
+                            <div class="card  border-primary h-100 py-2">
+                                <div class="card-body ">
+                                    <div class="row no-gutters  align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs fw-bolder  text-primary text-uppercase mb-1">
+                                                Total Company</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo getCount('importer_details') ?></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-truck fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-xl-4 col-md-6">
-                            <div class="card  mb-4">
-                                <div class="card-body">Total Body Details</div>
-                                <div class="card-footer d-flex align-items-center justify-content-between">
-                                <span><?php echo getCount('body_details') ?></span>                                </div>
+                        <div class="col-xl-4 col-md-6 mb-4">
+                            <div class="card  border-primary h-100 py-2">
+                                <div class="card-body ">
+                                    <div class="row no-gutters  align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs fw-bolder  text-primary text-uppercase mb-1">
+                                                Total Body Details</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo getCount('body_details') ?></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-bo fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                       
-
                     </div>
                     <div class="row">
                         <div class="col-xl-6">

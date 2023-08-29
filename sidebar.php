@@ -37,9 +37,9 @@
 
                     </div>
                 </div>
-                <div class="sb-sidenav-footer">
+                <div class="sb-sidenav-footer bg-primary text-light">
                     <div class="small">Logged in as:</div>
-                    Start Bootstrap
+                    <?php echo $_SESSION['user_fullname']; ?>
                 </div>
             </nav>
         </div>
