@@ -29,11 +29,7 @@ if (isset($_POST['submit'])) {
     $user_fullname = mysqli_real_escape_string($conn, $_POST['user_fullname']);
     $user_contact = mysqli_real_escape_string($conn, $_POST['user_contact']);
 
-    if (isset($_FILES['user_image'])) {
-        echo "<pre>";
-        print_r($_FILES);
-        echo " </pre>";
-    }
+   
     // $user_image = $_FILES['user_image'];
 
     // $imagefilename = $user_image['name'];
@@ -65,7 +61,11 @@ if (isset($_POST['submit'])) {
 // }
 
 
-
+if (isset($_FILES['user_image'])) {
+    echo "<pre>";
+    print_r($_FILES);
+    echo " </pre>";
+}
 
 
 
