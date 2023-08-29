@@ -2,6 +2,7 @@
 
 session_start();
 include "config.php";
+include "function.php";
 
 if (!isset($_SESSION['user_fullname'])) {
     echo "You are logged out";
@@ -51,11 +52,12 @@ if (!isset($_SESSION['user_fullname'])) {
                     <div class="row">
 
                         <div class="col-xl-4 col-md-6">
-                            <div class="card mb-4">
+                            <div class="card mb-4 shadow">
                                 <div class="card-body">Total User</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="#"></a>
+                                    <!-- <a class="small text-white stretched-link" href="#"></a> -->
                                     <!-- <div class="small text-white"><i class="fas fa-angle-right"></i></div> -->
+                                    <span><?php echo getCount('admin_users') ?></span>
                                 </div>
                             </div>
                         </div>
@@ -63,16 +65,14 @@ if (!isset($_SESSION['user_fullname'])) {
                             <div class="card   mb-4">
                                 <div class="card-body">Total Company</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="#">View Details</a>
-                                </div>
+                                <span><?php echo getCount('importer_details') ?></span>                                </div>
                             </div>
                         </div>
                         <div class="col-xl-4 col-md-6">
                             <div class="card  mb-4">
                                 <div class="card-body">Total Body Details</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="#">View Details</a>
-                                </div>
+                                <span><?php echo getCount('body_details') ?></span>                                </div>
                             </div>
                         </div>
                        
