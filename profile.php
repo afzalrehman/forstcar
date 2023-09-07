@@ -125,9 +125,6 @@ if (isset($_POST['submit'])) {
         if (in_array($file_extension, $allowed_extensions)) {
             $upload_path = 'uploads/' . $imagefilename; // Specify the upload directory here
             if (move_uploaded_file($imagefiletemp, $upload_path)) {
-                // File uploaded successfully, now update the database record
-                // $user_id = $_POST['user_id']; // Assuming you have the user's ID from a form field
-                // $user_id = mysqli_real_escape_string($conn, $user_id); // Sanitize the user input
 
                 $update_query = "UPDATE `admin_users` SET `user_fullname` = '$user_fullname', `user_contact` = '$user_contact', `user_image` = '$upload_path' WHERE user_id";
                 // echo "Query: " . $update_query; // Debugging line
