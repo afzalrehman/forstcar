@@ -112,7 +112,7 @@ if (isset($_POST['submit'])) {
 
 
 
-// <!-- =========================update Query====================== -->
+// <!-- =========================delete Query====================== -->
 if (isset($_POST['delete_btn'])) {
     if (isset($_POST['chack_btn_delete']) || !empty($_POST['chack_btn_delete'])) {
         $model_nos = $_POST['chack_btn_delete'];
