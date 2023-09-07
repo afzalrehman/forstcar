@@ -1,7 +1,9 @@
 <?php
 
-session_start();
+
 include "config.php";
+
+session_start();
 // =============Insert Qury=============
 if (!isset($_SESSION['user_fullname'])) {
     echo "You are logged out";
@@ -111,8 +113,10 @@ if (isset($_POST['delete_btn'])) {
 $edit = array();
 if (isset($_POST['edit'])) {
     if (isset($_POST['edit_delete']) && !empty($_POST['edit_delete']) && count($_POST['edit_delete']) == 1) {
-        $selectedId = $_POST['edit_delete'][0];
-        $sql = "SELECT * FROM importer_details WHERE importer_id";
+        // $selectedId = $_POST['edit_delete'][0];
+        $all_id = $_POST['edit_delete'];
+        $extrext_id = implode(',', $all_id);
+        $sql = "SELECT * FROM importer_details WHERE  importer_id  IN ($extrext_id)";
         $result = mysqli_query($conn, $sql);
         if ($result) {
             $row = mysqli_fetch_assoc($result);
@@ -142,40 +146,46 @@ if (isset($_POST['edit'])) {
 ?>
 <!--  =============update qury============= -->
 <?php
-// if (isset($_POST['update'])) {
-//     $company_name = mysqli_real_escape_string($conn, $_POST['company_name']);
-//     $company_address = mysqli_real_escape_string($conn, $_POST['address']);
-//     $phone = mysqli_real_escape_string($conn, $_POST['phone']);
-//     $company_contact = mysqli_real_escape_string($conn, $_POST['contact']);
-//     $company_city = mysqli_real_escape_string($conn, $_POST['company_city']);
-//     $company_state = mysqli_real_escape_string($conn, $_POST['company_state']);
-//     $direct = mysqli_real_escape_string($conn, $_POST['direct']);
-//     $email = mysqli_real_escape_string($conn, $_POST['email']);
-//     $company_zipcode = mysqli_real_escape_string($conn, $_POST['company_zipcode']);
-//     $port = mysqli_real_escape_string($conn, $_POST['port']);
-//     $vessel = mysqli_real_escape_string($conn, $_POST['vessel']);
-//     $trucking = mysqli_real_escape_string($conn, $_POST['trucking']);
-//     $misc = mysqli_real_escape_string($conn, $_POST['misc']);
-//     $total_cost = mysqli_real_escape_string($conn, $_POST['total_cost']);
-//     $custom = mysqli_real_escape_string($conn, $_POST['custom']);
+if (isset($_POST['update'])) {
+        $company_name = mysqli_real_escape_string($conn, $_POST['company_name']);
+        $company_address = mysqli_real_escape_string($conn, $_POST['address']);
+        $phone = mysqli_real_escape_string($conn, $_POST['phone']);
+        $company_contact = mysqli_real_escape_string($conn, $_POST['contact']);
+        $company_city = mysqli_real_escape_string($conn, $_POST['company_city']);
+        $company_state = mysqli_real_escape_string($conn, $_POST['company_state']);
+        $direct = mysqli_real_escape_string($conn, $_POST['direct']);
+        $email = mysqli_real_escape_string($conn, $_POST['email']);
+        $company_zipcode = mysqli_real_escape_string($conn, $_POST['company_zipcode']);
+        $port = mysqli_real_escape_string($conn, $_POST['port']);
+        $vessel = mysqli_real_escape_string($conn, $_POST['vessel']);
+        $trucking = mysqli_real_escape_string($conn, $_POST['trucking']);
+        $misc = mysqli_real_escape_string($conn, $_POST['misc']);
+        $total_cost = mysqli_real_escape_string($conn, $_POST['total_cost']);
+        $custom = mysqli_real_escape_string($conn, $_POST['custom']);
+        $all_id = $_POST['edit_delete'];
+        $extrext_id = implode(',', $all_id);
 
-//     // Prepare and execute an UPDATE query
-//     $update_query = "UPDATE `importer_details` SET `company_name`='$company_name',`company_contact`='$company_contact',`company_address`='$company_address',
-//     `company_city`='$company_city',`company_state`='$company_state',`company_zipcode`='$company_zipcode',`company_telephone`='$phone',`company_email`='$email',
-//     `company_direct`='$direct',`company_port_of_entry`='$port',`company_vessel_detail`='$vessel',`company_trucking`='$trucking',`company_misc`='$misc',
-//     `total_cost`='$total_cost',`custom_frieght`='$custom', `updated_on`=NOW(),`updated_by`='Admin' 
-//     WHERE importer_id";
+        // Prepare and execute an UPDATE query
+        $update_query = "UPDATE `importer_details` SET `company_name`='$company_name',`company_contact`='$company_contact',`company_address`='$company_address',
+    `company_city`='$company_city',`company_state`='$company_state',`company_zipcode`='$company_zipcode',`company_telephone`='$phone',`company_email`='$email',
+    `company_direct`='$direct',`company_port_of_entry`='$port',`company_vessel_detail`='$vessel',`company_trucking`='$trucking',`company_misc`='$misc',
+    `total_cost`='$total_cost',`custom_frieght`='$custom', `updated_on`=NOW(),`updated_by`='Admin' 
+    WHERE importer_id   ='$extrext_id'";
 
-//     if (mysqli_query($conn, $update_query)) {
-//         $succses['succses'] = 'Data Updated Successfully';
-//     } else {
-//         $warning['chackbox'] = 'Data Is Not Updated.';
-//     }
+        if (mysqli_query($conn, $update_query)) {
+            $succses['succses'] = 'Data Updated Successfully';
+        } else {
+            $warning['chackbox'] = 'Data Is Not Updated.';
+        }
 
-//     // Close the database connection
-// }
+        // Close the database connection
+    }
+
+
 
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -447,10 +457,11 @@ if (isset($_POST['edit'])) {
                                                         <tr>
                                                             <?php
                                                             // Assuming you have fetched data from both tables into $row1 and $row2
-                                                            $value =  $row['importer_id'];
+
                                                             ?>
                                                             <td>
-                                                                <input type="checkbox" <?php  ?> name="edit_delete[] " class="text-input" value="<?php echo $value;  ?>">
+                                                                <input type="checkbox" <?php  ?> name="edit_delete[] " class="text-input" value="<?php echo $row['importer_id'];  ?>">
+                                                               
                                                             </td>
 
                                                             <td class="font"><?php echo $no ?></td>
