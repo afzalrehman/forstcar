@@ -108,8 +108,7 @@ if (isset($_POST['delete_btn'])) {
 
 // =============Edit Qury=============
 $edit = array();
-$warning = array();
-$succses = array();
+
 if (isset($_POST['edit'])) {
     if (isset($_POST['edit_delete']) && !empty($_POST['edit_delete']) && count($_POST['edit_delete']) == 1) {
         // $selectedId = $_POST['edit_delete'][0];
@@ -119,6 +118,8 @@ if (isset($_POST['edit'])) {
         $result = mysqli_query($conn, $sql);
         if ($result) {
             $row = mysqli_fetch_assoc($result);
+
+            $edit_importer_id = $row['importer_id'];
             $edit['edit_company_name'] = $row['company_name'];
             $edit['company_contact'] = $row['company_contact'];
             $edit['company_address'] = $row['company_address'];
@@ -142,106 +143,57 @@ if (isset($_POST['edit'])) {
         $warning['chackbox'] = 'Please check exactly one checkbox!';
     }
 }
+
+
+
 ?>
 <!--  =============update qury============= -->
 <?php
-
+// $update_edit_delete = "";
 // if (isset($_POST['update'])) {
-//     if (isset($_POST['edit_delete']) && is_array($_POST['edit_delete'])) {
-//         $update_company_name =  $_POST['company_name'];
-//         $update_company_address =  $_POST['address'];
-//         $update_phone =  $_POST['phone'];
-//         $update_company_contact =  $_POST['contact'];
-//         $update_company_city =  $_POST['company_city'];
-//         $update_company_state =  $_POST['company_state'];
-//         $update_direct =  $_POST['direct'];
-//         $update_email =  $_POST['email'];
-//         $update_company_zipcode =  $_POST['company_zipcode'];
-//         $update_port =  $_POST['port'];
-//         $update_vessel =  $_POST['vessel'];
-//         $update_trucking =  $_POST['trucking'];
-//         $update_misc =  $_POST['misc'];
-//         $update_total_cost =  $_POST['total_cost'];
-//         $update_custom =  $_POST['custom'];
-//         $update_all_id = $_POST['edit_delete'];
+//     // Retrieve updated values and sanitize them.
+//     $update_edit_delete = mysqli_real_escape_string($conn, $_POST['edit_delete']);
+//     $update_company_name = mysqli_real_escape_string($conn, $_POST['company_name']);
+//     $update_company_address = mysqli_real_escape_string($conn, $_POST['address']);
+//     $update_phone = mysqli_real_escape_string($conn, $_POST['phone']);
+//     $update_company_contact = mysqli_real_escape_string($conn, $_POST['contact']);
+//     $update_company_city = mysqli_real_escape_string($conn, $_POST['company_city']);
+//     $update_company_state = mysqli_real_escape_string($conn, $_POST['company_state']);
+//     $update_direct = mysqli_real_escape_string($conn, $_POST['direct']);
+//     $update_email = mysqli_real_escape_string($conn, $_POST['email']);
+//     $update_company_zipcode = mysqli_real_escape_string($conn, $_POST['company_zipcode']);
+//     $update_port = mysqli_real_escape_string($conn, $_POST['port']);
+//     $update_vessel = mysqli_real_escape_string($conn, $_POST['vessel']);
+//     $update_trucking = mysqli_real_escape_string($conn, $_POST['trucking']);
+//     $update_misc = mysqli_real_escape_string($conn, $_POST['misc']);
+//     $update_total_cost = mysqli_real_escape_string($conn, $_POST['total_cost']);
+//     $update_custom = mysqli_real_escape_string($conn, $_POST['custom']);
 
-//         $updat_extrext_id = implode(',', $update_all_id);
+//     // Prepare and execute an UPDATE query
+//     $update_query = "UPDATE importer_details SET 
+//         `company_name` = '$update_company_name',
+//         `company_contact` = '$update_company_contact',
+//         `company_address` = '$update_company_address',
+//         `company_city` = '$update_company_city',
+//         `company_telephone` = '$update_phone',
+//         `company_email` = '$update_email',
+//         `company_direct` = '$update_direct',
+//         `company_zipcode` = '$update_company_zipcode',
+//         `company_port_of_entry` = '$update_port',
+//         `company_vessel_detail` = '$update_vessel',
+//         `company_trucking` = '$update_trucking',
+//         `company_misc` = '$update_misc',
+//         `total_cost` = '$update_total_cost',
+//         `custom_frieght` = '$update_custom'
+//         WHERE importer_id ='$update_edit_delete' ";
 
-//         // Prepare and execute an UPDATE query
-//         $update_query = "UPDATE `importer_details` SET `company_name`='$update_company_name',`company_contact`='$update_company_contact',`company_address`='$update_company_address',
-//     `company_city`='$update_company_city',`company_state`='$update_company_state',`company_zipcode`='$update_company_zipcode',`company_telephone`='$update_phone',`company_email`='$update_email',
-//     `company_direct`='$update_direct',`company_port_of_entry`='$update_port',`company_vessel_detail`='$update_vessel',`company_trucking`='$update_trucking',`company_misc`='$update_misc',
-//     `total_cost`='$update_total_cost',`custom_frieght`='$update_custom', `updated_on`=NOW(),`updated_by`='Admin' 
-//     WHERE importer_id  IN ($updat_extrext_id) ";
-
-//         if (mysqli_query($conn, $update_query)) {
-//             $succses['succses'] = 'Data Updated Successfully';
-//         }
-//     }
-//     // Close the database connection
-// }
-
-// if (isset($_POST['update'])) {
-//     if (isset($_POST['edit_delete']) && is_array($_POST['edit_delete'])) {
-//         // Continue with the update process
-//         $update_company_name = mysqli_real_escape_string($conn, $_POST['company_name']);
-//         // ... (other variable assignments)
-
-//         $update_all_id = $_POST['edit_delete'];
-//         $updat_extrext_id = implode(',', $update_all_id);
-
-//         // Prepare and execute an UPDATE query
-//         $update_query = "UPDATE `importer_details` SET `company_name`='$update_company_name', `other_column`='$other_value' WHERE importer_id IN ($updat_extrext_id)";
-
-//         if (mysqli_query($conn, $update_query)) {
-//             $succses['succses'] = 'Data Updated Successfully';
-//         } 
+//     if (mysqli_query($conn, $update_query)) {
+//         $succses['success'] = 'Data Updated Successfully';
 //     } else {
-//         // Handle the case where $_POST['edit_delete'] is not an array or is not set.
-//         $warning['edit_delete'] = 'Invalid or missing edit_delete data.';
+//         echo "Error updating record: " . mysqli_error($conn);
 //     }
-
-//     // Close the database connection
 // }
 
-if (isset($_POST['update'])) {
-    if (isset($_POST['edit_delete']) && is_array($_POST['edit_delete'])) {
-        // Get updated values from the form fields
-        $update_company_name =  mysqli_real_escape_string($conn, $_POST['company_name']);
-        $update_company_address =  mysqli_real_escape_string($conn, $_POST['address']);
-        // ... (get other updated values)
-        
-        // Ensure that update_company_name is not empty before proceeding
-        if (empty($update_company_name)) {
-            $warning['update'] = 'Company name cannot be empty.';
-        } else {
-            // Continue with the update
-            $update_all_id = $_POST['edit_delete'];
-            $updat_extrext_id = implode(',', $update_all_id);
-
-            // Prepare and execute an UPDATE query using prepared statement
-            $update_query = "UPDATE `importer_details` SET `company_name`=?, `company_contact`=?, `company_address`=?  WHERE importer_id IN ($updat_extrext_id)";
-            
-            $stmt = mysqli_prepare($conn, $update_query);
-            
-            if ($stmt) {
-                mysqli_stmt_bind_param($stmt,  $update_company_name, $update_company_contact, $update_company_address, );
-                if (mysqli_stmt_execute($stmt)) {
-                    $succses['succses'] = 'Data Updated Successfully';
-                } else {
-                    error_log("Error: " . mysqli_error($conn));
-                    $warning['update'] = 'An error occurred while updating data.';
-                }
-                mysqli_stmt_close($stmt);
-            } else {
-                error_log("Error: " . mysqli_error($conn));
-                $warning['update'] = 'An error occurred while preparing the update statement.';
-            }
-        }
-    }
-    // Close the database connection
-    mysqli_close($conn);
-}
 ?>
 
 
@@ -287,10 +239,10 @@ if (isset($_POST['update'])) {
                 <div class="container-fluid">
 
                     <?php
-                    if (isset($succses['succses']))
+                    if (isset($succses['success']))
                         echo '
                             <div class="mt-5 alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>@INSERT</strong> ' . $succses['succses'] . '
+                        <strong>@INSERT</strong> ' . $succses['success'] . '
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>';
                     ?>
@@ -338,7 +290,8 @@ if (isset($_POST['update'])) {
                                             <input type="text" name="company_name" id="name" class=" w-100 py-2 mt-3" placeholder="Company Name" value="<?php
                                                                                                                                                         if (isset($edit['edit_company_name'])) {
                                                                                                                                                             echo $edit['edit_company_name'];
-                                                                                                                                                        } elseif (isset($emty['company_name'])) {
+                                                                                                                                                        }
+                                                                                                                                                        if (isset($emty['company_name'])) {
                                                                                                                                                             echo $company_name;
                                                                                                                                                         } ?>">
                                             <span class="text-danger fs-6 "><?php if (isset($emty['company_name'])) echo $emty['company_name'] ?></span>
@@ -529,7 +482,7 @@ if (isset($_POST['update'])) {
 
                                                             ?>
                                                             <td>
-                                                                <input type="checkbox" <?php  ?> name="edit_delete[] " class="text-input" value="<?php echo $row['importer_id'];  ?>">
+                                                                <input type="checkbox" name="edit_delete[] " class="text-input" value="<?php echo $row['importer_id'];  ?>">
 
                                                             </td>
 
