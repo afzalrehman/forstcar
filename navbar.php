@@ -19,7 +19,9 @@
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-dark" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <!-- <i class="text-dark fs-5 fas fa-user fa-fw"></i> -->
-                <img class="rounded-circle" width="30px" src="<?php echo $_SESSION['user_image']; ?>" alt="">
+                <img class="rounded-circle" width="30px" src="<?php 
+                                                                    echo $_SESSION['user_image'];
+                                                                ?>" alt="">
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <!-- <li><a class="dropdown-item" href="#!">Settings</a></li> -->
@@ -37,7 +39,7 @@
                 <li>
                     <hr class="dropdown-divider mt-0 mb-0" />
                 </li>
-                <a class="dropdown-item" href="./logout.php" >
+                <a class="dropdown-item" href="./logout.php">
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                     Logout
                 </a>
