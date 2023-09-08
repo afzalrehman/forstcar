@@ -146,70 +146,76 @@ if (isset($_POST['edit'])) {
     if (isset($_POST['edit_delete']) && !empty($_POST['edit_delete']) && count($_POST['edit_delete']) == 1) {
         // Get the selected ID
         $selectedId = $_POST['edit_delete'][0];
+        // $all_id = $_POST['edit_delete'];
+        // $extrext_id = implode(',', $all_id);
 
         // Establish a database connection (replace with your database connection code)
 
 
         // Prepare and execute SQL query
         $selectsql = "SELECT * FROM `body_details`
-        INNER JOIN `eutectic_details` ON body_details.model_no = eutectic_details.model_no";
+        INNER JOIN `eutectic_details` ON body_details.model_no = eutectic_details.model_no = '$selectedId'";
+
         $resultselect = mysqli_query($conn, $selectsql);
 
         if ($resultselect) {
-            // Fetch the data
-            $row = mysqli_fetch_assoc($resultselect);
-            $edit['model_no'] = $row['model_no'];
-            $edit['year'] = $row['year'];
-            $edit['fc_body'] = $row['fc_body'];
-            $edit['body_length'] = $row['body_length'];
-            $edit['body_dimension'] = $row['body_dimension'];
-            $edit['body_side_door'] = $row['body_side_door'];
-            $edit['body_rear_door'] = $row['body_rear_door'];
-            $edit['body_weight'] = $row['body_weight'];
-            $edit['body_volume'] = $row['body_volume'];
-            $edit['body_temp'] = $row['body_temp'];
-            $edit['floor'] = $row['floor'];
-            $edit['e_track'] = $row['e_track'];
-            $edit['e_plate'] = $row['e_plate'];
-            $edit['body_accessories'] = $row['body_accessories'];
-            $edit['gvwr'] = $row['gvwr'];
-            $edit['wbl'] = $row['wbl'];
-            $edit['cal'] = $row['cal'];
-            $edit['no_of_units'] = $row['no_of_units'];
-            $edit['manufactured_on'] = $row['manufactured_on'];
-            $edit['chassis_frame'] = $row['chassis_frame'];
-            $edit['cost_quoted'] = $row['cost_quoted'];
-            $edit['misc'] = $row['misc'];
-            $edit['eutectic_plates'] = $row['eutectic_plates'];
-            $edit['refrigeration'] = $row['refrigeration'];
-            $edit['additional_details'] = $row['additional_details'];
-            $edit['special_requirements'] = $row['special_requirements'];
-            $edit['fuel_Type'] = $row['fuel_Type'];
-            $edit['unit_Custom'] = $row['unit_Custom'];
-            $edit['condensor'] = $row['condensor'];
-            $edit['condensor_unit'] = $row['condensor_unit'];
-            $edit['power'] = $row['power'];
-            $edit['refrigerant'] = $row['refrigerant'];
-            $edit['compressor'] = $row['compressor'];
-            $edit['volt'] = $row['volt'];
-            $edit['co2_eq'] = $row['co2_eq'];
-            $edit['press_max'] = $row['press_max'];
-            $edit['decible'] = $row['decible'];
-            $edit['production_date'] = $row['production_date'];
-            $edit['model_no'] = $row['model_no'];
-            $edit['GWP'] = $row['GWP'];
-            $edit['KG/LB'] = $row['KG/LB'];
-            $edit['oil'] = $row['oil'];
-            $edit['pressmen'] = $row['pressmen'];
-            $edit['export'] = $row['export'];
-            $edit['disp_m3/h'] = $row['disp_m3/h'];
-            $edit['moA/Amp'] = $row['moA/Amp'];
-            $edit['Mcc/Amp'] = $row['Mcc/Amp'];
-            $edit['LRA/Amp'] = $row['LRA/Amp'];
-            $edit['MRA/Amp'] = $row['MRA/Amp'];
-            $edit['RLAA/Amp'] = $row['RLAA/Amp'];
-        } else {
-            echo "Error: " . mysqli_error($conn);
+
+            if (mysqli_num_rows($resultselect) > 0) {
+                // Fetch the data
+                $row = mysqli_fetch_assoc($resultselect);
+                $edit['model_no'] = $row['model_no'];
+                $edit['year'] = $row['year'];
+                $edit['fc_body'] = $row['fc_body'];
+                $edit['body_length'] = $row['body_length'];
+                $edit['body_dimension'] = $row['body_dimension'];
+                $edit['body_side_door'] = $row['body_side_door'];
+                $edit['body_rear_door'] = $row['body_rear_door'];
+                $edit['body_weight'] = $row['body_weight'];
+                $edit['body_volume'] = $row['body_volume'];
+                $edit['body_temp'] = $row['body_temp'];
+                $edit['floor'] = $row['floor'];
+                $edit['e_track'] = $row['e_track'];
+                $edit['e_plate'] = $row['e_plate'];
+                $edit['body_accessories'] = $row['body_accessories'];
+                $edit['gvwr'] = $row['gvwr'];
+                $edit['wbl'] = $row['wbl'];
+                $edit['cal'] = $row['cal'];
+                $edit['no_of_units'] = $row['no_of_units'];
+                $edit['manufactured_on'] = $row['manufactured_on'];
+                $edit['chassis_frame'] = $row['chassis_frame'];
+                $edit['cost_quoted'] = $row['cost_quoted'];
+                $edit['misc'] = $row['misc'];
+                $edit['eutectic_plates'] = $row['eutectic_plates'];
+                $edit['refrigeration'] = $row['refrigeration'];
+                $edit['additional_details'] = $row['additional_details'];
+                $edit['special_requirements'] = $row['special_requirements'];
+                $edit['fuel_Type'] = $row['fuel_Type'];
+                $edit['unit_Custom'] = $row['unit_Custom'];
+                $edit['condensor'] = $row['condensor'];
+                $edit['condensor_unit'] = $row['condensor_unit'];
+                $edit['power'] = $row['power'];
+                $edit['refrigerant'] = $row['refrigerant'];
+                $edit['compressor'] = $row['compressor'];
+                $edit['volt'] = $row['volt'];
+                $edit['co2_eq'] = $row['co2_eq'];
+                $edit['press_max'] = $row['press_max'];
+                $edit['decible'] = $row['decible'];
+                $edit['production_date'] = $row['production_date'];
+                $edit['model_no'] = $row['model_no'];
+                $edit['GWP'] = $row['GWP'];
+                $edit['KG/LB'] = $row['KG/LB'];
+                $edit['oil'] = $row['oil'];
+                $edit['pressmen'] = $row['pressmen'];
+                $edit['export'] = $row['export'];
+                $edit['disp_m3/h'] = $row['disp_m3/h'];
+                $edit['moA/Amp'] = $row['moA/Amp'];
+                $edit['Mcc/Amp'] = $row['Mcc/Amp'];
+                $edit['LRA/Amp'] = $row['LRA/Amp'];
+                $edit['MRA/Amp'] = $row['MRA/Amp'];
+                $edit['RLAA/Amp'] = $row['RLAA/Amp'];
+            } else {
+                echo "Error: " . mysqli_error($conn);
+            }
         }
 
         // Close the database connection
@@ -279,7 +285,7 @@ if (isset($_POST['update'])) {
     `floor`='$floor', `e_track`='$e_track', `e_plate`='$e_plate', `body_accessories`='$body_accessories', `gvwr`='$gvwr', `wbl`='$wbl', `cal`='$cal', 
     `no_of_units`='$no_of_units', `manufactured_on`=NOW(), `chassis_frame`='$chassis_frame', `cost_quoted`='$cost_quoted', `misc`='$misc', `eutectic_plates`='$eutectic_plates', 
     `refrigeration`='$refrigeration', `additional_details`='$additional_details', `special_requirements`='$special_requirements', `fuel_Type`='$fuel_Type', `unit_Custom`='$unit_Custom', 
-    `updated_on`=NOW(), `updated_by`='Admin'  WHERE body_id";
+    `updated_on`=NOW(), `updated_by`='Admin'  WHERE model_no";
 
     // $body_query = mysqli_query($conn, $update_body);
 
@@ -288,7 +294,7 @@ if (isset($_POST['update'])) {
         $update_eutectic = "UPDATE `eutectic_details` SET `condensor`='$condensor',`condensor_unit`='$condensor_unit',`power`='$power',`refrigerant`='$refrigerant',
         `compressor`='$compressor',`volt`='$volt',`co2_eq`='$co2_eq',`press_max`='$press_max',`decible`='$decible',`production_date`=NOW(), `model_no`='$model_no',
         `GWP`='$GWP',`KG/LB`='$KG_LB',`oil`='$oil',`pressmen`='$pressmen',`export`='$export',`disp_m3/h`='$disp_m3_h',`moA/Amp`='$moA_Amp',
-        `Mcc/Amp`='$Mcc_Amp',`LRA/Amp`='$LRA_Amp',`MRA/Amp`='$MRA_Amp',`RLAA/Amp`='$RLAA_Amp' WHERE eutectic_id";
+        `Mcc/Amp`='$Mcc_Amp',`LRA/Amp`='$LRA_Amp',`MRA/Amp`='$MRA_Amp',`RLAA/Amp`='$RLAA_Amp' WHERE model_no";
 
         // $eutectic_query = mysqli_query($conn, $update_eutectic);
 
