@@ -23,6 +23,7 @@ if (isset($_POST['submit'])) {
 
         $_SESSION['user_fullname'] = $email_pass['user_fullname'];
         $_SESSION['user_email'] = $email_pass['user_email'];
+       
 
         $pass_decode = password_verify($user_password, $db_pass);
 
