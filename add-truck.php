@@ -8,12 +8,6 @@ if (!isset($_SESSION['user_fullname'])) {
     header('location:login.php');
 }
 
-
-
-
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

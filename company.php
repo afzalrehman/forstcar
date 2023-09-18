@@ -1,9 +1,9 @@
 <?php
-
 include "./includes/header.php";
 include "./includes/navbar.php";
 include "./includes/sidebar.php";
 ?>
+
 <div class="container-fluid">
     <div class="row my-5">
         <div class="col-lg-12 course-card pb-5">
