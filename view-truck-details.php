@@ -6,119 +6,6 @@ if (!isset($_SESSION['user_fullname'])) {
     header('location:login.php');
 }
 
-$succses = array();
-$warning = array();
-
-// <!-- =========================update Query====================== -->
-if (isset($_POST['delete_btn'])) {
-    if (isset($_POST['chack_btn_delete']) || !empty($_POST['chack_btn_delete'])) {
-        $model_nos = $_POST['chack_btn_delete'];
-        $escaped_model_nos = array_map([$conn, 'real_escape_string'], $model_nos);
-        $model_no_list = "'" . implode("', '", $escaped_model_nos) . "'";
-
-        $delete_query_table1 = "DELETE FROM `body_details` WHERE body_id IN ($model_no_list)";
-        $delete_query_table2 = "DELETE FROM `eutectic_details` WHERE eutectic_id IN ($model_no_list)";
-
-        if ($conn->query($delete_query_table1) && $conn->query($delete_query_table2)) {
-            $succses['succses'] = 'Data Deleted Successfully!';
-        } else {
-            $warning['warning'] = 'Failed to delete data.';
-        }
-    } else {
-        $warning['warning'] = "Please check the checkboxes to delete.";
-    }
-}
-
-
-// // <!-- =========================SELECT QUERY====================== -->
-// $edit = array();
-// // Check if the edit button is clicked
-// if (isset($_POST['edit'])) {
-//     // Check if at least one checkbox is checked
-//     if (isset($_POST['edit_delete']) && !empty($_POST['edit_delete']) && count($_POST['edit_delete']) == 1) {
-//         // Get the selected ID
-//         $selectedId = $_POST['edit_delete'][0];
-
-//         // Establish a database connection (replace with your database connection code)
-
-
-//         // Prepare and execute SQL query
-//         $selectsql = "SELECT * FROM `body_details`
-//         INNER JOIN `eutectic_details` ON body_details.model_no = eutectic_details.model_no";
-//         $resultselect = mysqli_query($conn, $selectsql);
-
-//         if ($resultselect) {
-//             // Fetch the data
-//             $row = mysqli_fetch_assoc($resultselect);
-//             $edit['model_no'] = $row['model_no'];
-//             $edit['year'] = $row['year'];
-//             $edit['fc_body'] = $row['fc_body'];
-//             $edit['body_length'] = $row['body_length'];
-//             $edit['body_dimension'] = $row['body_dimension'];
-//             $edit['body_side_door'] = $row['body_side_door'];
-//             $edit['body_rear_door'] = $row['body_rear_door'];
-//             $edit['body_weight'] = $row['body_weight'];
-//             $edit['body_volume'] = $row['body_volume'];
-//             $edit['body_temp'] = $row['body_temp'];
-//             $edit['floor'] = $row['floor'];
-//             $edit['e_track'] = $row['e_track'];
-//             $edit['e_plate'] = $row['e_plate'];
-//             $edit['body_accessories'] = $row['body_accessories'];
-//             $edit['gvwr'] = $row['gvwr'];
-//             $edit['wbl'] = $row['wbl'];
-//             $edit['cal'] = $row['cal'];
-//             $edit['no_of_units'] = $row['no_of_units'];
-//             $edit['manufactured_on'] = $row['manufactured_on'];
-//             $edit['chassis_frame'] = $row['chassis_frame'];
-//             $edit['cost_quoted'] = $row['cost_quoted'];
-//             $edit['misc'] = $row['misc'];
-//             $edit['eutectic_plates'] = $row['eutectic_plates'];
-//             $edit['refrigeration'] = $row['refrigeration'];
-//             $edit['additional_details'] = $row['additional_details'];
-//             $edit['special_requirements'] = $row['special_requirements'];
-//             $edit['fuel_Type'] = $row['fuel_Type'];
-//             $edit['unit_Custom'] = $row['unit_Custom'];
-//             $edit['condensor'] = $row['condensor'];
-//             $edit['condensor_unit'] = $row['condensor_unit'];
-//             $edit['power'] = $row['power'];
-//             $edit['refrigerant'] = $row['refrigerant'];
-//             $edit['compressor'] = $row['compressor'];
-//             $edit['volt'] = $row['volt'];
-//             $edit['co2_eq'] = $row['co2_eq'];
-//             $edit['press_max'] = $row['press_max'];
-//             $edit['decible'] = $row['decible'];
-//             $edit['production_date'] = $row['production_date'];
-//             $edit['model_no'] = $row['model_no'];
-//             $edit['GWP'] = $row['GWP'];
-//             $edit['KG/LB'] = $row['KG/LB'];
-//             $edit['oil'] = $row['oil'];
-//             $edit['pressmen'] = $row['pressmen'];
-//             $edit['export'] = $row['export'];
-//             $edit['disp_m3/h'] = $row['disp_m3/h'];
-//             $edit['moA/Amp'] = $row['moA/Amp'];
-//             $edit['Mcc/Amp'] = $row['Mcc/Amp'];
-//             $edit['LRA/Amp'] = $row['LRA/Amp'];
-//             $edit['MRA/Amp'] = $row['MRA/Amp'];
-//             $edit['RLAA/Amp'] = $row['RLAA/Amp'];
-
-//             header('location:add-truck.php');
-        
-//         } else {
-//             echo "Error: " . mysqli_error($conn);
-//         }
-
-//         // Close the database connection
-//         mysqli_close($conn);
-//     } else {
-//         echo '<script>alert("Please check exactly one checkbox!");</script>';
-//     }
-// }
-
-
-
-
-
-
 
 
 
@@ -157,21 +44,7 @@ if (isset($_POST['delete_btn'])) {
             <main>
                 <div class="container-fluid px-4 my-5">
 
-                    <?php
-                    if (isset($succses['succses']))
-                        echo '
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>@succsesfully!</strong> ' . $succses['succses'] . '
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>';
 
-                    if (isset($warning['warning']))
-                        echo '
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>@Error!</strong> ' . $warning['warning'] . '
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>';
-                    ?>
 
                     <form action="" method="POST">
                         <div class="row my-5">
@@ -206,62 +79,18 @@ if (isset($_POST['delete_btn'])) {
                                                             <!-- <input class="chack" type="checkbox"> -->
                                                             <i class="fa-solid fa-plus "></i>
                                                         </th>
-                                                        <th>body_id<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>model_no <i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>year<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>fc_body<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>body_length<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>body_dimension<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>body_side_door<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>body_rear_door<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>body_weight<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>body_volume<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>body_temp<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>floor<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>e_track<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>e_plate<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>body_accessories<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>gvwr<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>wbl<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>cal<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>no_of_units<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>manufactured_on<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>chassis_frame<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>cost_quoted<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>misc<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>eutectic_plates<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>refrigeration<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>additional_details<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>special_requirements<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>fuel_Type<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>unit_Custom<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>added_on<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>added_by<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>updated_on<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>updated_by<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <!-- Eutectic Details table -->
-                                                        <th>condensor<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>condensor_unit<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>power<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>refrigerant<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>compressor<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>volt<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>co2_eq<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>press_max<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>decible<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>production_date<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <!-- <th>model_no <i class="fa-solid fa-arrow-down px-2"></i></th> -->
-                                                        <th>GWP<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>KG/LB<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>oil<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>pressmen<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>export<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>disp_m3/h<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>moA/Amp<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>Mcc/Amp<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>LRA/Amp<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>MRA/Amp<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                                        <th>RLAA/Amp<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <th>Date<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <th>Company Name <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <th>Contact Name <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <th>Address <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <th>FEE PER MONTH <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <th>City<i class="fa-solid fa-arrow-down px-2"></i>
+                                                        </th>
+                                                        <th>State<i class="fa-solid fa-arrow-down px-2"></i>
+                                                        </th>
+                                                        <th>Zip Code <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <th>Telephone <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                                        <th>Email <i class="fa-solid fa-arrow-down px-2"></i></th>
 
 
                                                     </tr>
@@ -269,91 +98,21 @@ if (isset($_POST['delete_btn'])) {
 
                                                 <tbody>
 
-                                                    <?php
 
-                                                    $sql = "SELECT * FROM `body_details`
-                                                            INNER JOIN `eutectic_details` ON body_details.model_no = eutectic_details.model_no";
+                                                    <tr>
+                                                        <td><input type="checkbox" class="text-input"></td>
+                                                        <td class="font">Bold text column</td>
+                                                        <td>Regular text column</td>
+                                                        <td>Regular text column</td>
+                                                        <td>Regular text column</td>
+                                                        <td>Regular text column</td>
+                                                        <td>Regular text column</td>
+                                                        <td>Regular text column</td>
+                                                        <td>Regular text column</td>
+                                                        <td>Regular text column</td>
+                                                        <td>Regular text column</td>
+                                                    </tr>
 
-                                                    $result = $conn->query($sql);
-                                                    $no = 1;
-                                                    if ($result->num_rows > 0) {
-                                                        // Output data of each row
-                                                        while ($row = $result->fetch_assoc()) {
-                                                    ?>
-                                                            <tr>
-                                                                <?php
-                                                                // Assuming you have fetched data from both tables into $row1 and $row2
-                                                                $value = $row['body_id'] . '-' . $row['eutectic_id'];
-                                                                ?>
-                                                                <td><input type="checkbox" name="edit_delete[]" class="text-input" value="<?php echo $value; ?>"></td>
-                                                                <td class="font"><?php echo $no ?></td>
-                                                                <td><?php echo $row['model_no']; ?></td>
-                                                                <td><?php echo $row['year']; ?></td>
-                                                                <td><?php echo $row['fc_body']; ?></td>
-                                                                <td><?php echo $row['body_length']; ?></td>
-                                                                <td><?php echo $row['body_dimension']; ?></td>
-                                                                <td><?php echo $row['body_side_door']; ?></td>
-                                                                <td><?php echo $row['body_rear_door']; ?></td>
-                                                                <td><?php echo $row['body_weight']; ?></td>
-                                                                <td><?php echo $row['body_volume']; ?></td>
-                                                                <td><?php echo $row['body_temp']; ?></td>
-                                                                <td><?php echo $row['floor']; ?></td>
-                                                                <td><?php echo $row['e_track']; ?></td>
-                                                                <td><?php echo $row['e_plate']; ?></td>
-                                                                <td><?php echo $row['body_accessories']; ?></td>
-                                                                <td><?php echo $row['gvwr']; ?></td>
-                                                                <td><?php echo $row['wbl']; ?></td>
-                                                                <td><?php echo $row['cal']; ?></td>
-                                                                <td><?php echo $row['no_of_units']; ?></td>
-                                                                <td><?php echo $row['manufactured_on']; ?></td>
-                                                                <td><?php echo $row['chassis_frame']; ?></td>
-                                                                <td><?php echo $row['cost_quoted']; ?></td>
-                                                                <td><?php echo $row['misc']; ?></td>
-                                                                <td><?php echo $row['eutectic_plates']; ?></td>
-                                                                <td><?php echo $row['refrigeration']; ?></td>
-                                                                <td><?php echo $row['additional_details']; ?></td>
-                                                                <td><?php echo $row['special_requirements']; ?></td>
-                                                                <td><?php echo $row['fuel_Type']; ?></td>
-                                                                <td><?php echo $row['unit_Custom']; ?></td>
-                                                                <td><?php echo $row['added_on']; ?></td>
-                                                                <td><?php echo $row['added_by']; ?></td>
-                                                                <td><?php echo $row['updated_on']; ?></td>
-                                                                <td><?php echo $row['updated_by']; ?></td>
-
-                                                                <!-- Eutectic Details table -->
-                                                                <td><?php echo $row['condensor']; ?></td>
-                                                                <td><?php echo $row['condensor_unit']; ?></td>
-                                                                <td><?php echo $row['power']; ?></td>
-                                                                <td><?php echo $row['refrigerant']; ?></td>
-                                                                <td><?php echo $row['compressor']; ?></td>
-                                                                <td><?php echo $row['volt']; ?></td>
-                                                                <td><?php echo $row['co2_eq']; ?></td>
-                                                                <td><?php echo $row['press_max']; ?></td>
-                                                                <td><?php echo $row['decible']; ?></td>
-                                                                <td><?php echo $row['production_date']; ?></td>
-                                                                <!-- <td><?php echo $row['model_no']; ?></td> -->
-                                                                <td><?php echo $row['GWP']; ?></td>
-                                                                <td><?php echo $row['KG/LB']; ?></td>
-                                                                <td><?php echo $row['oil']; ?></td>
-                                                                <td><?php echo $row['pressmen']; ?></td>
-                                                                <td><?php echo $row['export']; ?></td>
-                                                                <td><?php echo $row['disp_m3/h']; ?></td>
-                                                                <td><?php echo $row['moA/Amp']; ?></td>
-                                                                <td><?php echo $row['Mcc/Amp']; ?></td>
-                                                                <td><?php echo $row['LRA/Amp']; ?></td>
-                                                                <td><?php echo $row['MRA/Amp']; ?></td>
-                                                                <td><?php echo $row['RLAA/Amp']; ?></td>
-
-                                                            </tr>
-                                                    <?php
-                                                            $no = $no + 1;
-                                                        }
-                                                    } else {
-                                                        echo "<tr><td class='text-start text-danger' colspan='40'>No Insert Data Please <a href='./add-truck.php'>Add Truck Details</a>.</td></tr>";
-                                                    }
-
-                                                    $conn->close();
-                                                    ?>
                                                 </tbody>
                                             </table>
 
