@@ -6666,7 +6666,8 @@ textarea.form-control-lg {
             mask-position: -200% 0%;
   }
 }
-.clearfix::{
+.clearfix::
+{
   display: block;
   clear: both;
   content: "";

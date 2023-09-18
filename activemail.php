@@ -12,13 +12,13 @@ try {
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
-    $mail->Username = 'hammadking427@gmail.com';
-    $mail->Password = 'gtohfmaaanqufdbn';
+    $mail->Username = 'noorulahad606@gmail.com';
+    $mail->Password = 'kulbbsejofmqiztc';
     $mail->SMTPSecure = 'tls';
     $mail->Port = 587;
 
-    $mail->setFrom('hammadking427@gmail.com', 'Abu_Hammad');
-    $mail->addAddress('hammadkamal2003@gmail.com', 'Mazaak');
+    $mail->setFrom('noorulahad606@gmail.com', 'noor');
+    $mail->addAddress('muhammadafzal1903@gmail.com', 'Mazaak');
 
     $mail->Subject = 'Test Email';
     $mail->Body = 'This is a test email sent using PHPMailer.';
