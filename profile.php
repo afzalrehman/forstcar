@@ -8,145 +8,7 @@ if (!isset($_SESSION['user_fullname'])) {
     header('location:login.php');
 }
 
-$succses = array();
-$warning = array();
 
-
-
-// SELECT QUERY
-$sql = "SELECT * FROM `admin_users` WHERE user_id";
-$result = mysqli_query($conn, $sql);
-$user = array();
-if ($result) {
-    // Fetch the data
-    $row = mysqli_fetch_assoc($result);
-    $_SESSION['user_fullname'] = $row['user_fullname'];
-    $user['user_contact'] = $row['user_contact'];
-    $_SESSION['user_image'] = $row['user_image'];
-} else {
-    echo "Error: " . mysqli_error($conn);
-}
-
-
-// =========================update======================
-// if (isset($_POST['submit'])) {
-//     $user_fullname = mysqli_real_escape_string($conn, $_POST['user_fullname']);
-//     $user_contact = mysqli_real_escape_string($conn, $_POST['user_contact']);
-
-//     if (isset($_FILES['user_image'])) {
-//         echo "<pre>";
-//         print_r($_FILES);
-//         echo " </pre>";
-//     }
-//     // $user_image = $_FILES['user_image'];
-
-//     // $imagefilename = $user_image['name'];
-
-//     // $imagefileerror = $user_image['error'];
-
-//     // $imagefiletemp = $user_image['tmp_name'];
-
-//     // $filename_separate = explode('.', $imagefilename);
-//     // $file_extension = strtolower(end($filename_separate));
-
-//     // $extension = array('jpeg', 'jpg', 'png');
-
-//     // if (in_array($file_extension, $extension)) {
-
-//     //     $upload_image = 'upload_image/' . $imagefilename;
-//     //     move_uploaded_file($imagefiletemp, $upload_image);
-
-//     $update_query = "UPDATE `admin_users` SET `user_fullname` = '$user_fullname', `user_contact` = '$user_contact'
-//     WHERE user_id";
-
-//     if (mysqli_query($conn, $update_query)) {
-//         echo "Record updated successfully!";
-//         header("location:profile.php");
-//     } else {
-//         echo "Error updating record: " . mysqli_error($conn);
-//     }
-// }
-// // }
-
-
-// if (isset($_POST['submit'])) {
-//     if (isset($_FILES['user_image'])) {
-//         $user_image = $_FILES['user_image'];
-//         $imagefilename = $user_image['name'];
-//         $imagefileerror = $user_image['error'];
-//         $imagefiletemp = $user_image['tmp_name'];
-
-//         $filename_separate = explode('.', $imagefilename);
-//         $file_extension = strtolower(end($filename_separate));
-
-//         $allowed_extensions = array('jpeg', 'jpg', 'png');
-
-//         if (in_array($file_extension, $allowed_extensions)) {
-//             $upload_path = 'uploads/' . $imagefilename; // Specify the upload directory here
-//             if (move_uploaded_file($imagefiletemp, $upload_path)) {
-//                 // File uploaded successfully, now update the database record
-//                 $user_id = $_POST['user_id']; // Assuming you have the user's ID from a form field
-//                 $user_id = mysqli_real_escape_string($conn, $user_id); // Sanitize the user input
-
-//                 $update_query = "UPDATE `admin_users` SET `user_image` = '$upload_path' WHERE user_id = $user_id";
-//                 $sql = mysqli_query($conn, $update_query);
-
-//                 if ($sql) {
-//                     echo "Update successful";
-//                 } else {
-//                     echo "Error: " . mysqli_error($conn);
-//                 }
-//             } else {
-//                 echo "Error uploading file.";
-//             }
-//         } else {
-//             echo "Invalid file format. Allowed formats: jpeg, jpg, png";
-//         }
-//     } else {
-//         echo "No file uploaded.";
-//     }
-// }
-
-
-if (isset($_POST['submit'])) {
-    $user_fullname = mysqli_real_escape_string($conn, $_POST['user_fullname']);
-    $user_contact = mysqli_real_escape_string($conn, $_POST['user_contact']);
-    if (isset($_FILES['user_image'])) {
-        $user_image = $_FILES['user_image'];
-        $imagefilename = $user_image['name'];
-        $imagefileerror = $user_image['error'];
-        $imagefiletemp = $user_image['tmp_name'];
-
-        $filename_separate = explode('.', $imagefilename);
-        $file_extension = strtolower(end($filename_separate));
-
-        $allowed_extensions = array('jpeg', 'jpg', 'png');
-
-        if (in_array($file_extension, $allowed_extensions)) {
-            $upload_path = 'uploads/' . $imagefilename; // Specify the upload directory here
-            if (move_uploaded_file($imagefiletemp, $upload_path)) {
-
-                $update_query = "UPDATE `admin_users` SET `user_fullname` = '$user_fullname', `user_contact` = '$user_contact', `user_image` = '$upload_path' WHERE user_id";
-                // echo "Query: " . $update_query; // Debugging line
-
-                $sql = mysqli_query($conn, $update_query);
-
-                if ($sql) {
-                    $succses['succses'] = 'Update successful';
-                    header('location:profile.php');
-                } else {
-                    echo "Error: " . mysqli_error($conn);
-                }
-            } else {
-                $warning['warning'] = 'Error uploading file.';
-            }
-        } else {
-            $warning['warning'] = 'Invalid file format. Allowed formats: jpeg, jpg, png';
-        }
-    } else {
-        $warning['warning'] = 'No file uploaded.';
-    }
-}
 
 
 
@@ -219,22 +81,6 @@ if (isset($_POST['submit'])) {
             <main>
                 <div class="container-fluid my-3">
 
-                    <?php
-                    if (isset($succses['succses']))
-                        echo '
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>@succsesfully!</strong> ' . $succses['succses'] . '
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>';
-
-                    if (isset($warning['warning']))
-                        echo '
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>@Error!</strong> ' . $warning['warning'] . '
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>';
-                    ?>
-
 
                     <div class="card  my-5 mein-card mb-5">
                         <h3 class=" font-inter text-center">PROFILE</h3>
@@ -245,25 +91,19 @@ if (isset($_POST['submit'])) {
 
                                         <div class="in">
                                             <label for="user_fullname">You Full Name</label>
-                                            <input type="text" name="user_fullname" id="user_fullname" class="inputDesign w-100 py-2  mb-3" placeholder="User FullName" value="<?php if (isset($_SESSION['user_fullname'])) {
-                                                                                                                                                                                    echo $_SESSION['user_fullname'];
-                                                                                                                                                                                } ?>">
+                                            <input type="text" name="user_fullname" id="user_fullname" class="inputDesign w-100 py-2  mb-3" placeholder="User FullName">
 
                                         </div>
                                         <div class="in">
                                             <label for="user_image">Image</label>
-                                            <input type="file" id="user_image" name="user_image" class="inputDesign w-100 py-2 " placeholder="Image" value="<?php if (isset($_SESSION['user_image'])) {
-                                                                                                                                                                echo $_SESSION['user_image'];
-                                                                                                                                                            } ?>">
+                                            <input type="file" id="user_image" name="user_image" class="inputDesign w-100 py-2 " placeholder="Image">
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6">
                                         <div class="in">
                                             <label for="user_contact">Enter Your Contact Number</label>
-                                            <input type="text" id="user_contact" name="user_contact" class="inputDesign w-100  " placeholder="Contact" value="<?php if (isset($user['user_contact'])) {
-                                                                                                                                                                    echo $user['user_contact'];
-                                                                                                                                                                } ?>">
+                                            <input type="text" id="user_contact" name="user_contact" class="inputDesign w-100  " placeholder="Contact">
                                         </div>
 
                                     </div>

@@ -1,3 +1,317 @@
+<?php
+
+session_start();
+require 'config.php';
+global $conn;
+if (!isset($_SESSION['user_fullname'])) {
+    echo "You are logged out";
+    header('location:login.php');
+}
+$succses = array();
+$warning = array();
+$emty = array();
+
+
+if (isset($_POST['submit'])) {
+    $model_no = mysqli_real_escape_string($conn, $_POST['model_no']);
+    $year = mysqli_real_escape_string($conn, $_POST['year']);
+    $fc_body = mysqli_real_escape_string($conn, $_POST['fc_body']);
+    $body_length = mysqli_real_escape_string($conn, $_POST['body_length']);
+    $body_dimension = mysqli_real_escape_string($conn, $_POST['body_dimension']);
+    $body_side_door = mysqli_real_escape_string($conn, $_POST['body_side_door']);
+    $body_rear_door = mysqli_real_escape_string($conn, $_POST['body_rear_door']);
+    $body_weight = mysqli_real_escape_string($conn, $_POST['body_weight']);
+    $body_volume = mysqli_real_escape_string($conn, $_POST['body_volume']);
+    $body_temp = mysqli_real_escape_string($conn, $_POST['body_temp']);
+    $floor = mysqli_real_escape_string($conn, $_POST['floor']);
+    $e_track = mysqli_real_escape_string($conn, $_POST['e_track']);
+    $e_plate = mysqli_real_escape_string($conn, $_POST['e_plate']);
+    $body_accessories = mysqli_real_escape_string($conn, $_POST['body_accessories']);
+    $gvwr = mysqli_real_escape_string($conn, $_POST['gvwr']);
+    $wbl = mysqli_real_escape_string($conn, $_POST['wbl']);
+    $cal = mysqli_real_escape_string($conn, $_POST['cal']);
+    $no_of_units = mysqli_real_escape_string($conn, $_POST['no_of_units']);
+    $chassis_frame = mysqli_real_escape_string($conn, $_POST['chassis_frame']);
+    $cost_quoted = mysqli_real_escape_string($conn, $_POST['cost_quoted']);
+    $misc = mysqli_real_escape_string($conn, $_POST['misc']);
+    $eutectic_plates = mysqli_real_escape_string($conn, $_POST['eutectic_plates']);
+    $refrigeration = mysqli_real_escape_string($conn, $_POST['refrigeration']);
+    $additional_details = mysqli_real_escape_string($conn, $_POST['additional_details']);
+    $special_requirements = mysqli_real_escape_string($conn, $_POST['special_requirements']);
+    $fuel_Type = mysqli_real_escape_string($conn, $_POST['fuel_Type']);
+    $unit_Custom = mysqli_real_escape_string($conn, $_POST['unit_Custom']);
+
+    $condensor = mysqli_real_escape_string($conn, $_POST['condensor']);
+    $condensor_unit = mysqli_real_escape_string($conn, $_POST['condensor_unit']);
+    $power = mysqli_real_escape_string($conn, $_POST['power']);
+    $refrigerant = mysqli_real_escape_string($conn, $_POST['refrigerant']);
+    $compressor = mysqli_real_escape_string($conn, $_POST['compressor']);
+    $volt = mysqli_real_escape_string($conn, $_POST['volt']);
+    $co2_eq = mysqli_real_escape_string($conn, $_POST['co2_eq']);
+    $press_max = mysqli_real_escape_string($conn, $_POST['press_max']);
+    $decible = mysqli_real_escape_string($conn, $_POST['decible']);
+    $GWP = mysqli_real_escape_string($conn, $_POST['GWP']);
+    $KG_LB = mysqli_real_escape_string($conn, $_POST['KG/LB']);
+    $oil = mysqli_real_escape_string($conn, $_POST['oil']);
+    $pressmen = mysqli_real_escape_string($conn, $_POST['pressmen']);
+    $export = mysqli_real_escape_string($conn, $_POST['export']);
+    $disp_m3_h = mysqli_real_escape_string($conn, $_POST['disp_m3/h']);
+    $moA_Amp = mysqli_real_escape_string($conn, $_POST['moA/Amp']);
+    $Mcc_Amp = mysqli_real_escape_string($conn, $_POST['Mcc/Amp']);
+    $LRA_Amp = mysqli_real_escape_string($conn, $_POST['LRA/Amp']);
+    $MRA_Amp = mysqli_real_escape_string($conn, $_POST['MRA/Amp']);
+    $RLAA_Amp = mysqli_real_escape_string($conn, $_POST['RLAA/Amp']);
+
+    // if (empty($name)) {
+    //     $emty['model_no'] = 'Please Fill The Model No';
+    // } else {
+
+    $query = "SELECT * FROM `body_details` WHERE `model_no` = '$model_no'";
+    $sql = mysqli_query($conn, $query);
+    $row = mysqli_fetch_row($sql);
+    if ($row > 0) {
+        // Duplicate data found
+        $warning['warning'] = "Model No already exists in Body Details.";
+    } else {
+
+        $query = "SELECT * FROM `eutectic_details` WHERE `model_no` = '$model_no'";
+        $sql = mysqli_query($conn, $query);
+        $row = mysqli_fetch_row($sql);
+        if ($row > 0) {
+            // Duplicate data found
+            $warning['warning'] = "Model No already exists in Eutectic Details.";
+        } else {
+            $insertBody = "INSERT INTO `body_details`(`model_no`, `year`, `fc_body`, `body_length`, `body_dimension`, `body_side_door`, `body_rear_door`, `body_weight`, 
+            `body_volume`, `body_temp`, `floor`, `e_track`, `e_plate`, `body_accessories`, `gvwr`, `wbl`, `cal`, `no_of_units`, `manufactured_on`, `chassis_frame`, 
+            `cost_quoted`, `misc`, `eutectic_plates`, `refrigeration`, `additional_details`, `special_requirements`, `fuel_Type`, `unit_Custom`, `added_on`, `added_by`) 
+            VALUES ('$model_no', '$year',  '$fc_body', '$body_length', '$body_dimension', '$body_side_door', '$body_rear_door', '$body_weight', '$body_volume', 
+            '$body_temp', '$floor', '$e_track', '$e_plate', '$body_accessories', '$gvwr', '$wbl', '$cal', '$no_of_units', NOW(), '$chassis_frame', '$cost_quoted', '$misc',
+            '$eutectic_plates', '$refrigeration', '$additional_details', '$special_requirements', '$fuel_Type', '$unit_Custom', NOW(), 'admin')";
+
+            $bodyInsert = mysqli_query($conn, $insertBody);
+
+            if ($bodyInsert) {
+                $insertEutectic = "INSERT INTO `eutectic_details`(`condensor`, `condensor_unit`, `power`, `refrigerant`, `compressor`, `volt`, `co2_eq`, `press_max`, 
+                `decible`, `production_date`, `model_no`, `GWP`, `KG/LB`, `oil`, `pressmen`, `export`, `disp_m3/h`, `moA/Amp`, `Mcc/Amp`, `LRA/Amp`, `MRA/Amp`, `RLAA/Amp`) 
+                VALUES ('$condensor', '$condensor_unit', '$power', '$refrigerant', '$compressor', '$volt', '$co2_eq', '$press_max', '$decible', NOW(), '$model_no', '$GWP',
+                '$KG_LB', '$oil', '$pressmen', '$export', '$disp_m3_h', '$moA_Amp', '$Mcc_Amp', '$LRA_Amp', '$MRA_Amp', '$RLAA_Amp')";
+
+                $eutecticInsert = mysqli_query($conn, $insertEutectic);
+
+                if ($eutecticInsert) {
+                    $succses['succses'] = "Data Inserted Successfully.";
+                }
+            } else {
+                $warning['warning'] = "Data Not Inserted.";
+            }
+        }
+    }
+}
+
+
+
+
+
+// <!-- =========================delete Query====================== -->
+if (isset($_POST['delete_btn'])) {
+    if (isset($_POST['chack_btn_delete']) || !empty($_POST['chack_btn_delete'])) {
+        $model_nos = $_POST['chack_btn_delete'];
+        $escaped_model_nos = array_map([$conn, 'real_escape_string'], $model_nos);
+        $model_no_list = "'" . implode("', '", $escaped_model_nos) . "'";
+
+        $delete_query_table1 = "DELETE FROM `body_details` WHERE body_id IN ($model_no_list)";
+        $delete_query_table2 = "DELETE FROM `eutectic_details` WHERE eutectic_id IN ($model_no_list)";
+
+        if ($conn->query($delete_query_table1) && $conn->query($delete_query_table2)) {
+            $succses['succses'] = 'Data Deleted Successfully!';
+        } else {
+            $warning['warning'] = 'Failed to delete data.';
+        }
+    } else {
+        $warning['warning'] = "Please check the checkboxes to delete.";
+    }
+}
+
+
+
+
+
+
+
+// <!-- =========================SELECT QUERY====================== -->
+$edit = array();
+// Check if the edit button is clicked
+if (isset($_POST['edit'])) {
+    // Check if at least one checkbox is checked
+    if (isset($_POST['edit_delete']) && !empty($_POST['edit_delete']) && count($_POST['edit_delete']) == 1) {
+        // Get the selected ID
+        $selectedId = $_POST['edit_delete'][0];
+
+        // Establish a database connection (replace with your database connection code)
+
+
+        // Prepare and execute SQL query
+        $selectsql = "SELECT * FROM `body_details`
+        INNER JOIN `eutectic_details` ON body_details.model_no = eutectic_details.model_no";
+        $resultselect = mysqli_query($conn, $selectsql);
+
+        if ($resultselect) {
+            // Fetch the data
+            $row = mysqli_fetch_assoc($resultselect);
+            $edit['model_no'] = $row['model_no'];
+            $edit['year'] = $row['year'];
+            $edit['fc_body'] = $row['fc_body'];
+            $edit['body_length'] = $row['body_length'];
+            $edit['body_dimension'] = $row['body_dimension'];
+            $edit['body_side_door'] = $row['body_side_door'];
+            $edit['body_rear_door'] = $row['body_rear_door'];
+            $edit['body_weight'] = $row['body_weight'];
+            $edit['body_volume'] = $row['body_volume'];
+            $edit['body_temp'] = $row['body_temp'];
+            $edit['floor'] = $row['floor'];
+            $edit['e_track'] = $row['e_track'];
+            $edit['e_plate'] = $row['e_plate'];
+            $edit['body_accessories'] = $row['body_accessories'];
+            $edit['gvwr'] = $row['gvwr'];
+            $edit['wbl'] = $row['wbl'];
+            $edit['cal'] = $row['cal'];
+            $edit['no_of_units'] = $row['no_of_units'];
+            $edit['manufactured_on'] = $row['manufactured_on'];
+            $edit['chassis_frame'] = $row['chassis_frame'];
+            $edit['cost_quoted'] = $row['cost_quoted'];
+            $edit['misc'] = $row['misc'];
+            $edit['eutectic_plates'] = $row['eutectic_plates'];
+            $edit['refrigeration'] = $row['refrigeration'];
+            $edit['additional_details'] = $row['additional_details'];
+            $edit['special_requirements'] = $row['special_requirements'];
+            $edit['fuel_Type'] = $row['fuel_Type'];
+            $edit['unit_Custom'] = $row['unit_Custom'];
+            $edit['condensor'] = $row['condensor'];
+            $edit['condensor_unit'] = $row['condensor_unit'];
+            $edit['power'] = $row['power'];
+            $edit['refrigerant'] = $row['refrigerant'];
+            $edit['compressor'] = $row['compressor'];
+            $edit['volt'] = $row['volt'];
+            $edit['co2_eq'] = $row['co2_eq'];
+            $edit['press_max'] = $row['press_max'];
+            $edit['decible'] = $row['decible'];
+            $edit['production_date'] = $row['production_date'];
+            $edit['model_no'] = $row['model_no'];
+            $edit['GWP'] = $row['GWP'];
+            $edit['KG/LB'] = $row['KG/LB'];
+            $edit['oil'] = $row['oil'];
+            $edit['pressmen'] = $row['pressmen'];
+            $edit['export'] = $row['export'];
+            $edit['disp_m3/h'] = $row['disp_m3/h'];
+            $edit['moA/Amp'] = $row['moA/Amp'];
+            $edit['Mcc/Amp'] = $row['Mcc/Amp'];
+            $edit['LRA/Amp'] = $row['LRA/Amp'];
+            $edit['MRA/Amp'] = $row['MRA/Amp'];
+            $edit['RLAA/Amp'] = $row['RLAA/Amp'];
+        } else {
+            echo "Error: " . mysqli_error($conn);
+        }
+
+        // Close the database connection
+        mysqli_close($conn);
+    } else {
+        echo '<script>alert("Please check exactly one checkbox!");</script>';
+    }
+}
+
+
+
+
+// <!-- =========================UPDATE QUERY====================== -->
+if (isset($_POST['update'])) {
+    $model_no = mysqli_real_escape_string($conn, $_POST['model_no']);
+    $year = mysqli_real_escape_string($conn, $_POST['year']);
+    $fc_body = mysqli_real_escape_string($conn, $_POST['fc_body']);
+    $body_length = mysqli_real_escape_string($conn, $_POST['body_length']);
+    $body_dimension = mysqli_real_escape_string($conn, $_POST['body_dimension']);
+    $body_side_door = mysqli_real_escape_string($conn, $_POST['body_side_door']);
+    $body_rear_door = mysqli_real_escape_string($conn, $_POST['body_rear_door']);
+    $body_weight = mysqli_real_escape_string($conn, $_POST['body_weight']);
+    $body_volume = mysqli_real_escape_string($conn, $_POST['body_volume']);
+    $body_temp = mysqli_real_escape_string($conn, $_POST['body_temp']);
+    $floor = mysqli_real_escape_string($conn, $_POST['floor']);
+    $e_track = mysqli_real_escape_string($conn, $_POST['e_track']);
+    $e_plate = mysqli_real_escape_string($conn, $_POST['e_plate']);
+    $body_accessories = mysqli_real_escape_string($conn, $_POST['body_accessories']);
+    $gvwr = mysqli_real_escape_string($conn, $_POST['gvwr']);
+    $wbl = mysqli_real_escape_string($conn, $_POST['wbl']);
+    $cal = mysqli_real_escape_string($conn, $_POST['cal']);
+    $no_of_units = mysqli_real_escape_string($conn, $_POST['no_of_units']);
+    $chassis_frame = mysqli_real_escape_string($conn, $_POST['chassis_frame']);
+    $cost_quoted = mysqli_real_escape_string($conn, $_POST['cost_quoted']);
+    $misc = mysqli_real_escape_string($conn, $_POST['misc']);
+    $eutectic_plates = mysqli_real_escape_string($conn, $_POST['eutectic_plates']);
+    $refrigeration = mysqli_real_escape_string($conn, $_POST['refrigeration']);
+    $additional_details = mysqli_real_escape_string($conn, $_POST['additional_details']);
+    $special_requirements = mysqli_real_escape_string($conn, $_POST['special_requirements']);
+    $fuel_Type = mysqli_real_escape_string($conn, $_POST['fuel_Type']);
+    $unit_Custom = mysqli_real_escape_string($conn, $_POST['unit_Custom']);
+
+    $condensor = mysqli_real_escape_string($conn, $_POST['condensor']);
+    $condensor_unit = mysqli_real_escape_string($conn, $_POST['condensor_unit']);
+    $power = mysqli_real_escape_string($conn, $_POST['power']);
+    $refrigerant = mysqli_real_escape_string($conn, $_POST['refrigerant']);
+    $compressor = mysqli_real_escape_string($conn, $_POST['compressor']);
+    $volt = mysqli_real_escape_string($conn, $_POST['volt']);
+    $co2_eq = mysqli_real_escape_string($conn, $_POST['co2_eq']);
+    $press_max = mysqli_real_escape_string($conn, $_POST['press_max']);
+    $decible = mysqli_real_escape_string($conn, $_POST['decible']);
+    $GWP = mysqli_real_escape_string($conn, $_POST['GWP']);
+    $KG_LB = mysqli_real_escape_string($conn, $_POST['KG/LB']);
+    $oil = mysqli_real_escape_string($conn, $_POST['oil']);
+    $pressmen = mysqli_real_escape_string($conn, $_POST['pressmen']);
+    $export = mysqli_real_escape_string($conn, $_POST['export']);
+    $disp_m3_h = mysqli_real_escape_string($conn, $_POST['disp_m3/h']);
+    $moA_Amp = mysqli_real_escape_string($conn, $_POST['moA/Amp']);
+    $Mcc_Amp = mysqli_real_escape_string($conn, $_POST['Mcc/Amp']);
+    $LRA_Amp = mysqli_real_escape_string($conn, $_POST['LRA/Amp']);
+    $MRA_Amp = mysqli_real_escape_string($conn, $_POST['MRA/Amp']);
+    $RLAA_Amp = mysqli_real_escape_string($conn, $_POST['RLAA/Amp']);
+
+
+    $update_body = "UPDATE `body_details` SET `model_no`='$model_no',`year`='$year', `fc_body`='$fc_body', `body_length`='$body_length', `body_dimension`='$body_dimension', 
+    `body_side_door`='$body_side_door', `body_rear_door`='$body_rear_door', `body_weight`='$body_weight', `body_volume`='$body_volume', `body_temp`='$body_temp', 
+    `floor`='$floor', `e_track`='$e_track', `e_plate`='$e_plate', `body_accessories`='$body_accessories', `gvwr`='$gvwr', `wbl`='$wbl', `cal`='$cal', 
+    `no_of_units`='$no_of_units', `manufactured_on`=NOW(), `chassis_frame`='$chassis_frame', `cost_quoted`='$cost_quoted', `misc`='$misc', `eutectic_plates`='$eutectic_plates', 
+    `refrigeration`='$refrigeration', `additional_details`='$additional_details', `special_requirements`='$special_requirements', `fuel_Type`='$fuel_Type', `unit_Custom`='$unit_Custom', 
+    `updated_on`=NOW(), `updated_by`='Admin'  WHERE body_id";
+
+    // $body_query = mysqli_query($conn, $update_body);
+
+    if (mysqli_query($conn, $update_body)) {
+
+        $update_eutectic = "UPDATE `eutectic_details` SET `condensor`='$condensor',`condensor_unit`='$condensor_unit',`power`='$power',`refrigerant`='$refrigerant',
+        `compressor`='$compressor',`volt`='$volt',`co2_eq`='$co2_eq',`press_max`='$press_max',`decible`='$decible',`production_date`=NOW(), `model_no`='$model_no',
+        `GWP`='$GWP',`KG/LB`='$KG_LB',`oil`='$oil',`pressmen`='$pressmen',`export`='$export',`disp_m3/h`='$disp_m3_h',`moA/Amp`='$moA_Amp',
+        `Mcc/Amp`='$Mcc_Amp',`LRA/Amp`='$LRA_Amp',`MRA/Amp`='$MRA_Amp',`RLAA/Amp`='$RLAA_Amp' WHERE eutectic_id";
+
+        // $eutectic_query = mysqli_query($conn, $update_eutectic);
+
+        if (mysqli_query($conn, $update_eutectic)) {
+            $succses['succses'] = "Data Updated Successfully.";
+        }
+    } else {
+        $warning['warning'] = "Data Is Not Updated.";
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
