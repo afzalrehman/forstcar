@@ -1,20 +1,8 @@
 <?php
-<<<<<<< HEAD
 
-
-
-
-
-?>
-<?php
-require "includes/header.php";
-require "includes/navbar.php";
-require "includes/sidebar.php";
-=======
 include "./includes/header.php";
 include "./includes/navbar.php";
 include "./includes/sidebar.php";
->>>>>>> 0b34bcb67b4a9213c049280f07f38fa38bf6fa4d
 ?>
 <div class="container-fluid">
 
