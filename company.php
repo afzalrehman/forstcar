@@ -1,25 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>Forst Car Usa</title>
-    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-    <link href="css/styles.css" rel="stylesheet" />
-    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-
-    <!-- --------------google font----------- -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-    <link rel="stylesheet" href="css/main.css">
-</head>
-
-<body class="sb-nav-fixed">
+    <?php require "includes/header.php"; ?>
     <?php require "navbar.php"; ?>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
@@ -36,7 +16,7 @@
                                     <div class="col-lg-6  ">
                                         <div class="in">
                                             <input type="text" name="company_name" id="name" class=" w-100 py-2 mt-3" placeholder="Company Name" value=">
-                                            <span class=" text-danger fs-6 "></span>
+                                            <span class=" text-danger fs-6 ></span>
                                         </div>
 
                                         <div class=" in">
@@ -226,48 +206,7 @@
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
     <script src="js/datatables-simple-demo.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var toggleIcons = document.querySelectorAll(".toggle-checkbox");
-
-            toggleIcons.forEach(function(icon) {
-                icon.addEventListener("click", function() {
-                    var checkboxId = this.getAttribute("data-checkbox-id");
-                    var checkbox = document.querySelector('input[type="checkbox"][value="' + checkboxId + '"]');
-                    if (checkbox) {
-                        checkbox.checked = !checkbox.checked;
-                    }
-                });
-            });
-        });
-
-
-        let user_phonenumber = document.getElementById('contact');
-        let company_zipcode = document.getElementById('company_zipcode');
-        let phone = document.getElementById('phone');
-        let total_cost = document.getElementById('total_cost');
-
-        user_phonenumber.addEventListener("input", function() {
-            if (user_phonenumber.value.length > 11) {
-                user_phonenumber.value = user_phonenumber.value.slice(0, 11);
-            }
-        });
-        company_zipcode.addEventListener("input", function() {
-            if (company_zipcode.value.length > 11) {
-                company_zipcode.value = company_zipcode.value.slice(0, 11);
-            }
-        });
-        phone.addEventListener("input", function() {
-            if (phone.value.length > 11) {
-                phone.value = phone.value.slice(0, 11);
-            }
-        });
-        total_cost.addEventListener("input", function() {
-            if (total_cost.value.length > 11) {
-                total_cost.value = total_cost.value.slice(0, 11);
-            }
-        });
-    </script>
+   
 
 </body>
 
