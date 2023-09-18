@@ -9,8 +9,6 @@ include "./includes/sidebar.php";
 
 
     <div class="tab-content" id="pills-tabContent">
-
-
         <div class="row">
             <div class="col-12">
                 <div class="card my-5 w-100 position-relative overflow-hidden mb-0">
