@@ -1,6 +1,3 @@
-<?php
-// session_start();
-?>
 
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-white shadow">
     <!-- Navbar Brand-->
