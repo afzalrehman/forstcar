@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "config.php";
+include "./config/config.php";
 global $conn;
 
 if (!isset($_SESSION['user_fullname'])) {

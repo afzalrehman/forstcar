@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-include "config.php";
+include "./config/config.php";
 include "function.php";
 
 if (!isset($_SESSION['user_fullname'])) {

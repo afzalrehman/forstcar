@@ -11,7 +11,7 @@
 <body>
 
     <?php
-    require 'config.php';
+    require './config/config.php';
     $sql = "SELECT * FROM `body_details`
         INNER JOIN `eutectic_details` ON body_details.model_no = eutectic_details.model_no";
     $res = $conn->query($sql);

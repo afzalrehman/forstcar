@@ -11,7 +11,7 @@
 <body>
 
     <?php
-    require 'config.php';
+    require './config/config.php';
     $sql = "SELECT * FROM `admin_users`";
     $res = mysqli_query($conn, $sql);
     $html = '<table class="table table-striped table-hover table-bordered border-dark text-center"> 

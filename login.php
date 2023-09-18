@@ -3,7 +3,7 @@
 session_start();
 ob_start();
 
-require 'config.php';
+require './config/config.php';
 $emailError = false;
 $passError = false;
 

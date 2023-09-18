@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-require 'config.php';
+require './config/config.php';
 global $conn;
 if (!isset($_SESSION['user_fullname'])) {
     echo "You are logged out";

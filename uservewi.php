@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "config.php";
+include "./config/config.php";
 // if (!isset($_SESSION['user_fullname'])) {
 //     echo "You are logged out";
 //     header('location:login.php');
@@ -112,19 +112,6 @@ if (isset($_POST['edit'])) {
         </div>
     </div> -->
 
-
-    <!-- navbar -->
-    <?php
-    require 'navbar.php';
-    ?>
-    <!-- navbar End -->
-    <div id="layoutSidenav">
-        <!-- Sidebar -->
-        <?php
-        require 'sidebar.php';
-        ?>
-        <!-- Sidebar End -->
-        <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid my-3">
 
