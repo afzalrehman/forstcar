@@ -162,5 +162,5 @@ require "includes/sidebar.php"; ?>
             </form>
         </div>
     </main>
+    <?php require "includes/footer.php"; ?>
 </div>
-<?php require "includes/footer.php"; ?>
