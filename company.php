@@ -1,205 +1,3 @@
-<?php
-
-
-include "config.php";
-
-session_start();
-// =============Insert Qury=============
-if (!isset($_SESSION['user_fullname'])) {
-    echo "You are logged out";
-    header('location:login.php');
-}
-$emty = array();
-$warning = array();
-$succses = array();
-$delete = array();
-if (isset($_POST['submit'])) {
-    $company_name = mysqli_real_escape_string($conn, $_POST['company_name']);
-    $address = mysqli_real_escape_string($conn, $_POST['address']);
-    $phone = mysqli_real_escape_string($conn, $_POST['phone']);
-    $contact = mysqli_real_escape_string($conn, $_POST['contact']);
-    $company_city = mysqli_real_escape_string($conn, $_POST['company_city']);
-    $company_state = mysqli_real_escape_string($conn, $_POST['company_state']);
-    $direct = mysqli_real_escape_string($conn, $_POST['direct']);
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $company_zipcode = mysqli_real_escape_string($conn, $_POST['company_zipcode']);
-    $port = mysqli_real_escape_string($conn, $_POST['port']);
-    $vessel = mysqli_real_escape_string($conn, $_POST['vessel']);
-    $trucking = mysqli_real_escape_string($conn, $_POST['trucking']);
-    $misc = mysqli_real_escape_string($conn, $_POST['misc']);
-    $total_cost = mysqli_real_escape_string($conn, $_POST['total_cost']);
-    $custom = mysqli_real_escape_string($conn, $_POST['custom']);
-
-    if (empty($company_name)) {
-        $emty['company_name'] = 'Please Fill The Company Name';
-    }
-    // if (empty($address)) {
-    //     $emty['address'] = 'Please Fill The Company address';
-    // }
-    // if (empty($phone)) {
-    //     $emty['phone'] = 'Please Fill The Company phone';
-    // }
-    // if (empty($contact)) {
-    //     $emty['contact'] = 'Please Fill The Company contact';
-    // }
-    // if (empty($company_city)) {
-    //     $emty['company_city'] = 'Please Fill The Company city';
-    // }
-    // if (empty($company_state)) {
-    //     $emty['company_state'] = 'Please Fill The Company stat';
-    // }
-    // if (empty($direct)) {
-    //     $emty['direct'] = 'Please Fill The Company direct';
-    // }
-    // if (empty($email)) {
-    //     $emty['email'] = 'Please Fill The Company email';
-    // }
-    // if (empty($company_zipcode)) {
-    //     $emty['company_zipcode'] = 'Please Fill The Company ZipCode';
-    // }
-    // if (empty($port)) {
-    //     $emty['port'] = 'Please Fill The Company port';
-    // }
-    // if (empty($vessel)) {
-    //     $emty['vessel'] = 'Please Fill The Company vessel';
-    // }
-    // if (empty($trucking)) {
-    //     $emty['trucking'] = 'Please Fill The Company trucking';
-    // }
-    // if (empty($misc)) {
-    //     $emty['misc'] = 'Please Fill The Company misc';
-    // }
-    // if (empty($total_cost)) {
-    //     $emty['total_cost'] = 'Please Fill The Company total cost';
-    // }
-    // if (empty($custom)) {
-    //     $emty['custom'] = 'Please Fill The Company cuctom';
-    // }
-    else {
-        $insert = " INSERT INTO importer_details(`company_name`, `company_contact`,`company_address`, `company_city`, `company_state`,  `company_zipcode`,`company_telephone`, `company_email`, `company_direct`, 
-            `company_port_of_entry`,`company_vessel_detail`,`company_trucking`,`company_misc`,`total_cost`, `custom_frieght` ,`added_on`)
-            VALUES('$company_name', '$contact', '$address', '$company_city', '$company_state', '$company_zipcode','$phone', '$email', '$direct','$port','$vessel','$trucking','$misc','$total_cost','$custom', NOW())";
-        $insert_sql = mysqli_query($conn, $insert);
-
-        if ($insert_sql) {
-            $succses['insert'] = 'insert data sucsses';
-        }
-    }
-}
-
-?>
-
-<?php
-
-// =============Delete Qury=============
-if (isset($_POST['delete_btn'])) {
-    if (!isset($_POST['edit_delete']) || empty($_POST['edit_delete'])) {
-        $warning['chackbox'] = "Please check the checkboxes to delete";
-    } else {
-        $all_id = $_POST['edit_delete'];
-        $extrext_id = implode(',', $all_id);
-        $delete_query = "DELETE FROM importer_details WHERE importer_id  IN ($extrext_id)";
-        $sql = mysqli_query($conn, $delete_query);
-        if ($sql) {
-            $delete['Delete'] = "Data Delete Successfully!";
-        }
-    }
-}
-
-// =============Edit Qury=============
-$edit = array();
-
-if (isset($_POST['edit'])) {
-    if (isset($_POST['edit_delete']) && !empty($_POST['edit_delete']) && count($_POST['edit_delete']) == 1) {
-        // $selectedId = $_POST['edit_delete'][0];
-        $all_id = $_POST['edit_delete'];
-        $extrext_id = implode(',', $all_id);
-        $sql = "SELECT * FROM importer_details WHERE  importer_id  IN ($extrext_id)";
-        $result = mysqli_query($conn, $sql);
-        if ($result) {
-            $row = mysqli_fetch_assoc($result);
-
-            $edit_importer_id = $row['importer_id'];
-            $edit['edit_company_name'] = $row['company_name'];
-            $edit['company_contact'] = $row['company_contact'];
-            $edit['company_address'] = $row['company_address'];
-            $edit['company_city'] = $row['company_city'];
-            $edit['company_state'] = $row['company_state'];
-            $edit['company_zipcode'] = $row['company_zipcode'];
-            $edit['company_telephone'] = $row['company_telephone'];
-            $edit['company_email'] = $row['company_email'];
-            $edit['company_direct'] = $row['company_direct'];
-            $edit['company_port_of_entry'] = $row['company_port_of_entry'];
-            $edit['company_vessel_detail'] = $row['company_vessel_detail'];
-            $edit['company_trucking'] = $row['company_trucking'];
-            $edit['company_misc'] = $row['company_misc'];
-            $edit['total_cost'] = $row['total_cost'];
-            $edit['custom_frieght'] = $row['custom_frieght'];
-        } else {
-            echo "Error: " . mysqli_error($conn);
-        }
-        mysqli_close($conn);
-    } else {
-        $warning['chackbox'] = 'Please check exactly one checkbox!';
-    }
-}
-
-
-
-?>
-<!--  =============update qury============= -->
-<?php
-// $update_edit_delete = "";
-// if (isset($_POST['update'])) {
-//     // Retrieve updated values and sanitize them.
-//     $update_edit_delete = mysqli_real_escape_string($conn, $_POST['edit_delete']);
-//     $update_company_name = mysqli_real_escape_string($conn, $_POST['company_name']);
-//     $update_company_address = mysqli_real_escape_string($conn, $_POST['address']);
-//     $update_phone = mysqli_real_escape_string($conn, $_POST['phone']);
-//     $update_company_contact = mysqli_real_escape_string($conn, $_POST['contact']);
-//     $update_company_city = mysqli_real_escape_string($conn, $_POST['company_city']);
-//     $update_company_state = mysqli_real_escape_string($conn, $_POST['company_state']);
-//     $update_direct = mysqli_real_escape_string($conn, $_POST['direct']);
-//     $update_email = mysqli_real_escape_string($conn, $_POST['email']);
-//     $update_company_zipcode = mysqli_real_escape_string($conn, $_POST['company_zipcode']);
-//     $update_port = mysqli_real_escape_string($conn, $_POST['port']);
-//     $update_vessel = mysqli_real_escape_string($conn, $_POST['vessel']);
-//     $update_trucking = mysqli_real_escape_string($conn, $_POST['trucking']);
-//     $update_misc = mysqli_real_escape_string($conn, $_POST['misc']);
-//     $update_total_cost = mysqli_real_escape_string($conn, $_POST['total_cost']);
-//     $update_custom = mysqli_real_escape_string($conn, $_POST['custom']);
-
-//     // Prepare and execute an UPDATE query
-//     $update_query = "UPDATE importer_details SET 
-//         `company_name` = '$update_company_name',
-//         `company_contact` = '$update_company_contact',
-//         `company_address` = '$update_company_address',
-//         `company_city` = '$update_company_city',
-//         `company_telephone` = '$update_phone',
-//         `company_email` = '$update_email',
-//         `company_direct` = '$update_direct',
-//         `company_zipcode` = '$update_company_zipcode',
-//         `company_port_of_entry` = '$update_port',
-//         `company_vessel_detail` = '$update_vessel',
-//         `company_trucking` = '$update_trucking',
-//         `company_misc` = '$update_misc',
-//         `total_cost` = '$update_total_cost',
-//         `custom_frieght` = '$update_custom'
-//         WHERE importer_id ='$update_edit_delete' ";
-
-//     if (mysqli_query($conn, $update_query)) {
-//         $succses['success'] = 'Data Updated Successfully';
-//     } else {
-//         echo "Error updating record: " . mysqli_error($conn);
-//     }
-// }
-
-?>
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -218,14 +16,7 @@ if (isset($_POST['edit'])) {
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
     <link rel="stylesheet" href="css/main.css">
-    <style>
-        input[type=number]::-webkit-inner-spin-button,
-        input[type=number]::-webkit-outer-spin-button {
-            -webkit-appearance: none !important;
-        }
-    </style>
 </head>
 
 <body class="sb-nav-fixed">
@@ -237,49 +28,6 @@ if (isset($_POST['edit'])) {
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid">
-
-                    <?php
-                    if (isset($succses['success']))
-                        echo '
-                            <div class="mt-5 alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>@INSERT</strong> ' . $succses['success'] . '
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>';
-                    ?>
-                    <?php
-                    if (isset($succses['insert']))
-                        echo '
-                            <div class="mt-5 alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>@INSERT</strong> ' . $succses['insert'] . '
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>';
-                    ?>
-                    <?php
-                    if (isset($warning['checkboxcheck']))
-                        echo '
-                            <div class="mt-5 alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>@INSERT</strong> ' . $warning['checkboxcheck'] . '
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>';
-                    ?>
-
-                    <?php
-                    if (isset($warning['chackbox']))
-                        echo '
-                            <div class="mt-2 alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>@Warning</strong> ' . $warning['chackbox'] . '
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>';
-                    ?>
-                    <?php
-                    if (isset($delete['Delete']))
-                        echo '
-                            <div class="mt-2 alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>@Warning</strong> ' . $delete['Delete'] . '
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>';
-                    ?>
-
                     <form action="" method="post">
                         <div class="  mein-card mb-5">
                             <div class="container-fluid card my-5 pb-5">
@@ -287,111 +35,69 @@ if (isset($_POST['edit'])) {
                                 <div class="row mt-5 ">
                                     <div class="col-lg-6  ">
                                         <div class="in">
-                                            <input type="text" name="company_name" id="name" class=" w-100 py-2 mt-3" placeholder="Company Name" value="<?php
-                                                                                                                                                        if (isset($edit['edit_company_name'])) {
-                                                                                                                                                            echo $edit['edit_company_name'];
-                                                                                                                                                        }
-                                                                                                                                                        if (isset($emty['company_name'])) {
-                                                                                                                                                            echo $company_name;
-                                                                                                                                                        } ?>">
-                                            <span class="text-danger fs-6 "><?php if (isset($emty['company_name'])) echo $emty['company_name'] ?></span>
+                                            <input type="text" name="company_name" id="name" class=" w-100 py-2 mt-3" placeholder="Company Name" value=">
+                                            <span class=" text-danger fs-6 "></span>
                                         </div>
 
-                                        <div class="in">
-                                            <input type="text" name="address" id="address" class=" w-100 py-2 mt-3" placeholder="Address" value="<?php if (isset($edit['company_address'])) {
-                                                                                                                                                        echo $edit['company_address'];
-                                                                                                                                                    } ?>">
+                                        <div class=" in">
+                                            <input type="text" name="address" id="address" class=" w-100 py-2 mt-3" placeholder="Address" value="">
 
                                         </div>
                                         <div class="in">
-                                            <input type="number" name="phone" id="phone" class=" w-100 py-2 mt-3" placeholder="Telephone " value="<?php if (isset($edit['company_telephone'])) {
-                                                                                                                                                        echo $edit['company_telephone'];
-                                                                                                                                                    } ?>">
+                                            <input type="number" name="phone" id="phone" class=" w-100 py-2 mt-3" placeholder="Telephone " value="">
 
                                         </div>
 
                                         <div class="in">
-                                            <input type="number" name="contact" id="contact" class="w-100 py-2 mt-3" placeholder="Contact Number" value="<?php if (isset($edit['company_contact'])) {
-                                                                                                                                                                echo $edit['company_contact'];
-                                                                                                                                                            } ?>">
+                                            <input type="number" name="contact" id="contact" class="w-100 py-2 mt-3" placeholder="Contact Number" value="">
                                         </div>
                                         <div class="in">
-                                            <input type="text" name="company_city" id="company_city" class="put w-100 py-2 mt-3" placeholder="Company City " value="<?php if (isset($edit['company_city'])) {
-                                                                                                                                                                        echo $edit['company_city'];
-                                                                                                                                                                    } ?>">
+                                            <input type="text" name="company_city" id="company_city" class="put w-100 py-2 mt-3" placeholder="Company City " value="">
                                         </div>
 
                                         <div class="in">
-                                            <input type="text" name="company_state" id="company_state" class=" w-100 py-2 mt-3" placeholder="Company State" value="<?php if (isset($edit['company_state'])) {
-                                                                                                                                                                        echo $edit['company_state'];
-                                                                                                                                                                    } ?>">
+                                            <input type="text" name="company_state" id="company_state" class=" w-100 py-2 mt-3" placeholder="Company State" value="">
                                         </div>
 
                                         <div class="in">
-                                            <input type="text" name="direct" id="direct" class=" w-100 py-2 mt-3" placeholder="Direct " value="<?php if (isset($edit['company_direct'])) {
-                                                                                                                                                    echo $edit['company_direct'];
-                                                                                                                                                } ?>">
+                                            <input type="text" name="direct" id="direct" class=" w-100 py-2 mt-3" placeholder="Direct ">
                                         </div>
 
                                         <div class="in">
-                                            <input type="email" name="email" id="email" class=" w-100 py-2 mt-3" placeholder="Email " value="<?php if (isset($edit['company_email'])) {
-                                                                                                                                                    echo $edit['company_email'];
-                                                                                                                                                } ?>">
+                                            <input type="email" name="email" id="email" class=" w-100 py-2 mt-3" placeholder="Email ">
                                         </div>
 
 
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="in">
-                                            <input type="number" name="company_zipcode" id="company_zipcode" class=" w-100 py-2 mt-3" placeholder="Company ZipCode " value="<?php if (isset($edit['company_zipcode'])) {
-                                                                                                                                                                                echo $edit['company_zipcode'];
-                                                                                                                                                                            } ?>">
+                                            <input type="number" name="company_zipcode" id="company_zipcode" class=" w-100 py-2 mt-3" placeholder="Company ZipCode ">
                                         </div>
 
                                         <div class="in">
-                                            <input type="text" name="port" id="port" class=" w-100 py-2 mt-3" placeholder="Port Of Entry " value="<?php if (isset($edit['company_port_of_entry'])) {
-                                                                                                                                                        echo $edit['company_port_of_entry'];
-                                                                                                                                                    } ?>">
+                                            <input type="text" name="port" id="port" class=" w-100 py-2 mt-3" placeholder="Port Of Entry ">
                                         </div>
                                         <div class="in">
-                                            <input type="text" name="vessel" id="vessel" class=" w-100 py-2 mt-3" placeholder="Vessel Details" value="<?php if (isset($edit['company_vessel_detail'])) {
-                                                                                                                                                            echo $edit['company_vessel_detail'];
-                                                                                                                                                        } ?>">
+                                            <input type="text" name="vessel" id="vessel" class=" w-100 py-2 mt-3" placeholder="Vessel Details">
                                         </div>
                                         <div class="in">
-                                            <input type="text" name="trucking" id="trucking" class=" w-100 py-2 mt-3" placeholder="Trucking" value="<?php if (isset($edit['company_trucking'])) {
-                                                                                                                                                        echo $edit['company_trucking'];
-                                                                                                                                                    } ?>">
+                                            <input type="text" name="trucking" id="trucking" class=" w-100 py-2 mt-3" placeholder="Trucking">
                                         </div>
                                         <div class="in">
-                                            <input type="text" name="misc" id="misc" class=" w-100 py-2 mt-3" placeholder="Misc" value="<?php if (isset($edit['company_misc'])) {
-                                                                                                                                            echo $edit['company_misc'];
-                                                                                                                                        } ?>">
+                                            <input type="text" name="misc" id="misc" class=" w-100 py-2 mt-3" placeholder="Misc">
                                         </div>
                                         <div class="in">
-                                            <input type="number" name="total_cost" id="total_cost" class=" w-100 py-2 mt-3" placeholder="Total Cost" value="<?php if (isset($edit['total_cost'])) {
-                                                                                                                                                                echo $edit['total_cost'];
-                                                                                                                                                            } ?>">
+                                            <input type="number" name="total_cost" id="total_cost" class=" w-100 py-2 mt-3" placeholder="Total Cost">
                                         </div>
                                         <div class="in">
-                                            <input type="text" name="custom" id="custom" class=" w-100 py-2 mt-3" placeholder="Custom Freiht" value="<?php if (isset($edit['custom_frieght'])) {
-                                                                                                                                                            echo $edit['custom_frieght'];
-                                                                                                                                                        } ?>">
+                                            <input type="text" name="custom" id="custom" class=" w-100 py-2 mt-3" placeholder="Custom Freiht">
                                         </div>
 
 
 
 
-                                        <button type="submit" name="<?php if (isset($_POST['edit_delete']) && !empty($_POST['edit_delete']) && count($_POST['edit_delete']) == 1) {
-                                                                        echo "update";
-                                                                    } else {
-                                                                        echo 'submit';
-                                                                    }
-                                                                    ?>" class="save py-2"><?php if (isset($_POST['edit_delete']) && !empty($_POST['edit_delete']) && count($_POST['edit_delete']) == 1) {
-                                                                                                echo "update";
-                                                                                            } else {
-                                                                                                echo 'save';
-                                                                                            } ?></button>
+                                        <button type="submit" name="" class="save py-2">
+                                        </button>
                                     </div>
                                 </div>
 
@@ -424,8 +130,8 @@ if (isset($_POST['edit'])) {
                                                 <thead>
                                                     <tr>
                                                         <th>
-                                                            <!-- <input class="chack" type="checkbox"> -->
-                                                            <i class="fa-solid fa-plus toggle-checkbox "></i>
+
+
                                                         </th>
                                                         <th>S/no<i class="fa-solid fa-arrow-down px-2"></i></th>
                                                         <th>Date<i class="fa-solid fa-arrow-down px-2"></i></th>
@@ -454,64 +160,37 @@ if (isset($_POST['edit'])) {
 
                                                 <tbody>
 
-                                                    <?php
-                                                    // Establish a database connection (replace with your database connection code)
-                                                    $conn = mysqli_connect("localhost", "root", "", "forstcarusa");
 
-                                                    if (!$conn) {
-                                                        die("Connection failed: " . mysqli_connect_error());
-                                                    }
+                                                    <tr>
+                                                        <?php
+                                                        // Assuming you have fetched data from both tables into $row1 and $row2
 
-                                                    $select = "SELECT * FROM importer_details";
-                                                    $sel_sql = mysqli_query($conn, $select);
+                                                        ?>
+                                                        <td>
 
-                                                    if (!$sel_sql) {
-                                                        die("Query failed: " . mysqli_error($conn));
-                                                    }
+                                                        </td>
 
-                                                    $sel_num = mysqli_num_rows($sel_sql);
-                                                    $no = 1;
-
-                                                    while ($row = mysqli_fetch_assoc($sel_sql)) {
-                                                        // Process your query results here
-
-                                                    ?>
-                                                        <tr>
-                                                            <?php
-                                                            // Assuming you have fetched data from both tables into $row1 and $row2
-
-                                                            ?>
-                                                            <td>
-                                                                <input type="checkbox" name="edit_delete[] " class="text-input" value="<?php echo $row['importer_id'];  ?>">
-
-                                                            </td>
-
-                                                            <td class="font"><?php echo $no ?></td>
-                                                            <td class="font"><?php echo $row['added_on'] ?></td>
-                                                            <td><?php echo $row['company_name'] ?></td>
-                                                            <td><?php echo $row['company_address'] ?></td>
-                                                            <td><?php echo $row['company_telephone'] ?></td>
-                                                            <td><?php echo $row['company_contact'] ?></td>
-                                                            <td><?php echo $row['company_city'] ?></td>
-                                                            <td><?php echo $row['company_state'] ?></td>
-                                                            <td><?php echo $row['company_direct'] ?></td>
-                                                            <td><?php echo $row['company_email'] ?></td>
-                                                            <td><?php echo $row['company_zipcode'] ?></td>
-                                                            <td><?php echo $row['company_port_of_entry'] ?></td>
-                                                            <td><?php echo $row['company_vessel_detail'] ?></td>
-                                                            <td><?php echo $row['company_trucking'] ?></td>
-                                                            <td><?php echo $row['company_misc'] ?></td>
-                                                            <td><?php echo $row['total_cost'] ?></td>
-                                                            <td><?php echo $row['custom_frieght'] ?></td>
-                                                            <td><?php echo $row['added_by'] ?></td>
+                                                        <td class="font"></td>
+                                                        <td class="font"></td>
+                                                        <td>company_name'</td>
+                                                        <td>company_address'</td>
+                                                        <td>company_telephone'</td>
+                                                        <td>company_contact'</td>
+                                                        <td>company_city'</td>
+                                                        <td>company_state'</td>
+                                                        <td>company_direct'</td>
+                                                        <td>company_email'</td>
+                                                        <td>company_zipcode'</td>
+                                                        <td>company_port_of_entry'</td>
+                                                        <td>company_vessel_detail'</td>
+                                                        <td>company_trucking'</td>
+                                                        <td>company_misc'</td>
+                                                        <td>total_cost'</td>
+                                                        <td>custom_frieght'</td>
+                                                        <td>added_by'</td>
 
 
-                                                        </tr>
-                                                    <?php
-                                                        $no = $no + 1;
-                                                    }
-
-                                                    ?>
+                                                    </tr>
                                                 </tbody>
                                             </table>
 

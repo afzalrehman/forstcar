@@ -1,317 +1,3 @@
-<?php
-
-session_start();
-require 'config.php';
-global $conn;
-if (!isset($_SESSION['user_fullname'])) {
-    echo "You are logged out";
-    header('location:login.php');
-}
-$succses = array();
-$warning = array();
-$emty = array();
-
-
-if (isset($_POST['submit'])) {
-    $model_no = mysqli_real_escape_string($conn, $_POST['model_no']);
-    $year = mysqli_real_escape_string($conn, $_POST['year']);
-    $fc_body = mysqli_real_escape_string($conn, $_POST['fc_body']);
-    $body_length = mysqli_real_escape_string($conn, $_POST['body_length']);
-    $body_dimension = mysqli_real_escape_string($conn, $_POST['body_dimension']);
-    $body_side_door = mysqli_real_escape_string($conn, $_POST['body_side_door']);
-    $body_rear_door = mysqli_real_escape_string($conn, $_POST['body_rear_door']);
-    $body_weight = mysqli_real_escape_string($conn, $_POST['body_weight']);
-    $body_volume = mysqli_real_escape_string($conn, $_POST['body_volume']);
-    $body_temp = mysqli_real_escape_string($conn, $_POST['body_temp']);
-    $floor = mysqli_real_escape_string($conn, $_POST['floor']);
-    $e_track = mysqli_real_escape_string($conn, $_POST['e_track']);
-    $e_plate = mysqli_real_escape_string($conn, $_POST['e_plate']);
-    $body_accessories = mysqli_real_escape_string($conn, $_POST['body_accessories']);
-    $gvwr = mysqli_real_escape_string($conn, $_POST['gvwr']);
-    $wbl = mysqli_real_escape_string($conn, $_POST['wbl']);
-    $cal = mysqli_real_escape_string($conn, $_POST['cal']);
-    $no_of_units = mysqli_real_escape_string($conn, $_POST['no_of_units']);
-    $chassis_frame = mysqli_real_escape_string($conn, $_POST['chassis_frame']);
-    $cost_quoted = mysqli_real_escape_string($conn, $_POST['cost_quoted']);
-    $misc = mysqli_real_escape_string($conn, $_POST['misc']);
-    $eutectic_plates = mysqli_real_escape_string($conn, $_POST['eutectic_plates']);
-    $refrigeration = mysqli_real_escape_string($conn, $_POST['refrigeration']);
-    $additional_details = mysqli_real_escape_string($conn, $_POST['additional_details']);
-    $special_requirements = mysqli_real_escape_string($conn, $_POST['special_requirements']);
-    $fuel_Type = mysqli_real_escape_string($conn, $_POST['fuel_Type']);
-    $unit_Custom = mysqli_real_escape_string($conn, $_POST['unit_Custom']);
-
-    $condensor = mysqli_real_escape_string($conn, $_POST['condensor']);
-    $condensor_unit = mysqli_real_escape_string($conn, $_POST['condensor_unit']);
-    $power = mysqli_real_escape_string($conn, $_POST['power']);
-    $refrigerant = mysqli_real_escape_string($conn, $_POST['refrigerant']);
-    $compressor = mysqli_real_escape_string($conn, $_POST['compressor']);
-    $volt = mysqli_real_escape_string($conn, $_POST['volt']);
-    $co2_eq = mysqli_real_escape_string($conn, $_POST['co2_eq']);
-    $press_max = mysqli_real_escape_string($conn, $_POST['press_max']);
-    $decible = mysqli_real_escape_string($conn, $_POST['decible']);
-    $GWP = mysqli_real_escape_string($conn, $_POST['GWP']);
-    $KG_LB = mysqli_real_escape_string($conn, $_POST['KG/LB']);
-    $oil = mysqli_real_escape_string($conn, $_POST['oil']);
-    $pressmen = mysqli_real_escape_string($conn, $_POST['pressmen']);
-    $export = mysqli_real_escape_string($conn, $_POST['export']);
-    $disp_m3_h = mysqli_real_escape_string($conn, $_POST['disp_m3/h']);
-    $moA_Amp = mysqli_real_escape_string($conn, $_POST['moA/Amp']);
-    $Mcc_Amp = mysqli_real_escape_string($conn, $_POST['Mcc/Amp']);
-    $LRA_Amp = mysqli_real_escape_string($conn, $_POST['LRA/Amp']);
-    $MRA_Amp = mysqli_real_escape_string($conn, $_POST['MRA/Amp']);
-    $RLAA_Amp = mysqli_real_escape_string($conn, $_POST['RLAA/Amp']);
-
-    // if (empty($name)) {
-    //     $emty['model_no'] = 'Please Fill The Model No';
-    // } else {
-
-    $query = "SELECT * FROM `body_details` WHERE `model_no` = '$model_no'";
-    $sql = mysqli_query($conn, $query);
-    $row = mysqli_fetch_row($sql);
-    if ($row > 0) {
-        // Duplicate data found
-        $warning['warning'] = "Model No already exists in Body Details.";
-    } else {
-
-        $query = "SELECT * FROM `eutectic_details` WHERE `model_no` = '$model_no'";
-        $sql = mysqli_query($conn, $query);
-        $row = mysqli_fetch_row($sql);
-        if ($row > 0) {
-            // Duplicate data found
-            $warning['warning'] = "Model No already exists in Eutectic Details.";
-        } else {
-            $insertBody = "INSERT INTO `body_details`(`model_no`, `year`, `fc_body`, `body_length`, `body_dimension`, `body_side_door`, `body_rear_door`, `body_weight`, 
-            `body_volume`, `body_temp`, `floor`, `e_track`, `e_plate`, `body_accessories`, `gvwr`, `wbl`, `cal`, `no_of_units`, `manufactured_on`, `chassis_frame`, 
-            `cost_quoted`, `misc`, `eutectic_plates`, `refrigeration`, `additional_details`, `special_requirements`, `fuel_Type`, `unit_Custom`, `added_on`, `added_by`) 
-            VALUES ('$model_no', '$year',  '$fc_body', '$body_length', '$body_dimension', '$body_side_door', '$body_rear_door', '$body_weight', '$body_volume', 
-            '$body_temp', '$floor', '$e_track', '$e_plate', '$body_accessories', '$gvwr', '$wbl', '$cal', '$no_of_units', NOW(), '$chassis_frame', '$cost_quoted', '$misc',
-            '$eutectic_plates', '$refrigeration', '$additional_details', '$special_requirements', '$fuel_Type', '$unit_Custom', NOW(), 'admin')";
-
-            $bodyInsert = mysqli_query($conn, $insertBody);
-
-            if ($bodyInsert) {
-                $insertEutectic = "INSERT INTO `eutectic_details`(`condensor`, `condensor_unit`, `power`, `refrigerant`, `compressor`, `volt`, `co2_eq`, `press_max`, 
-                `decible`, `production_date`, `model_no`, `GWP`, `KG/LB`, `oil`, `pressmen`, `export`, `disp_m3/h`, `moA/Amp`, `Mcc/Amp`, `LRA/Amp`, `MRA/Amp`, `RLAA/Amp`) 
-                VALUES ('$condensor', '$condensor_unit', '$power', '$refrigerant', '$compressor', '$volt', '$co2_eq', '$press_max', '$decible', NOW(), '$model_no', '$GWP',
-                '$KG_LB', '$oil', '$pressmen', '$export', '$disp_m3_h', '$moA_Amp', '$Mcc_Amp', '$LRA_Amp', '$MRA_Amp', '$RLAA_Amp')";
-
-                $eutecticInsert = mysqli_query($conn, $insertEutectic);
-
-                if ($eutecticInsert) {
-                    $succses['succses'] = "Data Inserted Successfully.";
-                }
-            } else {
-                $warning['warning'] = "Data Not Inserted.";
-            }
-        }
-    }
-}
-
-
-
-
-
-// <!-- =========================delete Query====================== -->
-if (isset($_POST['delete_btn'])) {
-    if (isset($_POST['chack_btn_delete']) || !empty($_POST['chack_btn_delete'])) {
-        $model_nos = $_POST['chack_btn_delete'];
-        $escaped_model_nos = array_map([$conn, 'real_escape_string'], $model_nos);
-        $model_no_list = "'" . implode("', '", $escaped_model_nos) . "'";
-
-        $delete_query_table1 = "DELETE FROM `body_details` WHERE body_id IN ($model_no_list)";
-        $delete_query_table2 = "DELETE FROM `eutectic_details` WHERE eutectic_id IN ($model_no_list)";
-
-        if ($conn->query($delete_query_table1) && $conn->query($delete_query_table2)) {
-            $succses['succses'] = 'Data Deleted Successfully!';
-        } else {
-            $warning['warning'] = 'Failed to delete data.';
-        }
-    } else {
-        $warning['warning'] = "Please check the checkboxes to delete.";
-    }
-}
-
-
-
-
-
-
-
-// <!-- =========================SELECT QUERY====================== -->
-$edit = array();
-// Check if the edit button is clicked
-if (isset($_POST['edit'])) {
-    // Check if at least one checkbox is checked
-    if (isset($_POST['edit_delete']) && !empty($_POST['edit_delete']) && count($_POST['edit_delete']) == 1) {
-        // Get the selected ID
-        $selectedId = $_POST['edit_delete'][0];
-
-        // Establish a database connection (replace with your database connection code)
-
-
-        // Prepare and execute SQL query
-        $selectsql = "SELECT * FROM `body_details`
-        INNER JOIN `eutectic_details` ON body_details.model_no = eutectic_details.model_no";
-        $resultselect = mysqli_query($conn, $selectsql);
-
-        if ($resultselect) {
-            // Fetch the data
-            $row = mysqli_fetch_assoc($resultselect);
-            $edit['model_no'] = $row['model_no'];
-            $edit['year'] = $row['year'];
-            $edit['fc_body'] = $row['fc_body'];
-            $edit['body_length'] = $row['body_length'];
-            $edit['body_dimension'] = $row['body_dimension'];
-            $edit['body_side_door'] = $row['body_side_door'];
-            $edit['body_rear_door'] = $row['body_rear_door'];
-            $edit['body_weight'] = $row['body_weight'];
-            $edit['body_volume'] = $row['body_volume'];
-            $edit['body_temp'] = $row['body_temp'];
-            $edit['floor'] = $row['floor'];
-            $edit['e_track'] = $row['e_track'];
-            $edit['e_plate'] = $row['e_plate'];
-            $edit['body_accessories'] = $row['body_accessories'];
-            $edit['gvwr'] = $row['gvwr'];
-            $edit['wbl'] = $row['wbl'];
-            $edit['cal'] = $row['cal'];
-            $edit['no_of_units'] = $row['no_of_units'];
-            $edit['manufactured_on'] = $row['manufactured_on'];
-            $edit['chassis_frame'] = $row['chassis_frame'];
-            $edit['cost_quoted'] = $row['cost_quoted'];
-            $edit['misc'] = $row['misc'];
-            $edit['eutectic_plates'] = $row['eutectic_plates'];
-            $edit['refrigeration'] = $row['refrigeration'];
-            $edit['additional_details'] = $row['additional_details'];
-            $edit['special_requirements'] = $row['special_requirements'];
-            $edit['fuel_Type'] = $row['fuel_Type'];
-            $edit['unit_Custom'] = $row['unit_Custom'];
-            $edit['condensor'] = $row['condensor'];
-            $edit['condensor_unit'] = $row['condensor_unit'];
-            $edit['power'] = $row['power'];
-            $edit['refrigerant'] = $row['refrigerant'];
-            $edit['compressor'] = $row['compressor'];
-            $edit['volt'] = $row['volt'];
-            $edit['co2_eq'] = $row['co2_eq'];
-            $edit['press_max'] = $row['press_max'];
-            $edit['decible'] = $row['decible'];
-            $edit['production_date'] = $row['production_date'];
-            $edit['model_no'] = $row['model_no'];
-            $edit['GWP'] = $row['GWP'];
-            $edit['KG/LB'] = $row['KG/LB'];
-            $edit['oil'] = $row['oil'];
-            $edit['pressmen'] = $row['pressmen'];
-            $edit['export'] = $row['export'];
-            $edit['disp_m3/h'] = $row['disp_m3/h'];
-            $edit['moA/Amp'] = $row['moA/Amp'];
-            $edit['Mcc/Amp'] = $row['Mcc/Amp'];
-            $edit['LRA/Amp'] = $row['LRA/Amp'];
-            $edit['MRA/Amp'] = $row['MRA/Amp'];
-            $edit['RLAA/Amp'] = $row['RLAA/Amp'];
-        } else {
-            echo "Error: " . mysqli_error($conn);
-        }
-
-        // Close the database connection
-        mysqli_close($conn);
-    } else {
-        echo '<script>alert("Please check exactly one checkbox!");</script>';
-    }
-}
-
-
-
-
-// <!-- =========================UPDATE QUERY====================== -->
-if (isset($_POST['update'])) {
-    $model_no = mysqli_real_escape_string($conn, $_POST['model_no']);
-    $year = mysqli_real_escape_string($conn, $_POST['year']);
-    $fc_body = mysqli_real_escape_string($conn, $_POST['fc_body']);
-    $body_length = mysqli_real_escape_string($conn, $_POST['body_length']);
-    $body_dimension = mysqli_real_escape_string($conn, $_POST['body_dimension']);
-    $body_side_door = mysqli_real_escape_string($conn, $_POST['body_side_door']);
-    $body_rear_door = mysqli_real_escape_string($conn, $_POST['body_rear_door']);
-    $body_weight = mysqli_real_escape_string($conn, $_POST['body_weight']);
-    $body_volume = mysqli_real_escape_string($conn, $_POST['body_volume']);
-    $body_temp = mysqli_real_escape_string($conn, $_POST['body_temp']);
-    $floor = mysqli_real_escape_string($conn, $_POST['floor']);
-    $e_track = mysqli_real_escape_string($conn, $_POST['e_track']);
-    $e_plate = mysqli_real_escape_string($conn, $_POST['e_plate']);
-    $body_accessories = mysqli_real_escape_string($conn, $_POST['body_accessories']);
-    $gvwr = mysqli_real_escape_string($conn, $_POST['gvwr']);
-    $wbl = mysqli_real_escape_string($conn, $_POST['wbl']);
-    $cal = mysqli_real_escape_string($conn, $_POST['cal']);
-    $no_of_units = mysqli_real_escape_string($conn, $_POST['no_of_units']);
-    $chassis_frame = mysqli_real_escape_string($conn, $_POST['chassis_frame']);
-    $cost_quoted = mysqli_real_escape_string($conn, $_POST['cost_quoted']);
-    $misc = mysqli_real_escape_string($conn, $_POST['misc']);
-    $eutectic_plates = mysqli_real_escape_string($conn, $_POST['eutectic_plates']);
-    $refrigeration = mysqli_real_escape_string($conn, $_POST['refrigeration']);
-    $additional_details = mysqli_real_escape_string($conn, $_POST['additional_details']);
-    $special_requirements = mysqli_real_escape_string($conn, $_POST['special_requirements']);
-    $fuel_Type = mysqli_real_escape_string($conn, $_POST['fuel_Type']);
-    $unit_Custom = mysqli_real_escape_string($conn, $_POST['unit_Custom']);
-
-    $condensor = mysqli_real_escape_string($conn, $_POST['condensor']);
-    $condensor_unit = mysqli_real_escape_string($conn, $_POST['condensor_unit']);
-    $power = mysqli_real_escape_string($conn, $_POST['power']);
-    $refrigerant = mysqli_real_escape_string($conn, $_POST['refrigerant']);
-    $compressor = mysqli_real_escape_string($conn, $_POST['compressor']);
-    $volt = mysqli_real_escape_string($conn, $_POST['volt']);
-    $co2_eq = mysqli_real_escape_string($conn, $_POST['co2_eq']);
-    $press_max = mysqli_real_escape_string($conn, $_POST['press_max']);
-    $decible = mysqli_real_escape_string($conn, $_POST['decible']);
-    $GWP = mysqli_real_escape_string($conn, $_POST['GWP']);
-    $KG_LB = mysqli_real_escape_string($conn, $_POST['KG/LB']);
-    $oil = mysqli_real_escape_string($conn, $_POST['oil']);
-    $pressmen = mysqli_real_escape_string($conn, $_POST['pressmen']);
-    $export = mysqli_real_escape_string($conn, $_POST['export']);
-    $disp_m3_h = mysqli_real_escape_string($conn, $_POST['disp_m3/h']);
-    $moA_Amp = mysqli_real_escape_string($conn, $_POST['moA/Amp']);
-    $Mcc_Amp = mysqli_real_escape_string($conn, $_POST['Mcc/Amp']);
-    $LRA_Amp = mysqli_real_escape_string($conn, $_POST['LRA/Amp']);
-    $MRA_Amp = mysqli_real_escape_string($conn, $_POST['MRA/Amp']);
-    $RLAA_Amp = mysqli_real_escape_string($conn, $_POST['RLAA/Amp']);
-
-
-    $update_body = "UPDATE `body_details` SET `model_no`='$model_no',`year`='$year', `fc_body`='$fc_body', `body_length`='$body_length', `body_dimension`='$body_dimension', 
-    `body_side_door`='$body_side_door', `body_rear_door`='$body_rear_door', `body_weight`='$body_weight', `body_volume`='$body_volume', `body_temp`='$body_temp', 
-    `floor`='$floor', `e_track`='$e_track', `e_plate`='$e_plate', `body_accessories`='$body_accessories', `gvwr`='$gvwr', `wbl`='$wbl', `cal`='$cal', 
-    `no_of_units`='$no_of_units', `manufactured_on`=NOW(), `chassis_frame`='$chassis_frame', `cost_quoted`='$cost_quoted', `misc`='$misc', `eutectic_plates`='$eutectic_plates', 
-    `refrigeration`='$refrigeration', `additional_details`='$additional_details', `special_requirements`='$special_requirements', `fuel_Type`='$fuel_Type', `unit_Custom`='$unit_Custom', 
-    `updated_on`=NOW(), `updated_by`='Admin'  WHERE body_id";
-
-    // $body_query = mysqli_query($conn, $update_body);
-
-    if (mysqli_query($conn, $update_body)) {
-
-        $update_eutectic = "UPDATE `eutectic_details` SET `condensor`='$condensor',`condensor_unit`='$condensor_unit',`power`='$power',`refrigerant`='$refrigerant',
-        `compressor`='$compressor',`volt`='$volt',`co2_eq`='$co2_eq',`press_max`='$press_max',`decible`='$decible',`production_date`=NOW(), `model_no`='$model_no',
-        `GWP`='$GWP',`KG/LB`='$KG_LB',`oil`='$oil',`pressmen`='$pressmen',`export`='$export',`disp_m3/h`='$disp_m3_h',`moA/Amp`='$moA_Amp',
-        `Mcc/Amp`='$Mcc_Amp',`LRA/Amp`='$LRA_Amp',`MRA/Amp`='$MRA_Amp',`RLAA/Amp`='$RLAA_Amp' WHERE eutectic_id";
-
-        // $eutectic_query = mysqli_query($conn, $update_eutectic);
-
-        if (mysqli_query($conn, $update_eutectic)) {
-            $succses['succses'] = "Data Updated Successfully.";
-        }
-    } else {
-        $warning['warning'] = "Data Is Not Updated.";
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -350,23 +36,6 @@ if (isset($_POST['update'])) {
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid my-5 pb-5">
-
-                    <?php
-                    if (isset($succses['succses']))
-                        echo '
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>@succsesfully!</strong> ' . $succses['succses'] . '
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>';
-
-                    if (isset($warning['warning']))
-                        echo '
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>@Error!</strong> ' . $warning['warning'] . '
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>';
-                    ?>
-
                     <div class="tab-content" id="pills-tabContent">
                         <div class="row">
                             <div class="col-12">
@@ -382,54 +51,34 @@ if (isset($_POST['update'])) {
                                                     <div class="col-lg-6">
                                                         <div class="mb-3">
                                                             <label for="model_no" class="form-label fw-semibold">Model No</label>
-                                                            <input type="text" class="w-100" name="model_no" placeholder="Model No" value="<?php
-                                                                                                                                            if (isset($edit['model_no'])) {
-                                                                                                                                                echo $edit['model_no'];
-                                                                                                                                            } elseif (isset($emty['model_no'])) {
-                                                                                                                                                echo $model_no;
-                                                                                                                                            } ?>">
-                                                            <span class="text-danger fs-6 "><?php if (isset($emty['model_no'])) echo $emty['model_no'] ?></span>
+                                                            <input type="text" class="w-100" name="model_no" placeholder="Model No" >
+                                                            <span class="text-danger fs-6 "></span>
                                                         </div>
-                                                        <!-- <div class="mb-3">
+                                                        <div class="mb-3">
                                                             <label for="body_length" class="form-label fw-semibold">Body Size</label>
                                                             <input type="text" class="w-100" name="body_length" placeholder="Body Size">
-                                                        </div> -->
+                                                        </div>
                                                         <div class="mb-3">
                                                             <label for="unit_Custom" class="form-label fw-semibold">Unit Custom</label>
-                                                            <input type="text" class="w-100" name="unit_Custom" placeholder="Unit: Custom" value="<?php
-                                                                                                                                                    if (isset($edit['unit_Custom'])) {
-                                                                                                                                                        echo $edit['unit_Custom'];
-                                                                                                                                                    } ?>">
+                                                            <input type="text" class="w-100" name="unit_Custom" placeholder="Unit: Custom" >
                                                         </div>
                                                         <div class=" mb-3">
                                                             <label for="additional_details" class="form-label fw-semibold">Additional Details</label>
-                                                            <input type="text" class="w-100" name="additional_details" placeholder="Additional Details" value="<?php
-                                                                                                                                                                if (isset($edit['additional_details'])) {
-                                                                                                                                                                    echo $edit['additional_details'];
-                                                                                                                                                                } ?>">
+                                                            <input type="text" class="w-100" name="additional_details" placeholder="Additional Details" >
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="chassis_frame" class="form-label fw-semibold">Chassis Frame</label>
-                                                            <input type="text" class="w-100" name="chassis_frame" placeholder="Chassis Frame" value="<?php
-                                                                                                                                                        if (isset($edit['chassis_frame'])) {
-                                                                                                                                                            echo $edit['chassis_frame'];
-                                                                                                                                                        } ?>">
+                                                            <input type="text" class="w-100" name="chassis_frame" placeholder="Chassis Frame" >
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="compressor" class="form-label fw-semibold">Compressor</label>
-                                                            <input type="text" class="w-100" name="compressor" placeholder="Compressor" value="<?php
-                                                                                                                                                if (isset($edit['compressor'])) {
-                                                                                                                                                    echo $edit['compressor'];
-                                                                                                                                                } ?>">
+                                                            <input type="text" class="w-100" name="compressor" placeholder="Compressor" >
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6">
                                                         <div class="mb-3">
                                                             <label for="refrigerant" class="form-label fw-semibold">refrigerant</label>
-                                                            <input type="text" class="w-100" name="refrigerant" placeholder="Refrigerant" value="<?php
-                                                                                                                                                    if (isset($edit['refrigerant'])) {
-                                                                                                                                                        echo $edit['refrigerant'];
-                                                                                                                                                    } ?>">
+                                                            <input type="text" class="w-100" name="refrigerant" placeholder="Refrigerant" >
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="power" class="form-label fw-semibold">Power</label>
@@ -437,68 +86,39 @@ if (isset($_POST['update'])) {
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="condensor" class="form-label fw-semibold">Condenser</label>
-                                                            <input type="text" class="w-100" name="condensor" placeholder="Condenser" value="<?php
-                                                                                                                                                if (isset($edit['condensor'])) {
-                                                                                                                                                    echo $edit['condensor'];
-                                                                                                                                                } ?>">
+                                                            <input type="text" class="w-100" name="condensor" placeholder="Condenser" >
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="eutectic_plates" class="form-label fw-semibold">Eutectic Plates</label>
-                                                            <input type="text" class="w-100" name="eutectic_plates" placeholder="Eutectic Plates" value="<?php
-                                                                                                                                                            if (isset($edit['eutectic_plates'])) {
-                                                                                                                                                                echo $edit['eutectic_plates'];
-                                                                                                                                                            } ?>">
+                                                            <input type="text" class="w-100" name="eutectic_plates" placeholder="Eutectic Plates" >
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="misc" class="form-label fw-semibold">MISC</label>
-                                                            <input type="text" class="w-100" name="misc" placeholder="MISC" value="<?php
-                                                                                                                                    if (isset($edit['MISC'])) {
-                                                                                                                                        echo $edit['MISC'];
-                                                                                                                                    } ?>">
+                                                            <input type="text" class="w-100" name="misc" placeholder="MISC" >
                                                         </div>
                                                     </div>
 
 
-                                                    <!-- 2. Wakl-in/Rear-door Body -->
+                                                    2. Wakl-in/Rear-door Body
                                                     <div class="row my-5">
                                                         <h5 class="card-title fw-semibold">2. Wakl-in/Rear-door Body</h5>
                                                         <hr class="p-0">
 
                                                         <div class="col-lg-4 mt-3">
                                                             <p>Body Length in Feet</p>
-                                                            <input class="form-check-input bodyFeetCheck" type="checkbox" name="body_length" value="<?php
-                                                                                                                                                    if (isset($edit['body_length'])) {
-                                                                                                                                                        echo $edit['body_length'];
-                                                                                                                                                    } else {
-                                                                                                                                                        echo '14';
-                                                                                                                                                    } ?>">
+                                                            <input class="form-check-input bodyFeetCheck" type="checkbox" name="body_length" >
                                                             <label class="form-check-label" for="bodyFeetCheck">
                                                                 14
                                                             </label>
-                                                            <input class="form-check-input bodyFeetCheck ms-3" type="checkbox" checked name="body_length" value="<?php
-                                                                                                                                                                    if (isset($edit['body_length'])) {
-                                                                                                                                                                        echo $edit['body_length'];
-                                                                                                                                                                    } else {
-                                                                                                                                                                        echo '16';
-                                                                                                                                                                    } ?>">
+                                                            <input class="form-check-input bodyFeetCheck ms-3" type="checkbox" checked name="body_length" >
                                                             <label class="form-check-label" for="bodyFeetCheck">
                                                                 16
                                                             </label>
-                                                            <input class="form-check-input bodyFeetCheck ms-3" type="checkbox" name="body_length" value="<?php
-                                                                                                                                                            if (isset($edit['body_length'])) {
-                                                                                                                                                                echo $edit['body_length'];
-                                                                                                                                                            } else {
-                                                                                                                                                                echo '18';
-                                                                                                                                                            } ?>">
+                                                            <input class="form-check-input bodyFeetCheck ms-3" type="checkbox" name="body_length" >
                                                             <label class="form-check-label" for="bodyFeetCheck">
                                                                 18
                                                             </label>
-                                                            <input class="form-check-input bodyFeetCheck ms-3" type="checkbox" name="body_length" value="<?php
-                                                                                                                                                            if (isset($edit['body_length'])) {
-                                                                                                                                                                echo $edit['body_length'];
-                                                                                                                                                            } else {
-                                                                                                                                                                echo '20';
-                                                                                                                                                            } ?>">
+                                                            <input class="form-check-input bodyFeetCheck ms-3" type="checkbox" name="body_length" >
                                                             <label class="form-check-label" for="bodyFeetCheck">
                                                                 20
                                                             </label>
@@ -507,23 +127,13 @@ if (isset($_POST['update'])) {
                                                         <div class="col-lg-4 mt-3">
                                                             <p>Refrigeration</p>
                                                             <div class="form-check">
-                                                                <input class="form-check-input refriCheck" type="checkbox" checked name="refrigeration" value="<?php
-                                                                                                                                                                if (isset($edit['refrigeration'])) {
-                                                                                                                                                                    echo $edit['refrigeration'];
-                                                                                                                                                                } else {
-                                                                                                                                                                    echo 'Low Temp - IceCream/Frozen';
-                                                                                                                                                                } ?>">
+                                                                <input class="form-check-input refriCheck" type="checkbox" checked name="refrigeration" >
                                                                 <label class="form-check-label" for="refriCheck">
                                                                     Low Temp - IceCream/Frozen
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input refriCheck" type="checkbox" name="refrigeration" value="<?php
-                                                                                                                                                        if (isset($edit['refrigeration'])) {
-                                                                                                                                                            echo $edit['refrigeration'];
-                                                                                                                                                        } else {
-                                                                                                                                                            echo 'Mid Temp - Fresh/Cold';
-                                                                                                                                                        } ?>">
+                                                                <input class="form-check-input refriCheck" type="checkbox" name="refrigeration" >
                                                                 <label class="form-check-label" for="refriCheck">
                                                                     Mid Temp - Fresh/Cold
                                                                 </label>
@@ -533,34 +143,19 @@ if (isset($_POST['update'])) {
                                                         <div class="col-lg-4 mt-3">
                                                             <p>Rear Door</p>
                                                             <div class="form-check">
-                                                                <input class="form-check-input rearCheck" type="checkbox" checked name="body_rear_door" value="<?php
-                                                                                                                                                                if (isset($edit['body_rear_door'])) {
-                                                                                                                                                                    echo $edit['body_rear_door'];
-                                                                                                                                                                } else {
-                                                                                                                                                                    echo 'Center Door';
-                                                                                                                                                                } ?>">
+                                                                <input class="form-check-input rearCheck" type="checkbox" checked name="body_rear_door" >
                                                                 <label class="form-check-label" for="flexCheckDefault">
                                                                     Center Door
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input rearCheck" type="checkbox" name="body_rear_door" value="<?php
-                                                                                                                                                        if (isset($edit['body_rear_door'])) {
-                                                                                                                                                            echo $edit['body_rear_door'];
-                                                                                                                                                        } else {
-                                                                                                                                                            echo 'Double Door';
-                                                                                                                                                        } ?>">
+                                                                <input class="form-check-input rearCheck" type="checkbox" name="body_rear_door" >
                                                                 <label class="form-check-label" for="flexCheckChecked">
                                                                     Double Door
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input rearCheck" type="checkbox" name="body_rear_door" valuevalue="<?php
-                                                                                                                                                            if (isset($edit['body_rear_door'])) {
-                                                                                                                                                                echo $edit['body_rear_door'];
-                                                                                                                                                            } else {
-                                                                                                                                                                echo 'Tri-fold Door';
-                                                                                                                                                            } ?>">
+                                                                <input class="form-check-input rearCheck" type="checkbox" name="body_rear_door" >
                                                                 <label class="form-check-label" for="rearCheck">
                                                                     Tri-fold Door
                                                                 </label>
@@ -570,23 +165,13 @@ if (isset($_POST['update'])) {
                                                         <div class="col-lg-4 mt-5">
                                                             <p>Side Door</p>
                                                             <div class="form-check">
-                                                                <input class="form-check-input sideCheck" type="checkbox" checked name="body_side_door" value="<?php
-                                                                                                                                                                if (isset($edit['body_side_door'])) {
-                                                                                                                                                                    echo $edit['body_side_door'];
-                                                                                                                                                                } else {
-                                                                                                                                                                    echo 'Yes';
-                                                                                                                                                                } ?>">
+                                                                <input class="form-check-input sideCheck" type="checkbox" checked name="body_side_door" >
                                                                 <label class="form-check-label" for="sideCheck">
                                                                     Yes
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input sideCheck" type="checkbox" name="body_side_door" value="<?php
-                                                                                                                                                        if (isset($edit['body_side_door'])) {
-                                                                                                                                                            echo $edit['body_side_door'];
-                                                                                                                                                        } else {
-                                                                                                                                                            echo 'No';
-                                                                                                                                                        } ?>">
+                                                                <input class="form-check-input sideCheck" type="checkbox" name="body_side_door" >
                                                                 <label class="form-check-label" for="sideCheck">
                                                                     No
                                                                 </label>
@@ -596,23 +181,13 @@ if (isset($_POST['update'])) {
                                                         <div class="col-lg-4 mt-5">
                                                             <p>E-Track (Tall Body Cargo Control)</p>
                                                             <div class="form-check">
-                                                                <input class="form-check-input eTrackCheck" type="checkbox" checked name="e_track" value="<?php
-                                                                                                                                                            if (isset($edit['e_track'])) {
-                                                                                                                                                                echo $edit['e_track'];
-                                                                                                                                                            } else {
-                                                                                                                                                                echo 'Yes';
-                                                                                                                                                            } ?>">
+                                                                <input class="form-check-input eTrackCheck" type="checkbox" checked name="e_track" >
                                                                 <label class="form-check-label" for="e_track">
                                                                     Yes
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input eTrackCheck" type="checkbox" name="e_track" value="<?php
-                                                                                                                                                    if (isset($edit['e_track'])) {
-                                                                                                                                                        echo $edit['e_track'];
-                                                                                                                                                    } else {
-                                                                                                                                                        echo 'No';
-                                                                                                                                                    } ?>">
+                                                                <input class="form-check-input eTrackCheck" type="checkbox" name="e_track" >
                                                                 <label class="form-check-label" for="e_track">
                                                                     No
                                                                 </label>
@@ -622,34 +197,19 @@ if (isset($_POST['update'])) {
                                                         <div class="col-lg-4 mt-5">
                                                             <p>Floor</p>
                                                             <div class="form-check">
-                                                                <input class="form-check-input floorCheck" type="checkbox" checked name="floor" value="<?php
-                                                                                                                                                        if (isset($edit['floor'])) {
-                                                                                                                                                            echo $edit['floor'];
-                                                                                                                                                        } else {
-                                                                                                                                                            echo 'Non-Slip Textured';
-                                                                                                                                                        } ?>">
+                                                                <input class="form-check-input floorCheck" type="checkbox" checked name="floor" >
                                                                 <label class="form-check-label" for="floor">
                                                                     Non-Slip Textured
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input floorCheck" type="checkbox" name="floor" value="<?php
-                                                                                                                                                if (isset($edit['floor'])) {
-                                                                                                                                                    echo $edit['floor'];
-                                                                                                                                                } else {
-                                                                                                                                                    echo 'Taised Channel';
-                                                                                                                                                } ?>">
+                                                                <input class="form-check-input floorCheck" type="checkbox" name="floor" >
                                                                 <label class="form-check-label" for="floor">
                                                                     Taised Channel
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input floorCheck" type="checkbox" name="floor" value="<?php
-                                                                                                                                                if (isset($edit['floor'])) {
-                                                                                                                                                    echo $edit['floor'];
-                                                                                                                                                } else {
-                                                                                                                                                    echo 'Steel Reinforced Diamond Palte';
-                                                                                                                                                } ?>">
+                                                                <input class="form-check-input floorCheck" type="checkbox" name="floor" >
                                                                 <label class="form-check-label" for="floor">
                                                                     Steel Reinforced Diamond Palte
                                                                 </label>
@@ -668,23 +228,13 @@ if (isset($_POST['update'])) {
                                                         <div class="col-lg-4 mt-3">
                                                             <p>Temperature</p>
                                                             <div class="form-check">
-                                                                <input class="form-check-input temperaCheck" type="checkbox" checked name="body_temp" value="<?php
-                                                                                                                                                                if (isset($edit['body_temp'])) {
-                                                                                                                                                                    echo $edit['body_temp'];
-                                                                                                                                                                } else {
-                                                                                                                                                                    echo 'Low & Mid Temp';
-                                                                                                                                                                } ?>">
+                                                                <input class="form-check-input temperaCheck" type="checkbox" checked name="body_temp" >
                                                                 <label class="form-check-label" for="body_temp">
                                                                     Low & Mid Temp
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input temperaCheck" type="checkbox" name="body_temp" value="<?php
-                                                                                                                                                        if (isset($edit['body_temp'])) {
-                                                                                                                                                            echo $edit['body_temp'];
-                                                                                                                                                        } else {
-                                                                                                                                                            echo 'Low & Mid Temp & Dry';
-                                                                                                                                                        } ?>">
+                                                                <input class="form-check-input temperaCheck" type="checkbox" name="body_temp" >
                                                                 <label class="form-check-label" for="body_temp">
                                                                     Low & Mid Temp & Dry
                                                                 </label>
