@@ -3,16 +3,13 @@ include "./includes/header.php";
 include "./includes/navbar.php";
 include "./includes/sidebar.php";
 ?>
-<div class="container-fluid">
+<div class="container-fluid px-4">
     <div class="row my-5">
-
-
-
         <div class="col-lg-12 ">
             <div class="card">
                 <div class="row">
                     <div class="col-lg-3 col-md-3 text-start py-3 px-4">
-                        <p class="font student"> User Vewi Details</p>
+                        <p class="font student"> Forcars usa body details</p>
                     </div>
                     <div class="col-lg-9 col-md-9 py-3 ">
                         <div class="btn-edit-delete1 text-end px-1">
@@ -63,6 +60,7 @@ include "./includes/sidebar.php";
                                     <td>Regular text column</td>
                                     <td>Regular text column</td>
                                     <td>Regular text column</td>
+
                                 </tr>
                             </tbody>
                         </table>
