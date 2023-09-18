@@ -1,7 +1,8 @@
 <?php
 require "includes/header.php";
 require "includes/navbar.php";
-require "includes/sidebar.php"; ?>
+require "includes/sidebar.php";
+?>
 <div id="layoutSidenav_content">
     <main>
         <div class="container-fluid">
