@@ -8,7 +8,7 @@
                             Dashboard
                         </a>
 
-                        <a class="nav-link collapsed hover"  data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                        <a class="nav-link collapsed hover" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                             <div class="sb-nav-link-icon "><i class="fa-solid fa-truck"></i></div>
                             Truck
                             <div class="sb-sidenav-collapse-arrow "><i class="fas fa-angle-down"></i></div>
@@ -22,7 +22,7 @@
                         </div>
 
 
-                        <a class="nav-link collapsed hover"  data-bs-toggle="collapse" data-bs-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts1">
+                        <a class="nav-link collapsed hover" data-bs-toggle="collapse" data-bs-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts1">
                             <div class="sb-nav-link-icon "><i class="fa-solid fa-user"></i></div>
                             Users
                             <div class="sb-sidenav-collapse-arrow "><i class="fas fa-angle-down"></i></div>
@@ -39,7 +39,8 @@
                 </div>
                 <div class="sb-sidenav-footer bg-primary text-light">
                     <div class="small">Logged in as:</div>
-                    <?php echo $_SESSION['user_fullname']; ?>
+                    <p>Afzal</p>
                 </div>
             </nav>
+        </div>
         </div>
