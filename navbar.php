@@ -19,13 +19,10 @@
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-dark" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <!-- <i class="text-dark fs-5 fas fa-user fa-fw"></i> -->
-<<<<<<< HEAD
-                <img class="rounded-circle" width="30px" src="uploads/<?php echo $_SESSION['user_image']; ?>" alt="">
-=======
+                <!-- <img class="rounded-circle" width="30px" src="uploads/<?php echo $_SESSION['user_image']; ?>" alt=""> -->
                 <img class="rounded-circle" width="30px" src="<?php 
                                                                     echo $_SESSION['user_image'];
                                                                 ?>" alt="">
->>>>>>> acbd921b7d423e6f7cb76c6ad6a2fbe06fe2aa07
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <!-- <li><a class="dropdown-item" href="#!">Settings</a></li> -->
