@@ -101,9 +101,97 @@ if (isset($_GET['deleteid'])) {
     if ($sql) {
         // Assuming your redirect function sets the session message correctly
         redirectdelete("company.php", "Data Delete Successfully!");
-        
+
         exit(); // Add this line to stop executing the script after the redirect
     } else {
         echo 'Data not Delete Successfully!';
     }
 }
+
+if (isset($_POST['update_company_btn'])) {
+    $id = $_GET['editid'];
+    $company_name = $_POST['company_name'];
+    $company_contact = $_POST['company_contact'];
+    $company_address = $_POST['company_address'];
+    $company_city = $_POST['company_city'];
+    $company_state = $_POST['company_state'];
+    $company_zipcode = $_POST['company_zipcode'];
+    $company_telephone = $_POST['company_telephone'];
+    $company_email = $_POST['company_email'];
+    $company_direct = $_POST['company_direct'];
+    $company_port = $_POST['company_port'];
+    $company_vessel = $_POST['company_vessel'];
+    $company_trucking = $_POST['company_trucking'];
+    $company_misc = $_POST['company_misc'];
+    $total_cost = $_POST['total_cost'];
+    $custom_freight = $_POST['custom_frieght'];
+
+    if (
+        empty($company_name) || empty($company_contact) || empty($company_address) || empty($company_city) || empty($company_state)
+        || empty($company_zipcode) || empty($company_telephone) || empty($company_email) || empty($company_direct) || empty($company_port) || empty($company_vessel) || empty($company_trucking)
+        || empty($company_misc) || empty($total_cost) || empty($custom_freight)
+    ) {
+        if (empty($company_name)) {
+            $_SESSION['empty_company_name'] = "Please fill in the Company Name.";
+        }
+        if (empty($company_contact)) {
+            $_SESSION['empty_company_contact'] = "Please fill in the Company Contact.";
+        }
+        if (empty($company_address)) {
+            $_SESSION['empty_company_address'] = "Please fill in the Company Address.";
+        }
+        if (empty($company_city)) {
+            $_SESSION['empty_company_city'] = "Please fill in the Company City.";
+        }
+        if (empty($company_state)) {
+            $_SESSION['empty_company_state'] = "Please fill in the Company State.";
+        }
+        if (empty($company_zipcode)) {
+            $_SESSION['empty_company_zipcode'] = "Please fill in the Company Zipcode.";
+        }
+        if (empty($company_telephone)) {
+            $_SESSION['empty_company_telephone'] = "Please fill in the Company Telephone.";
+        }
+        if (empty($company_email)) {
+            $_SESSION['empty_company_email'] = "Please fill in the Company Email.";
+        }
+        if (empty($company_direct)) {
+            $_SESSION['empty_company_direct'] = "Please fill in the Company Direct.";
+        }
+        if (empty($company_port)) {
+            $_SESSION['empty_company_port'] = "Please fill in the Company Port.";
+        }
+        if (empty($company_vessel)) {
+            $_SESSION['empty_company_vessel'] = "Please fill in the Company Vessel.";
+        }
+        if (empty($company_trucking)) {
+            $_SESSION['empty_company_trucking'] = "Please fill in the Company Trucking.";
+        }
+        if (empty($company_misc)) {
+            $_SESSION['empty_company_misc'] = "Please fill in the Company Misc.";
+        }
+        if (empty($total_cost)) {
+            $_SESSION['empty_total_cost'] = "Please fill in the Total Cost.";
+        }
+        if (empty($custom_freight)) {
+            $_SESSION['empty_custom_freight'] = "Please fill in the Custom Freight.";
+        }
+    } else {
+        $update = "UPDATE importer_details SET company_name='$company_name',
+        `company_contact`='$company_contact',`company_address`='$company_address',`company_city`='$company_city',
+        `company_state`='$company_state',`company_zipcode`='$company_zipcode',`company_telephone`='$company_telephone',
+        `company_email`='$company_email',`company_direct`='$company_direct',`company_port_of_entry`='$company_port',
+        `company_vessel_detail`='$company_vessel',`company_trucking`='$company_trucking',`company_misc`='$company_misc',
+        `total_cost`='$total_cost',`custom_frieght`='$custom_freight'
+         WHERE importer_id='$id'";
+
+        $qury = mysqli_query($conn, $update);
+        if ($qury) {
+            redirect("company.php", "Data Update Successfully!");
+            exit();
+        } 
+    }
+}
+
+
+

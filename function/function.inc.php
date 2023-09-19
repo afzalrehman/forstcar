@@ -16,6 +16,13 @@ function getAll($table)
    return $query_run = mysqli_query($conn, $query);
    
 };
+function getByID($table , $id)
+{
+   global $conn;
+   $query = "SELECT * FROM $table where importer_id='$id'";
+   return $query_run = mysqli_query($conn, $query);
+   
+};
 
 
 //  ===========inset message============ 
