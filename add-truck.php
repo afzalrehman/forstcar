@@ -104,14 +104,15 @@ include "./includes/sidebar.php";
                                             <label for="exampleInputPassword1" class="form-label fw-semibold">Current FLA</label>
                                             <input type="text" class="form-control" id="telePhone" name="telePhone" placeholder="Tele Phone">
                                         </div>
-                                        <div class="mb-2">
-                                            <label for="exampleInputPassword1" class="form-label fw-semibold">Refrigerant</label>
-                                            <input type="text" class="form-control" id="email" name="email" placeholder="Email">
-                                        </div>
+
 
                                     </div>
 
                                     <div class="col-lg-6">
+                                        <div class="mb-2">
+                                            <label for="exampleInputPassword1" class="form-label fw-semibold">Refrigerant</label>
+                                            <input type="text" class="form-control" id="email" name="email" placeholder="Email">
+                                        </div>
 
                                         <div class="mb-2">
                                             <label for="exampleInputPassword1" class="form-label fw-semibold">Condenser</label>
