@@ -1,5 +1,6 @@
 <?php
 include './config/config.php';
+session_start();
 ?>
 
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-white shadow">
@@ -19,15 +20,19 @@ include './config/config.php';
     <ul class="navbar-nav    ms-auto ms-md-0 me-3 me-lg-4">
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-dark " id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <img class="img-profile rounded-circle" height="25" width="25" src="images/<?php echo $_SESSION['user_image']; ?>">
+                <img class="img-profile rounded-circle" height="25" width="25" src="images/<?php echo $_SESSION['user_image']; ?>">
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#!">Settings</a></li>
-                <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                <li class="dropdown-item">
+                    <h6 class="mt-0 mb-0"><b>Name</b></h6>
+                    <p><?php echo $_SESSION['user_fullname']; ?></p>
+                    <h6 class="mt-0 mb-0"><b>Email</b></h6>
+                    <p><?php echo $_SESSION['user_email']; ?></p>
+                </li>
                 <li>
                     <hr class="dropdown-divider" />
                 </li>
-                <li><a class="dropdown-item" href="#!">Logout</a></li>
+                <li><a class="dropdown-item" href="../logout.php">Logout</a></li>
             </ul>
         </li>
     </ul>
