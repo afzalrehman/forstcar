@@ -1,5 +1,5 @@
 <?php
-
+include "./config/config.php";
 function get_safe_value($conn, $str)
 {
     if ($str != '') {
@@ -7,3 +7,31 @@ function get_safe_value($conn, $str)
         return mysqli_real_escape_string($conn, $str);
     }
 }
+
+// ===========selct =============
+function getAll($table)
+{
+   global $conn;
+   $query = "SELECT * FROM $table";
+   return $query_run = mysqli_query($conn, $query);
+   
+};
+
+
+//  ===========inset message============ 
+function redirect($url, $message)
+{
+   $_SESSION['message'] = $message;
+   header("Location: " . $url);
+   exit();
+   
+};
+function redirectdelete($url, $message)
+{
+   $_SESSION['delete'] = $message;
+   header("Location: " . $url);
+   exit();
+   
+};
+
+?>

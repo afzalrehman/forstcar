@@ -193,8 +193,8 @@ include "./includes/sidebar.php";
                 </div>
                 <div class="col-lg-6">
                     <div class="in mb-3">
-                        <select name="user_type" class="inputDesign py-2 w-100">
-                            <option selected>User Type</option>
+                        <select name="user_type" class="inputDesign py-2 w-100 form-control">
+                            <option  selected>User Type</option>
                             <option value="Admin">Admin</option>
                             <option value="User"> User</option>
                             <span class='text-danger py-0'><?php if (isset($error['user_type'])) {
