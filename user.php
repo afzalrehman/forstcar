@@ -105,7 +105,7 @@ if (isset($_POST['submit'])) {
                         $mail->send();
                         move_uploaded_file($image_temp_name, $image_folder);
                         $succses['succses'] = 'Please Check The Gmail And Activated';
-                        $_SESSION['msg'] = "Check you mail to activate your account $email";
+                        $_SESSION['msg'] = "Check you mail to activate your account $user_email";
                     } catch (Exception $e) {
                         echo "Failed to send email. Error: {$mail->ErrorInfo}";
                     }
