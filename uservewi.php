@@ -79,7 +79,7 @@ include "./includes/sidebar.php";
 
                                 $no = 1;
                                 while ($row = mysqli_fetch_assoc($result)) {
-                                    $_SESSION['user_image'] = $row['user_image'];
+                                    // $_SESSION['user_image'] = $row['user_image'];
                                 ?>
                                     <tr>
                                         <td>
