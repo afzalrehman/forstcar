@@ -1,4 +1,7 @@
-
+<?php
+include './config/config.php';
+global $conn;
+?>
 
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-white shadow">
     <!-- Navbar Brand-->
@@ -17,7 +20,7 @@
     <ul class="navbar-nav    ms-auto ms-md-0 me-3 me-lg-4">
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-dark " id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img class="img-profile rounded-circle" height="25" width="25" src="images/<?php echo $_SESSION['user_image']; ?>">
+                <img class="rounded-circle" height="25" width="25" src="images/<?php echo $_SESSION['user_image']; ?>" alt="">
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <li class="dropdown-item">

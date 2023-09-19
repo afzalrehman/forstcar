@@ -4,6 +4,7 @@ session_start();
 ob_start();
 
 require './config/config.php';
+global $conn;
 $emailError = false;
 $passError = false;
 
@@ -22,6 +23,8 @@ if (isset($_POST['submit'])) {
         $db_pass = $email_pass['user_password'];
 
         $_SESSION['user_fullname'] = $email_pass['user_fullname'];
+        $_SESSION['user_email'] = $email_pass['user_email'];
+        // $_SESSION['user_image'] = $email_pass['user_image'];
 
         $pass_decode = password_verify($user_password, $db_pass);
 

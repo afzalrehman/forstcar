@@ -2,6 +2,7 @@
 include './config/config.php';
 require './function/function.inc.php';
 session_start();
+global $conn;
 if (!isset($_SESSION['user_fullname'])) {
     echo "You are logged out";
     header('location:login.php');
@@ -79,8 +80,6 @@ include "./includes/sidebar.php";
                                 $no = 1;
                                 while ($row = mysqli_fetch_assoc($result)) {
                                     $_SESSION['user_image'] = $row['user_image'];
-                                    $_SESSION['user_fullname'] = $row['user_fullname'];
-                                    $_SESSION['user_email'] = $row['user_email'];
                                 ?>
                                     <tr>
                                         <td>
