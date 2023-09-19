@@ -1,7 +1,4 @@
-<?php
-include './config/config.php';
-session_start();
-?>
+
 
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-white shadow">
     <!-- Navbar Brand-->
@@ -32,7 +29,7 @@ session_start();
                 <li>
                     <hr class="dropdown-divider" />
                 </li>
-                <li><a class="dropdown-item" href="../logout.php">Logout</a></li>
+                <li><a class="dropdown-item" href="./logout.php">Logout</a></li>
             </ul>
         </li>
     </ul>

@@ -249,6 +249,14 @@ body::-webkit-scrollbar-thumb:hover {
     background-color: #0055B8;
 }
 
+.msg {
+    height: 50px;
+    border-radius: 10px;
+    justify-content: center;
+    text-align: center;
+    padding-top: 10px;
+}
+
 .inputDesign {
     padding: 10px;
     border: 2px solid #ccc;
