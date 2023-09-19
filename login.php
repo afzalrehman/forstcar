@@ -3,7 +3,7 @@
 session_start();
 ob_start();
 
-require 'config/config.php';
+require './config/config.php';
 $emailError = false;
 $passError = false;
 
@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
 
         $db_pass = $email_pass['user_password'];
 
-        $_SESSION['username'] = $email_pass['user_name'];
+        $_SESSION['user_fullname'] = $email_pass['user_fullname'];
 
         $pass_decode = password_verify($password, $db_pass);
 
@@ -32,9 +32,9 @@ if (isset($_POST['submit'])) {
                 setcookie('emailcookie', $email, time() + 86400);
                 setcookie('passwordcookie', $password, time() + 86400);
 
-                header('location:index.html');
+                header('location:index.php');
             } else {
-                header('location:index.html');
+                header('location:index.php');
             }
 
 

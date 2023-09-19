@@ -1,48 +1,111 @@
 <?php
 include 'config/config.php';
+require './function/function.inc.php';
+session_start();
+
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+
 $error = array();
 $succses = array();
 $warning = array();
-if (isset($_POST['submit'])) {
-    $name = mysqli_real_escape_string($conn, $_POST['name']);
-    $email =  mysqli_real_escape_string($conn, $_POST['email']);
-    $password =  mysqli_real_escape_string($conn, $_POST['password']);
-    $user_type =  mysqli_real_escape_string($conn, $_POST['user_type']);
-    $contact =  mysqli_real_escape_string($conn, $_POST['contact']);
-    // $image = $_POST['image'];
-    $pass_hach = password_hash($password, PASSWORD_DEFAULT);
 
-    if (empty($name)) {
-        $error['$name'] = "Please Fill Name";
-    }
-    if (empty($email)) {
-        $error['$email'] = "Please Fill Email";
-    }
-    if (empty($password)) {
-        $error['$password'] = "Please Fill Passwrod";
-    }
-    if (empty($user_type)) {
-        $error['$user_type'] = "Please Fill User Type";
-    }
-    if (empty($contact)) {
-        $error['$contact'] = "Please Fill Contact";
+if (isset($_POST['submit'])) {
+    $user_fullname = mysqli_real_escape_string($conn, $_POST['user_fullname']);
+    $user_email = mysqli_real_escape_string($conn, $_POST['user_email']);
+    $user_password = mysqli_real_escape_string($conn, $_POST['user_password']);
+    $user_type = mysqli_real_escape_string($conn, $_POST['user_type']);
+    $user_contact = mysqli_real_escape_string($conn, $_POST['user_contact']);
+    $user_image = $_FILES['user_image']['name'];
+    $image_temp_name = $_FILES['user_image']['tmp_name'];
+    $image_folder = 'images/' . $user_image;
+
+    $pass = password_hash($user_password, PASSWORD_BCRYPT);
+
+    $token = bin2hex(random_bytes(15));
+
+    if (
+        empty($_POST['user_fullname']) || empty($_POST['user_email']) || empty($_POST['user_password']) || empty($_POST['user_type']) ||
+        empty($_POST['user_contact']) || empty($_FILES['user_image'])
+    ) {
+        if (empty($user_fullname)) {
+            $error['user_fullname'] = "** Please Fill Fullname";
+        }
+        if (empty($user_email)) {
+            $error['user_email'] = "** Please Fill Email";
+        }
+        if (empty($user_password)) {
+            $error['user_password'] = "** Please Fill Password";
+        }
+        if (empty($user_type)) {
+            $error['user_type'] = "** Please Fill User Type";
+        }
+        if (empty($user_contact)) {
+            $error['user_contact'] = "** Please Fill User Contact";
+        }
+        if (empty($user_image)) {
+            $error['user_image'] = "** Please Fill Image";
+        }
     } else {
 
-        $select = "SELECT * FROM admin_users WHERE user_email='$email' ";
-        $sql = mysqli_query($conn, $select);
-        $sql_num = mysqli_num_rows($sql);
-        if ($sql_num > 0) {
-            $warning['warning'] = 'user already exists';
+        $emailquery = "SELECT * FROM `admin_users` WHERE `user_email` = '$user_email'";
+
+        // $emailquery = "SELECT * FROM `admin_users` WHERE `user_email ` = '$user_email' ";
+        $query = mysqli_query($conn, $emailquery);
+
+        $emailcount = mysqli_num_rows($query);
+        if ($emailcount > 0) {
+            $warning['warning'] = 'Email already exists';
         } else {
 
-            $insert = "INSERT INTO admin_users(`userfullname` , `user_email` ,`user_password` ,`user_type` ,`user_contact` ,`registered_on`)
-            VALUES('$name' , '$email', '$pass_hach', '$user_type', '$contact', NOW())";
+            $contactquery = "SELECT * FROM `admin_users` WHERE `user_contact` = '$user_contact' ";
+            $query = mysqli_query($conn, $contactquery);
 
-            $in_sql = mysqli_query($conn, $insert);
-            if ($in_sql) {
-                $succses['succses'] = 'insert your data';
+            $contactcount = mysqli_num_rows($query);
+            if ($contactcount > 0) {
+                $warning['warning'] = 'Contact Number already exists';
             } else {
-                echo "not insert data";
+
+                $insertquery = "INSERT INTO `admin_users` (`user_fullname`, `user_email`, `user_password`, `user_type`, `user_contact`, `user_image`, `registered_on`, `token`, `is_verified`) 
+                        VALUES ('$user_fullname', '$user_email', '$pass', '$user_type', '$user_contact', '$user_image', NOW(), '$token', 'Inactive')";
+
+                $iquery = mysqli_query($conn, $insertquery);
+                if ($iquery) {
+
+                    $mail = new PHPMailer(true);
+                    try {
+                        $mail->SMTPDebug = 0;
+                        $mail->isSMTP();
+                        $mail->Host = 'smtp.gmail.com';
+                        $mail->SMTPAuth = true;
+                        $mail->Username = 'hammadking427@gmail.com';
+                        $mail->Password = 'gtohfmaaanqufdbn';
+                        $mail->SMTPSecure = 'tls';
+                        $mail->Port = 587;
+
+                        $mail->setFrom('hammadking427@gmail.com', 'Abu_Hammad');
+                        $mail->addAddress($user_email, $user_fullname);
+
+                        $mail->Subject = 'Email Activation';
+                        $mail->Body = "Hi, $user_fullname. Click here too activate your account 
+                    http://localhost/forstcar/activate.php?token=$token ";
+                        $send_email = "From: hammadking427@gmail.com";
+
+                        $mail->send();
+                        move_uploaded_file($image_temp_name, $image_folder);
+                        $succses['succses'] = 'Please Check The Gmail And Activated';
+                        $_SESSION['msg'] = "Check you mail to activate your account $email";
+                    } catch (Exception $e) {
+                        echo "Failed to send email. Error: {$mail->ErrorInfo}";
+                    }
+                } else {
+                    $warning['warning'] = 'No Inserted';
+                }
             }
         }
     }
@@ -56,60 +119,104 @@ include "./includes/header.php";
 include "./includes/navbar.php";
 include "./includes/sidebar.php";
 ?>
-<div class="container-fluid">
-    <?php if (isset($succses['succses'])) echo $succses['succses']; ?>
-    <?php if (isset($warning['warning'])) echo $warning['warning']; ?>
+<div class="container-fluid mt-3">
+
+
+    <?php
+    if (isset($succses['succses'])) {
+        echo '
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Error!</strong> ' . $succses['succses'] . '
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>';
+    }
+    if (isset($warning['warning'])) {
+        echo '
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error!</strong> ' . $warning['warning'] . '
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>';
+    }
+
+
+    if (isset($_SESSION['update'])) {
+        echo '
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Succses</strong> ' . $_SESSION['update'] . '
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>';
+        unset($_SESSION['update']);
+    }
+    if (isset($_SESSION['notUpdate'])) {
+        echo '
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>!Error</strong> ' . $_SESSION['notUpdate'] . '
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>';
+        unset($_SESSION['notUpdate']);
+    }
+    ?>
     <div class="card  my-5 mein-card mb-5">
         <h3 class=" font-inter text-center">Add New User</h3>
         <div class="container-fluid course-card">
             <div class="row my-5 ">
                 <div class="col-lg-6">
-                    <form action="" method="post">
-                        <!-- <div class="in py-3">
-                                            <input type="date" class=" input w-100 py-2 mt-3" placeholder="Date">
-                                        </div> -->
+                    <form action="" method="POST" enctype="multipart/form-data">
 
-                        <div class="in">
-                            <input type="text" name="name" class=" input w-100 py-2 mt-3" placeholder="User Name">
-                            <span class='fw-bold text-danger '><?php if (isset($error['$name'])) {
-                                                                    echo $error['$name'];
-                                                                } ?></span>
+                        <div class="in mb-3">
+                            <input type="text" name="user_fullname" id="name" class=" inputDesign w-100 py-2" placeholder="Full Name">
+                            <span class='text-danger  py-0'><?php if (isset($error['user_fullname'])) {
+                                                                echo $error['user_fullname'];
+                                                            } ?>
+                            </span>
                         </div>
 
-                        <div class="in">
-                            <input type="email" name="email" class=" input w-100 py-2 mt-3" placeholder="User Email">
-                            <span class='fw-bold text-danger '><?php if (isset($error['$email'])) {
-                                                                    echo $error['$email'];
-                                                                } ?></span>
+                        <div class="in mb-3">
+                            <input type="email" name="user_email" id="name" class=" inputDesign w-100 py-2" placeholder="Full Name">
+                            <span class='text-danger  py-0'><?php if (isset($error['user_email'])) {
+                                                                echo $error['user_email'];
+                                                            } ?>
+                            </span>
                         </div>
-                        <div class="in">
-                            <input type="password" name="password" class=" input w-100 py-2 mt-3" placeholder="Passwrod ">
-                            <span class='fw-bold text-danger '><?php if (isset($error['$password'])) {
-                                                                    echo $error['$password'];
-                                                                } ?></span>
+
+                        <div class="in mb-3">
+                            <input type="password" name="user_password" id="name" class=" inputDesign w-100 py-2" placeholder="Full Name">
+                            <span class='text-danger  py-0'><?php if (isset($error['user_password'])) {
+                                                                echo $error['user_password'];
+                                                            } ?>
+                            </span>
                         </div>
                 </div>
                 <div class="col-lg-6">
-                    <select name="user_type" class="input  py-2 mt-3 w-100">
-                        <option value="" selected> User Type</option>
-                        <option value="Admin"> Admin</option>
-                        <!-- <option value="Course type w-100 ">Admin</option>
-                                        <option value="Course type w-100 "> Admin</option> -->
-                        <span class='fw-bold text-danger '><?php if (isset($error['$user_type'])) {
-                                                                echo $error['$user_type'];
+                    <div class="in mb-3">
+                        <select name="user_type" class="inputDesign py-2 w-100">
+                            <option selected>User Type</option>
+                            <option value="Admin">Admin</option>
+                            <option value="User"> User</option>
+                            <span class='text-danger py-0'><?php if (isset($error['user_type'])) {
+                                                                echo $error['user_type'];
                                                             } ?></span>
-                    </select>
-
-                    <div class="in">
-                        <input type="text" name="contact" class=" input w-100 py-2 mt-3" placeholder="Contact ">
-                        <span class='fw-bold text-danger '><?php if (isset($error['$contact'])) {
-                                                                echo $error['$contact'];
-                                                            } ?></span>
+                        </select>
                     </div>
-                    <!-- <div class="in">
-                                        <input type="file" name="image" class=" input w-100 py-2 mt-3" placeholder="Image ">
-                                        
-                                    </div> -->
+
+                    <div class="in mb-3">
+                        <input type="text" name="user_contact" id="name" class=" inputDesign w-100 py-2" placeholder="Full Name">
+                        <span class='text-danger  py-0'><?php if (isset($error['user_contact'])) {
+                                                            echo $error['user_contact'];
+                                                        } ?>
+                        </span>
+                    </div>
+                    <div class="in">
+                        <input type="file" name="user_image" id="image" class="inputDesign w-100 py-2">
+                        <span class='text-danger py-0'><?php if (isset($error['user_image'])) {
+                                                            echo $error['user_image'];
+                                                        } ?></span>
+                    </div>
+
                 </div>
 
 
