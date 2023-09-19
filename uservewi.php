@@ -89,7 +89,7 @@ include "./includes/sidebar.php";
                                             ?>
                                             <a href="#"><i class="fa-solid fa-pen-to-square text-success  fs-6"></i></a>
                                         </td>
-                                        <td class="font">ََِِِِِ<?php echo $no; ?></td>
+                                        <td class="font"><?php echo $no; ?></td>
                                         <td><?php echo $row['user_fullname']; ?></td>
                                         <td><?php echo $row['user_email']; ?></td>
                                         <td><?php echo $row['user_type']; ?></td>
@@ -101,7 +101,7 @@ include "./includes/sidebar.php";
                                     </tr>
 
                                 <?php
-                                    $no++;
+                                    $no = $no+1;
                                 }
 
                                 ?>
