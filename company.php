@@ -231,7 +231,7 @@ include "./includes/sidebar.php";
                                         <tr>
                                             <td>
                                                 <a href="add_company_code.php?deleteid=<?= $item['importer_id'] ?>" name="delete"><i class="fa-regular fa-trash-can text-danger me-1 fs-6"></i></a>
-                                                <a href="#"><i class="fa-solid fa-pen-to-square text-success  fs-6"></i></a>
+                                                <a href="edit"><i class="fa-solid fa-pen-to-square text-success  fs-6"></i></a>
                                             </td>
                                             <td class="font"><?= $no++; ?></td>
                                             <td><?= $item['company_name'] ?></td>
