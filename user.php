@@ -2,6 +2,12 @@
 include 'config/config.php';
 require './function/function.inc.php';
 session_start();
+global $conn;
+
+if (!isset($_SESSION['user_fullname'])) {
+    echo "You are logged out";
+    header('location:login.php');
+}
 
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -168,7 +174,8 @@ include "./includes/sidebar.php";
                     <form action="" method="POST" enctype="multipart/form-data">
 
                         <div class="in mb-3">
-                            <input type="text" name="user_fullname" id="name" class=" inputDesign w-100 py-2" placeholder="Full Name">
+                            <label class="form-label fw-semibold">Full Name</label>
+                            <input type="text" name="user_fullname" id="name" class=" inputDesign w-100 py-2" placeholder="Enter Your Full Name">
                             <span class='text-danger  py-0'><?php if (isset($error['user_fullname'])) {
                                                                 echo $error['user_fullname'];
                                                             } ?>
@@ -176,7 +183,8 @@ include "./includes/sidebar.php";
                         </div>
 
                         <div class="in mb-3">
-                            <input type="email" name="user_email" id="name" class=" inputDesign w-100 py-2" placeholder="Full Name">
+                            <label class="form-label fw-semibold">Email</label>
+                            <input type="email" name="user_email" id="name" class=" inputDesign w-100 py-2" placeholder="Enter Your Email">
                             <span class='text-danger  py-0'><?php if (isset($error['user_email'])) {
                                                                 echo $error['user_email'];
                                                             } ?>
@@ -184,7 +192,8 @@ include "./includes/sidebar.php";
                         </div>
 
                         <div class="in mb-3">
-                            <input type="password" name="user_password" id="name" class=" inputDesign w-100 py-2" placeholder="Full Name">
+                            <label class="form-label fw-semibold">Password</label>
+                            <input type="password" name="user_password" id="name" class=" inputDesign w-100 py-2" placeholder="Enter Your Password">
                             <span class='text-danger  py-0'><?php if (isset($error['user_password'])) {
                                                                 echo $error['user_password'];
                                                             } ?>
@@ -193,8 +202,10 @@ include "./includes/sidebar.php";
                 </div>
                 <div class="col-lg-6">
                     <div class="in mb-3">
-                        <select name="user_type" class="inputDesign py-2 w-100 form-control">
-                            <option  selected>User Type</option>
+                        <label class="form-label fw-semibold">User Type</label>
+                        <select name="user_type" class="inputDesign py-2 w-100">
+                            <option selected>User Type</option>
+
                             <option value="Admin">Admin</option>
                             <option value="User"> User</option>
                             <span class='text-danger py-0'><?php if (isset($error['user_type'])) {
@@ -204,13 +215,15 @@ include "./includes/sidebar.php";
                     </div>
 
                     <div class="in mb-3">
-                        <input type="text" name="user_contact" id="name" class=" inputDesign w-100 py-2" placeholder="Full Name">
+                        <label class="form-label fw-semibold">Contact Number</label>
+                        <input type="text" name="user_contact" id="name" class=" inputDesign w-100 py-2" placeholder="Enter Your Contact Number">
                         <span class='text-danger  py-0'><?php if (isset($error['user_contact'])) {
                                                             echo $error['user_contact'];
                                                         } ?>
                         </span>
                     </div>
                     <div class="in">
+                        <label class="form-label fw-semibold">Image</label>
                         <input type="file" name="user_image" id="image" class="inputDesign w-100 py-2">
                         <span class='text-danger py-0'><?php if (isset($error['user_image'])) {
                                                             echo $error['user_image'];

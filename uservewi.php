@@ -2,6 +2,11 @@
 include './config/config.php';
 require './function/function.inc.php';
 session_start();
+global $conn;
+if (!isset($_SESSION['user_fullname'])) {
+    echo "You are logged out";
+    header('location:login.php');
+}
 
 if (isset($_GET['type']) && $_GET['type'] != '') {
     $type = get_safe_value($conn, $_GET['type']);
@@ -79,7 +84,7 @@ include "./includes/sidebar.php";
                                     <tr>
                                         <td>
                                             <?php
-                                                echo "<a href='?type=delete&user_id=". $row['user_id'] ."'><i class='fa-regular fa-trash-can text-danger me-1 fs-6'></i></a>";
+                                            echo "<a href='?type=delete&user_id=" . $row['user_id'] . "'><i class='fa-regular fa-trash-can text-danger me-1 fs-6'></i></a>";
 
                                             ?>
                                             <a href="#"><i class="fa-solid fa-pen-to-square text-success  fs-6"></i></a>

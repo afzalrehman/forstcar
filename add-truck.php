@@ -1,12 +1,24 @@
 <?php
+include './config/config.php';
+require './function/function.inc.php';
+session_start();
+global $conn;
+if (!isset($_SESSION['user_fullname'])) {
+    echo "You are logged out";
+    header('location:login.php');
+}
+
+
+
+
+
+
 
 include "./includes/header.php";
 include "./includes/navbar.php";
 include "./includes/sidebar.php";
 ?>
 <div class="container-fluid">
-
-
 
 
     <div class="tab-content" id="pills-tabContent">
@@ -18,8 +30,7 @@ include "./includes/sidebar.php";
                         <form>
                             <div class="row text-dark">
                                 <div class="row my-5">
-                                    <h5 class="card-title fw-semibold">2. Wakl-in/Rear-door Body
-                                    </h5>
+                                    <h5 class="card-title fw-semibold">Frost Car Unit Details (SQL)</h5>
                                     <hr class="p-0">
 
 
@@ -31,6 +42,10 @@ include "./includes/sidebar.php";
                                         </div>
                                         <div class="mb-2">
                                             <label for="exampleInputPassword1" class="form-label fw-semibold">Make</label>
+                                            <input type="text" class="form-control" id="telePhone" name="telePhone" placeholder="Tele Phone">
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="exampleInputPassword1" class="form-label fw-semibold">Model</label>
                                             <input type="text" class="form-control" id="telePhone" name="telePhone" placeholder="Tele Phone">
                                         </div>
                                         <div class="mb-2">
@@ -162,6 +177,8 @@ include "./includes/sidebar.php";
                                             <label for="exampleInputPassword1" class="form-label fw-semibold">Misc</label>
                                             <input type="text" class="form-control" id="telePhone" name="telePhone" placeholder="Tele Phone">
                                         </div>
+
+                                        <button type="submit" name="submit" class="save py-2">Save</button>
 
                                     </div>
 

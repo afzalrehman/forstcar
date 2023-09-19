@@ -1,4 +1,14 @@
 <?php
+include './config/config.php';
+require './function/function.inc.php';
+session_start();
+if (!isset($_SESSION['user_fullname'])) {
+    echo "You are logged out";
+    header('location:login.php');
+}
+
+
+
 include "./includes/header.php";
 include "./includes/navbar.php";
 include "./includes/sidebar.php";
