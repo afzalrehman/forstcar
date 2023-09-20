@@ -21,6 +21,12 @@ function getByID($table, $id)
    $query = "SELECT * FROM $table where importer_id='$id'";
    return $query_run = mysqli_query($conn, $query);
 };
+function getByIDUser($table, $id)
+{
+   global $conn;
+   $query = "SELECT * FROM $table where admin_users='$id'";
+   return $query_run = mysqli_query($conn, $query);
+};
 
 
 //  ===========inset message============ 
