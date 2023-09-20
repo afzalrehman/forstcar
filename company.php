@@ -212,7 +212,9 @@ include "./includes/sidebar.php";
                                         <th>Total Cost <i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>Custom Frieght <i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>Added On<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                        <th>Added By<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>Update On<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                        <th>Update By<i class="fa-solid fa-arrow-down px-2"></i></th>
 
 
                                     </tr>
@@ -252,7 +254,9 @@ include "./includes/sidebar.php";
                                                 <td><?= $item['total_cost'] ?></td>
                                                 <td><?= $item['custom_frieght'] ?></td>
                                                 <td><?= $item['added_on'] ?></td>
+                                                <td><?= $item['added_by'] ?></td>
                                                 <td><?= $item['updated_on'] ?></td>
+                                                <td><?= $item['updated_by'] ?></td>
 
 
                                             </tr>

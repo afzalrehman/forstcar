@@ -76,9 +76,9 @@ if (isset($_POST['add_company_btn'])) {
     } else {
         $sql = "INSERT INTO importer_details (company_name, company_contact, company_address, company_city, company_state, company_zipcode, 
         company_telephone, company_email, company_direct, company_port_of_entry, company_vessel_detail, company_trucking, company_misc, total_cost, 
-        custom_frieght , added_on) VALUES ('$company_name', '$company_contact', '$company_address', '$company_city', '$company_state', '$company_zipcode', 
+        custom_frieght , added_on ,added_by) VALUES ('$company_name', '$company_contact', '$company_address', '$company_city', '$company_state', '$company_zipcode', 
         '$company_telephone', '$company_email', '$company_direct', '$company_port', '$company_vessel', '$company_trucking', '$company_misc',
-         '$total_cost', '$custom_freight' , NOW())";
+         '$total_cost', '$custom_freight' , NOW() , '{$_SESSION['user_fullname']}')";
 
         $inset_qury_run = mysqli_query($conn, $sql);
 
@@ -182,7 +182,7 @@ if (isset($_POST['update_company_btn'])) {
         `company_state`='$company_state',`company_zipcode`='$company_zipcode',`company_telephone`='$company_telephone',
         `company_email`='$company_email',`company_direct`='$company_direct',`company_port_of_entry`='$company_port',
         `company_vessel_detail`='$company_vessel',`company_trucking`='$company_trucking',`company_misc`='$company_misc',
-        `total_cost`='$total_cost',`custom_frieght`='$custom_freight',updated_on=NOW()
+        `total_cost`='$total_cost',`custom_frieght`='$custom_freight',updated_on=NOW() , updated_by='{$_SESSION['user_fullname']}'
          WHERE importer_id='$id'";
 
         $qury = mysqli_query($conn, $update);
