@@ -29,6 +29,7 @@ include "./includes/sidebar.php";
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="in">
+                                            <input type="hidden" name="edit" value="<?=$data ['importer_id'];?> ">
                                             <input type="text" name="company_name" value="<?=$data ['company_name'];?> " class=" input w-100 py-2 mt-3" placeholder="Company Name">
                                             <?php if (isset($_SESSION['empty_company_name'])) {
                                                 echo '

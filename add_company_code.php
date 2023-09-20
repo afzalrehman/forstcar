@@ -109,7 +109,7 @@ if (isset($_GET['deleteid'])) {
 }
 
 if (isset($_POST['update_company_btn'])) {
-    $id = $_GET['editid'];
+    $id = $_POST['edit'];
     $company_name = $_POST['company_name'];
     $company_contact = $_POST['company_contact'];
     $company_address = $_POST['company_address'];
@@ -182,7 +182,7 @@ if (isset($_POST['update_company_btn'])) {
         `company_state`='$company_state',`company_zipcode`='$company_zipcode',`company_telephone`='$company_telephone',
         `company_email`='$company_email',`company_direct`='$company_direct',`company_port_of_entry`='$company_port',
         `company_vessel_detail`='$company_vessel',`company_trucking`='$company_trucking',`company_misc`='$company_misc',
-        `total_cost`='$total_cost',`custom_frieght`='$custom_freight'
+        `total_cost`='$total_cost',`custom_frieght`='$custom_freight',updated_on=NOW()
          WHERE importer_id='$id'";
 
         $qury = mysqli_query($conn, $update);
