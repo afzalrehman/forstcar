@@ -31,7 +31,11 @@ include "./includes/sidebar.php";
 
                                         <div class="mb-2">
                                             <label for="make" class="form-label fw-semibold">Make</label>
-                                            <input type="text" class="w-100 inputDesign" id="make" name="make" placeholder="make">
+                                            <input type="text" class="w-100 inputDesign" id="make" name="make" placeholder="make" value="<?php
+                                                                                                                                            if (isset($_POST['add_truck_btn'])) {
+                                                                                                                                                echo $make;
+                                                                                                                                            }
+                                                                                                                                            unset($make); ?>">
                                             <?php if (isset($_SESSION['empty_make'])) {
                                                 echo '
                                         <p class="text-danger">' . $_SESSION['empty_make'] . '</p>';
@@ -51,7 +55,7 @@ include "./includes/sidebar.php";
                                         </div>
                                         <div class="mb-2">
                                             <label for="wheelbase" class="form-label fw-semibold">Wheelbase</label>
-                                            <input type="text" class="w-100 inputDesign"  id="wheelbase" name="wheelbase" placeholder="wheelbase">
+                                            <input type="text" class="w-100 inputDesign" id="wheelbase" name="wheelbase" placeholder="wheelbase">
                                             <?php if (isset($_SESSION['empty_wheelbase'])) {
                                                 echo '
                                         <p class="text-danger">' . $_SESSION['empty_wheelbase'] . '</p>';
@@ -81,7 +85,7 @@ include "./includes/sidebar.php";
                                         </div>
                                         <div class="mb-2">
                                             <label for="contact_Num" class="form-label fw-semibold">Contact #</label>
-                                            <input type="text" class="w-100 inputDesign"  id="contact_Num" name="contact_Num" placeholder="contact_Num">
+                                            <input type="text" class="w-100 inputDesign" id="contact_Num" name="contact_Num" placeholder="contact_Num">
                                             <?php if (isset($_SESSION['empty_contact_Num'])) {
                                                 echo '
                                         <p class="text-danger">' . $_SESSION['empty_contact_Num'] . '</p>';
@@ -111,7 +115,7 @@ include "./includes/sidebar.php";
                                         </div>
                                         <div class="mb-2">
                                             <label for="body_Weight" class="form-label fw-semibold">Body Weight</label>
-                                            <input type="text" class="w-100 inputDesign"  id="body_Weight" name="body_Weight" placeholder="body_Weight">
+                                            <input type="text" class="w-100 inputDesign" id="body_Weight" name="body_Weight" placeholder="body_Weight">
                                             <?php if (isset($_SESSION['empty_body_Weight'])) {
                                                 echo '
                                         <p class="text-danger">' . $_SESSION['empty_body_Weight'] . '</p>';
@@ -141,7 +145,7 @@ include "./includes/sidebar.php";
                                         </div>
                                         <div class="mb-2">
                                             <label for="compressor" class="form-label fw-semibold">Compressor</label>
-                                            <input type="text" class="w-100 inputDesign"  id="compressor" name="compressor" placeholder="compressor">
+                                            <input type="text" class="w-100 inputDesign" id="compressor" name="compressor" placeholder="compressor">
                                             <?php if (isset($_SESSION['empty_compressor'])) {
                                                 echo '
                                         <p class="text-danger">' . $_SESSION['empty_compressor'] . '</p>';
@@ -201,11 +205,6 @@ include "./includes/sidebar.php";
                                             ?>
                                         </div>
 
-                                    </div>
-
-                                    <div class="col-lg-6">
-
-
                                         <div class="mb-2">
                                             <label for="condenser" class="form-label fw-semibold">Condenser</label>
                                             <input type="text" class="w-100 inputDesign" id="condenser" name="condenser" placeholder="condenser">
@@ -246,6 +245,13 @@ include "./includes/sidebar.php";
                                             }
                                             ?>
                                         </div>
+
+
+                                    </div>
+
+                                    <div class="col-lg-6">
+
+
                                         <div class="mb-2">
                                             <label for="control_Panel" class="form-label fw-semibold">Control Panel</label>
                                             <input type="text" class="w-100 inputDesign" id="control_Panel" name="control_Panel" placeholder="control_Panel">
