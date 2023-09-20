@@ -10,6 +10,7 @@ if (!isset($_SESSION['user_fullname'])) {
 }
 
 
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -18,7 +19,7 @@ require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
 
 $error = array();
-$succses = array();
+$success = array();
 $warning = array();
 
 if (isset($_POST['submit'])) {
@@ -60,19 +61,17 @@ if (isset($_POST['submit'])) {
     } else {
 
         $emailquery = "SELECT * FROM `admin_users` WHERE `user_email` = '$user_email'";
-
-        // $emailquery = "SELECT * FROM `admin_users` WHERE `user_email ` = '$user_email' ";
         $query = mysqli_query($conn, $emailquery);
-
         $emailcount = mysqli_num_rows($query);
+        
         if ($emailcount > 0) {
             $warning['warning'] = 'Email already exists';
         } else {
 
-            $contactquery = "SELECT * FROM `admin_users` WHERE `user_contact` = '$user_contact' ";
+            $contactquery = "SELECT * FROM `admin_users` WHERE `user_contact` = '$user_contact'";
             $query = mysqli_query($conn, $contactquery);
-
             $contactcount = mysqli_num_rows($query);
+
             if ($contactcount > 0) {
                 $warning['warning'] = 'Contact Number already exists';
             } else {
@@ -81,6 +80,7 @@ if (isset($_POST['submit'])) {
                         VALUES ('$user_fullname', '$user_email', '$pass', '$user_type', '$user_contact', '$user_image', NOW(), '$token', 'Inactive')";
 
                 $iquery = mysqli_query($conn, $insertquery);
+
                 if ($iquery) {
 
                     $mail = new PHPMailer(true);
@@ -98,24 +98,34 @@ if (isset($_POST['submit'])) {
                         $mail->addAddress($user_email, $user_fullname);
 
                         $mail->Subject = 'Email Activation';
-                        $mail->Body = "Hi, $user_fullname. Click here too activate your account 
-                    http://localhost/forstcar/activate.php?token=$token ";
-                        $send_email = "From: hammadking427@gmail.com";
+
+                        // Include the email content from email.php
+                        include('email.php');
+                        
+                        // Replace placeholders with actual values
+                        $emailContent = str_replace('$user_fullname', $user_fullname, $emailContent);
+                        $emailContent = str_replace('$token', $token, $emailContent);
+
+                        // Set the email content as HTML
+                        $mail->isHTML(true);
+                        $mail->Body = $emailContent;
 
                         $mail->send();
                         move_uploaded_file($image_temp_name, $image_folder);
-                        $succses['succses'] = 'Please Check The Gmail And Activated';
-                        $_SESSION['msg'] = "Check you mail to activate your account $user_email";
+                        $succses['succses'] = 'Please Check The Gmail And Activate';
+                        $_SESSION['msg'] = "Check your mail to activate your account $user_email";
                     } catch (Exception $e) {
                         echo "Failed to send email. Error: {$mail->ErrorInfo}";
                     }
                 } else {
-                    $warning['warning'] = 'No Inserted';
+                    $warning['warning'] = 'Not Inserted';
                 }
             }
         }
     }
 }
+
+
 
 
 ?>

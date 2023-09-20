@@ -3,6 +3,14 @@ session_start();
 require './function/function.inc.php';
 include "./config/config.php";
 
+
+
+
+// Check if the form is submitted
+
+
+
+
 if (isset($_POST['add_company_btn'])) {
     $company_name = $_POST['company_name'];
     $company_contact = $_POST['company_contact'];
@@ -91,6 +99,8 @@ if (isset($_POST['add_company_btn'])) {
         }
     }
 }
+
+
 
 $delete = [''];
 if (isset($_GET['deleteid'])) {
