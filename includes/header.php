@@ -1,3 +1,11 @@
+<?php
+if (!isset($_SESSION['user_fullname'])) {
+    echo "You are logged out";
+    header('location:login.php');
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
