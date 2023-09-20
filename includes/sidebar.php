@@ -28,9 +28,9 @@
                     </a>
                     <a class="nav-link hover " href="operatin.php">
                         <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
-                         Operating
+                        Operating
                     </a>
-                   
+
 
 
                     <!-- <div class="sb-sidenav-menu-heading">Addons</div> -->

@@ -2,6 +2,7 @@
 session_start();
 include './config/config.php';
 require './function/function.inc.php';
+global $conn;
 
 
 
@@ -38,6 +39,10 @@ include "./includes/sidebar.php";
                                     <th>Year<i class="fa-solid fa-arrow-down px-2"></i></th>
                                     <th>Make<i class="fa-solid fa-arrow-down px-2"></i></th>
                                     <th>Model<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                    <th>front_S_Image<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                    <th>back_S_Image<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                    <th>left_S_Image<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                    <th>right_S_Image<i class="fa-solid fa-arrow-down px-2"></i></th>
                                     <th>Wheelbase<i class="fa-solid fa-arrow-down px-2"></i></th>
                                     <th>Vin #<i class="fa-solid fa-arrow-down px-2"></i></th>
                                     <th>Contact Name<i class="fa-solid fa-arrow-down px-2"></i></th>
@@ -98,6 +103,10 @@ include "./includes/sidebar.php";
                                             <td><?= $item['year'] ?></td>
                                             <td><?= $item['make'] ?></td>
                                             <td><?= $item['model'] ?></td>
+                                            <td><img height="50" width="50" src="./media/car_images/<?php echo  $item['front_S_Image']; ?>"></td>
+                                            <td><img height="50" width="50" src="./media/car_images/<?php echo  $item['back_S_Image']; ?>"></td>
+                                            <td><img height="50" width="50" src="./media/car_images/<?php echo  $item['left_S_Image']; ?>"></td>
+                                            <td><img height="50" width="50" src="./media/car_images/<?php echo  $item['right_S_Image']; ?>"></td>
                                             <td><?= $item['wheelbase'] ?></td>
                                             <td><?= $item['vin'] ?></td>
                                             <td><?= $item['contact_Name'] ?></td>

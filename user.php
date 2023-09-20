@@ -30,7 +30,7 @@ if (isset($_POST['submit'])) {
     $user_contact = mysqli_real_escape_string($conn, $_POST['user_contact']);
     $user_image = $_FILES['user_image']['name'];
     $image_temp_name = $_FILES['user_image']['tmp_name'];
-    $image_folder = 'images/' . $user_image;
+    $image_folder = 'media/user_images/' . $user_image;
 
     $pass = password_hash($user_password, PASSWORD_BCRYPT);
 
@@ -63,7 +63,7 @@ if (isset($_POST['submit'])) {
         $emailquery = "SELECT * FROM `admin_users` WHERE `user_email` = '$user_email'";
         $query = mysqli_query($conn, $emailquery);
         $emailcount = mysqli_num_rows($query);
-        
+
         if ($emailcount > 0) {
             $warning['warning'] = 'Email already exists';
         } else {
@@ -76,8 +76,8 @@ if (isset($_POST['submit'])) {
                 $warning['warning'] = 'Contact Number already exists';
             } else {
 
-                $insertquery = "INSERT INTO `admin_users` (`user_fullname`, `user_email`, `user_password`, `user_type`, `user_contact`, `user_image`, `registered_on`, `token`, `is_verified`) 
-                        VALUES ('$user_fullname', '$user_email', '$pass', '$user_type', '$user_contact', '$user_image', NOW(), '$token', 'Inactive')";
+                $insertquery = "INSERT INTO `admin_users` (`user_fullname`, `user_email`, `user_password`, `user_type`, `user_contact`, `user_image`, `registered_on`, `token`, `is_verified`, `added_by`, `added_on`) 
+                        VALUES ('$user_fullname', '$user_email', '$pass', '$user_type', '$user_contact', '$user_image', NOW(), '$token', 'Inactive', '{$_SESSION['user_fullname']}', NOW())";
 
                 $iquery = mysqli_query($conn, $insertquery);
 
@@ -101,7 +101,7 @@ if (isset($_POST['submit'])) {
 
                         // Include the email content from email.php
                         include('email.php');
-                        
+
                         // Replace placeholders with actual values
                         $emailContent = str_replace('$user_fullname', $user_fullname, $emailContent);
                         $emailContent = str_replace('$token', $token, $emailContent);

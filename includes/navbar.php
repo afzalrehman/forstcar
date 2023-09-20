@@ -6,7 +6,7 @@ global $conn;
 
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-white shadow">
     <!-- Navbar Brand-->
-    <a class="navbar-brand ps-3" href="index.html"><img width="200px" src="assets/img/forscar_logo.png" alt=""></a>
+    <a class="navbar-brand ps-3" href="index.php"><img width="200px" src="assets/img/forscar_logo.png" alt=""></a>
 
     <!-- Sidebar Toggle-->
     <button class="btn text-black btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="text-dark fas fa-bars"></i></button>
@@ -21,7 +21,7 @@ global $conn;
     <ul class="navbar-nav    ms-auto ms-md-0 me-3 me-lg-4">
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-dark " id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img class="rounded-circle" height="25" width="25" src="images/<?php echo $_SESSION['user_image']; ?>" alt="">
+                <img class="rounded-circle" height="25" width="25" src="media/user_images/<?php echo $_SESSION['user_image']; ?>" alt="">
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <li class="dropdown-item">
