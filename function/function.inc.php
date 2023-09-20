@@ -40,5 +40,3 @@ function redirectdelete($url, $message)
    exit();
    
 };
-
-?>
