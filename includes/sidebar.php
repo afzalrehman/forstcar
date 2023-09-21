@@ -24,7 +24,7 @@
                         </nav>
                     </div>
                     <?php
-                    if (isset($_SESSION['user_type']) == "Admin") {
+                    if (!empty($_SESSION['user_type']) == "Admin") {
                         echo '
                     <a class="nav-link collapsed hover" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts1">
                         <div class="sb-nav-link-icon "><i class="fa-solid fa-user"></i></div>
