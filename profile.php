@@ -22,9 +22,7 @@ include "./includes/sidebar.php";
                     <input disabled class="w-100 inputDesign" placeholder="<?php echo $_SESSION['user_fullname']; ?>">
 
                     <label for="user_contact" class="form-label fw-semibold mt-3">Contact Number</label>
-                    <input disabled class="w-100 inputDesign" id="user_contact" name="user_contact" placeholder="Contact Number" value="<?php if (isset($_SESSION['user_contact'])) {
-                                                                                                                                            echo $_SESSION['user_contact'];
-                                                                                                                                        } ?>">
+                    <input disabled class="w-100 inputDesign" id="user_contact" name="user_contact" placeholder="<?php echo $_SESSION['user_contact']; ?>">
 
                 </div>
                 <div class="col-lg-6">
