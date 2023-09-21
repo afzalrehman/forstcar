@@ -63,6 +63,9 @@ include "./includes/sidebar.php";
                                     <th>Contact Number<i class="fa-solid fa-arrow-down px-2"></i></th>
                                     <th>Image<i class="fa-solid fa-arrow-down px-2"></i></th>
                                     <th>Registered On<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                    <th>Added By<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                    <th>Added On<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                    <th>Updated By<i class="fa-solid fa-arrow-down px-2"></i></th>
                                     <th>Updated On<i class="fa-solid fa-arrow-down px-2"></i></th>
                                     <th>Is Verified<i class="fa-solid fa-arrow-down px-2"></i></th>
 
@@ -87,21 +90,25 @@ include "./includes/sidebar.php";
                                             echo "<a href='?type=delete&user_id=" . $row['user_id'] . "'><i class='fa-regular fa-trash-can text-danger me-1 fs-6'></i></a>";
 
                                             ?>
-                                            <a href="#"><i class="fa-solid fa-pen-to-square text-success  fs-6"></i></a>
+                                            <a href="edit_user.php?editid=<?= $row['user_id'] ?>" name="edit"><i class="fa-solid fa-pen-to-square text-success  fs-6"></i></a>
+
                                         </td>
                                         <td class="font"><?php echo $no; ?></td>
                                         <td><?php echo $row['user_fullname']; ?></td>
                                         <td><?php echo $row['user_email']; ?></td>
                                         <td><?php echo $row['user_type']; ?></td>
                                         <td><?php echo $row['user_contact']; ?></td>
-                                        <td><img height="50" width="50" src="images/<?php echo  $row['user_image']; ?>" alt="<?php echo  $row['user_fullname']; ?>"> </td>
+                                        <td><img height="50" width="50" src="media/user_images/<?php echo  $row['user_image']; ?>" alt="<?php echo  $row['user_fullname']; ?>"> </td>
                                         <td><?php echo $row['registered_on']; ?></td>
+                                        <td><?php echo $row['added_by']; ?></td>
+                                        <td><?php echo $row['added_on']; ?></td>
+                                        <td><?php echo $row['updated_by']; ?></td>
                                         <td><?php echo $row['updated_on']; ?></td>
                                         <td><?php echo $row['is_verified']; ?></td>
                                     </tr>
 
                                 <?php
-                                    $no = $no+1;
+                                    $no = $no + 1;
                                 }
 
                                 ?>

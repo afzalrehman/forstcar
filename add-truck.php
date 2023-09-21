@@ -20,7 +20,7 @@ include "./includes/sidebar.php";
                 <div class="card my-5 w-100 position-relative overflow-hidden mb-0">
                     <div class="card-body p-4">
 
-                        <form action="add_truck_code.php" method="POST">
+                        <form action="add_truck_code.php" method="POST" enctype="multipart/form-data">
                             <div class="row text-dark">
                                 <div class="row my-5">
                                     <h5 class="card-title fw-semibold">Frost Car Unit Details (SQL)</h5>
@@ -362,7 +362,7 @@ include "./includes/sidebar.php";
                                             }
                                             ?>
                                         </div>
-                                        <div class="my-2">
+                                        <div class="mb-2">
                                             <label for="misc" class="form-label fw-semibold">Misc</label>
                                             <input type="text" class="w-100 inputDesign" id="misc" name="misc" placeholder="misc">
                                             <?php if (isset($_SESSION['empty_misc'])) {
@@ -372,6 +372,49 @@ include "./includes/sidebar.php";
                                             }
                                             ?>
                                         </div>
+
+
+                                        <div class="mb-2">
+                                            <label for="front_S_Image" class="form-label fw-semibold">Front Side Image</label>
+                                            <input type="file" class="w-100 inputDesign" id="front_S_Image" name="front_S_Image">
+                                            <?php if (isset($_SESSION['empty_sight_Glass'])) {
+                                                echo '
+                                        <p class="text-danger">' . $_SESSION['empty_sight_Glass'] . '</p>';
+                                                unset($_SESSION['empty_sight_Glass']);
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="back_S_Image" class="form-label fw-semibold">Back Side Image</label>
+                                            <input type="file" class="w-100 inputDesign" id="back_S_Image" name="back_S_Image">
+                                            <?php if (isset($_SESSION['empty_filter_Drier'])) {
+                                                echo '
+                                        <p class="text-danger">' . $_SESSION['empty_filter_Drier'] . '</p>';
+                                                unset($_SESSION['empty_filter_Drier']);
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="left_S_Image" class="form-label fw-semibold">Left Side Image</label>
+                                            <input type="file" class="w-100 inputDesign" id="left_S_Image" name="left_S_Image">
+                                            <?php if (isset($_SESSION['empty_thermostat'])) {
+                                                echo '
+                                        <p class="text-danger">' . $_SESSION['empty_thermostat'] . '</p>';
+                                                unset($_SESSION['empty_thermostat']);
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="my-2">
+                                            <label for="right_S_Image" class="form-label fw-semibold">Right Side Image</label>
+                                            <input type="file" class="w-100 inputDesign" id="right_S_Image" name="right_S_Image">
+                                            <?php if (isset($_SESSION['empty_misc'])) {
+                                                echo '
+                                        <p class="text-danger">' . $_SESSION['empty_misc'] . '</p>';
+                                                unset($_SESSION['empty_misc']);
+                                            }
+                                            ?>
+                                        </div>
+
 
                                         <button type="submit" name="add_truck_btn" class="save py-2">Save</button>
 

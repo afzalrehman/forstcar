@@ -43,7 +43,6 @@ if (isset($_GET['editid']) && $_GET['editid'] != '') {
     $check = mysqli_num_rows($res);
     if ($check > 0) {
         $row = mysqli_fetch_assoc($res);
-
         $make = $row['make'];
         $model = $row['model'];
         $wheelbase = $row['wheelbase'];
@@ -79,16 +78,7 @@ if (isset($_GET['editid']) && $_GET['editid'] != '') {
         $misc = $row['misc'];
     } else {
         redirect("veiwtruck.php", "Please Don't Change The URL!");
-        // header('location:veiwtruck.php');
-        // die();
     }
-    // Check if a row was found before accessing its data
-    // if ($row) {
-    // } else {
-    //     // Handle the case where no category was found with the given id
-    //     // You can show an error message or perform other actions here
-    //     echo "no categories find";
-    // }
 }
 
 
@@ -130,11 +120,9 @@ if (isset($_POST['submit'])) {
     $thermostat = get_safe_value($conn, $_POST['thermostat']);
     $misc = get_safe_value($conn, $_POST['misc']);
 
-
     $res_model = mysqli_query($conn, "SELECT * FROM `unit_details` WHERE `model` = '$model'");
     $check_model = mysqli_num_rows($res_model);
     if ($check_model > 0) {
-
         if (isset($_GET['editid']) && $_GET['editid'] != '') {
             $getData = mysqli_fetch_assoc($res_model);
             if ($id == $getData['id']) {
@@ -150,112 +138,62 @@ if (isset($_POST['submit'])) {
 
     if ($id == $id) {
 
-
         if (isset($_GET['editid']) && $_GET['editid'] != '') {
-            mysqli_query($conn,  "UPDATE `unit_details` SET `year` = NOW(), `make` = '$make',`model` = '$model',`wheelbase` = '$wheelbase',`vin` = '$vin',`contact_Name` = '$contact_Name',
-            `contact_Num` = '$contact_Num',`fc_Unit_Cost` = '$fc_Unit_Cost',`fc_Body` = '$fc_Body',`body_Weight` = '$body_Weight',`fc_Model` = '$fc_Model',
-            `exterior_Dimension` = '$exterior_Dimension',`compressor` = '$compressor',`comp_Serial` = '$comp_Serial',`voltage` = '$voltage',
-            `sound_Decibel` = '$sound_Decibel',`current_FLA` = '$current_FLA',`refrigerant` = '$refrigerant',`condenser` = '$condenser',`solenoid` = '$solenoid',
-            `condenser_Fan` = '$condenser_Fan',`interior_Lights` = '$interior_Lights',`control_Panel` = '$control_Panel',`circuit_Breaker` = '$circuit_Breaker',
-            `electric_Contactor` = '$electric_Contactor',`part` = '$part',`eutectic_Plate` = '$eutectic_Plate',`expansion_Valve` = '$expansion_Valve',
-            `recovery_Tank` = '$recovery_Tank',`pressure_Control` = '$pressure_Control',`sight_Glass` = '$sight_Glass',`filter_Drier` = '$filter_Drier',
-            `thermostat` = '$thermostat',`misc` = '$misc',`updated_on`= NOW(), `updated_by`='Admin' WHERE `id` = '$id'");
+            $front_S_Image = '';
+            $back_S_Image = '';
+            $left_S_Image = '';
+            $right_S_Image = '';
+            // Check if the 'front_S_Image' file is provided
+            if ($_FILES['front_S_Image']['name'] != '') {
+                $front_S_Image = rand(111111111, 999999999) . '_' . $_FILES['front_S_Image']['name'];
+                move_uploaded_file($_FILES['front_S_Image']['tmp_name'], 'media/car_images/' . $front_S_Image);
+            }
+            // Check if 'back_S_Image' file is provided
+            if ($_FILES['back_S_Image']['name'] != '') {
+                $back_S_Image = rand(111111111, 999999999) . '_' . $_FILES['back_S_Image']['name'];
+                move_uploaded_file($_FILES['back_S_Image']['tmp_name'], 'media/car_images/' . $back_S_Image);
+            }
+            // Check if 'left_S_Image' file is provided
+            if ($_FILES['left_S_Image']['name'] != '') {
+                $left_S_Image = rand(111111111, 999999999) . '_' . $_FILES['left_S_Image']['name'];
+                move_uploaded_file($_FILES['left_S_Image']['tmp_name'], 'media/car_images/' . $left_S_Image);
+            }
+            // Check if 'right_S_Image' file is provided
+            if ($_FILES['right_S_Image']['name'] != '') {
+                $right_S_Image = rand(111111111, 999999999) . '_' . $_FILES['right_S_Image']['name'];
+                move_uploaded_file($_FILES['right_S_Image']['tmp_name'], 'media/car_images/' . $right_S_Image);
+            }
+            // Construct the SQL query
+            $update_sql = "UPDATE `unit_details` SET `year` = NOW(), `make` = '$make', `model` = '$model', `wheelbase` = '$wheelbase', `vin` = '$vin', `contact_Name` = '$contact_Name',
+    `contact_Num` = '$contact_Num', `fc_Unit_Cost` = '$fc_Unit_Cost', `fc_Body` = '$fc_Body', `body_Weight` = '$body_Weight', `fc_Model` = '$fc_Model',
+    `exterior_Dimension` = '$exterior_Dimension', `compressor` = '$compressor', `comp_Serial` = '$comp_Serial', `voltage` = '$voltage',
+    `sound_Decibel` = '$sound_Decibel', `current_FLA` = '$current_FLA', `refrigerant` = '$refrigerant', `condenser` = '$condenser', `solenoid` = '$solenoid',
+    `condenser_Fan` = '$condenser_Fan', `interior_Lights` = '$interior_Lights', `control_Panel` = '$control_Panel', `circuit_Breaker` = '$circuit_Breaker',
+    `electric_Contactor` = '$electric_Contactor', `part` = '$part', `eutectic_Plate` = '$eutectic_Plate', `expansion_Valve` = '$expansion_Valve',
+    `recovery_Tank` = '$recovery_Tank', `pressure_Control` = '$pressure_Control', `sight_Glass` = '$sight_Glass', `filter_Drier` = '$filter_Drier',
+    `thermostat` = '$thermostat', `misc` = '$misc'";
+
+            // Add image fields to the query if they are provided
+            if (!empty($front_S_Image)) {
+                $update_sql .= ", `front_S_Image` = '$front_S_Image'";
+            }
+            if (!empty($back_S_Image)) {
+                $update_sql .= ", `back_S_Image` = '$back_S_Image'";
+            }
+            if (!empty($left_S_Image)) {
+                $update_sql .= ", `left_S_Image` = '$left_S_Image'";
+            }
+            if (!empty($right_S_Image)) {
+                $update_sql .= ", `right_S_Image` = '$right_S_Image'";
+            }
+            // Complete the query
+            $update_sql .= ", `updated_on` = NOW(), `updated_by` = '{$_SESSION['user_fullname']}' WHERE `id` = '$id'";
+            mysqli_query($conn, $update_sql);
         }
-        // else {
-        //     mysqli_query($conn, "INSERT INTO `unit_details` (`make`,`model`,`wheelbase`,`vin`,`contact_Name`,`contact_Num`,`fc_Unit_Cost`,`fc_Body`,
-        //     `body_Weight`,`fc_Model`,`exterior_Dimension`,`compressor`,`comp_Serial`,`voltage`,`sound_Decibel`,`current_FLA`,`refrigerant`,
-        //     `condenser`,`solenoid`,`condenser_Fan`,`interior_Lights`,`control_Panel`,`circuit_Breaker`,`electric_Contactor`,`part`,`eutectic_Plate`,
-        //     `expansion_Valve`,`recovery_Tank`,`pressure_Control`,`sight_Glass`,`filter_Drier`,`thermostat`,`misc`
-        //     ) VALUES ('$make','$model','$wheelbase','$vin','$contact_Name','$contact_Num','$fc_Unit_Cost','$fc_Body','$body_Weight','$fc_Model',
-        //     '$exterior_Dimension','$compressor','$comp_Serial','$voltage','$sound_Decibel','$current_FLA','$refrigerant','$condenser','$solenoid',
-        //     '$condenser_Fan','$interior_Lights','$control_Panel','$circuit_Breaker','$electric_Contactor','$part','$eutectic_Plate',
-        //     '$expansion_Valve','$recovery_Tank','$pressure_Control','$sight_Glass','$filter_Drier','$thermostat','$misc')");
-        // }
         redirect("veiwtruck.php", "Updated Successfully!");
-        // header('location:veiwtruck.php');
         die();
     }
 }
-
-// ================================================================================================================
-
-
-
-
-
-// if (isset($_POST['submit'])) {
-//     $make = get_safe_value($conn, $_POST['make']);
-//     $model = get_safe_value($conn, $_POST['model']);
-//     $wheelbase = get_safe_value($conn, $_POST['wheelbase']);
-//     $vin = get_safe_value($conn, $_POST['vin']);
-//     $contact_Name = get_safe_value($conn, $_POST['contact_Name']);
-//     $contact_Num = get_safe_value($conn, $_POST['contact_Num']);
-//     $fc_Unit_Cost = get_safe_value($conn, $_POST['fc_Unit_Cost']);
-//     $fc_Body = get_safe_value($conn, $_POST['fc_Body']);
-//     $body_Weight = get_safe_value($conn, $_POST['body_Weight']);
-//     $fc_Model = get_safe_value($conn, $_POST['fc_Model']);
-//     $exterior_Dimension = get_safe_value($conn, $_POST['exterior_Dimension']);
-//     $compressor = get_safe_value($conn, $_POST['compressor']);
-//     $comp_Serial = get_safe_value($conn, $_POST['comp_Serial']);
-//     $voltage = get_safe_value($conn, $_POST['voltage']);
-//     $sound_Decibel = get_safe_value($conn, $_POST['sound_Decibel']);
-//     $current_FLA = get_safe_value($conn, $_POST['current_FLA']);
-//     $refrigerant = get_safe_value($conn, $_POST['refrigerant']);
-//     $condenser = get_safe_value($conn, $_POST['condenser']);
-//     $solenoid = get_safe_value($conn, $_POST['solenoid']);
-//     $condenser_Fan = get_safe_value($conn, $_POST['condenser_Fan']);
-//     $interior_Lights = get_safe_value($conn, $_POST['interior_Lights']);
-//     $control_Panel = get_safe_value($conn, $_POST['control_Panel']);
-//     $circuit_Breaker = get_safe_value($conn, $_POST['circuit_Breaker']);
-//     $electric_Contactor = get_safe_value($conn, $_POST['electric_Contactor']);
-//     $part = get_safe_value($conn, $_POST['part']);
-//     $eutectic_Plate = get_safe_value($conn, $_POST['eutectic_Plate']);
-//     $expansion_Valve = get_safe_value($conn, $_POST['expansion_Valve']);
-//     $recovery_Tank = get_safe_value($conn, $_POST['recovery_Tank']);
-//     $pressure_Control = get_safe_value($conn, $_POST['pressure_Control']);
-//     $sight_Glass = get_safe_value($conn, $_POST['sight_Glass']);
-//     $filter_Drier = get_safe_value($conn, $_POST['filter_Drier']);
-//     $thermostat = get_safe_value($conn, $_POST['thermostat']);
-//     $misc = get_safe_value($conn, $_POST['misc']);
-
-
-//     $res_categories = mysqli_query($conn, "SELECT * FROM `unit_details` WHERE `model` = '$model'");
-//     $check_categories = mysqli_num_rows($res_categories);
-
-//     if ($check_categories > 0) {
-//         // Assuming you have a unique identifier for the record you want to update (e.g., an ID column)
-//         redirect("veiwtruck.php", "Data Insert Successfully!");
-//         if (isset($_GET['editid']) && $_GET['editid'] != '') {
-//             $row = mysqli_fetch_assoc($res_categories);
-//             $recordId = $row['id']; // Replace 'id' with your actual unique identifier column name
-
-//         } else {
-//             redirect("veiwtruck.php", "Data Insert Successfully!");
-//         }
-//     }
-
-//     if (isset($_GET['editid']) && $_GET['editid'] != '') {
-//         // Assuming you have retrieved the $id from somewhere
-//         if ($id == $recordId) {
-//             // Update the record
-//             mysqli_query($conn, "UPDATE `unit_details` SET `make` = '$make',`model` = '$model',`wheelbase` = '$wheelbase',`vin` = '$vin',`contact_Name` = '$contact_Name',
-//                 `contact_Num` = '$contact_Num',`fc_Unit_Cost` = '$fc_Unit_Cost',`fc_Body` = '$fc_Body',`body_Weight` = '$body_Weight',`fc_Model` = '$fc_Model',
-//                 `exterior_Dimension` = '$exterior_Dimension',`compressor` = '$compressor',`comp_Serial` = '$comp_Serial',`voltage` = '$voltage',
-//                 `sound_Decibel` = '$sound_Decibel',`current_FLA` = '$current_FLA',`refrigerant` = '$refrigerant',`condenser` = '$condenser',`solenoid` = '$solenoid',
-//                 `condenser_Fan` = '$condenser_Fan',`interior_Lights` = '$interior_Lights',`control_Panel` = '$control_Panel',`circuit_Breaker` = '$circuit_Breaker',
-//                 `electric_Contactor` = '$electric_Contactor',`part` = '$part',`eutectic_Plate` = '$eutectic_Plate',`expansion_Valve` = '$expansion_Valve',
-//                 `recovery_Tank` = '$recovery_Tank',`pressure_Control` = '$pressure_Control',`sight_Glass` = '$sight_Glass',`filter_Drier` = '$filter_Drier',
-//                 `thermostat` = '$thermostat',`misc` = '$misc' WHERE `id` = '$recordId'");
-//         }
-//         redirect("veiwtruck.php", "Data Insert Successfully!");
-//     }
-// }
-
-
-
-
-
-
 
 
 
@@ -272,14 +210,15 @@ include "./includes/sidebar.php";
 
     <div class="tab-content" id="pills-tabContent">
         <div class="row">
+
             <div class="col-12">
                 <div class="card my-5 w-100 position-relative overflow-hidden mb-0">
                     <div class="card-body p-4">
 
-                        <form action="" method="POST">
+                        <form action="" method="POST" enctype="multipart/form-data">
                             <div class="row text-dark">
                                 <div class="row my-5">
-                                    <h5 class="card-title fw-semibold">Frost Car Unit Details (SQL)</h5>
+                                    <h5 class="card-title fw-semibold">Frost Car Unit Details (SQL): Edit Model : <?php echo $model; ?></h5>
                                     <hr class="p-0">
 
 
@@ -457,11 +396,6 @@ include "./includes/sidebar.php";
                                             ?>
                                         </div>
 
-                                    </div>
-
-                                    <div class="col-lg-6">
-
-
                                         <div class="mb-2">
                                             <label for="condenser" class="form-label fw-semibold">Condenser</label>
                                             <input type="text" class="form-control" id="condenser" name="condenser" placeholder="Condenser" value="<?php echo $condenser; ?>">
@@ -502,6 +436,13 @@ include "./includes/sidebar.php";
                                             }
                                             ?>
                                         </div>
+
+
+                                    </div>
+
+                                    <div class="col-lg-6">
+
+
                                         <div class="mb-2">
                                             <label for="control_Panel" class="form-label fw-semibold">Control Panel</label>
                                             <input type="text" class="form-control" id="control_Panel" name="control_Panel" placeholder="Control Panel" value="<?php echo $control_Panel; ?>">
@@ -622,6 +563,49 @@ include "./includes/sidebar.php";
                                             }
                                             ?>
                                         </div>
+
+
+                                        <div class="mb-2">
+                                            <label for="front_S_Image" class="form-label fw-semibold">Front Side Image</label>
+                                            <input type="file" class="w-100 inputDesign" id="front_S_Image" name="front_S_Image">
+                                            <?php if (isset($_SESSION['empty_sight_Glass'])) {
+                                                echo '
+                                        <p class="text-danger">' . $_SESSION['empty_sight_Glass'] . '</p>';
+                                                unset($_SESSION['empty_sight_Glass']);
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="back_S_Image" class="form-label fw-semibold">Back Side Image</label>
+                                            <input type="file" class="w-100 inputDesign" id="back_S_Image" name="back_S_Image">
+                                            <?php if (isset($_SESSION['empty_filter_Drier'])) {
+                                                echo '
+                                        <p class="text-danger">' . $_SESSION['empty_filter_Drier'] . '</p>';
+                                                unset($_SESSION['empty_filter_Drier']);
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="left_S_Image" class="form-label fw-semibold">Left Side Image</label>
+                                            <input type="file" class="w-100 inputDesign" id="left_S_Image" name="left_S_Image">
+                                            <?php if (isset($_SESSION['empty_thermostat'])) {
+                                                echo '
+                                        <p class="text-danger">' . $_SESSION['empty_thermostat'] . '</p>';
+                                                unset($_SESSION['empty_thermostat']);
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="my-2">
+                                            <label for="right_S_Image" class="form-label fw-semibold">Right Side Image</label>
+                                            <input type="file" class="w-100 inputDesign" id="right_S_Image" name="right_S_Image">
+                                            <?php if (isset($_SESSION['empty_misc'])) {
+                                                echo '
+                                        <p class="text-danger">' . $_SESSION['empty_misc'] . '</p>';
+                                                unset($_SESSION['empty_misc']);
+                                            }
+                                            ?>
+                                        </div>
+
 
                                         <button type="submit" name="submit" class="save py-2">Update</button>
 
