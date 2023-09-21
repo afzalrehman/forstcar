@@ -4,6 +4,11 @@ require './function/function.inc.php';
 include "./includes/header.php";
 include "./includes/navbar.php";
 include "./includes/sidebar.php";
+$company_name = "";
+if (isset($_POST['add_company_btn'])) {
+    $company_name = $_POST['company_name'];
+unset($company_name);
+}
 ?>
 
 <div class="container-fluid">
@@ -17,7 +22,16 @@ include "./includes/sidebar.php";
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="in">
-                                    <input type="text" name="company_name"  class=" input w-100 py-2 mt-3" placeholder="Company Name">
+                                    <input type="text" name="model" class=" input w-100 py-2 mt-3" placeholder=" Model">
+                                    <?php if (isset($_SESSION['empty_model'])) {
+                                        echo '
+                                        <p class="text-danger">' . $_SESSION['empty_model'] . '</p>';
+                                        unset($_SESSION['empty_model']);
+                                    }
+                                    ?>
+                                </div>
+                                <div class="in">
+                                    <input type="text" name="company_name" class=" input w-100 py-2 mt-3" placeholder="Company Name" value="<?= $company_name;?>">
                                     <?php if (isset($_SESSION['empty_company_name'])) {
                                         echo '
                                         <p class="text-danger">' . $_SESSION['empty_company_name'] . '</p>';
@@ -193,6 +207,7 @@ include "./includes/sidebar.php";
                                     <tr>
                                         <th>Action<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>S/no<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                        <th>Model<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>Company Name<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>Contact number<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>Address <i class="fa-solid fa-arrow-down px-2"></i></th>
@@ -237,6 +252,7 @@ include "./includes/sidebar.php";
                                                     <a href="edit_company.php?editid=<?= $item['importer_id'] ?>"><i class="fa-solid fa-pen-to-square text-success  fs-6"></i></a>
                                                 </td>
                                                 <td class="font"><?= $no++; ?></td>
+                                                <td><?= $item['model'] ?></td>
                                                 <td><?= $item['company_name'] ?></td>
                                                 <td><?= $item['company_contact'] ?></td>
                                                 <td><?= $item['company_address'] ?></td>
