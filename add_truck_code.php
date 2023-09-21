@@ -197,7 +197,7 @@ if (isset($_POST['add_truck_btn'])) {
     }
 }
 
-$delete = [''];
+// $delete = [''];
 if (isset($_GET['deleteid'])) {
     $id = $_GET['deleteid'];
     $delete_query = "DELETE FROM `unit_details` WHERE id=$id ";
