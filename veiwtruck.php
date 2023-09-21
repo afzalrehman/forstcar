@@ -87,12 +87,21 @@ include "./includes/sidebar.php";
                             <tbody>
 
                                 <?php
-                                $category = getAll("unit_details");
+                                // $category = getAll("unit_details");
+                                // if (mysqli_num_rows($category) > 0) {
+                                //     $no = 1;
+                                //     // facth mysqli_fetch
+                                //     foreach ($category as $item) {
 
-                                if (mysqli_num_rows($category) > 0) {
-                                    $no = 1;
-                                    // facth mysqli_fetch
-                                    foreach ($category as $item) {
+
+                                $sql = "SELECT * FROM `unit_details`
+                                    INNER JOIN `importer_details` ON unit_details.model = importer_details.model";
+
+                                $result = $conn->query($sql);
+                                $no = 1;
+                                if ($result->num_rows > 0) {
+                                    // Output data of each row
+                                    while ($item = $result->fetch_assoc()) {
                                 ?>
                                         <tr>
                                             <td>
@@ -139,7 +148,7 @@ include "./includes/sidebar.php";
                                             <td> $item['thermostat'] ?></td>
                                             <td> $item['misc'] ?></td> -->
                                             <td>
-                                                <a href="vewimore.php?model=<?= $item['model']?>">Vewimore</a>
+                                                <a href="vewimore.php?model=<?= $item['model'] ?>">Vewimore</a>
                                             </td>
                                             <td><?= $item['added_on'] ?></td>
                                             <td><?= $item['added_by'] ?></td>

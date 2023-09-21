@@ -29,8 +29,8 @@ include "./includes/sidebar.php";
                                 <div class="row">
                                     <div class="col-lg-6">
 
-                                    <div class="in">
-                                            <input type="text" name="model" value="<?= $data['model']; ?> " class=" input w-100 py-2 mt-3" placeholder="Model">
+                                        <div class="in">
+                                            <input type="text" name="model" value="<?= $data['model']; ?>" class=" input w-100 py-2 mt-3" placeholder="Model">
                                             <?php if (isset($_SESSION['empty_model'])) {
                                                 echo '
                                         <p class="text-danger">' . $_SESSION['empty_model'] . '</p>';
@@ -40,7 +40,7 @@ include "./includes/sidebar.php";
                                         </div>
                                         <div class="in">
                                             <input type="hidden" name="edit" value="<?= $data['importer_id']; ?> ">
-                                            <input type="text" name="company_name" value="<?= $data['company_name']; ?> " class=" input w-100 py-2 mt-3" placeholder="Company Name">
+                                            <input type="text" name="company_name" value="<?= $data['company_name']; ?>" class=" input w-100 py-2 mt-3" placeholder="Company Name">
                                             <?php if (isset($_SESSION['empty_company_name'])) {
                                                 echo '
                                         <p class="text-danger">' . $_SESSION['empty_company_name'] . '</p>';
@@ -50,9 +50,9 @@ include "./includes/sidebar.php";
                                         </div>
 
 
-                         
+
                                         <div class="in">
-                                            <input type="text" name="company_contact" value="<?= $data['company_contact']; ?> " class=" input w-100 py-2 mt-3" placeholder="Contact Name ">
+                                            <input type="text" name="company_contact" value="<?= $data['company_contact']; ?>" class=" input w-100 py-2 mt-3" placeholder="Contact Name ">
                                             <?php if (isset($_SESSION['empty_company_contact'])) {
                                                 echo '
                                         <p class="text-danger">' . $_SESSION['empty_company_contact'] . '</p>';
@@ -62,7 +62,7 @@ include "./includes/sidebar.php";
                                         </div>
 
                                         <div class="in">
-                                            <input type="text" name="company_address" value="<?= $data['company_address']; ?> " class=" input w-100 py-2 mt-3" placeholder="Address">
+                                            <input type="text" name="company_address" value="<?= $data['company_address']; ?>" class=" input w-100 py-2 mt-3" placeholder="Address">
                                             <?php if (isset($_SESSION['empty_company_address'])) {
                                                 echo '
                                         <p class="text-danger">' . $_SESSION['empty_company_address'] . '</p>';
@@ -71,7 +71,7 @@ include "./includes/sidebar.php";
                                             ?>
                                         </div>
                                         <div class="in">
-                                            <input type="text" name="company_city" value="<?= $data['company_city']; ?> " class=" input w-100 py-2 mt-3" placeholder="City">
+                                            <input type="text" name="company_city" value="<?= $data['company_city']; ?>" class=" input w-100 py-2 mt-3" placeholder="City">
                                             <?php if (isset($_SESSION['empty_company_city'])) {
                                                 echo '
                                         <p class="text-danger">' . $_SESSION['empty_company_city'] . '</p>';
@@ -81,7 +81,7 @@ include "./includes/sidebar.php";
                                         </div>
 
                                         <div class="in">
-                                            <input type="text" name="company_state" value="<?= $data['company_state']; ?> " class=" input w-100 py-2 mt-3" placeholder="State ">
+                                            <input type="text" name="company_state" value="<?= $data['company_state']; ?>" class=" input w-100 py-2 mt-3" placeholder="State ">
                                             <?php if (isset($_SESSION['empty_company_state'])) {
                                                 echo '
                                         <p class="text-danger">' . $_SESSION['empty_company_state'] . '</p>';
@@ -90,7 +90,7 @@ include "./includes/sidebar.php";
                                             ?>
                                         </div>
                                         <div class="in">
-                                            <input type="text" name="company_zipcode" value="<?= $data['company_zipcode']; ?> " class=" input w-100 py-2 mt-3" placeholder="Zip Code ">
+                                            <input type="text" name="company_zipcode" value="<?= $data['company_zipcode']; ?>" class=" input w-100 py-2 mt-3" placeholder="Zip Code ">
                                             <?php if (isset($_SESSION['empty_company_zipcode'])) {
                                                 echo '
                                         <p class="text-danger">' . $_SESSION['empty_company_zipcode'] . '</p>';
@@ -100,7 +100,7 @@ include "./includes/sidebar.php";
                                         </div>
 
                                         <div class="in">
-                                            <input type="text" name="company_telephone" value="<?= $data['company_telephone']; ?> " class=" input w-100 py-2 mt-3" placeholder="Telephone ">
+                                            <input type="text" name="company_telephone" value="<?= $data['company_telephone']; ?>" class=" input w-100 py-2 mt-3" placeholder="Telephone ">
                                             <?php if (isset($_SESSION['empty_company_telephone'])) {
                                                 echo '
                                         <p class="text-danger">' . $_SESSION['empty_company_telephone'] . '</p>';
@@ -131,7 +131,7 @@ include "./includes/sidebar.php";
                                             ?>
                                         </div>
                                         <div class="in">
-                                            <input type="text" name="company_port" value="<?= $data['company_port_of_entry']; ?> " class=" input w-100 py-2 mt-3" placeholder="Port Of Entry ">
+                                            <input type="text" name="company_port" value="<?= $data['company_port_of_entry']; ?>" class=" input w-100 py-2 mt-3" placeholder="Port Of Entry ">
                                             <?php if (isset($_SESSION['empty_company_port'])) {
                                                 echo '
                                         <p class="text-danger">' . $_SESSION['empty_company_port'] . '</p>';
@@ -167,7 +167,7 @@ include "./includes/sidebar.php";
                                             ?>
                                         </div>
                                         <div class="in">
-                                            <input type="text" name="total_cost" value="<?= $data['total_cost']; ?> " class=" input w-100 py-2 mt-3" placeholder="Total Cost">
+                                            <input type="text" name="total_cost" value="<?= $data['total_cost']; ?>" class=" input w-100 py-2 mt-3" placeholder="Total Cost">
                                             <?php if (isset($_SESSION['empty_total_cost'])) {
                                                 echo '
                                         <p class="text-danger">' . $_SESSION['empty_total_cost'] . '</p>';
