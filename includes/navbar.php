@@ -9,6 +9,7 @@ global $conn;
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-dark " id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <img class="rounded-circle" height="25" width="25" src="media/user_images/<?php echo $_SESSION['user_image']; ?>" alt="">
+                <!-- <img class="rounded-circle" height="25" width="25" src="media/user_images/<?php echo $user_image; ?>?<?php echo time(); ?>" alt="Profile Image"> -->
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <li class="dropdown-item">

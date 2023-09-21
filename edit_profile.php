@@ -2,7 +2,6 @@
 include 'config/config.php';
 require './function/function.inc.php';
 session_start();
-global $conn;
 
 
 if (isset($_GET['editid']) && $_GET['editid'] != '') {
@@ -23,57 +22,35 @@ if (isset($_GET['editid']) && $_GET['editid'] != '') {
 }
 
 
+
 // ===================   Update Querry   =====================
+
 if (isset($_POST['update'])) {
-    $user_contact = get_safe_value($conn, $_POST['user_contact']);
+    $user_contact = mysqli_real_escape_string($conn, $_POST['user_contact']);
 
-    $res_contact = mysqli_query($conn, "SELECT * FROM `admin_users` WHERE `user_contact` = '$user_contact'");
+    if ($_FILES['user_image']['name']) {
+        // If a new image is uploaded, update the user_image field
+        $user_image = rand(111111111, 999999999) . '_' . $_FILES['user_image']['name'];
+        move_uploaded_file($_FILES['user_image']['tmp_name'], 'media/user_images/' . $user_image);
+        $update_query = "UPDATE `admin_users` SET `user_contact` = '$user_contact', `user_image` = '$user_image' 
+                        WHERE `user_email` = '{$_SESSION['user_email']}'";
+    } else {
+        // If no new image is uploaded, retain the existing image in the database
+        $update_query = "UPDATE `admin_users` SET `user_contact` = '$user_contact' 
+                        WHERE `user_email` = '{$_SESSION['user_email']}'";
+    }
 
-    $check_contact = mysqli_num_rows($res_contact);
-    if ($check_contact > 0) {
-        if (isset($_GET['editid']) && $_GET['editid'] != '') {
-            $getData = mysqli_fetch_assoc($res_contact);
-            if ($id == $getData['user_id']) {
-            } else {
-                echo "Contact Number is already exist";
-                // redirect("uservewi.php", "Contact Number is already exist!");
-                exit();
-            }
-        } else {
-            echo "Contact Number is already exist";
-            // redirect("uservewi.php", "Contact Number is already exist!");
-            exit();
-        }
+    $sql = mysqli_query($conn, $update_query);
+
+    if ($sql) {
+        redirect("profile.php", "Updated Successfully!");
+    } else {
+        echo "Error: " . mysqli_error($conn);
     }
 }
 
-if ($id == $id) {
 
-    if (isset($_GET['editid']) && $_GET['editid'] != '') {
-        $user_image = '';
-        // Check if the 'front_S_Image' file is provided
-        if ($_FILES['user_image']['name'] != '') {
-            $user_image = rand(111111111, 999999999) . '_' . $_FILES['user_image']['name'];
-            move_uploaded_file($_FILES['user_image']['tmp_name'], 'media/user_images/' . $user_image);
-        }
 
-        // Construct the SQL query
-        $update_sql = "UPDATE `admin_users` SET  `user_contact` = '$user_contact'";
-
-        // Add image fields to the query if they are provided
-        if (!empty($user_image)) {
-            $update_sql .= ", `user_image` = '$user_image'";
-        }
-
-        // Complete the query
-        $update_sql .= ", `updated_on` = NOW(), `updated_by` = '{$_SESSION['user_fullname']}' WHERE `user_email` = '{$_SESSION['user_email']}'";
-        mysqli_query($conn, $update_sql);
-    }
-    echo "Updated Successfully";
-    // redirect("uservewi.php", "Updated Successfully!");
-    die();
-}
-// }
 ?>
 
 
@@ -93,63 +70,11 @@ include "./includes/sidebar.php";
 
                     <div class="col-lg-6">
 
-                        <!-- <div class="in mb-3">
-                            <label class="form-label fw-semibold">Full Name</label>
-                            <input type="text" name="user_fullname" id="name" class=" inputDesign w-100 py-2" placeholder="Enter Your Full Name" value="<?php if (isset($_GET['editid'])) {
-                                                                                                                                                            echo $name;
-                                                                                                                                                        } ?>">
-                            <?php if (isset($_SESSION['empty_make'])) {
-                                echo '
-                                        <p class="text-danger">' . $_SESSION['empty_make'] . '</p>';
-                                unset($_SESSION['empty_make']);
-                            }
-                            ?>
-                        </div>
-
-                        <div class="in mb-3">
-                            <label class="form-label fw-semibold">Email</label>
-                            <input type="email" name="user_email" id="name" class=" inputDesign w-100 py-2" placeholder="Enter Your Email" value="<?php if (isset($_GET['editid'])) {
-                                                                                                                                                        echo $user_email;
-                                                                                                                                                    } ?>">
-                            <?php if (isset($_SESSION['empty_make'])) {
-                                echo '
-                                        <p class="text-danger">' . $_SESSION['empty_make'] . '</p>';
-                                unset($_SESSION['empty_make']);
-                            }
-                            ?>
-                        </div>
-
-                        <div class="in mb-3">
-                            <label class="form-label fw-semibold">User Type</label>
-                            <select name="user_type" class="inputDesign py-2 w-100">
-                                <option selected><?php if (isset($_GET['editid'])) {
-                                                        echo $user_type;
-                                                    } else {
-                                                        echo "User Type";
-                                                    } ?></option>
-
-                                <option value="Admin">Admin</option>
-                                <option value="User"> User</option>
-                                <?php if (isset($_SESSION['empty_make'])) {
-                                    echo '
-                                        <p class="text-danger">' . $_SESSION['empty_make'] . '</p>';
-                                    unset($_SESSION['empty_make']);
-                                }
-                                ?>
-                            </select>
-                        </div> -->
-
                         <div class="in mb-3">
                             <label class="form-label fw-semibold">Contact Number</label>
                             <input type="text" name="user_contact" id="name" class=" inputDesign w-100 py-2" placeholder="Enter Your Contact Number" value="<?php if (isset($_GET['editid'])) {
                                                                                                                                                                 echo $user_contact;
                                                                                                                                                             } ?>">
-                            <?php if (isset($_SESSION['empty_make'])) {
-                                echo '
-                                        <p class="text-danger">' . $_SESSION['empty_make'] . '</p>';
-                                unset($_SESSION['empty_make']);
-                            }
-                            ?>
                         </div>
 
                     </div>
@@ -160,12 +85,6 @@ include "./includes/sidebar.php";
                         <div class="in">
                             <label class="form-label fw-semibold">Image</label>
                             <input type="file" name="user_image" id="image" class="inputDesign w-100 py-2">
-                            <?php if (isset($_SESSION['empty_make'])) {
-                                echo '
-                                        <p class="text-danger">' . $_SESSION['empty_make'] . '</p>';
-                                unset($_SESSION['empty_make']);
-                            }
-                            ?>
                         </div>
 
                     </div>
