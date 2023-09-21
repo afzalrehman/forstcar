@@ -29,10 +29,10 @@ if (isset($_POST['submit'])) {
         $_SESSION['user_id'] = $email_pass['user_id'];
         $_SESSION['user_type'] = $email_pass['user_type'];
 
-        
+
         $pass_decode = password_verify($user_password, $db_pass);
         $_SESSION['user_pass'] = $pass_decode;
-        
+
         if ($pass_decode) {
 
             if (isset($_POST['rememberme'])) {

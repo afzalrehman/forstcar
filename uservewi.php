@@ -67,8 +67,7 @@ include "./includes/sidebar.php";
                                 $res_num = mysqli_num_rows($result);
 
                                 $no = 1;
-                                while ($row = mysqli_fetch_assoc($result)) {
-                                    // $_SESSION['user_image'] = $row['user_image'];
+                                while ($row = mysqli_fetch_assoc($result)) { 
                                 ?>
                                     <tr>
                                         <td>
