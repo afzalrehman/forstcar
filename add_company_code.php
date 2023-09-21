@@ -104,6 +104,7 @@ if (isset($_POST['add_company_btn'])) {
             $inset_qury_run = mysqli_query($conn, $sql);
 
             if ($inset_qury_run) {
+                $_SESSION['company_name']= [""];
                 redirect("company.php", "Data Insert Successfully!");
                 exit();
                 // header("location:company.php");
