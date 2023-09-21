@@ -31,7 +31,7 @@ unset($company_name);
                                     ?>
                                 </div>
                                 <div class="in">
-                                    <input type="text" name="company_name" class=" input w-100 py-2 mt-3" placeholder="Company Name" value="<?= $company_name;?>">
+                                    <input type="text" name="company_name" class=" input w-100 py-2 mt-3" placeholder="Company Name" value="<?= $company_name; unset($company_name);?>">
                                     <?php if (isset($_SESSION['empty_company_name'])) {
                                         echo '
                                         <p class="text-danger">' . $_SESSION['empty_company_name'] . '</p>';
