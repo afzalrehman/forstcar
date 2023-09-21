@@ -42,3 +42,10 @@ function redirectdelete($url, $message)
    header("Location: " . $url);
    exit();
 };
+// =============vewimore ============
+function modal_chack($unit_details ,$modal)
+{
+   global $conn;
+   $query = "SELECT * FROM $unit_details where model='$modal'";
+   return $query_run = mysqli_query($conn, $query);
+};

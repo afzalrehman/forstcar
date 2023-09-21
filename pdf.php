@@ -3,9 +3,9 @@ include './config/config.php';
 require './function/function.inc.php';
 session_start();
 
+
 include "./includes/header.php";
-include "./includes/navbar.php";
-include "./includes/sidebar.php";
+
 
 if (isset($_GET['model'])) {
     $model_num = $_GET['model'];
@@ -13,9 +13,7 @@ if (isset($_GET['model'])) {
     if(mysqli_num_rows($select_modal)> 0){
         $fach = mysqli_fetch_array($select_modal);
 
-     $id = $fach['id'] ;
      $year = $fach['year'] ;
-     $make = $fach['make'] ;
      $model = $fach['model'] ;
      $wheelbase = $fach['wheelbase'] ;
      $vin = $fach['vin'] ;
@@ -124,7 +122,7 @@ if (isset($_GET['model'])) {
                 <h3 class="mb-5">TRUCK DETAILS</h3>
             </div>
             <div class="col-3 text-end">
-                <a href="edit_truck.php?editid=<?= $id ?>" name="edit" class="btn btn-primary">Edit</a>
+                <button class="btn btn-primary">Edit</button>
             </div>
         </div>
         <div class="row px-5">
@@ -133,12 +131,6 @@ if (isset($_GET['model'])) {
                     <label for="" class="fw-bold text-muted">Year:</label>
                     <div class=" pt-2">
                         <p><?=$year ?><?php if (empty($year)){echo "------";}?></p>
-                    </div>
-                </div>
-                <div class="mb-4">
-                    <label for="" class="fw-bold text-muted">Mack:</label>
-                    <div class="pt-2">
-                        <p><?=$make ?><?php if (empty($make)){echo "------";}?></p>
                     </div>
                 </div>
                 <div class="mb-4">
@@ -282,7 +274,7 @@ if (isset($_GET['model'])) {
                 <div class="mb-4">
                     <label for="" class="fw-bold text-muted">Electric Contactor:</label>
                     <div class="pt-2">
-                        <p><?=$electric_Contactor ?><?php if (empty($electric_Contactor) || !isset($electric_Contactor)){echo "------";}?></p>
+                        <p><?=$electric_Contactor ?><?php if (empty($electric_Contactor)){echo "------";}?></p>
                     </div>
                 </div>
                 <div class="mb-4">
