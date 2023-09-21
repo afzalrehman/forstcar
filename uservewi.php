@@ -1,14 +1,8 @@
 <?php
-include './config/config.php';
-require './function/function.inc.php';
 session_start();
 global $conn;
-
-
-
-
-
-
+include './config/config.php';
+require './function/function.inc.php';
 
 include "./includes/header.php";
 include "./includes/navbar.php";
