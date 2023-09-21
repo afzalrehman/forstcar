@@ -37,7 +37,7 @@ include "./includes/sidebar.php";
 
             </div>
             <div>
-                <button name="profile_update" class="save py-2 mt-5">Update</button>
+                <button type="submit" name="profile_update" class="save py-2 mt-5">Update</button>
             </div>
         </div>
     </div>

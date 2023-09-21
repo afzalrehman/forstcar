@@ -1,29 +1,8 @@
 <?php
-include './config/config.php';
-require './function/function.inc.php';
 session_start();
 global $conn;
-if (!isset($_SESSION['user_fullname'])) {
-    echo "You are logged out";
-    header('location:login.php');
-}
-
-if (isset($_GET['type']) && $_GET['type'] != '') {
-    $type = get_safe_value($conn, $_GET['type']);
-
-    if ($type == 'delete') {
-        $id = get_safe_value($conn, $_GET['user_id']);
-        $delete_sql = "DELETE FROM `admin_users` WHERE user_id = '$id'";
-        mysqli_query($conn, $delete_sql);
-        header('location:uservewi.php');
-        die();
-    }
-}
-
-
-
-
-
+include './config/config.php';
+require './function/function.inc.php';
 
 include "./includes/header.php";
 include "./includes/navbar.php";
@@ -87,7 +66,7 @@ include "./includes/sidebar.php";
                                     <tr>
                                         <td>
                                             <?php
-                                            echo "<a href='?type=delete&user_id=" . $row['user_id'] . "'><i class='fa-regular fa-trash-can text-danger me-1 fs-6'></i></a>";
+                                            echo "<a href='user_code.php?deleteid=" . $row['user_id'] . "'><i class='fa-regular fa-trash-can text-danger me-1 fs-6'></i></a>";
 
                                             ?>
                                             <a href="edit_user.php?editid=<?= $row['user_id'] ?>" name="edit"><i class="fa-solid fa-pen-to-square text-success  fs-6"></i></a>

@@ -4,16 +4,11 @@ require './function/function.inc.php';
 session_start();
 global $conn;
 
-
-
-
 include "./includes/header.php";
 include "./includes/navbar.php";
 include "./includes/sidebar.php";
 ?>
 <div class="container-fluid">
-
-
     <div class="tab-content" id="pills-tabContent">
         <div class="row">
             <div class="col-12">
@@ -25,7 +20,6 @@ include "./includes/sidebar.php";
                                 <div class="row my-5">
                                     <h5 class="card-title fw-semibold">Frost Car Unit Details (SQL)</h5>
                                     <hr class="p-0">
-
 
                                     <div class="col-lg-6">
 
@@ -420,23 +414,14 @@ include "./includes/sidebar.php";
 
                                     </div>
 
-
-
                                 </div>
-                                <!-- End 2. Wakl-in/Rear-door Body -->
-
-
-
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
-
-
 </div>
 <?php
 include "./includes/footer.php";
