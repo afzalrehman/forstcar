@@ -22,10 +22,7 @@
                         </nav>
                     </div>
 
-                    <a class="nav-link hover " href="truckimage.php">
-                        <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
-                        Truck Image
-                    </a>
+                    
                     <a class="nav-link hover " href="operatin.php">
                         <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
                         Operating
