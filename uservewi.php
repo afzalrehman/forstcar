@@ -2,11 +2,18 @@
 session_start();
 global $conn;
 include './config/config.php';
+if ($_SESSION['user_type'] !== "Admin") {
+    header("location:index.php");
+}
 require './function/function.inc.php';
 
 include "./includes/header.php";
+include "./includes/searchbar.php";
 include "./includes/navbar.php";
 include "./includes/sidebar.php";
+
+
+
 ?>
 <div class="container-fluid">
     <div class="row my-5">

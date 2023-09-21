@@ -33,3 +33,13 @@ if (!isset($_SESSION['user_fullname'])) {
 </head>
 
 <body class="sb-nav-fixed">
+
+
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-white shadow">
+    <!-- Navbar Brand-->
+    <a class="navbar-brand ps-3" href="index.php"><img width="200px" src="assets/img/forscar_logo.png" alt=""></a>
+
+    <!-- Sidebar Toggle-->
+    <button class="btn text-black btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="text-dark fas fa-bars"></i></button>
+    <!-- Navbar Search-->
+    

@@ -4,10 +4,8 @@ include './config/config.php';
 require './function/function.inc.php';
 global $conn;
 
-
-
-
 include "./includes/header.php";
+include "./includes/searchbar.php";
 include "./includes/navbar.php";
 include "./includes/sidebar.php";
 ?>
