@@ -430,6 +430,12 @@ include "./includes/sidebar.php";
                                             }
                                             ?>
                                         </div>
+
+
+                                    </div>
+
+                                    <div class="col-lg-6">
+
                                         <div class="mb-2">
                                             <label for="condenser_Fan" class="form-label fw-semibold">Condenser Fan</label>
                                             <input type="text" class="form-control" id="condenser_Fan" name="condenser_Fan" placeholder="Condenser Fan" value="<?php echo $condenser_Fan; ?>">
@@ -450,13 +456,6 @@ include "./includes/sidebar.php";
                                             }
                                             ?>
                                         </div>
-
-
-                                    </div>
-
-                                    <div class="col-lg-6">
-
-
                                         <div class="mb-2">
                                             <label for="control_Panel" class="form-label fw-semibold">Control Panel</label>
                                             <input type="text" class="form-control" id="control_Panel" name="control_Panel" placeholder="Control Panel" value="<?php echo $control_Panel; ?>">
