@@ -251,254 +251,247 @@ include "./includes/sidebar.php";
 
                                         <div class="mb-2">
 
-
-                                        </div>
-
-                                        <div class="col-lg-6">
-
-                                            <div class="mb-2">
-
-                                                <label for="condenser_Fan" class="form-label fw-semibold">Condenser Fan</label>
-                                                <input type="text" class="w-100 inputDesign" id="condenser_Fan" name="condenser_Fan" placeholder="condenser_Fan">
-                                                <?php if (isset($_SESSION['empty_condenser_Fan'])) {
-                                                    echo '
+                                            <label for="condenser_Fan" class="form-label fw-semibold">Condenser Fan</label>
+                                            <input type="text" class="w-100 inputDesign" id="condenser_Fan" name="condenser_Fan" placeholder="condenser_Fan">
+                                            <?php if (isset($_SESSION['empty_condenser_Fan'])) {
+                                                echo '
                                         <p class="text-danger">' . $_SESSION['empty_condenser_Fan'] . '</p>';
-                                                    unset($_SESSION['empty_condenser_Fan']);
-                                                }
-                                                ?>
-                                            </div>
-                                            <div class="mb-2">
-                                                <label for="interior_Lights" class="form-label fw-semibold">Interior Lights</label>
-                                                <input type="text" class="w-100 inputDesign" id="interior_Lights" name="interior_Lights" placeholder="interior_Lights">
-                                                <?php if (isset($_SESSION['empty_interior_Lights'])) {
-                                                    echo '
+                                                unset($_SESSION['empty_condenser_Fan']);
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="interior_Lights" class="form-label fw-semibold">Interior Lights</label>
+                                            <input type="text" class="w-100 inputDesign" id="interior_Lights" name="interior_Lights" placeholder="interior_Lights">
+                                            <?php if (isset($_SESSION['empty_interior_Lights'])) {
+                                                echo '
                                         <p class="text-danger">' . $_SESSION['empty_interior_Lights'] . '</p>';
-                                                    unset($_SESSION['empty_interior_Lights']);
-                                                }
-                                                ?>
-                                            </div>
+                                                unset($_SESSION['empty_interior_Lights']);
+                                            }
+                                            ?>
+                                        </div>
 
-                                            <div class="mb-2">
-                                                <label for="control_Panel" class="form-label fw-semibold">Control Panel</label>
-                                                <input type="text" class="w-100 inputDesign" id="control_Panel" name="control_Panel" placeholder="control_Panel">
-                                                <?php if (isset($_SESSION['empty_control_Panel'])) {
-                                                    echo '
+                                        <div class="mb-2">
+                                            <label for="control_Panel" class="form-label fw-semibold">Control Panel</label>
+                                            <input type="text" class="w-100 inputDesign" id="control_Panel" name="control_Panel" placeholder="control_Panel">
+                                            <?php if (isset($_SESSION['empty_control_Panel'])) {
+                                                echo '
                                         <p class="text-danger">' . $_SESSION['empty_control_Panel'] . '</p>';
-                                                    unset($_SESSION['empty_control_Panel']);
-                                                }
-                                                ?>
-                                            </div>
-                                            <div class="mb-2">
-                                                <label for="circuit_Breaker" class="form-label fw-semibold">Circuit Breaker</label>
-                                                <input type="text" class="w-100 inputDesign" id="circuit_Breaker" name="circuit_Breaker" placeholder="circuit_Breaker">
-                                                <?php if (isset($_SESSION['empty_circuit_Breaker'])) {
-                                                    echo '
+                                                unset($_SESSION['empty_control_Panel']);
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="circuit_Breaker" class="form-label fw-semibold">Circuit Breaker</label>
+                                            <input type="text" class="w-100 inputDesign" id="circuit_Breaker" name="circuit_Breaker" placeholder="circuit_Breaker">
+                                            <?php if (isset($_SESSION['empty_circuit_Breaker'])) {
+                                                echo '
                                         <p class="text-danger">' . $_SESSION['empty_circuit_Breaker'] . '</p>';
-                                                    unset($_SESSION['empty_circuit_Breaker']);
-                                                }
-                                                ?>
-                                            </div>
-                                            <div class="mb-2">
-                                                <label for="electric_Contactor" class="form-label fw-semibold">Electric Contactor</label>
-                                                <input type="text" class="w-100 inputDesign" id="electric_Contactor" name="electric_Contactor" placeholder="electric_Contactor">
-                                                <?php if (isset($_SESSION['empty_electric_Contactor'])) {
-                                                    echo '
+                                                unset($_SESSION['empty_circuit_Breaker']);
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="electric_Contactor" class="form-label fw-semibold">Electric Contactor</label>
+                                            <input type="text" class="w-100 inputDesign" id="electric_Contactor" name="electric_Contactor" placeholder="electric_Contactor">
+                                            <?php if (isset($_SESSION['empty_electric_Contactor'])) {
+                                                echo '
                                         <p class="text-danger">' . $_SESSION['empty_electric_Contactor'] . '</p>';
-                                                    unset($_SESSION['empty_electric_Contactor']);
-                                                }
-                                                ?>
-                                            </div>
-                                            <div class="mb-2">
-                                                <label for="part" class="form-label fw-semibold">Part #</label>
-                                                <input type="text" class="w-100 inputDesign" id="part" name="part" placeholder="part">
-                                                <?php if (isset($_SESSION['empty_part'])) {
-                                                    echo '
+                                                unset($_SESSION['empty_electric_Contactor']);
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="part" class="form-label fw-semibold">Part #</label>
+                                            <input type="text" class="w-100 inputDesign" id="part" name="part" placeholder="part">
+                                            <?php if (isset($_SESSION['empty_part'])) {
+                                                echo '
                                         <p class="text-danger">' . $_SESSION['empty_part'] . '</p>';
-                                                    unset($_SESSION['empty_part']);
-                                                }
-                                                ?>
-                                            </div>
-                                            <div class="mb-2">
-                                                <label for="eutectic_Plate" class="form-label fw-semibold">Eutectic Plate</label>
-                                                <input type="text" class="w-100 inputDesign" id="eutectic_Plate" name="eutectic_Plate" placeholder="eutectic_Plate">
-                                                <?php if (isset($_SESSION['empty_eutectic_Plate'])) {
-                                                    echo '
+                                                unset($_SESSION['empty_part']);
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="eutectic_Plate" class="form-label fw-semibold">Eutectic Plate</label>
+                                            <input type="text" class="w-100 inputDesign" id="eutectic_Plate" name="eutectic_Plate" placeholder="eutectic_Plate">
+                                            <?php if (isset($_SESSION['empty_eutectic_Plate'])) {
+                                                echo '
                                         <p class="text-danger">' . $_SESSION['empty_eutectic_Plate'] . '</p>';
-                                                    unset($_SESSION['empty_eutectic_Plate']);
-                                                }
-                                                ?>
-                                            </div>
-                                            <div class="mb-2">
-                                                <label for="expansion_Valve" class="form-label fw-semibold">Expansion Valve</label>
-                                                <input type="text" class="w-100 inputDesign" id="expansion_Valve" name="expansion_Valve" placeholder="expansion_Valve">
-                                                <?php if (isset($_SESSION['empty_expansion_Valve'])) {
-                                                    echo '
+                                                unset($_SESSION['empty_eutectic_Plate']);
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="expansion_Valve" class="form-label fw-semibold">Expansion Valve</label>
+                                            <input type="text" class="w-100 inputDesign" id="expansion_Valve" name="expansion_Valve" placeholder="expansion_Valve">
+                                            <?php if (isset($_SESSION['empty_expansion_Valve'])) {
+                                                echo '
                                         <p class="text-danger">' . $_SESSION['empty_expansion_Valve'] . '</p>';
-                                                    unset($_SESSION['empty_expansion_Valve']);
-                                                }
-                                                ?>
-                                            </div>
-                                            <div class="mb-2">
-                                                <label for="recovery_Tank" class="form-label fw-semibold">Recovery Tank</label>
-                                                <input type="text" class="w-100 inputDesign" id="recovery_Tank" name="recovery_Tank" placeholder="recovery_Tank">
-                                                <?php if (isset($_SESSION['empty_recovery_Tank'])) {
-                                                    echo '
+                                                unset($_SESSION['empty_expansion_Valve']);
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="recovery_Tank" class="form-label fw-semibold">Recovery Tank</label>
+                                            <input type="text" class="w-100 inputDesign" id="recovery_Tank" name="recovery_Tank" placeholder="recovery_Tank">
+                                            <?php if (isset($_SESSION['empty_recovery_Tank'])) {
+                                                echo '
                                         <p class="text-danger">' . $_SESSION['empty_recovery_Tank'] . '</p>';
-                                                    unset($_SESSION['empty_recovery_Tank']);
-                                                }
-                                                ?>
-                                            </div>
-                                            <div class="mb-2">
-                                                <label for="pressure_Control" class="form-label fw-semibold">Pressure Control</label>
-                                                <input type="text" class="w-100 inputDesign" id="pressure_Control" name="pressure_Control" placeholder="pressure_Control">
-                                                <?php if (isset($_SESSION['empty_pressure_Control'])) {
-                                                    echo '
+                                                unset($_SESSION['empty_recovery_Tank']);
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="pressure_Control" class="form-label fw-semibold">Pressure Control</label>
+                                            <input type="text" class="w-100 inputDesign" id="pressure_Control" name="pressure_Control" placeholder="pressure_Control">
+                                            <?php if (isset($_SESSION['empty_pressure_Control'])) {
+                                                echo '
                                         <p class="text-danger">' . $_SESSION['empty_pressure_Control'] . '</p>';
-                                                    unset($_SESSION['empty_pressure_Control']);
-                                                }
-                                                ?>
-                                            </div>
-                                            <div class="mb-2">
-                                                <label for="sight_Glass" class="form-label fw-semibold">Sight Glass</label>
-                                                <input type="text" class="w-100 inputDesign" id="sight_Glass" name="sight_Glass" placeholder="sight_Glass">
-                                                <?php if (isset($_SESSION['empty_sight_Glass'])) {
-                                                    echo '
+                                                unset($_SESSION['empty_pressure_Control']);
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="sight_Glass" class="form-label fw-semibold">Sight Glass</label>
+                                            <input type="text" class="w-100 inputDesign" id="sight_Glass" name="sight_Glass" placeholder="sight_Glass">
+                                            <?php if (isset($_SESSION['empty_sight_Glass'])) {
+                                                echo '
                                         <p class="text-danger">' . $_SESSION['empty_sight_Glass'] . '</p>';
-                                                    unset($_SESSION['empty_sight_Glass']);
-                                                }
-                                                ?>
-                                            </div>
-                                            <div class="mb-2">
-                                                <label for="filter_Drier" class="form-label fw-semibold">Filter Drier</label>
-                                                <input type="text" class="w-100 inputDesign" id="filter_Drier" name="filter_Drier" placeholder="filter_Drier">
-                                                <?php if (isset($_SESSION['empty_filter_Drier'])) {
-                                                    echo '
+                                                unset($_SESSION['empty_sight_Glass']);
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="filter_Drier" class="form-label fw-semibold">Filter Drier</label>
+                                            <input type="text" class="w-100 inputDesign" id="filter_Drier" name="filter_Drier" placeholder="filter_Drier">
+                                            <?php if (isset($_SESSION['empty_filter_Drier'])) {
+                                                echo '
                                         <p class="text-danger">' . $_SESSION['empty_filter_Drier'] . '</p>';
-                                                    unset($_SESSION['empty_filter_Drier']);
-                                                }
-                                                ?>
-                                            </div>
-                                            <div class="mb-2">
-                                                <label for="thermostat" class="form-label fw-semibold">Thermostat</label>
-                                                <input type="text" class="w-100 inputDesign" id="thermostat" name="thermostat" placeholder="thermostat">
-                                                <?php if (isset($_SESSION['empty_thermostat'])) {
-                                                    echo '
+                                                unset($_SESSION['empty_filter_Drier']);
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="thermostat" class="form-label fw-semibold">Thermostat</label>
+                                            <input type="text" class="w-100 inputDesign" id="thermostat" name="thermostat" placeholder="thermostat">
+                                            <?php if (isset($_SESSION['empty_thermostat'])) {
+                                                echo '
                                         <p class="text-danger">' . $_SESSION['empty_thermostat'] . '</p>';
-                                                    unset($_SESSION['empty_thermostat']);
-                                                }
-                                                ?>
-                                            </div>
-                                            <div class="mb-2">
-                                                <label for="misc" class="form-label fw-semibold">Misc</label>
-                                                <input type="text" class="w-100 inputDesign" id="misc" name="misc" placeholder="misc">
-                                                <?php if (isset($_SESSION['empty_misc'])) {
-                                                    echo '
+                                                unset($_SESSION['empty_thermostat']);
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="misc" class="form-label fw-semibold">Misc</label>
+                                            <input type="text" class="w-100 inputDesign" id="misc" name="misc" placeholder="misc">
+                                            <?php if (isset($_SESSION['empty_misc'])) {
+                                                echo '
                                         <p class="text-danger">' . $_SESSION['empty_misc'] . '</p>';
-                                                    unset($_SESSION['empty_misc']);
-                                                }
-                                                ?>
-                                            </div>
+                                                unset($_SESSION['empty_misc']);
+                                            }
+                                            ?>
+                                        </div>
 
 
 
-                                            <div class="mb-2">
-                                                <label for="left_S_Image" class="form-label fw-semibold">Left Side Image</label>
-                                                <input type="file" class="w-100 inputDesign" id="left_S_Image" name="left_S_Image">
-                                                <?php if (isset($_SESSION['empty_thermostat'])) {
-                                                    echo '
+                                        <div class="mb-2">
+                                            <label for="left_S_Image" class="form-label fw-semibold">Left Side Image</label>
+                                            <input type="file" class="w-100 inputDesign" id="left_S_Image" name="left_S_Image">
+                                            <?php if (isset($_SESSION['empty_thermostat'])) {
+                                                echo '
                                         <p class="text-danger">' . $_SESSION['empty_thermostat'] . '</p>';
-                                                    unset($_SESSION['empty_thermostat']);
-                                                }
-                                                ?>
-                                            </div>
-                                            <div class="my-2">
-                                                <label for="right_S_Image" class="form-label fw-semibold">Right Side Image</label>
-                                                <input type="file" class="w-100 inputDesign" id="right_S_Image" name="right_S_Image">
-                                                <?php if (isset($_SESSION['empty_misc'])) {
-                                                    echo '
+                                                unset($_SESSION['empty_thermostat']);
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="my-2">
+                                            <label for="right_S_Image" class="form-label fw-semibold">Right Side Image</label>
+                                            <input type="file" class="w-100 inputDesign" id="right_S_Image" name="right_S_Image">
+                                            <?php if (isset($_SESSION['empty_misc'])) {
+                                                echo '
                                         <p class="text-danger">' . $_SESSION['empty_misc'] . '</p>';
-                                                    unset($_SESSION['empty_misc']);
-                                                }
-                                                ?>
-                                            </div>
-
+                                                unset($_SESSION['empty_misc']);
+                                            }
+                                            ?>
                                         </div>
-
-
-                                        <h5 class="card-title fw-semibold my-3">Additional Accessories:</h5>
-                                        <hr class="p-0">
-
-                                        <div class="col-lg-6">
-                                            <div class="mb-2">
-                                                <label for="air_Curtains" class="form-label fw-semibold">Air Curtains</label>
-                                                <input type="text" class="w-100 inputDesign" id="air_Curtains" name="air_Curtains" placeholder="Air Curtains">
-                                                <?php if (isset($_SESSION['empty_air_Curtains'])) {
-                                                    echo '
-                                        <p class="text-danger">' . $_SESSION['empty_air_Curtains'] . '</p>';
-                                                    unset($_SESSION['empty_air_Curtains']);
-                                                }
-                                                ?>
-                                            </div>
-                                            <div class="mb-2">
-                                                <label for="back_Camera" class="form-label fw-semibold">Back Camera</label>
-                                                <input type="text" class="w-100 inputDesign" id="back_Camera" name="back_Camera" placeholder="Back Camera">
-                                                <?php if (isset($_SESSION['empty_back_Camera'])) {
-                                                    echo '
-                                        <p class="text-danger">' . $_SESSION['empty_back_Camera'] . '</p>';
-                                                    unset($_SESSION['empty_back_Camera']);
-                                                }
-                                                ?>
-                                            </div>
-                                            <div class="mb-2">
-                                                <label for="body_Graphic_Warp" class="form-label fw-semibold">Body Graphic Warp</label>
-                                                <input type="text" class="w-100 inputDesign" id="body_Graphic_Warp" name="body_Graphic_Warp" placeholder="Body Graphic Warp">
-                                                <?php if (isset($_SESSION['empty_body_Graphic_Warp'])) {
-                                                    echo '
-                                        <p class="text-danger">' . $_SESSION['empty_body_Graphic_Warp'] . '</p>';
-                                                    unset($_SESSION['empty_body_Graphic_Warp']);
-                                                }
-                                                ?>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6">
-                                            <div class="mb-2">
-                                                <label for="add_Unit_Carrier" class="form-label fw-semibold">Add Unit Carrier</label>
-                                                <input type="text" class="w-100 inputDesign" id="add_Unit_Carrier" name="add_Unit_Carrier" placeholder="Add Unit Carrier">
-                                                <?php if (isset($_SESSION['empty_add’l_Unit_Carrier'])) {
-                                                    echo '
-                                        <p class="text-danger">' . $_SESSION['empty_add_Unit_Carrier'] . '</p>';
-                                                    unset($_SESSION['empty_add_Unit_Carrier']);
-                                                }
-                                                ?>
-                                            </div>
-                                            <div class="mb-2">
-                                                <label for="hand_Truck_Stand" class="form-label fw-semibold">Hand Truck Stand</label>
-                                                <input type="text" class="w-100 inputDesign" id="hand_Truck_Stand" name="hand_Truck_Stand" placeholder="Hand Truck Stand">
-                                                <?php if (isset($_SESSION['empty_hand_Truck_Stand'])) {
-                                                    echo '
-                                        <p class="text-danger">' . $_SESSION['empty_hand_Truck_Stand'] . '</p>';
-                                                    unset($_SESSION['empty_hand_Truck_Stand']);
-                                                }
-                                                ?>
-                                            </div>
-                                            <div class="mb-2">
-                                                <label for="other" class="form-label fw-semibold">Other</label>
-                                                <input type="text" class="w-100 inputDesign" id="other" name="other" placeholder="Other">
-                                                <?php if (isset($_SESSION['empty_other'])) {
-                                                    echo '
-                                        <p class="text-danger">' . $_SESSION['empty_other'] . '</p>';
-                                                    unset($_SESSION['empty_other']);
-                                                }
-                                                ?>
-                                            </div>
-                                        </div>
-
-
-                                        <button type="submit" name="add_truck_btn" class="save py-2">Save</button>
 
                                     </div>
+
+
+                                    <h5 class="card-title fw-semibold my-3">Additional Accessories:</h5>
+                                    <hr class="p-0">
+
+                                    <div class="col-lg-6">
+                                        <div class="mb-2">
+                                            <label for="air_Curtains" class="form-label fw-semibold">Air Curtains</label>
+                                            <input type="text" class="w-100 inputDesign" id="air_Curtains" name="air_Curtains" placeholder="Air Curtains">
+                                            <?php if (isset($_SESSION['empty_air_Curtains'])) {
+                                                echo '
+                                        <p class="text-danger">' . $_SESSION['empty_air_Curtains'] . '</p>';
+                                                unset($_SESSION['empty_air_Curtains']);
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="back_Camera" class="form-label fw-semibold">Back Camera</label>
+                                            <input type="text" class="w-100 inputDesign" id="back_Camera" name="back_Camera" placeholder="Back Camera">
+                                            <?php if (isset($_SESSION['empty_back_Camera'])) {
+                                                echo '
+                                        <p class="text-danger">' . $_SESSION['empty_back_Camera'] . '</p>';
+                                                unset($_SESSION['empty_back_Camera']);
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="body_Graphic_Warp" class="form-label fw-semibold">Body Graphic Warp</label>
+                                            <input type="text" class="w-100 inputDesign" id="body_Graphic_Warp" name="body_Graphic_Warp" placeholder="Body Graphic Warp">
+                                            <?php if (isset($_SESSION['empty_body_Graphic_Warp'])) {
+                                                echo '
+                                        <p class="text-danger">' . $_SESSION['empty_body_Graphic_Warp'] . '</p>';
+                                                unset($_SESSION['empty_body_Graphic_Warp']);
+                                            }
+                                            ?>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="mb-2">
+                                            <label for="add_Unit_Carrier" class="form-label fw-semibold">Add Unit Carrier</label>
+                                            <input type="text" class="w-100 inputDesign" id="add_Unit_Carrier" name="add_Unit_Carrier" placeholder="Add Unit Carrier">
+                                            <?php if (isset($_SESSION['empty_add’l_Unit_Carrier'])) {
+                                                echo '
+                                        <p class="text-danger">' . $_SESSION['empty_add_Unit_Carrier'] . '</p>';
+                                                unset($_SESSION['empty_add_Unit_Carrier']);
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="hand_Truck_Stand" class="form-label fw-semibold">Hand Truck Stand</label>
+                                            <input type="text" class="w-100 inputDesign" id="hand_Truck_Stand" name="hand_Truck_Stand" placeholder="Hand Truck Stand">
+                                            <?php if (isset($_SESSION['empty_hand_Truck_Stand'])) {
+                                                echo '
+                                        <p class="text-danger">' . $_SESSION['empty_hand_Truck_Stand'] . '</p>';
+                                                unset($_SESSION['empty_hand_Truck_Stand']);
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="other" class="form-label fw-semibold">Other</label>
+                                            <input type="text" class="w-100 inputDesign" id="other" name="other" placeholder="Other">
+                                            <?php if (isset($_SESSION['empty_other'])) {
+                                                echo '
+                                        <p class="text-danger">' . $_SESSION['empty_other'] . '</p>';
+                                                unset($_SESSION['empty_other']);
+                                            }
+                                            ?>
+                                        </div>
+                                    </div>
+
+
+                                    <button type="submit" name="add_truck_btn" class="save py-2">Save</button>
+
                                 </div>
+                            </div>
                         </form>
                     </div>
                 </div>
