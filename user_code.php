@@ -56,8 +56,6 @@ if (isset($_POST['submit'])) {
     } else {
         // Password complexity validation
         if (strlen($user_password) < 8) {
-            // $error_message = "Password should be at least 8 characters long.";
-            // redirectdelete("user.php", "Password should be at least 8 characters long.");
             $_SESSION['error_messege'] = "Password should be at least 8 characters long.";
             header("location:user.php");
         } else {

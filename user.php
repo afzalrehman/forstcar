@@ -52,7 +52,8 @@ include "./includes/sidebar.php";
 
                         <div class="in mb-3">
                             <label class="form-label fw-semibold">Password</label>
-                            <input type="password" name="user_password" id="name" class=" inputDesign w-100 py-2" placeholder="Enter Your Password">
+                            <input type="password" name="user_password" class=" inputDesign w-100 py-2" placeholder="Enter Your Password">
+                           
                             <?php if (isset($_SESSION['empty_user_password'])) {
                                 echo '
                                         <p class="text-danger">' . $_SESSION['empty_user_password'] . '</p>';
@@ -113,6 +114,7 @@ include "./includes/sidebar.php";
 
     </div>
 </div>
+
 
 <?php
 include "./includes/footer.php";

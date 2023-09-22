@@ -4,7 +4,7 @@
         <div class="d-flex align-items-center justify-content-between small">
             <div class="text-muted">Copyright &copy; 2023 </div>
             <div>
-            <div class="text-muted">Made by Abu Hammad &amp; Afzal</div>
+                <div class="text-muted">Made by Abu Hammad &amp; Afzal</div>
             </div>
         </div>
     </div>
@@ -47,20 +47,20 @@
         filter = input.value.toLowerCase();
         table = document.getElementById("data-table");
         tr = table.getElementsByTagName("tr");
-        noDataMessage = document.getElementById("no-data-message"); 
+        noDataMessage = document.getElementById("no-data-message");
 
         var found = false;
 
         for (i = 0; i < tr.length; i++) {
             var rowMatches = false;
-            td = tr[i].getElementsByClassName("searchable"); 
+            td = tr[i].getElementsByClassName("searchable");
 
             for (j = 0; j < td.length; j++) {
                 txtValue = td[j].textContent || td[j].innerText;
                 if (txtValue.toLowerCase().indexOf(filter) > -1) {
                     rowMatches = true;
-                    found = true; 
-                    break; 
+                    found = true;
+                    break;
                 }
             }
 
@@ -81,6 +81,9 @@
 
     // Attach an event listener to the search input field
     document.getElementById("search").addEventListener("keyup", filterTable);
+
+
+    
 </script>
 </body>
 
