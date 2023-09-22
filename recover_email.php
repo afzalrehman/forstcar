@@ -52,7 +52,7 @@ if (isset($_POST['submit'])) {
             $mail->isHTML(true);
             $mail->Body = $emailContent;
             $mail->send();
-            $succses['succses'] = "Check yout email to reset your password; ($user_email)";
+            $succses['succses'] = "Check your email to reset your password; ($user_email)";
         } catch (Exception $e) {
             echo "Failed to send email. Error: {$mail->ErrorInfo}";
         }

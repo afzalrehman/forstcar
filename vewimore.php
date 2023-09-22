@@ -135,6 +135,14 @@ if (isset($_GET['model'])) {
             $company_misc = $importer_data['company_misc'];
             $total_cost = $importer_data['total_cost'];
             $custom_freight = $importer_data['custom_frieght'];
+
+            // $importer_data for "importer_details" data
+            $air_Curtains = $importer_data['air_Curtains'];
+            $back_Camera = $importer_data['back_Camera'];
+            $body_Graphic_Warp = $importer_data['body_Graphic_Warp'];
+            $add_Unit_Carrier = $importer_data['add_Unit_Carrier'];
+            $hand_Truck_Stand = $importer_data['hand_Truck_Stand'];
+            $other = $importer_data['other'];
         } else {
             // Handle case when no data is found in "importer_details" database
             echo "Something Went Wrong importer_details";
@@ -156,7 +164,7 @@ if (isset($_GET['model'])) {
             </div>
             <div class="col-3 text-end">
 
-                <a href="edit_company.php?editid=<?=$importer_id?>" name="edit" class="btn btn-primary">Edit</a>
+                <a href="edit_company.php?editid=<?= $importer_id ?>" name="edit" class="btn btn-primary">Edit</a>
                 <!-- <a href="edit_truck.php?editid=<?= $id ?>" name="edit" class="btn btn-primary">Edit</a> -->
             </div>
         </div>
@@ -585,6 +593,68 @@ if (isset($_GET['model'])) {
                     <label for="" class="fw-bold text-muted">Misc:</label>
                     <div class="pt-2">
                         <p><?= $misc ?><?php if (empty($misc)) {
+                                            echo "------";
+                                        } ?></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row px-5">
+            <div class="col-9">
+                <h3 class="mb-5">Additional Accessories:</h3>
+            </div>
+        </div>
+        <div class="row px-5">
+            <div class="col-lg-4">
+                <div class="mb-4">
+                    <label for="" class="fw-bold text-muted">Air Curtains:</label>
+                    <div class=" pt-2">
+                        <p><?= $air_Curtains ?><?php if (empty($air_Curtains)) {
+                                                    echo "------";
+                                                } ?></p>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="" class="fw-bold text-muted">Back Camera:</label>
+                    <div class=" pt-2">
+                        <p><?= $back_Camera ?><?php if (empty($back_Camera)) {
+                                                    echo "------";
+                                                } ?></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="mb-4">
+                    <label for="" class="fw-bold text-muted">Body Graphic Warp:</label>
+                    <div class=" pt-2">
+                        <p><?= $body_Graphic_Warp ?><?php if (empty($body_Graphic_Warp)) {
+                                                        echo "------";
+                                                    } ?></p>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="" class="fw-bold text-muted">Add Unit Carrier:</label>
+                    <div class=" pt-2">
+                        <p><?= $add_Unit_Carrier ?><?php if (empty($add_Unit_Carrier)) {
+                                                        echo "------";
+                                                    } ?></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="mb-4">
+                    <label for="" class="fw-bold text-muted">Hand Truck Stand:</label>
+                    <div class=" pt-2">
+                        <p><?= $hand_Truck_Stand ?><?php if (empty($hand_Truck_Stand)) {
+                                                        echo "------";
+                                                    } ?></p>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="" class="fw-bold text-muted">Other:</label>
+                    <div class=" pt-2">
+                        <p><?= $other ?><?php if (empty($other)) {
                                             echo "------";
                                         } ?></p>
                     </div>
