@@ -17,32 +17,44 @@ $noUpdated = false;
 $noFoundToken = false;
 
 if (isset($_POST['submit'])) {
+    $newPassword = mysqli_real_escape_string($conn, $_POST['user_password']);
+    $pass = password_hash($newPassword, PASSWORD_BCRYPT);
 
-    if (isset($_GET['token'])) {
-        $token = $_GET['token'];
-
-
-        $newPassword = mysqli_real_escape_string($conn, $_POST['user_password']);
-
-        $pass = password_hash($newPassword, PASSWORD_BCRYPT);
-
-
-        $updatequery = " UPDATE `admin_users` SET `user_password` = '$pass', `reset_expiration` = NOW() WHERE `token` = '$token' ";
-
-
-        $iquery = mysqli_query($conn, $updatequery);
-        if ($iquery) {
-            header('location:login.php');
-            $_SESSION['msg'] = "Your password has been updated";
-            exit();
-        } else {
-            $noUpdated = true;
-            header('location:reset_password.php');
+    if (
+        empty($newPassword)
+    ) {
+        if (empty($newPassword)) {
+            $_SESSION['empty_user_password'] = "Please fill in the Password.";
         }
+        header("location:reset_password.php");
+        exit();
     } else {
-        $noFoundToken = true;
+
+        if (isset($_GET['token'])) {
+            $token = $_GET['token'];
+
+
+
+
+
+            $updatequery = " UPDATE `admin_users` SET `user_password` = '$pass', `reset_expiration` = NOW() WHERE `token` = '$token' ";
+
+
+            $iquery = mysqli_query($conn, $updatequery);
+            if ($iquery) {
+                header('location:login.php');
+                $_SESSION['msg'] = "Your password has been updated";
+                exit();
+            } else {
+                $noUpdated = true;
+                header('location:reset_password.php');
+            }
+        } else {
+            $noFoundToken = true;
+        }
     }
 }
+
 
 
 ?>
@@ -104,6 +116,12 @@ if (isset($_POST['submit'])) {
                                     <div class="mb-4">
                                         <label for="" class="form-label">New Password</label>
                                         <input type="password" class="form-control" id="" name="user_password" placeholder="New Password">
+                                        <?php if (isset($_SESSION['empty_user_password'])) {
+                                            echo '
+                                        <p class="text-danger">' . $_SESSION['empty_user_password'] . '</p>';
+                                            unset($_SESSION['empty_user_password']);
+                                        }
+                                        ?>
                                     </div>
                                     <input type="submit" name="submit" value="Send Email" class="btn btn-primary w-100 py-8 mb-4 rounded-2">
                                 </form>

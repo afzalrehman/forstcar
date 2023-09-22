@@ -41,9 +41,9 @@ if (isset($_POST['submit'])) {
         if (empty($user_email)) {
             $_SESSION['empty_user_email'] = "Please fill in the user_email.";
         }
-        // if (empty($user_password)) {
-        //     $_SESSION['empty_user_password'] = "Please fill in the user_password.";
-        // }
+        if (empty($user_password)) {
+            $_SESSION['empty_user_password'] = "Please fill in the user_password.";
+        }
         if (empty($user_type)) {
             $_SESSION['empty_user_type'] = "Please fill in the user_type.";
         }

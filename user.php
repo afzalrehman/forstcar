@@ -13,13 +13,14 @@ include "./includes/navbar.php";
 include "./includes/sidebar.php";
 ?>
 <div class="container-fluid mt-3">
-    <?php if(!empty( $_SESSION['error_messege'])) {?>
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>@Warning</strong> <?php echo  $_SESSION['error_messege']; ?>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+    <?php if (!empty($_SESSION['error_messege'])) { ?>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>@Warning</strong> <?php echo  $_SESSION['error_messege']; ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
 
-    <?php } unset($_SESSION['error_messege']); ?>
+    <?php }
+    unset($_SESSION['error_messege']); ?>
     <div class="card  my-5 mein-card mb-5">
         <h3 class=" font-inter text-center">Add New User</h3>
         <div class="container-fluid course-card">
@@ -68,13 +69,13 @@ include "./includes/sidebar.php";
 
                             <option value="Admin">Admin</option>
                             <option value="User"> User</option>
-                            <?php if (isset($_SESSION['empty_user_type'])) {
-                                echo '
-                                        <p class="text-danger">' . $_SESSION['empty_user_type'] . '</p>';
-                                unset($_SESSION['empty_user_type']);
-                            }
-                            ?>
                         </select>
+                        <?php if (isset($_SESSION['empty_user_type'])) {
+                            echo '
+                                        <p class="text-danger">' . $_SESSION['empty_user_type'] . '</p>';
+                            unset($_SESSION['empty_user_type']);
+                        }
+                        ?>
                     </div>
 
                     <div class="in mb-3">
