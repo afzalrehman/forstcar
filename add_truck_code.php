@@ -37,6 +37,12 @@ if (isset($_POST['add_truck_btn'])) {
     $filter_Drier = get_safe_value($conn, $_POST['filter_Drier']);
     $thermostat = get_safe_value($conn, $_POST['thermostat']);
     $misc = get_safe_value($conn, $_POST['misc']);
+    $air_Curtains = get_safe_value($conn, $_POST['air_Curtains']);
+    $back_Camera = get_safe_value($conn, $_POST['back_Camera']);
+    $body_Graphic_Warp = get_safe_value($conn, $_POST['body_Graphic_Warp']);
+    $add_Unit_Carrier = get_safe_value($conn, $_POST['add_Unit_Carrier']);
+    $hand_Truck_Stand = get_safe_value($conn, $_POST['hand_Truck_Stand']);
+    $other = get_safe_value($conn, $_POST['other']);
 
     if (
         // empty($make) || 
@@ -46,8 +52,9 @@ if (isset($_POST['add_truck_btn'])) {
         // empty($exterior_Dimension) || empty($compressor) || empty($comp_Serial) || empty($voltage) || empty($sound_Decibel) ||
         // empty($current_FLA) || empty($refrigerant) || empty($condenser) || empty($solenoid) || empty($condenser_Fan) ||
         // empty($interior_Lights) || empty($control_Panel) || empty($circuit_Breaker) || empty($electric_Contactor) || empty($part) ||
-        // empty($eutectic_Plate) || empty($expansion_Valve) || empty($recovery_Tank) || empty($pressure_Control) || empty($sight_Glass) ||
-        // empty($filter_Drier) || empty($thermostat) || empty($misc)
+        // empty($eutectic_Plate) || empty($expansion_Valve) || 
+        // empty($recovery_Tank) || empty($pressure_Control) || empty($sight_Glass) ||empty($filter_Drier) || empty($thermostat) || empty($misc) || 
+        // empty($air_Curtains) || empty($back_Camera) || empty($body_Graphic_Warp) ||empty($add_Unit_Carrier) || empty($hand_Truck_Stand) || empty($other)
     ) {
         // if (empty($make)) {
         //     $_SESSION['empty_make'] = "Please fill in the make.";
@@ -148,6 +155,24 @@ if (isset($_POST['add_truck_btn'])) {
         // if (empty($misc)) {
         //     $_SESSION['empty_misc'] = "Please fill in the misc.";
         // }
+        // if (empty($air_Curtains)) {
+        //     $_SESSION['empty_air_Curtains'] = "Please fill in the air_Curtains.";
+        // }
+        // if (empty($back_Camera)) {
+        //     $_SESSION['empty_back_Camera'] = "Please fill in the back_Camera.";
+        // }
+        // if (empty($body_Graphic_Warp)) {
+        //     $_SESSION['empty_body_Graphic_Warp'] = "Please fill in the body_Graphic_Warp.";
+        // }
+        // if (empty($add_Unit_Carrier)) {
+        //     $_SESSION['empty_add_Unit_Carrier'] = "Please fill in the add_Unit_Carrier.";
+        // }
+        // if (empty($hand_Truck_Stand)) {
+        //     $_SESSION['empty_hand_Truck_Stand'] = "Please fill in the hand_Truck_Stand.";
+        // }
+        // if (empty($other)) {
+        //     $_SESSION['empty_other'] = "Please fill in the other.";
+        // }
 
         header("location:add-truck.php");
         exit();
@@ -175,13 +200,15 @@ if (isset($_POST['add_truck_btn'])) {
         `fc_Body`, `body_Weight`, `fc_Model`, `exterior_Dimension`, `compressor`, `comp_Serial`, `voltage`, `sound_Decibel`, `current_FLA`, 
         `refrigerant`, `condenser`, `solenoid`, `condenser_Fan`, `interior_Lights`, `control_Panel`, `circuit_Breaker`, `electric_Contactor`, 
         `part`, `eutectic_Plate`, `expansion_Valve`, `recovery_Tank`, `pressure_Control`, `sight_Glass`, `filter_Drier`, `thermostat`, `misc`, `front_S_Image`, 
-        `back_S_Image`, `left_S_Image`, `right_S_Image`, `added_on`, `added_by`)
+        `back_S_Image`, `left_S_Image`, `right_S_Image`, `air_Curtains`, `back_Camera`, `body_Graphic_Warp`, `add_Unit_Carrier`, `hand_Truck_Stand`, `other`, 
+        `added_on`, `added_by`)
         VALUES (NOW(), '$make', '$model', '$wheelbase', '$vin', '$contact_Name', '$contact_Num', 
         '$fc_Unit_Cost', '$fc_Body', '$body_Weight', '$fc_Model', '$exterior_Dimension', '$compressor', '$comp_Serial',
         '$voltage', '$sound_Decibel', '$current_FLA', '$refrigerant', '$condenser', '$solenoid', '$condenser_Fan', '$interior_Lights', 
         '$control_Panel', '$circuit_Breaker', '$electric_Contactor', '$part', '$eutectic_Plate', '$expansion_Valve', '$recovery_Tank',
         '$pressure_Control', '$sight_Glass', '$filter_Drier', '$thermostat', '$misc', '$front_S_Image', '$back_S_Image','$left_S_Image', 
-        '$right_S_Image', NOW(), '{$_SESSION['user_fullname']}')";
+        '$right_S_Image', '$air_Curtains', '$back_Camera', '$body_Graphic_Warp', '$add_Unit_Carrier', '$hand_Truck_Stand', '$other', 
+        NOW(), '{$_SESSION['user_fullname']}')";
 
             $inset_qury_run = mysqli_query($conn, $sql);
 

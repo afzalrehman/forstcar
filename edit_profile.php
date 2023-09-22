@@ -10,14 +10,11 @@ if (isset($_GET['editid']) && $_GET['editid'] != '') {
     $check = mysqli_num_rows($res);
     if ($check > 0) {
         $row = mysqli_fetch_assoc($res);
-        // $name = $row['user_fullname'];
-        // $user_email = $row['user_email'];
-        // $user_type = $row['user_type'];
         $user_contact = $row['user_contact'];
     } else {
-        echo "Please Don't Change The URL!";
-        // redirect("uservewi.php", "Please Don't Change The URL!");
-        exit();
+        // echo "Please Don't Change The URL!";
+        redirect("profile.php", "Please Don't Change The URL!");
+        // exit();
     }
 }
 
@@ -44,6 +41,8 @@ if (isset($_POST['update'])) {
 
     if ($sql) {
         redirect("profile.php", "Updated Successfully!");
+        header("Refresh: 5; url=profile.php");
+        // header('location:profile.php');
     } else {
         echo "Error: " . mysqli_error($conn);
     }

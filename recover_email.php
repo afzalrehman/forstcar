@@ -43,12 +43,6 @@ if (isset($_POST['submit'])) {
             $mail->setFrom('hammadking427@gmail.com', 'ABu_Hammad');
             $mail->addAddress($user_email, $user_fullname);
             $mail->Subject = 'Password Reset';
-
-            // $mail->Body = "Hi, $user_fullname. Click here too activate your account 
-            //         http://localhost/forstcar/reset_password.php?token=$token ";
-            // $send_email = "From: muhammadafzal1903@gmail.com";
-            // $mail->send();
-
             // Include the email content from email.php
             include('email_Reset.php');
             // Replace placeholders with actual values
@@ -64,7 +58,6 @@ if (isset($_POST['submit'])) {
         }
     } else {
         $warning['warning'] = "No Email Found Please Fill Properly Email";
-        // redirectdelete("recover_email.php", "Not Inserted");
     }
 }
 

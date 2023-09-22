@@ -76,6 +76,12 @@ if (isset($_GET['editid']) && $_GET['editid'] != '') {
         $filter_Drier = $row['filter_Drier'];
         $thermostat = $row['thermostat'];
         $misc = $row['misc'];
+        $air_Curtains = $row['air_Curtains'];
+        $back_Camera = $row['back_Camera'];
+        $body_Graphic_Warp = $row['body_Graphic_Warp'];
+        $add_Unit_Carrier = $row['add_Unit_Carrier'];
+        $hand_Truck_Stand = $row['hand_Truck_Stand'];
+        $other = $row['other'];
     } else {
         redirect("veiwtruck.php", "Please Don't Change The URL!");
     }
@@ -119,6 +125,13 @@ if (isset($_POST['submit'])) {
     $filter_Drier = get_safe_value($conn, $_POST['filter_Drier']);
     $thermostat = get_safe_value($conn, $_POST['thermostat']);
     $misc = get_safe_value($conn, $_POST['misc']);
+    $air_Curtains = get_safe_value($conn, $_POST['air_Curtains']);
+    $back_Camera = get_safe_value($conn, $_POST['back_Camera']);
+    $body_Graphic_Warp = get_safe_value($conn, $_POST['body_Graphic_Warp']);
+    $add_Unit_Carrier = get_safe_value($conn, $_POST['add_Unit_Carrier']);
+    $hand_Truck_Stand = get_safe_value($conn, $_POST['hand_Truck_Stand']);
+    $other = get_safe_value($conn, $_POST['other']);
+
 
     $res_model = mysqli_query($conn, "SELECT * FROM `unit_details` WHERE `model` = '$model'");
     $check_model = mysqli_num_rows($res_model);
@@ -165,13 +178,14 @@ if (isset($_POST['submit'])) {
             }
             // Construct the SQL query
             $update_sql = "UPDATE `unit_details` SET `year` = NOW(), `make` = '$make', `model` = '$model', `wheelbase` = '$wheelbase', `vin` = '$vin', `contact_Name` = '$contact_Name',
-    `contact_Num` = '$contact_Num', `fc_Unit_Cost` = '$fc_Unit_Cost', `fc_Body` = '$fc_Body', `body_Weight` = '$body_Weight', `fc_Model` = '$fc_Model',
-    `exterior_Dimension` = '$exterior_Dimension', `compressor` = '$compressor', `comp_Serial` = '$comp_Serial', `voltage` = '$voltage',
-    `sound_Decibel` = '$sound_Decibel', `current_FLA` = '$current_FLA', `refrigerant` = '$refrigerant', `condenser` = '$condenser', `solenoid` = '$solenoid',
-    `condenser_Fan` = '$condenser_Fan', `interior_Lights` = '$interior_Lights', `control_Panel` = '$control_Panel', `circuit_Breaker` = '$circuit_Breaker',
-    `electric_Contactor` = '$electric_Contactor', `part` = '$part', `eutectic_Plate` = '$eutectic_Plate', `expansion_Valve` = '$expansion_Valve',
-    `recovery_Tank` = '$recovery_Tank', `pressure_Control` = '$pressure_Control', `sight_Glass` = '$sight_Glass', `filter_Drier` = '$filter_Drier',
-    `thermostat` = '$thermostat', `misc` = '$misc'";
+            `contact_Num` = '$contact_Num', `fc_Unit_Cost` = '$fc_Unit_Cost', `fc_Body` = '$fc_Body', `body_Weight` = '$body_Weight', `fc_Model` = '$fc_Model',
+            `exterior_Dimension` = '$exterior_Dimension', `compressor` = '$compressor', `comp_Serial` = '$comp_Serial', `voltage` = '$voltage',
+            `sound_Decibel` = '$sound_Decibel', `current_FLA` = '$current_FLA', `refrigerant` = '$refrigerant', `condenser` = '$condenser', `solenoid` = '$solenoid',
+            `condenser_Fan` = '$condenser_Fan', `interior_Lights` = '$interior_Lights', `control_Panel` = '$control_Panel', `circuit_Breaker` = '$circuit_Breaker',
+            `electric_Contactor` = '$electric_Contactor', `part` = '$part', `eutectic_Plate` = '$eutectic_Plate', `expansion_Valve` = '$expansion_Valve',
+            `recovery_Tank` = '$recovery_Tank', `pressure_Control` = '$pressure_Control', `sight_Glass` = '$sight_Glass', `filter_Drier` = '$filter_Drier',
+            `thermostat` = '$thermostat', `misc` = '$misc', `air_Curtains` = '$air_Curtains', `back_Camera` = '$back_Camera', `body_Graphic_Warp` = '$body_Graphic_Warp', 
+            `add_Unit_Carrier` = '$add_Unit_Carrier', `hand_Truck_Stand` = '$hand_Truck_Stand', `other`= '$other'";
 
             // Add image fields to the query if they are provided
             if (!empty($front_S_Image)) {
@@ -564,7 +578,6 @@ include "./includes/sidebar.php";
                                             ?>
                                         </div>
 
-
                                         <div class="mb-2">
                                             <label for="front_S_Image" class="form-label fw-semibold">Front Side Image</label>
                                             <input type="file" class="w-100 inputDesign" id="front_S_Image" name="front_S_Image">
@@ -606,10 +619,79 @@ include "./includes/sidebar.php";
                                             ?>
                                         </div>
 
-
-                                        <button type="submit" name="submit" class="save py-2">Update</button>
-
                                     </div>
+
+                                    <h5 class="card-title fw-semibold my-3">Additional Accessories:</h5>
+                                    <hr class="p-0">
+
+                                    <div class="col-lg-6">
+                                        <div class="mb-2">
+                                            <label for="air_Curtains" class="form-label fw-semibold">Air Curtains</label>
+                                            <input type="text" class="w-100 inputDesign" id="air_Curtains" name="air_Curtains" placeholder="Air Curtains" value="<?php echo $air_Curtains; ?>">
+                                            <?php if (isset($_SESSION['empty_air_Curtains'])) {
+                                                echo '
+                                        <p class="text-danger">' . $_SESSION['empty_air_Curtains'] . '</p>';
+                                                unset($_SESSION['empty_air_Curtains']);
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="back_Camera" class="form-label fw-semibold">Back Camera</label>
+                                            <input type="text" class="w-100 inputDesign" id="back_Camera" name="back_Camera" placeholder="Back Camera" value="<?php echo $back_Camera; ?>">
+                                            <?php if (isset($_SESSION['empty_back_Camera'])) {
+                                                echo '
+                                        <p class="text-danger">' . $_SESSION['empty_back_Camera'] . '</p>';
+                                                unset($_SESSION['empty_back_Camera']);
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="body_Graphic_Warp" class="form-label fw-semibold">Body Graphic Warp</label>
+                                            <input type="text" class="w-100 inputDesign" id="body_Graphic_Warp" name="body_Graphic_Warp" placeholder="Body Graphic Warp" value="<?php echo $body_Graphic_Warp; ?>">
+                                            <?php if (isset($_SESSION['empty_body_Graphic_Warp'])) {
+                                                echo '
+                                        <p class="text-danger">' . $_SESSION['empty_body_Graphic_Warp'] . '</p>';
+                                                unset($_SESSION['empty_body_Graphic_Warp']);
+                                            }
+                                            ?>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="mb-2">
+                                            <label for="add_Unit_Carrier" class="form-label fw-semibold">Add Unit Carrier</label>
+                                            <input type="text" class="w-100 inputDesign" id="add_Unit_Carrier" name="add_Unit_Carrier" placeholder="Add Unit Carrier" value="<?php echo $add_Unit_Carrier; ?>">
+                                            <?php if (isset($_SESSION['empty_add’l_Unit_Carrier'])) {
+                                                echo '
+                                        <p class="text-danger">' . $_SESSION['empty_add_Unit_Carrier'] . '</p>';
+                                                unset($_SESSION['empty_add_Unit_Carrier']);
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="hand_Truck_Stand" class="form-label fw-semibold">Hand Truck Stand</label>
+                                            <input type="text" class="w-100 inputDesign" id="hand_Truck_Stand" name="hand_Truck_Stand" placeholder="Hand Truck Stand" value="<?php echo $hand_Truck_Stand; ?>">
+                                            <?php if (isset($_SESSION['empty_hand_Truck_Stand'])) {
+                                                echo '
+                                        <p class="text-danger">' . $_SESSION['empty_hand_Truck_Stand'] . '</p>';
+                                                unset($_SESSION['empty_hand_Truck_Stand']);
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="other" class="form-label fw-semibold">Other</label>
+                                            <input type="text" class="w-100 inputDesign" id="other" name="other" placeholder="Other" value="<?php echo $other; ?>">
+                                            <?php if (isset($_SESSION['empty_other'])) {
+                                                echo '
+                                        <p class="text-danger">' . $_SESSION['empty_other'] . '</p>';
+                                                unset($_SESSION['empty_other']);
+                                            }
+                                            ?>
+                                        </div>
+                                    </div>
+
+
+                                    <button type="submit" name="submit" class="save py-2">Update</button>
 
 
 
