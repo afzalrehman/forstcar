@@ -41,8 +41,6 @@ if (isset($_POST['update'])) {
 
     if ($sql) {
         redirect("profile.php", "Updated Successfully!");
-        // header("Refresh: 5; url=profile.php");
-        // header('location:profile.php');
     } else {
         echo "Error: " . mysqli_error($conn);
     }
