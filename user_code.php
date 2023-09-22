@@ -2,7 +2,9 @@
 session_start();
 require './function/function.inc.php';
 include "./config/config.php";
-
+if ($_SESSION['user_type'] !== "Admin") {
+    header("location:index.php");
+}
 // <!-- =============================== User Page Insert Query  ==================================== -->
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
