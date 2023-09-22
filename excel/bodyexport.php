@@ -64,7 +64,7 @@ if (!isset($_SESSION['user_fullname'])) {
                             $html = '<table class="contain-table">
             <thead>
                 <tr>
-                    <th class="fs-4" colspan="35">USA IMPORTANT Details</th>
+                    <th class="fs-4" colspan="41">USA IMPORTANT Details</th>
                 </tr>
                 <tr>
                       <th>S/NO</th>
@@ -101,7 +101,13 @@ if (!isset($_SESSION['user_fullname'])) {
                                     <th>Sight Glass</th>
                                     <th>Filter Drier</th>
                                     <th>Thermostat</th>
-                                    <th class="last-th">Misc</th>
+                                    <th >Misc</th>
+                                    <th >Air Curtains</th>
+                                    <th >Back Camera</th>
+                                    <th >Body Graphic_Warp</th>
+                                    <th >Add Unit_Carrier</th>
+                                    <th >Hand Truck_Stand</th>
+                                    <th class="last-th">other</th>
                     
                    
                 </tr>
@@ -151,8 +157,12 @@ if (!isset($_SESSION['user_fullname'])) {
                                     $html .= '<td>' . $item['filter_Drier'] . '</td>';
                                     $html .= '<td>' . $item['thermostat'] . '</td>';
                                     $html .= '<td>' . $item['misc'] . '</td>';
-                                    
-                                    
+                                    $html .= '<td>' . $item['air_Curtains'] . '</td>';
+                                    $html .= '<td>' . $item['back_Camera'] . '</td>';
+                                    $html .= '<td>' . $item['body_Graphic_Warp'] . '</td>';
+                                    $html .= '<td>' . $item['add_Unit_Carrier'] . '</td>';
+                                    $html .= '<td>' . $item['hand_Truck_Stand'] . '</td>';
+                                    $html .= '<td>' . $item['other'] . '</td>';
                                     $html .= '</tr>';
                                 }
                             } else {

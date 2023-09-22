@@ -49,20 +49,20 @@
         filter = input.value.toLowerCase();
         table = document.getElementById("data-table");
         tr = table.getElementsByTagName("tr");
-        noDataMessage = document.getElementById("no-data-message"); // Add an element with id="no-data-message"
+        noDataMessage = document.getElementById("no-data-message"); 
 
         var found = false;
 
         for (i = 0; i < tr.length; i++) {
             var rowMatches = false;
-            td = tr[i].getElementsByClassName("searchable"); // Only search in elements with the "searchable" class
+            td = tr[i].getElementsByClassName("searchable"); 
 
             for (j = 0; j < td.length; j++) {
                 txtValue = td[j].textContent || td[j].innerText;
                 if (txtValue.toLowerCase().indexOf(filter) > -1) {
                     rowMatches = true;
-                    found = true; // Set found to true if a match is found in any td
-                    break; // Break the inner loop if a match is found in any td
+                    found = true; 
+                    break; 
                 }
             }
 

@@ -19,7 +19,7 @@ include "./includes/sidebar.php";
                     </div>
                     <div class="col-lg-9 col-md-9 py-3 ">
                         <div class="btn-edit-delete1 text-end px-1">
-                            <a href="">
+                            <a href="./excel/bodyexport.php">
                                 <span class="fa-solid fa-cloud-arrow-down export export-btn"> </span>
                             </a>
                         </div>
