@@ -24,8 +24,6 @@ if (isset($_POST['submit'])) {
 
         $_SESSION['user_fullname'] = $email_pass['user_fullname'];
         $_SESSION['user_email'] = $email_pass['user_email'];
-        $_SESSION['user_image'] = $email_pass['user_image'];
-        $_SESSION['user_contact'] = $email_pass['user_contact'];
         $_SESSION['user_id'] = $email_pass['user_id'];
         $_SESSION['user_type'] = $email_pass['user_type'];
 
@@ -52,46 +50,6 @@ if (isset($_POST['submit'])) {
     }
 }
 
-
-
-// define("MAX_LOGIN_ATTEMPTS", 3);
-// define("LOCKOUT_DURATION", 30); // 30 seconds
-
-// function checkLogin($email, $password) {
-//     // Yahan actual login logic aayega
-
-//     if (loginFailed) { // Jab login fail ho
-//         if (!isset($_SESSION['login_attempts'])) {
-//             $_SESSION['login_attempts'] = 1;
-//         } else {
-//             $_SESSION['login_attempts']++;
-//             if ($_SESSION['login_attempts'] >= MAX_LOGIN_ATTEMPTS) {
-//                 $_SESSION['login_locked'] = time() + LOCKOUT_DURATION;
-//                 echo "Login disabled for 30 seconds due to multiple failed attempts.";
-//                 exit;
-//             }
-//         }
-//     } else { // Agar login successful ho
-//         unset($_SESSION['login_attempts']);
-//         unset($_SESSION['login_locked']);
-//     }
-// }
-
-// function isLoginLocked() {
-//     return isset($_SESSION['login_locked']) && $_SESSION['login_locked'] > time();
-// }
-
-// if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-//     $email = $_POST['email'];
-//     $password = $_POST['password'];
-
-//     if (isLoginLocked()) {
-//         echo "Login is currently disabled. Please wait and try again later.";
-//         exit;
-//     }
-
-//     checkLogin($email, $password);
-// }
 ?>
 
 

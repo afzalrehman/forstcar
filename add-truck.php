@@ -220,6 +220,12 @@ include "./includes/sidebar.php";
                                             }
                                             ?>
                                         </div>
+
+
+                                    </div>
+
+                                    <div class="col-lg-6">
+
                                         <div class="mb-2">
                                             <label for="condenser_Fan" class="form-label fw-semibold">Condenser Fan</label>
                                             <input type="text" class="w-100 inputDesign" id="condenser_Fan" name="condenser_Fan" placeholder="condenser_Fan">
@@ -240,12 +246,6 @@ include "./includes/sidebar.php";
                                             }
                                             ?>
                                         </div>
-
-
-                                    </div>
-
-                                    <div class="col-lg-6">
-
 
                                         <div class="mb-2">
                                             <label for="control_Panel" class="form-label fw-semibold">Control Panel</label>
@@ -410,10 +410,80 @@ include "./includes/sidebar.php";
                                             ?>
                                         </div>
 
-
-                                        <button type="submit" name="add_truck_btn" class="save py-2">Save</button>
-
                                     </div>
+
+
+                                    <h5 class="card-title fw-semibold my-3">Additional Accessories:</h5>
+                                    <hr class="p-0">
+
+                                    <div class="col-lg-6">
+                                        <div class="mb-2">
+                                            <label for="air_Curtains" class="form-label fw-semibold">Air Curtains</label>
+                                            <input type="text" class="w-100 inputDesign" id="air_Curtains" name="air_Curtains" placeholder="Air Curtains">
+                                            <?php if (isset($_SESSION['empty_air_Curtains'])) {
+                                                echo '
+                                        <p class="text-danger">' . $_SESSION['empty_air_Curtains'] . '</p>';
+                                                unset($_SESSION['empty_air_Curtains']);
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="back_Camera" class="form-label fw-semibold">Back Camera</label>
+                                            <input type="text" class="w-100 inputDesign" id="back_Camera" name="back_Camera" placeholder="Back Camera">
+                                            <?php if (isset($_SESSION['empty_back_Camera'])) {
+                                                echo '
+                                        <p class="text-danger">' . $_SESSION['empty_back_Camera'] . '</p>';
+                                                unset($_SESSION['empty_back_Camera']);
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="body_Graphic_Warp" class="form-label fw-semibold">Body Graphic Warp</label>
+                                            <input type="text" class="w-100 inputDesign" id="body_Graphic_Warp" name="body_Graphic_Warp" placeholder="Body Graphic Warp">
+                                            <?php if (isset($_SESSION['empty_body_Graphic_Warp'])) {
+                                                echo '
+                                        <p class="text-danger">' . $_SESSION['empty_body_Graphic_Warp'] . '</p>';
+                                                unset($_SESSION['empty_body_Graphic_Warp']);
+                                            }
+                                            ?>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="mb-2">
+                                            <label for="add_Unit_Carrier" class="form-label fw-semibold">Add Unit Carrier</label>
+                                            <input type="text" class="w-100 inputDesign" id="add_Unit_Carrier" name="add_Unit_Carrier" placeholder="Add Unit Carrier">
+                                            <?php if (isset($_SESSION['empty_add’l_Unit_Carrier'])) {
+                                                echo '
+                                        <p class="text-danger">' . $_SESSION['empty_add_Unit_Carrier'] . '</p>';
+                                                unset($_SESSION['empty_add_Unit_Carrier']);
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="hand_Truck_Stand" class="form-label fw-semibold">Hand Truck Stand</label>
+                                            <input type="text" class="w-100 inputDesign" id="hand_Truck_Stand" name="hand_Truck_Stand" placeholder="Hand Truck Stand">
+                                            <?php if (isset($_SESSION['empty_hand_Truck_Stand'])) {
+                                                echo '
+                                        <p class="text-danger">' . $_SESSION['empty_hand_Truck_Stand'] . '</p>';
+                                                unset($_SESSION['empty_hand_Truck_Stand']);
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="other" class="form-label fw-semibold">Other</label>
+                                            <input type="text" class="w-100 inputDesign" id="other" name="other" placeholder="Other">
+                                            <?php if (isset($_SESSION['empty_other'])) {
+                                                echo '
+                                        <p class="text-danger">' . $_SESSION['empty_other'] . '</p>';
+                                                unset($_SESSION['empty_other']);
+                                            }
+                                            ?>
+                                        </div>
+                                    </div>
+
+
+                                    <button type="submit" name="add_truck_btn" class="save py-2">Save</button>
 
                                 </div>
                             </div>
