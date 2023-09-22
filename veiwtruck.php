@@ -82,7 +82,7 @@ include "./includes/sidebar.php";
                                 </tr>
                             </thead>
 
-                            <tbody>
+                            <tbody id="data-table">
 
                                 <?php
                                 // $category = getAll("unit_details");
@@ -109,7 +109,7 @@ include "./includes/sidebar.php";
                                             <td class="font"><?= $no++; ?></td>
                                             <td><?= $item['year'] ?></td>
                                             <td><?= $item['make'] ?></td>
-                                            <td><?= $item['model'] ?></td>
+                                            <td class="searchable"><?= $item['model'] ?></td>
                                             <!-- <td><img height="50" width="50" src="./media/car_images/ echo  $item['front_S_Image']; ?>"></td>
                                             <td><img height="50" width="50" src="./media/car_images/ echo  $item['back_S_Image']; ?>"></td>
                                             <td><img height="50" width="50" src="./media/car_images/ echo  $item['left_S_Image']; ?>"></td>
@@ -161,8 +161,12 @@ include "./includes/sidebar.php";
                                 <td class="text-danger">Data not found</td></tr>
                             ';
                                 } ?>
+
+
                             </tbody>
+
                         </table>
+                        <div id="no-data-message" class="text-danger" style="display: none; padding: 10px;">Data Not Found</div>
 
                     </div>
                 </div>

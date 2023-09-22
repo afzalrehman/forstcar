@@ -40,6 +40,50 @@
         <?php unset($_SESSION['delete']); ?>
     <?php } ?>
 </script>
+
+<script>
+    // Function to filter the table rows based on the search input
+    function filterTable() {
+        var input, filter, table, tr, td, i, j, txtValue, noDataMessage;
+        input = document.getElementById("search");
+        filter = input.value.toLowerCase();
+        table = document.getElementById("data-table");
+        tr = table.getElementsByTagName("tr");
+        noDataMessage = document.getElementById("no-data-message"); // Add an element with id="no-data-message"
+
+        var found = false;
+
+        for (i = 0; i < tr.length; i++) {
+            var rowMatches = false;
+            td = tr[i].getElementsByClassName("searchable"); // Only search in elements with the "searchable" class
+
+            for (j = 0; j < td.length; j++) {
+                txtValue = td[j].textContent || td[j].innerText;
+                if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                    rowMatches = true;
+                    found = true; // Set found to true if a match is found in any td
+                    break; // Break the inner loop if a match is found in any td
+                }
+            }
+
+            if (rowMatches) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+
+        // Show/hide the "Data Not Found" message
+        if (found) {
+            noDataMessage.style.display = "none";
+        } else {
+            noDataMessage.style.display = "block";
+        }
+    }
+
+    // Attach an event listener to the search input field
+    document.getElementById("search").addEventListener("keyup", filterTable);
+</script>
 </body>
 
 </html>

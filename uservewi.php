@@ -59,7 +59,7 @@ include "./includes/sidebar.php";
                                 </tr>
                             </thead>
 
-                            <tbody>
+                            <tbody id="data-table">
                                 <!-- ==============select qurey============ -->
                                 <?php
                                 $select = "SELECT * FROM `admin_users`";
@@ -67,7 +67,7 @@ include "./includes/sidebar.php";
                                 $res_num = mysqli_num_rows($result);
 
                                 $no = 1;
-                                while ($row = mysqli_fetch_assoc($result)) { 
+                                while ($row = mysqli_fetch_assoc($result)) {
                                 ?>
                                     <tr>
                                         <td>
@@ -80,7 +80,7 @@ include "./includes/sidebar.php";
                                         </td>
                                         <td class="font"><?php echo $no; ?></td>
                                         <td><?php echo $row['user_fullname']; ?></td>
-                                        <td><?php echo $row['user_email']; ?></td>
+                                        <td class="searchable"><?php echo $row['user_email']; ?></td>
                                         <td><?php echo $row['user_type']; ?></td>
                                         <td><?php echo $row['user_contact']; ?></td>
                                         <td><img height="50" width="50" src="media/user_images/<?php echo  $row['user_image']; ?>" alt="<?php echo  $row['user_fullname']; ?>"> </td>
@@ -99,6 +99,8 @@ include "./includes/sidebar.php";
                                 ?>
                             </tbody>
                         </table>
+                        <div id="no-data-message" class="text-danger" style="display: none; padding: 10px;">Data Not Found</div>
+
 
                     </div>
                 </div>

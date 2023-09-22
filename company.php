@@ -230,7 +230,7 @@ include "./includes/sidebar.php";
                                     </tr>
                                 </thead>
 
-                                <tbody>
+                                <tbody id="data-table">
 
                                     <?php
                                     $category = getAll("importer_details");
@@ -248,8 +248,8 @@ include "./includes/sidebar.php";
                                                     <a href="edit_company.php?editid=<?= $item['importer_id'] ?>"><i class="fa-solid fa-pen-to-square text-success  fs-6"></i></a>
                                                 </td>
                                                 <td class="font"><?= $no++; ?></td>
-                                                <td><?= $item['model'] ?></td>
-                                                <td><?= $item['company_name'] ?></td>
+                                                <td class="searchable"><?= $item['model'] ?></td>
+                                                <td class="searchable"><?= $item['company_name'] ?></td>
                                                 <td><?= $item['company_contact'] ?></td>
                                                 <td><?= $item['company_address'] ?></td>
                                                 <td><?= $item['company_city'] ?></td>
@@ -271,16 +271,16 @@ include "./includes/sidebar.php";
 
 
                                             </tr>
-
                                     <?php  }
                                     } else {
                                         echo '
-                                <tr>
-                                <td class="text-danger">Data not found</td></tr>
-                            ';
+                                        <tr>
+                                        <td class="text-danger">Data not found</td></tr>
+                                        ';
                                     } ?>
                                 </tbody>
                             </table>
+                            <div id="no-data-message" class="text-danger" style="display: none; padding: 10px;">Data Not Found</div>
 
                         </div>
                     </div>
