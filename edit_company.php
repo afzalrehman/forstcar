@@ -2,7 +2,7 @@
 session_start();
 require './function/function.inc.php';
 include "./includes/header.php";
-include "./includes/serchbar.php";
+// include "./includes/serchbar.php";
 include "./includes/navbar.php";
 include "./includes/sidebar.php";
 
