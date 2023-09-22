@@ -41,9 +41,9 @@ if (isset($_POST['submit'])) {
         if (empty($user_email)) {
             $_SESSION['empty_user_email'] = "Please fill in the user_email.";
         }
-        // if (empty($user_password)) {
-        //     $_SESSION['empty_user_password'] = "Please fill in the user_password.";
-        // }
+        if (empty($user_password)) {
+            $_SESSION['empty_user_password'] = "Please fill in the user_password.";
+        }
         if (empty($user_type)) {
             $_SESSION['empty_user_type'] = "Please fill in the user_type.";
         }
@@ -56,8 +56,6 @@ if (isset($_POST['submit'])) {
     } else {
         // Password complexity validation
         if (strlen($user_password) < 8) {
-            // $error_message = "Password should be at least 8 characters long.";
-            // redirectdelete("user.php", "Password should be at least 8 characters long.");
             $_SESSION['error_messege'] = "Password should be at least 8 characters long.";
             header("location:user.php");
         } else {
