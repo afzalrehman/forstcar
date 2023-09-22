@@ -85,12 +85,12 @@ include "./includes/sidebar.php";
                     <div class="in">
                         <label class="form-label fw-semibold">Image</label>
                         <input type="file" name="user_image" id="image" class="inputDesign w-100 py-2">
-                        <?php if (isset($_SESSION['empty_user_image'])) {
+                        <!-- <?php if (isset($_SESSION['empty_user_image'])) {
                             echo '
                                         <p class="text-danger">' . $_SESSION['empty_user_image'] . '</p>';
                             unset($_SESSION['empty_user_image']);
                         }
-                        ?>
+                        ?> -->
                     </div>
 
                 </div>

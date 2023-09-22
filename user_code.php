@@ -30,7 +30,8 @@ if (isset($_POST['submit'])) {
     $token = bin2hex(random_bytes(15));
 
     if (
-        empty($user_fullname) || empty($user_email) || empty($user_password) || empty($user_type) || empty($user_contact) || empty($user_image)
+        empty($user_fullname) || empty($user_email) || empty($user_password) || empty($user_type) || empty($user_contact)
+        //  || empty($user_image)
     ) {
         if (empty($user_fullname)) {
             $_SESSION['empty_user_fullname'] = "Please fill in the user_fullname.";
@@ -47,9 +48,9 @@ if (isset($_POST['submit'])) {
         if (empty($user_contact)) {
             $_SESSION['empty_user_contact'] = "Please fill in the user_contact.";
         }
-        if (empty($user_image)) {
-            $_SESSION['empty_user_image'] = "Please fill in the user_image.";
-        }
+        // if (empty($user_image)) {
+        //     $_SESSION['empty_user_image'] = "Please fill in the user_image.";
+        // }
 
         header("location:user.php");
         exit();

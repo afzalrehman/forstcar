@@ -73,7 +73,6 @@ include "./includes/sidebar.php";
                                         <td>
                                             <?php
                                             echo "<a href='user_code.php?deleteid=" . $row['user_id'] . "'><i class='fa-regular fa-trash-can text-danger me-1 fs-6'></i></a>";
-
                                             ?>
                                             <a href="edit_user.php?editid=<?= $row['user_id'] ?>" name="edit"><i class="fa-solid fa-pen-to-square text-success  fs-6"></i></a>
 

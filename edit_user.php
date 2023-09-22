@@ -1,9 +1,12 @@
 <?php
 include 'config/config.php';
-if ($_SESSION['user_type'] !== "Admin") {
-    header("location:index.php");
-}
 require './function/function.inc.php';
+if (isset($_SESSION['user_type']) == "Admin") {
+    header("location:edit_user.php");
+}
+// else{
+//     header("location:index.php");
+// }
 session_start();
 global $conn;
 $name = '';

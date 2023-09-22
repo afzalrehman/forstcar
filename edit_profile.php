@@ -56,6 +56,7 @@ if (isset($_POST['update'])) {
 
 <?php
 include "./includes/header.php";
+include "./includes/serchform.php";
 include "./includes/navbar.php";
 include "./includes/sidebar.php";
 ?>
@@ -77,6 +78,9 @@ include "./includes/sidebar.php";
                                                                                                                                                             } ?>">
                         </div>
 
+                        <div class=" mt-4">
+                            <button type="submit" name="update" class="btn btn-primary py-2">Update Profile</button>
+                        </div>
                     </div>
 
                     <div class="col-lg-6">
@@ -86,9 +90,9 @@ include "./includes/sidebar.php";
                             <label class="form-label fw-semibold">Image</label>
                             <input type="file" name="user_image" id="image" class="inputDesign w-100 py-2">
                         </div>
-
+                         
+                       
                     </div>
-                    <button type="submit" name="update" class="save py-2">Update Profile</button>
 
 
             </form>
