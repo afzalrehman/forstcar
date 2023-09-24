@@ -92,7 +92,7 @@ $emailContent = '
 
     <!-- start preheader -->
     <div class="preheader" style="display: none; max-width: 0; max-height: 0; overflow: hidden; font-size: 1px; line-height: 1px; color: #fff; opacity: 0;">
-        Reset Your Password: Tap to Your Reset Password
+        Confirm Your Email Address: Tap to Activate Your Account
     </div>
     <!-- end preheader -->
 
@@ -105,7 +105,7 @@ $emailContent = '
                     <tr>
                         <td align="center" valign="top" style="padding: 36px 24px;">
                             <a href="http://localhost/forstcar/" target="_blank" style="display: inline-block;">
-                                <img src="assets/img/forscar_logo.png" alt="Logo" width="180" style="display: block; width: 180px; max-width: 180px; min-width: 180px; border:0;">
+                                <img src="./assets/img/forscar_logo.png" alt="Logo" width="180" style="display: block; width: 180px; max-width: 180px; min-width: 180px; border:0;">
                             </a>
                         </td>
                     </tr>
@@ -136,7 +136,9 @@ $emailContent = '
                     <!-- start copy -->
                     <tr>
                         <td style="background-color:#ffffff; text-align:left; padding: 24px; font-family: \'Source Sans Pro\', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
-                            <p style="margin: 0;">Tap the button below to confirm your new password. If you haven\'t signed up for this service, you can safely delete this email.</p>
+                            <p style="margin: 0;"><br>
+                            You have been registered successfuly at Frostcar USA Admin Portal. You can access the portal
+                            </p>
                         </td>
                     </tr>
                     <!-- end copy -->
@@ -163,17 +165,8 @@ $emailContent = '
 
                     <!-- start copy -->
                     <tr>
-                        <td style="text-align:left; background-color:#ffffff; padding: 24px; font-family: \'Source Sans Pro\', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
-                            <p style="margin: 0;">If that doesn\'t work, copy and paste the following link in your browser:</p>
-                            <p style="margin: 0;"><a href="http://localhost/forstcar/reset_password.php?token=' . $token . '" target="_blank">http://localhost/forstcar/reset_password.php?token=' . $token . '</a></p>
-                        </td>
-                    </tr>
-                    <!-- end copy -->
-
-                    <!-- start copy -->
-                    <tr>
                         <td style="text-align:left; background-color:#ffffff; padding: 24px; font-family: \'Source Sans Pro\', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; border-bottom: 3px solid #d4dadf">
-                            <p style="margin: 0;">Team Regards,<br>Forst Car Usa</p>
+                            <p style="margin: 0;">Thanks and Regards,<br>FrostCar USA Team</p>
                         </td>
                     </tr>
                     <!-- end copy -->

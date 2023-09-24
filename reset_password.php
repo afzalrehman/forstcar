@@ -2,7 +2,6 @@
 
 
 session_start();
-
 ob_start();
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -19,26 +18,16 @@ $noFoundToken = false;
 
 if (isset($_POST['submit'])) {
     $newPassword = mysqli_real_escape_string($conn, $_POST['user_password']);
-   
 
-    $pass = password_hash($newPassword, PASSWORD_BCRYPT);
-
-    if (
-        empty($newPassword)
-    ) {
-        if (empty($newPassword)) {
-            $_SESSION['empty_user_password'] = "Please fill in the Password.";
-        }
-
-        header("location:reset_password.php");
-        exit();
+    if (empty($newPassword)) {
+        $_SESSION['empty_user_password'] = "Please fill in the Password.";
     }
+
     if (strlen($newPassword) < 8) {
         $_SESSION['empty_user_password'] = "Password should be at least 8 characters long.";
-        header("location:reset_password.php");
-        exit();
     } else {
 
+        $pass = password_hash($newPassword, PASSWORD_BCRYPT);
         if (isset($_GET['token'])) {
             $token = $_GET['token'];
             $updatequery = " UPDATE `admin_users` SET `user_password` = '$pass', `reset_expiration` = NOW() WHERE `token` = '$token' ";
@@ -57,6 +46,7 @@ if (isset($_POST['submit'])) {
         }
     }
 }
+
 
 
 
@@ -118,7 +108,7 @@ if (isset($_POST['submit'])) {
 
                                     <div class="mb-4">
                                         <label for="" class="form-label">New Password</label>
-                                        <input type="password" class="form-control" id="" name="user_password" placeholder="New Password">
+                                        <input type="password" class="form-control" id="" name="user_password" placeholder="New Password" min="8">
                                         <?php if (isset($_SESSION['empty_user_password'])) {
                                             echo '
                                         <p class="text-danger">' . $_SESSION['empty_user_password'] . '</p>';
