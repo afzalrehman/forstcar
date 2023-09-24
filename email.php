@@ -173,6 +173,7 @@ $emailContent = '
                     <!-- start copy -->
                     <tr>
                         <td style="text-align:left; background-color:#ffffff; padding: 24px; font-family: \'Source Sans Pro\', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; border-bottom: 3px solid #d4dadf">
+                            <p style="margin: 0;">Your login Email: ' . $_SESSION['show_email'] . ',<br>Your login Pawword: ' . $_SESSION['user_password'] . '</p>
                             <p style="margin: 0;">Team Regards,<br>Forst Car Usa</p>
                         </td>
                     </tr>
@@ -190,4 +191,3 @@ $emailContent = '
 
 </html>
 ';
-?>
