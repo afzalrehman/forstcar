@@ -34,10 +34,6 @@ if (isset($_POST['submit'])) {
 
     $token = bin2hex(random_bytes(15));
 
-    // Define an empty error message
-    // $error_message = '';
-
-    // Password validation
     if (
         empty($user_fullname) || empty($user_email) || empty($user_password) || empty($user_type) || empty($user_contact)
     ) {

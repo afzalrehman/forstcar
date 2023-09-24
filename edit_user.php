@@ -1,20 +1,13 @@
 <?php
 session_start();
 include 'config/config.php';
-// if ($_SESSION['user_type'] !== "Admin") {
-//     header("location:index.php");
-// }
-
+require './function/function.inc.php';
 if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] != "Admin") {
-    // User is not logged in, display the login form
-    header('location: index.php'); // Redirect to your login page if not logged in
+    header('location: index.php');
     exit;
 }
 
-require './function/function.inc.php';
-// else{
-//     header("location:index.php");
-// }
+
 
 global $conn;
 $name = '';

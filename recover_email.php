@@ -19,57 +19,47 @@ $warning = array();
 if (isset($_POST['submit'])) {
     $user_email = mysqli_real_escape_string($conn, $_POST['user_email']);
 
-    // if (
-    //     empty($user_email) || empty($user_password)
-    // ) {
-    //     if (empty($user_email)) {
-    //         $_SESSION['empty_user_email'] = "Please fill in the Emai.";
-    //     }
-    //     header("location:recover_email.php");
-    //     exit();
-    // } else {
+    $emailquery = "SELECT * FROM `admin_users` WHERE `user_email` = '$user_email' ";
+    $query = mysqli_query($conn, $emailquery);
 
-        $emailquery = "SELECT * FROM `admin_users` WHERE `user_email` = '$user_email' ";
-        $query = mysqli_query($conn, $emailquery);
+    $emailcount = mysqli_num_rows($query);
+    if ($emailcount) {
 
-        $emailcount = mysqli_num_rows($query);
-        if ($emailcount) {
+        $userdata = mysqli_fetch_array($query);
 
-            $userdata = mysqli_fetch_array($query);
+        $user_fullname = $userdata['user_fullname'];
+        $token = $userdata['token'];
 
-            $user_fullname = $userdata['user_fullname'];
-            $token = $userdata['token'];
-
-            $mail = new PHPMailer(true);
-            try {
-                $mail->SMTPDebug = 0;
-                $mail->isSMTP();
-                $mail->Host = 'smtp.gmail.com';
-                $mail->SMTPAuth = true;
-                $mail->Username = 'hammadking427@gmail.com';
-                $mail->Password = 'gtohfmaaanqufdbn';
-                $mail->SMTPSecure = 'tls';
-                $mail->Port = 587;
-                $mail->setFrom('hammadking427@gmail.com', 'ABu_Hammad');
-                $mail->addAddress($user_email, $user_fullname);
-                $mail->Subject = 'Password Reset';
-                // Include the email content from email.php
-                include('email_Reset.php');
-                // Replace placeholders with actual values
-                $emailContent = str_replace('$user_fullname', $user_fullname, $emailContent);
-                $emailContent = str_replace('$token', $token, $emailContent);
-                // Set the email content as HTML
-                $mail->isHTML(true);
-                $mail->Body = $emailContent;
-                $mail->send();
-                $succses['succses'] = "Check your email to reset your password; ($user_email)";
-            } catch (Exception $e) {
-                echo "Failed to send email. Error: {$mail->ErrorInfo}";
-            }
-        } else {
-            $warning['warning'] = "No Email Found Please Fill Properly Email";
+        $mail = new PHPMailer(true);
+        try {
+            $mail->SMTPDebug = 0;
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'hammadking427@gmail.com';
+            $mail->Password = 'gtohfmaaanqufdbn';
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
+            $mail->setFrom('hammadking427@gmail.com', 'ABu_Hammad');
+            $mail->addAddress($user_email, $user_fullname);
+            $mail->Subject = 'Password Reset';
+            // Include the email content from email.php
+            include('email_Reset.php');
+            // Replace placeholders with actual values
+            $emailContent = str_replace('$user_fullname', $user_fullname, $emailContent);
+            $emailContent = str_replace('$token', $token, $emailContent);
+            // Set the email content as HTML
+            $mail->isHTML(true);
+            $mail->Body = $emailContent;
+            $mail->send();
+            $succses['succses'] = "Check your email to reset your password; ($user_email)";
+        } catch (Exception $e) {
+            echo "Failed to send email. Error: {$mail->ErrorInfo}";
         }
+    } else {
+        $warning['warning'] = "No Email Found Please Fill Properly Email";
     }
+}
 // }
 
 

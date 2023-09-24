@@ -33,7 +33,7 @@ include "./includes/sidebar.php";
                         <table class="contain-table">
                             <thead>
                                 <tr>
-                                    <th>Action<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                    <!-- <th>Action<i class="fa-solid fa-arrow-down px-2"></i></th> -->
                                     <th>S/NO<i class="fa-solid fa-arrow-down px-2"></i></th>
                                     <th>Year<i class="fa-solid fa-arrow-down px-2"></i></th>
                                     <th>Make<i class="fa-solid fa-arrow-down px-2"></i></th>
@@ -103,10 +103,10 @@ include "./includes/sidebar.php";
                                     while ($item = $result->fetch_assoc()) {
                                 ?>
                                         <tr>
-                                            <td>
-                                                <a href="add_truck_code.php?deleteid=<?= $item['id'] ?>" name="delete"><i class="fa-regular fa-trash-can text-danger me-1 fs-6"></i></a>
+                                            <!-- <td>
+                                                <a href="add_truck_code.php?deleteid=<?= $item['id'] . $item['importerid'] ?>" name="delete"><i class="fa-regular fa-trash-can text-danger me-1 fs-6"></i></a>
                                                 <a href="edit_truck.php?editid=<?= $item['id'] ?>" name="edit"><i class="fa-solid fa-pen-to-square text-success  fs-6"></i></a>
-                                            </td>
+                                            </td> -->
                                             <td class="font"><?= $no++; ?></td>
                                             <td><?= $item['year'] ?></td>
                                             <td><?= $item['make'] ?></td>

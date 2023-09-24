@@ -4,12 +4,8 @@ session_start();
 global $conn;
 include 'config/config.php';
 
-// if ($_SESSION['user_type'] !== "Admin") {
-//     header("location:index.php");
-// }
 
 if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] != "Admin") {
-    // User is not logged in, display the login form
     header('location: index.php'); // Redirect to your login page if not logged in
     exit;
 }
@@ -62,7 +58,7 @@ include "./includes/sidebar.php";
                         <div class="in mb-3">
                             <label class="form-label fw-semibold">Password</label>
                             <input type="password" name="user_password" class=" inputDesign w-100 py-2" placeholder="Enter Your Password">
-                           
+
                             <?php if (isset($_SESSION['empty_user_password'])) {
                                 echo '
                                         <p class="text-danger">' . $_SESSION['empty_user_password'] . '</p>';
@@ -102,7 +98,7 @@ include "./includes/sidebar.php";
                     <div class="in">
                         <label class="form-label fw-semibold">Image</label>
                         <input type="file" name="user_image" id="image" class="inputDesign w-100 py-2">
-                    
+
                     </div>
 
                 </div>

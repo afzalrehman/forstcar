@@ -3,43 +3,9 @@ include './config/config.php';
 
 require './function/function.inc.php';
 session_start();
-// $make = '';
-// $model = '';
-// $wheelbase = '';
-// $vin = '';
-// $contact_Name = '';
-// $contact_Num = '';
-// $fc_Unit_Cost = '';
-// $fc_Body = '';
-// $body_Weight = '';
-// $fc_Model = '';
-// $exterior_Dimension = '';
-// $compressor = '';
-// $comp_Serial = '';
-// $voltage = '';
-// $sound_Decibel = '';
-// $current_FLA = '';
-// $refrigerant = '';
-// $condenser = '';
-// $solenoid = '';
-// $condenser_Fan = '';
-// $interior_Lights = '';
-// $control_Panel = '';
-// $circuit_Breaker = '';
-// $electric_Contactor = '';
-// $part = '';
-// $eutectic_Plate = '';
-// $expansion_Valve = '';
-// $recovery_Tank = '';
-// $pressure_Control = '';
-// $sight_Glass = '';
-// $filter_Drier = '';
-// $thermostat = '';
-// $misc = '';
-
 
 if (isset($_GET['editid']) && $_GET['editid'] != '') {
-    $id = get_safe_value($conn, $_GET['editid']); // Use $_GET to get 'id' parameter
+    $id = get_safe_value($conn, $_GET['editid']);
     $res = mysqli_query($conn, "SELECT * FROM `unit_details` WHERE id = '$id'");
     $check = mysqli_num_rows($res);
     if ($check > 0) {
@@ -205,7 +171,7 @@ if (isset($_POST['submit'])) {
             $update_sql .= ", `updated_on` = NOW(), `updated_by` = '{$_SESSION['user_fullname']}' WHERE `id` = '$id'";
             mysqli_query($conn, $update_sql);
         }
-        redirect("veiwtruck.php", "Updated Successfully!");
+        redirect("add-truck.php", "Updated Successfully!");
         die();
     }
 }
@@ -611,7 +577,7 @@ include "./includes/sidebar.php";
                                         <div class="my-2">
                                             <label for="right_S_Image" class="form-label fw-semibold">Right Side Image</label>
                                             <input type="file" class="w-100 inputDesign" id="right_S_Image" name="right_S_Image">
-                                            
+
                                             <?php if (isset($_SESSION['empty_misc'])) {
                                                 echo '
                                         <p class="text-danger">' . $_SESSION['empty_misc'] . '</p>';
