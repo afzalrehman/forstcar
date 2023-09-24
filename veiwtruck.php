@@ -15,11 +15,11 @@ include "./includes/sidebar.php";
             <div class="card">
                 <div class="row">
                     <div class="col-lg-3 col-md-3 text-start py-3 px-4">
-                        <p class="font student">Forcars usa body details</p>
+                        <p class="font student">Frost Car Usa Body Details</p>
                     </div>
                     <div class="col-lg-9 col-md-9 py-3 ">
                         <div class="btn-edit-delete1 text-end px-1">
-                            <a href="./excel/bodyexport.php">
+                            <a href="./excel/bodyexport.php" id="export">
                                 <span class="fa-solid fa-cloud-arrow-down export export-btn"> </span>
                             </a>
                         </div>

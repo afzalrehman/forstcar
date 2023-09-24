@@ -6,10 +6,6 @@ include "./includes/searchbar.php";
 include "./includes/navbar.php";
 include "./includes/sidebar.php";
 
-
-if(!empty($_POST['export'])){
-    redirect("", "Company File Downloaded");
-}
 ?>
 
 
@@ -190,16 +186,14 @@ if(!empty($_POST['export'])){
                 <div class="card">
                     <div class="row">
                         <div class="col-lg-3 col-md-3 text-start py-3 px-4">
-                            <p class="font student"> USA IMPORTANT Details</p>
+                            <p class="font student"> Usa Importent Details</p>
                         </div>
-                        <form action="" method="post">
                             <div class="col-lg-9 col-md-9 py-3 ">
                                 <div class="btn-edit-delete1 text-end px-1">
-                                    <a href="./excel/comexport.php" name="export">
+                                    <a href="./excel/comexport.php" id="export">
                                         <span class="fa-solid fa-cloud-arrow-down export export-btn"> </span>
                                     </a>
                                 </div>
-                        </form>
                     </div>
                 </div>
                 <hr class="m-0 ">

@@ -23,16 +23,10 @@ include "./includes/sidebar.php";
         <div class="col-lg-12 ">
             <div class="card">
                 <div class="row">
-                    <div class="col-lg-3 col-md-3 text-start py-3 px-4">
+                    <div class="col-lg-12 col-md-12 text-start py-3 px-4">
                         <p class="font student"> User Vewi Details</p>
                     </div>
-                    <div class="col-lg-9 col-md-9 py-3 ">
-                        <div class="btn-edit-delete1 text-end px-1">
-                            <a href="">
-                                <span class="fa-solid fa-cloud-arrow-down export export-btn"> </span>
-                            </a>
-                        </div>
-                    </div>
+                    
                 </div>
                 <hr class="m-0 ">
 
@@ -81,7 +75,7 @@ include "./includes/sidebar.php";
                                         <td><?php echo $row['user_fullname']; ?></td>
                                         <td class="searchable"><?php echo $row['user_email']; ?></td>
                                         <td><?php echo $row['user_type']; ?></td>
-                                        <td><?php echo $row['user_contact']; ?></td>
+                                        <td class="searchable"><?php echo $row['user_contact']; ?></td>
                                         <td><img height="50" width="50" src="media/user_images/<?php echo  $row['user_image']; ?>" alt="<?php echo  $row['user_fullname']; ?>"> </td>
                                         <td><?php echo $row['registered_on']; ?></td>
                                         <td><?php echo $row['added_by']; ?></td>
