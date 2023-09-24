@@ -24,6 +24,7 @@ if (isset($_POST['submit'])) {
 
         $_SESSION['user_fullname'] = $email_pass['user_fullname'];
         $_SESSION['user_email'] = $email_pass['user_email'];
+        $_SESSION['user_password'] = $email_pass['user_password'];
         $_SESSION['user_id'] = $email_pass['user_id'];
         $_SESSION['user_type'] = $email_pass['user_type'];
 

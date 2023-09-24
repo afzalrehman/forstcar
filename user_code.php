@@ -24,7 +24,11 @@ if (isset($_POST['submit'])) {
     $image_temp_name = $_FILES['user_image']['tmp_name'];
     $image_folder = 'media/user_images/' . $user_image;
 
+    $_SESSION['show_email'] = mysqli_real_escape_string($conn, $_POST['user_email']);
+    $_SESSION['user_password'] = mysqli_real_escape_string($conn, $_POST['user_password']);
+
     $pass = password_hash($user_password, PASSWORD_BCRYPT);
+
 
     $token = bin2hex(random_bytes(15));
 

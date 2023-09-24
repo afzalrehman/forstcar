@@ -34,7 +34,6 @@ if (isset($_POST['submit'])) {
             $token = $_GET['token'];
             $updatequery = " UPDATE `admin_users` SET `user_password` = '$pass', `reset_expiration` = NOW() WHERE `token` = '$token' ";
 
-
             $iquery = mysqli_query($conn, $updatequery);
             if ($iquery) {
                 header('location:login.php');
@@ -80,7 +79,7 @@ if (isset($_POST['submit'])) {
                         <div class="card mb-0">
                             <div class="card-body">
                                 <a href="index.html" class="text-nowrap logo-img text-center d-block mb-3 mt-3 w-100">
-                                    <img src="./assets/img/cropped-frostcar_logo-2-1.png" width="50%" alt="">
+                                    <img src="./assets/img/forscar_logo.png" width="50%" alt="">
                                 </a>
                                 <div class="position-relative text-center my-4">
                                     <p class="fw-bolder mt-3 fs-3 px-3 d-inline-block bg-white text-dark z-index-5 position-relative">

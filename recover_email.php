@@ -18,18 +18,15 @@ $warning = array();
 if (isset($_POST['submit'])) {
     $user_email = mysqli_real_escape_string($conn, $_POST['user_email']);
 
-
-    if (
-        empty($user_email) || empty($user_password)
-    ) {
-        if (empty($user_email)) {
-            $_SESSION['empty_user_email'] = "Please fill in the Emai.";
-        }
-        header("location:recover_email.php");
-        exit();
-    } else {
-
-
+    // if (
+    //     empty($user_email) || empty($user_password)
+    // ) {
+    //     if (empty($user_email)) {
+    //         $_SESSION['empty_user_email'] = "Please fill in the Emai.";
+    //     }
+    //     header("location:recover_email.php");
+    //     exit();
+    // } else {
 
         $emailquery = "SELECT * FROM `admin_users` WHERE `user_email` = '$user_email' ";
         $query = mysqli_query($conn, $emailquery);
@@ -72,7 +69,7 @@ if (isset($_POST['submit'])) {
             $warning['warning'] = "No Email Found Please Fill Properly Email";
         }
     }
-}
+// }
 
 
 ?>
@@ -104,7 +101,7 @@ if (isset($_POST['submit'])) {
                         <div class="card mb-0">
                             <div class="card-body">
                                 <a href="index.html" class="text-nowrap logo-img text-center d-block mb-3 mt-3 w-100">
-                                    <img src="./assets/img/cropped-frostcar_logo-2-1.png" width="50%" alt="">
+                                    <img src="./assets/img/forscar_logo.png" width="50%" alt="">
                                 </a>
                                 <div class="position-relative text-center my-4">
                                     <p class="fw-bolder mt-3 fs-3 px-3 d-inline-block bg-white text-dark z-index-5 position-relative">
