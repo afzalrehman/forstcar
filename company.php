@@ -8,7 +8,6 @@ include "./includes/sidebar.php";
 
 ?>
 
-
 <div class="container-fluid">
     <form action="add_company_code.php" method="post">
         <div class="row my-5">

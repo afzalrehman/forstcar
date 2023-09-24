@@ -26,6 +26,12 @@ if (isset($_POST['submit'])) {
         if (empty($newPassword)) {
             $_SESSION['empty_user_password'] = "Please fill in the Password.";
         }
+
+        header("location:reset_password.php");
+        exit();
+    }
+    if (strlen($newPassword) < 8) {
+        $_SESSION['empty_user_password'] = "Password should be at least 8 characters long.";
         header("location:reset_password.php");
         exit();
     } else {
