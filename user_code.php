@@ -24,6 +24,7 @@ if (isset($_POST['submit'])) {
     $image_temp_name = $_FILES['user_image']['tmp_name'];
     $image_folder = 'media/user_images/' . $user_image;
 
+    $_SESSION['show_fullname'] = mysqli_real_escape_string($conn, $_POST['user_fullname']);
     $_SESSION['show_email'] = mysqli_real_escape_string($conn, $_POST['user_email']);
     $_SESSION['user_password'] = mysqli_real_escape_string($conn, $_POST['user_password']);
 
@@ -96,7 +97,7 @@ if (isset($_POST['submit'])) {
                             $mail->Port = 587;
                             $mail->setFrom('hammadking427@gmail.com', 'Abu_Hammad');
                             $mail->addAddress($user_email, $user_fullname);
-                            $mail->Subject = 'Email Activation';
+                            $mail->Subject = 'Email Verification Required for Frostcar USA Admin Portal';
                             // Include the email content from email.php
                             include('email.php');
                             // Replace placeholders with actual values
