@@ -167,7 +167,7 @@ $emailContent = '
                     <tr>
                     <td style="text-align:left; background-color:#ffffff; padding: 24px; font-family: \'Source Sans Pro\', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
                             <p style="margin: 0;">Your login Credentials are:<br>
-                            User Email: ' . $_SESSION['show_email'] . ',<br>Pawword: ' . $_SESSION['user_password'] . '</p><br>
+                            User Email: ' . $_SESSION['show_email'] . ',<br>Password: ' . $_SESSION['user_password'] . '</p><br>
                             <p style="margin: 0;">First, you need to verify your email using the following link:</p>
                             <p style="margin: 0;"><a href="http://localhost/forstcar/activate.php?token=' . $token . '" target="_blank">http://localhost/forstcar/activate.php</a></p>
                         </td>
@@ -177,7 +177,6 @@ $emailContent = '
                     <!-- start copy -->
                     <tr>
                         <td style="text-align:left; background-color:#ffffff; padding: 24px; font-family: \'Source Sans Pro\', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; border-bottom: 3px solid #d4dadf">
-                            <p style="margin: 0;">In case of any query, you can contact [hamza.aslam3904@gmail.com, ask sir hamza about it]</p><br>
                             <p style="margin: 0;">Thanks and Regards,<br>FrostCar USA Team</p>
                         </td>
                     </tr>
