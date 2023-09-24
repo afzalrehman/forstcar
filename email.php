@@ -169,7 +169,7 @@ $emailContent = '
                             <p style="margin: 0;">Your login Credentials are:<br>
                             User Email: ' . $_SESSION['show_email'] . ',<br>Pawword: ' . $_SESSION['user_password'] . '</p><br>
                             <p style="margin: 0;">First, you need to verify your email using the following link:</p>
-                            <p style="margin: 0;"><a href="http://localhost/forstcar/activate.php?token=' . $token . '" target="_blank">http://localhost/forstcar/activate.php?token=' . $token . '</a></p>
+                            <p style="margin: 0;"><a href="http://localhost/forstcar/activate.php?token=' . $token . '" target="_blank">http://localhost/forstcar/activate.php</a></p>
                         </td>
                     </tr>
                     <!-- end copy -->
