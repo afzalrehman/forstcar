@@ -177,7 +177,6 @@ $emailContent = '
                     <!-- start copy -->
                     <tr>
                         <td style="text-align:left; background-color:#ffffff; padding: 24px; font-family: \'Source Sans Pro\', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; border-bottom: 3px solid #d4dadf">
-                            <p style="margin: 0;">In case of any query, you can contact [hamza.aslam3904@gmail.com, ask sir hamza about it]</p><br>
                             <p style="margin: 0;">Thanks and Regards,<br>FrostCar USA Team</p>
                         </td>
                     </tr>
