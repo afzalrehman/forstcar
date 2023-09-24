@@ -610,6 +610,7 @@ include "./includes/sidebar.php";
                                         <div class="my-2">
                                             <label for="right_S_Image" class="form-label fw-semibold">Right Side Image</label>
                                             <input type="file" class="w-100 inputDesign" id="right_S_Image" name="right_S_Image">
+                                            
                                             <?php if (isset($_SESSION['empty_misc'])) {
                                                 echo '
                                         <p class="text-danger">' . $_SESSION['empty_misc'] . '</p>';

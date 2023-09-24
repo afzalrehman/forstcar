@@ -72,7 +72,7 @@ include "./includes/sidebar.php";
                                     <th>Filter Drier<i class="fa-solid fa-arrow-down px-2"></i></th>
                                     <th>Thermostat<i class="fa-solid fa-arrow-down px-2"></i></th>
                                     <th>Misc<i class="fa-solid fa-arrow-down px-2"></i></th> -->
-                                    <th>Vewimore</th>
+                                    <th>View more<i class="fa-solid fa-arrow-down px-2"></i></th>
                                     <th>Added ON<i class="fa-solid fa-arrow-down px-2"></i></th>
                                     <th>Added BY<i class="fa-solid fa-arrow-down px-2"></i></th>
                                     <th>Updated ON<i class="fa-solid fa-arrow-down px-2"></i></th>
@@ -145,8 +145,8 @@ include "./includes/sidebar.php";
                                             <td> $item['filter_Drier'] ?></td>
                                             <td> $item['thermostat'] ?></td>
                                             <td> $item['misc'] ?></td> -->
-                                            <td>
-                                                <a href="vewimore.php?model=<?= $item['model'] ?>">Vewimore</a>
+                                            <td class="text-center">
+                                                <a href="vewimore.php?model=<?= $item['model'] ?>"><i class="fa-solid fa-eye text-primary   fs-6"></i></a>
                                             </td>
                                             <td><?= $item['added_on'] ?></td>
                                             <td><?= $item['added_by'] ?></td>

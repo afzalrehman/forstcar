@@ -1,13 +1,14 @@
 <?php
+session_start();
 include 'config/config.php';
-require './function/function.inc.php';
-if (isset($_SESSION['user_type']) == "Admin") {
-    header("location:edit_user.php");
+if ($_SESSION['user_type'] !== "Admin") {
+    header("location:index.php");
 }
+require './function/function.inc.php';
 // else{
 //     header("location:index.php");
 // }
-session_start();
+
 global $conn;
 $name = '';
 $user_email = '';
