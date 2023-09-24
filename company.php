@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 require './function/function.inc.php';
 include "./includes/header.php";
 include "./includes/searchbar.php";

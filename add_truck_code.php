@@ -3,6 +3,7 @@ session_start();
 require './function/function.inc.php';
 include "./config/config.php";
 
+
 if (isset($_POST['add_truck_btn'])) {
     $make = get_safe_value($conn, $_POST['make']);
     $model = get_safe_value($conn, $_POST['model']);

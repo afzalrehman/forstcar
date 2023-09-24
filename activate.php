@@ -1,6 +1,7 @@
 <?php
 session_start();
 require './config/config.php';
+
 global $conn;
 
 if (isset($_GET['token'])) {

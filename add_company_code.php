@@ -3,6 +3,7 @@ session_start();
 require './function/function.inc.php';
 include "./config/config.php";
 
+
 // Check if the form is submitted
 
 if (isset($_POST['add_company_btn'])) {

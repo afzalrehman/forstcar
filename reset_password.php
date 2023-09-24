@@ -2,6 +2,7 @@
 
 
 session_start();
+
 ob_start();
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -18,6 +19,8 @@ $noFoundToken = false;
 
 if (isset($_POST['submit'])) {
     $newPassword = mysqli_real_escape_string($conn, $_POST['user_password']);
+   
+
     $pass = password_hash($newPassword, PASSWORD_BCRYPT);
 
     if (

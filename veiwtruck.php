@@ -1,6 +1,7 @@
 <?php
 session_start();
 include './config/config.php';
+
 require './function/function.inc.php';
 global $conn;
 

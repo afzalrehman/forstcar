@@ -1,9 +1,9 @@
 <?php
-if (!isset($_SESSION['user_fullname'])) {
-    echo "You are logged out";
-    header('location:login.php');
+if (!isset($_SESSION['login']) || $_SESSION['login'] != true) {
+    // User is not logged in, display the login form
+    header('location: login.php'); // Redirect to your login page if not logged in
+    exit;
 }
-
 ?>
 
 <!DOCTYPE html>

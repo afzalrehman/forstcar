@@ -4,9 +4,15 @@ session_start();
 ob_start();
 
 require './config/config.php';
+
 global $conn;
 $emailError = false;
 $passError = false;
+
+if (isset($_SESSION['login']) && $_SESSION['login'] == true) {
+    header('location: index.php');
+    exit;
+}
 
 if (isset($_POST['submit'])) {
     $user_email = $_POST['user_email'];
@@ -27,14 +33,14 @@ if (isset($_POST['submit'])) {
         $_SESSION['user_password'] = $email_pass['user_password'];
         $_SESSION['user_id'] = $email_pass['user_id'];
         $_SESSION['user_type'] = $email_pass['user_type'];
-
+        $_SESSION['login'] = true;
         $pass_decode = password_verify($user_password, $db_pass);
         $_SESSION['user_pass'] = $pass_decode;
 
         if ($pass_decode) {
 
             if (isset($_POST['rememberme'])) {
-
+                
                 setcookie('emailcookie', $user_email, time() + 86400);
                 setcookie('passwordcookie', $user_password, time() + 86400);
 

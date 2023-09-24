@@ -1,8 +1,7 @@
 <?php
+session_start();
 include './config/config.php';
 require './function/function.inc.php';
-session_start();
-
 include "./includes/header.php";
 include "./includes/serchform.php";
 include "./includes/navbar.php";
