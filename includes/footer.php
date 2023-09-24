@@ -82,8 +82,12 @@
     // Attach an event listener to the search input field
     document.getElementById("search").addEventListener("keyup", filterTable);
 
+    let exportButton = document.getElementById("export");
 
-    
+    exportButton.addEventListener("click", function() {
+        alertify.set('notifier', 'position', 'top-right');
+        alertify.success('File Downloaded');
+    });
 </script>
 </body>
 

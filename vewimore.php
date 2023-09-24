@@ -112,6 +112,12 @@ if (isset($_GET['model'])) {
             $filter_Drier = $fach['filter_Drier'];
             $thermostat = $fach['thermostat'];
             $misc = $fach['misc'];
+            $air_Curtains = $fach['air_Curtains'];
+            $back_Camera = $fach['back_Camera'];
+            $body_Graphic_Warp = $fach['body_Graphic_Warp'];
+            $add_Unit_Carrier = $fach['add_Unit_Carrier'];
+            $hand_Truck_Stand = $fach['hand_Truck_Stand'];
+            $other = $fach['other'];
             $fron_image = $fach['front_S_Image'];
             $back_S_Image = $fach['back_S_Image'];
             $left_S_Image = $fach['left_S_Image'];
@@ -137,12 +143,7 @@ if (isset($_GET['model'])) {
             $custom_freight = $importer_data['custom_frieght'];
 
             // $importer_data for "importer_details" data
-            $air_Curtains = $importer_data['air_Curtains'];
-            $back_Camera = $importer_data['back_Camera'];
-            $body_Graphic_Warp = $importer_data['body_Graphic_Warp'];
-            $add_Unit_Carrier = $importer_data['add_Unit_Carrier'];
-            $hand_Truck_Stand = $importer_data['hand_Truck_Stand'];
-            $other = $importer_data['other'];
+         
         } else {
             // Handle case when no data is found in "importer_details" database
             echo "Something Went Wrong importer_details";

@@ -15,11 +15,11 @@ include "./includes/sidebar.php";
             <div class="card">
                 <div class="row">
                     <div class="col-lg-3 col-md-3 text-start py-3 px-4">
-                        <p class="font student">Forcars usa body details</p>
+                        <p class="font student">Frost Car Usa Body Details</p>
                     </div>
                     <div class="col-lg-9 col-md-9 py-3 ">
                         <div class="btn-edit-delete1 text-end px-1">
-                            <a href="./excel/bodyexport.php">
+                            <a href="./excel/bodyexport.php" id="export">
                                 <span class="fa-solid fa-cloud-arrow-down export export-btn"> </span>
                             </a>
                         </div>
@@ -72,7 +72,7 @@ include "./includes/sidebar.php";
                                     <th>Filter Drier<i class="fa-solid fa-arrow-down px-2"></i></th>
                                     <th>Thermostat<i class="fa-solid fa-arrow-down px-2"></i></th>
                                     <th>Misc<i class="fa-solid fa-arrow-down px-2"></i></th> -->
-                                    <th>Vewimore</th>
+                                    <th>View more<i class="fa-solid fa-arrow-down px-2"></i></th>
                                     <th>Added ON<i class="fa-solid fa-arrow-down px-2"></i></th>
                                     <th>Added BY<i class="fa-solid fa-arrow-down px-2"></i></th>
                                     <th>Updated ON<i class="fa-solid fa-arrow-down px-2"></i></th>
@@ -145,8 +145,8 @@ include "./includes/sidebar.php";
                                             <td> $item['filter_Drier'] ?></td>
                                             <td> $item['thermostat'] ?></td>
                                             <td> $item['misc'] ?></td> -->
-                                            <td>
-                                                <a href="vewimore.php?model=<?= $item['model'] ?>">Vewimore</a>
+                                            <td class="text-center">
+                                                <a href="vewimore.php?model=<?= $item['model'] ?>"><i class="fa-solid fa-eye text-primary   fs-6"></i></a>
                                             </td>
                                             <td><?= $item['added_on'] ?></td>
                                             <td><?= $item['added_by'] ?></td>

@@ -19,7 +19,7 @@ include "./includes/sidebar.php";
                         <form action="add_truck_code.php" method="POST" enctype="multipart/form-data">
                             <div class="row text-dark">
                                 <div class="row my-5">
-                                    <h5 class="card-title fw-semibold">Frost Car Unit Details (SQL)</h5>
+                                    <h5 class="card-title fw-semibold">Frost Car Unit Details </h5>
                                     <hr class="p-0">
 
                                     <div class="col-lg-6">

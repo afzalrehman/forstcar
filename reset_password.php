@@ -32,7 +32,6 @@ if (isset($_POST['submit'])) {
 
         if (isset($_GET['token'])) {
             $token = $_GET['token'];
-
             $updatequery = " UPDATE `admin_users` SET `user_password` = '$pass', `reset_expiration` = NOW() WHERE `token` = '$token' ";
 
             $iquery = mysqli_query($conn, $updatequery);
