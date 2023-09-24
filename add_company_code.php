@@ -3,13 +3,7 @@ session_start();
 require './function/function.inc.php';
 include "./config/config.php";
 
-
-
-
 // Check if the form is submitted
-
-
-
 
 if (isset($_POST['add_company_btn'])) {
     $model = $_POST['model'];
@@ -32,17 +26,17 @@ if (isset($_POST['add_company_btn'])) {
     
     $_SESSION['company_name']= $company_name;
     if (
-        empty($model)
-        //  ||  empty($company_name) || empty($company_contact) || empty($company_address) || empty($company_city) || empty($company_state)
+        empty($model) ||  empty($company_name) 
+        // || empty($company_contact) || empty($company_address) || empty($company_city) || empty($company_state)
         // || empty($company_zipcode) || empty($company_telephone) || empty($company_email) || empty($company_direct) || empty($company_port) || empty($company_vessel) || empty($company_trucking)
         // || empty($company_misc) || empty($total_cost) || empty($custom_freight)
     ) {
         if (empty($model)) {
             $_SESSION['empty_model'] = "Please fill in the Company Name.";
         }
-        // if (empty($company_name)) {
-        //     $_SESSION['empty_company_name'] = "Please fill in the Company Name.";
-        // }
+        if (empty($company_name)) {
+            $_SESSION['empty_company_name'] = "Please fill in the Company Name.";
+        }
         // if (empty($company_contact)) {
         //     $_SESSION['empty_company_contact'] = "Please fill in the Company Contact.";
         // }
@@ -153,17 +147,17 @@ if (isset($_POST['update_company_btn'])) {
     $custom_freight = $_POST['custom_frieght'];
 
     if (
-        empty($model)
-        // ||  empty($company_name) || empty($company_contact) || empty($company_address) || empty($company_city) || empty($company_state)
+        empty($model) ||  empty($company_name) 
+        // || empty($company_contact) || empty($company_address) || empty($company_city) || empty($company_state)
         // || empty($company_zipcode) || empty($company_telephone) || empty($company_email) || empty($company_direct) || empty($company_port) || empty($company_vessel) || empty($company_trucking)
         // || empty($company_misc) || empty($total_cost) || empty($custom_freight)
     ) {
         if (empty($model)) {
-            $_SESSION['empty_model'] = "Please fill in the Company Name.";
+            $_SESSION['empty_model'] = "Please fill in the  Modal.";
         }
-        // if (empty($company_name)) {
-        //     $_SESSION['empty_company_name'] = "Please fill in the Company Name.";
-        // }
+        if (empty($company_name)) {
+            $_SESSION['empty_company_name'] = "Please fill in the Company Name.";
+        }
         // if (empty($company_contact)) {
         //     $_SESSION['empty_company_contact'] = "Please fill in the Company Contact.";
         // }
