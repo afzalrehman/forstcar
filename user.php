@@ -71,8 +71,7 @@ include "./includes/sidebar.php";
                     <div class="in mb-3">
                         <label class="form-label fw-semibold">User Type</label>
                         <select name="user_type" class="inputDesign py-2 w-100">
-                            <option selected>User Type</option>
-
+                            <option value="" selected>User Type</option>
                             <option value="Admin">Admin</option>
                             <option value="User"> User</option>
                         </select>

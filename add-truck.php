@@ -204,21 +204,23 @@ include "./includes/sidebar.php";
                                         <div class="mb-2">
                                             <label for="front_S_Image" class="form-label fw-semibold">Front Side Image</label>
                                             <input type="file" class="w-100 inputDesign" id="front_S_Image" name="front_S_Image">
-                                            <?php if (isset($_SESSION['empty_sight_Glass'])) {
-                                                echo '
-                                        <p class="text-danger">' . $_SESSION['empty_sight_Glass'] . '</p>';
-                                                unset($_SESSION['empty_sight_Glass']);
-                                            }
+                                            <?php
+                                        //      if (isset($_SESSION['empty_sight_Glass'])) {
+                                        //         echo '
+                                        // <p class="text-danger">' . $_SESSION['empty_sight_Glass'] . '</p>';
+                                        //         unset($_SESSION['empty_sight_Glass']);
+                                        //     }
                                             ?>
                                         </div>
                                         <div class="mb-2">
                                             <label for="back_S_Image" class="form-label fw-semibold">Back Side Image</label>
                                             <input type="file" class="w-100 inputDesign" id="back_S_Image" name="back_S_Image">
-                                            <?php if (isset($_SESSION['empty_filter_Drier'])) {
-                                                echo '
-                                        <p class="text-danger">' . $_SESSION['empty_filter_Drier'] . '</p>';
-                                                unset($_SESSION['empty_filter_Drier']);
-                                            }
+                                            <?php 
+                                        //     if (isset($_SESSION['empty_filter_Drier'])) {
+                                        //         echo '
+                                        // <p class="text-danger">' . $_SESSION['empty_filter_Drier'] . '</p>';
+                                        //         unset($_SESSION['empty_filter_Drier']);
+                                        //     }
                                             ?>
                                         </div>
 
@@ -398,21 +400,23 @@ include "./includes/sidebar.php";
                                         <div class="mb-2">
                                             <label for="left_S_Image" class="form-label fw-semibold">Left Side Image</label>
                                             <input type="file" class="w-100 inputDesign" id="left_S_Image" name="left_S_Image">
-                                            <?php if (isset($_SESSION['empty_thermostat'])) {
-                                                echo '
-                                        <p class="text-danger">' . $_SESSION['empty_thermostat'] . '</p>';
-                                                unset($_SESSION['empty_thermostat']);
-                                            }
+                                            <?php
+                                        //      if (isset($_SESSION['empty_thermostat'])) {
+                                        //         echo '
+                                        // <p class="text-danger">' . $_SESSION['empty_thermostat'] . '</p>';
+                                        //         unset($_SESSION['empty_thermostat']);
+                                        //     }
                                             ?>
                                         </div>
                                         <div class="my-2">
                                             <label for="right_S_Image" class="form-label fw-semibold">Right Side Image</label>
                                             <input type="file" class="w-100 inputDesign" id="right_S_Image" name="right_S_Image">
-                                            <?php if (isset($_SESSION['empty_misc'])) {
-                                                echo '
-                                        <p class="text-danger">' . $_SESSION['empty_misc'] . '</p>';
-                                                unset($_SESSION['empty_misc']);
-                                            }
+                                            <?php
+                                        //      if (isset($_SESSION['empty_misc'])) {
+                                        //         echo '
+                                        // <p class="text-danger">' . $_SESSION['empty_misc'] . '</p>';
+                                        //         unset($_SESSION['empty_misc']);
+                                        //     }
                                             ?>
                                         </div>
 

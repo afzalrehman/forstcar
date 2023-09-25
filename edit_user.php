@@ -123,10 +123,10 @@ include "./includes/sidebar.php";
                             <input type="text" name="user_fullname" id="name" class=" inputDesign w-100 py-2" placeholder="Enter Your Full Name" value="<?php if (isset($_GET['editid'])) {
                                                                                                                                                             echo $name;
                                                                                                                                                         } ?>">
-                            <?php if (isset($_SESSION['empty_make'])) {
+                            <?php if (isset($_SESSION['empty_user_fullname'])) {
                                 echo '
-                                        <p class="text-danger">' . $_SESSION['empty_make'] . '</p>';
-                                unset($_SESSION['empty_make']);
+                                        <p class="text-danger">' . $_SESSION['empty_user_fullname'] . '</p>';
+                                unset($_SESSION['empty_user_fullname']);
                             }
                             ?>
                         </div>
@@ -136,10 +136,10 @@ include "./includes/sidebar.php";
                             <input type="email" name="user_email" id="name" class=" inputDesign w-100 py-2" placeholder="Enter Your Email" value="<?php if (isset($_GET['editid'])) {
                                                                                                                                                         echo $user_email;
                                                                                                                                                     } ?>">
-                            <?php if (isset($_SESSION['empty_make'])) {
+                            <?php if (isset($_SESSION['empty_user_email'])) {
                                 echo '
-                                        <p class="text-danger">' . $_SESSION['empty_make'] . '</p>';
-                                unset($_SESSION['empty_make']);
+                                        <p class="text-danger">' . $_SESSION['empty_user_email'] . '</p>';
+                                unset($_SESSION['empty_user_email']);
                             }
                             ?>
                         </div>
@@ -150,15 +150,15 @@ include "./includes/sidebar.php";
                                 <option selected><?php if (isset($_GET['editid'])) {
                                                         echo $user_type;
                                                     } else {
-                                                        echo "User Type";
+                                                        
                                                     } ?></option>
 
                                 <option value="Admin">Admin</option>
                                 <option value="User"> User</option>
-                                <?php if (isset($_SESSION['empty_make'])) {
+                                <?php if (isset($_SESSION['empty_user_type'])) {
                                     echo '
-                                        <p class="text-danger">' . $_SESSION['empty_make'] . '</p>';
-                                    unset($_SESSION['empty_make']);
+                                        <p class="text-danger">' . $_SESSION['empty_user_type'] . '</p>';
+                                    unset($_SESSION['empty_user_type']);
                                 }
                                 ?>
                             </select>
@@ -172,21 +172,23 @@ include "./includes/sidebar.php";
                         <input type="text" name="user_contact" id="name" class=" inputDesign w-100 py-2" placeholder="Enter Your Contact Number" value="<?php if (isset($_GET['editid'])) {
                                                                                                                                                             echo $user_contact;
                                                                                                                                                         } ?>">
-                        <?php if (isset($_SESSION['empty_make'])) {
+                        <?php if (isset($_SESSION['empty_user_contact'])) {
                             echo '
-                                        <p class="text-danger">' . $_SESSION['empty_make'] . '</p>';
-                            unset($_SESSION['empty_make']);
+                                        <p class="text-danger">' . $_SESSION['empty_user_contact'] . '</p>';
+                            unset($_SESSION['empty_user_contact']);
                         }
                         ?>
                     </div>
                     <div class="in">
                         <label class="form-label fw-semibold">Image</label>
                         <input type="file" name="user_image" id="image" class="inputDesign w-100 py-2">
-                        <?php if (isset($_SESSION['empty_make'])) {
-                            echo '
-                                        <p class="text-danger">' . $_SESSION['empty_make'] . '</p>';
-                            unset($_SESSION['empty_make']);
-                        }
+                        <?php 
+                        // if (isset($_SESSION['empty_make'])) {
+                        //     echo '
+                        //                 <p class="text-danger">' . $_SESSION['empty_make'] . '</p>';
+                        //     unset($_SESSION['empty_make']);
+                        // }
+
                         ?>
                     </div>
 

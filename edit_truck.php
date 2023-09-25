@@ -43,6 +43,10 @@ if (isset($_GET['editid']) && $_GET['editid'] != '') {
         $filter_Drier = $row['filter_Drier'];
         $thermostat = $row['thermostat'];
         $misc = $row['misc'];
+        $right_S_Image = $row['right_S_Image'];
+        $left_S_Image = $row['left_S_Image'];
+        $back_S_Image = $row['back_S_Image'];
+        $front_S_Image = $row['front_S_Image'];
         $air_Curtains = $row['air_Curtains'];
         $back_Camera = $row['back_Camera'];
         $body_Graphic_Warp = $row['body_Graphic_Warp'];
@@ -183,6 +187,7 @@ if (isset($_POST['submit'])) {
 
 
 include "./includes/header.php";
+include "./includes/serchform.php";
 include "./includes/navbar.php";
 include "./includes/sidebar.php";
 ?>
@@ -199,7 +204,7 @@ include "./includes/sidebar.php";
                         <form action="" method="POST" enctype="multipart/form-data">
                             <div class="row text-dark">
                                 <div class="row my-5">
-                                    <h5 class="card-title fw-semibold">Frost Car Unit Details (SQL): Edit Model : <?php echo $model; ?></h5>
+                                    <h5 class="card-title fw-semibold">Frost Car Unit Details - Edit Model  <?php echo $model; ?></h5>
                                     <hr class="p-0">
 
 
@@ -547,6 +552,7 @@ include "./includes/sidebar.php";
                                         <div class="mb-2">
                                             <label for="front_S_Image" class="form-label fw-semibold">Front Side Image</label>
                                             <input type="file" class="w-100 inputDesign" id="front_S_Image" name="front_S_Image">
+                                            <img height="40px" width="40px" src="media/car_images/<?= $front_S_Image; ?> " alt="media/car_images/<?= $front_S_Image; ?> ">
                                             <?php if (isset($_SESSION['empty_sight_Glass'])) {
                                                 echo '
                                         <p class="text-danger">' . $_SESSION['empty_sight_Glass'] . '</p>';
@@ -557,19 +563,21 @@ include "./includes/sidebar.php";
                                         <div class="mb-2">
                                             <label for="back_S_Image" class="form-label fw-semibold">Back Side Image</label>
                                             <input type="file" class="w-100 inputDesign" id="back_S_Image" name="back_S_Image">
+                                            <img height="40px" width="40px" src="media/car_images/<?php echo $back_S_Image; ?> " alt="media/car_images/<?php echo $back_S_Image; ?>">
                                             <?php if (isset($_SESSION['empty_filter_Drier'])) {
                                                 echo '
-                                        <p class="text-danger">' . $_SESSION['empty_filter_Drier'] . '</p>';
+                                                <p class="text-danger">' . $_SESSION['empty_filter_Drier'] . '</p>';
                                                 unset($_SESSION['empty_filter_Drier']);
                                             }
                                             ?>
                                         </div>
                                         <div class="mb-2">
                                             <label for="left_S_Image" class="form-label fw-semibold">Left Side Image</label>
-                                            <input type="file" class="w-100 inputDesign" id="left_S_Image" name="left_S_Image">
+                                            <input type="file" class="w-100 inputDesign"  id="left_S_Image" name="left_S_Image">
+                                            <img height="40px" width="40px" src="media/car_images/<?php echo $left_S_Image; ?> " alt="media/car_images/<?php echo $left_S_Image; ?>">
                                             <?php if (isset($_SESSION['empty_thermostat'])) {
                                                 echo '
-                                        <p class="text-danger">' . $_SESSION['empty_thermostat'] . '</p>';
+                                                <p class="text-danger">' . $_SESSION['empty_thermostat'] . '</p>';
                                                 unset($_SESSION['empty_thermostat']);
                                             }
                                             ?>
@@ -577,6 +585,7 @@ include "./includes/sidebar.php";
                                         <div class="my-2">
                                             <label for="right_S_Image" class="form-label fw-semibold">Right Side Image</label>
                                             <input type="file" class="w-100 inputDesign" id="right_S_Image" name="right_S_Image">
+                                            <img height="40px" width="40px" src="media/car_images/<?php echo $right_S_Image; ?>" alt="media/car_images/<?php echo $right_S_Image; ?>">
 
                                             <?php if (isset($_SESSION['empty_misc'])) {
                                                 echo '

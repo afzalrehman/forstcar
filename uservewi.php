@@ -27,7 +27,7 @@ include "./includes/sidebar.php";
                     <div class="col-lg-12 col-md-12 text-start py-3 px-4">
                         <p class="font student"> User Vewi Details</p>
                     </div>
-                    
+
                 </div>
                 <hr class="m-0 ">
 
@@ -59,7 +59,7 @@ include "./includes/sidebar.php";
                                 <?php
                                 $select = "SELECT * FROM `admin_users`";
                                 $result = mysqli_query($conn, $select);
-                                $res_num = mysqli_num_rows($result);
+                                if ($res_num = mysqli_num_rows($result) > 0){
 
                                 $no = 1;
                                 while ($row = mysqli_fetch_assoc($result)) {
@@ -89,7 +89,14 @@ include "./includes/sidebar.php";
                                 <?php
                                     $no = $no + 1;
                                 }
-
+                           
+                                }
+                                else{
+                                    echo '
+                                    <tr>
+                                    <td class="text-danger">Data not found</td></tr>
+                                    ';
+                                }
                                 ?>
                             </tbody>
                         </table>
