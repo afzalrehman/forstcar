@@ -144,7 +144,7 @@ if (isset($_GET['model'])) {
             $custom_freight = $importer_data['custom_frieght'];
 
             // $importer_data for "importer_details" data
-         
+
         } else {
             // Handle case when no data is found in "importer_details" database
             echo "Something Went Wrong importer_details";
