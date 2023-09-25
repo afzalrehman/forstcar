@@ -20,15 +20,6 @@ include "./includes/sidebar.php";
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="in">
-                                    <input type="text" name="model" class="inputDesign w-100 py-2 mt-3" placeholder=" Model">
-                                    <?php if (isset($_SESSION['empty_model'])) {
-                                        echo '
-                                        <p class="text-danger">' . $_SESSION['empty_model'] . '</p>';
-                                        unset($_SESSION['empty_model']);
-                                    }
-                                    ?>
-                                </div>
-                                <div class="in">
                                     <input type="text" name="company_name" class="inputDesign w-100 py-2 mt-3" placeholder="Company Name">
                                     <?php if (isset($_SESSION['empty_company_name'])) {
                                         echo '
@@ -188,108 +179,108 @@ include "./includes/sidebar.php";
                         <div class="col-lg-3 col-md-3 text-start py-3 px-4">
                             <p class="font student"> Usa Importent Details</p>
                         </div>
-                            <div class="col-lg-9 col-md-9 py-3 ">
-                                <div class="btn-edit-delete1 text-end px-1">
-                                    <a href="./excel/comexport.php" id="export">
-                                        <span class="fa-solid fa-cloud-arrow-down export export-btn"> </span>
-                                    </a>
-                                </div>
+                        <div class="col-lg-9 col-md-9 py-3 ">
+                            <div class="btn-edit-delete1 text-end px-1">
+                                <a href="./excel/comexport.php" id="export">
+                                    <span class="fa-solid fa-cloud-arrow-down export export-btn"> </span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <hr class="m-0 ">
+                    <hr class="m-0 ">
 
-                <div class="dov ">
-                    <div class="table-wrapper">
-                        <table class="contain-table">
-                            <thead>
-                                <tr>
-                                    <th>Action<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                    <th>S/no<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                    <th>Model<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                    <th>Company Name<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                    <th>Contact number<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                    <th>Address <i class="fa-solid fa-arrow-down px-2"></i></th>
-                                    <th>City <i class="fa-solid fa-arrow-down px-2"></i></th>
-                                    <th>State <i class="fa-solid fa-arrow-down px-2"></i></th>
-                                    <th>Zipe Code<i class="fa-solid fa-arrow-down px-2"></i>
-                                    </th>
-                                    <th>Tele Phone<i class="fa-solid fa-arrow-down px-2"></i>
-                                    </th>
-                                    <th>Email<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                    <th>Direct <i class="fa-solid fa-arrow-down px-2"></i></th>
-                                    <th>Port Of Entry <i class="fa-solid fa-arrow-down px-2"></i></th>
-                                    <th>Vessel Details <i class="fa-solid fa-arrow-down px-2"></i></th>
-                                    <th>Trucking <i class="fa-solid fa-arrow-down px-2"></i></th>
-                                    <th>Misc <i class="fa-solid fa-arrow-down px-2"></i></th>
-                                    <th>Total Cost <i class="fa-solid fa-arrow-down px-2"></i></th>
-                                    <th>Custom Frieght <i class="fa-solid fa-arrow-down px-2"></i></th>
-                                    <th>Added On<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                    <th>Added By<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                    <th>Update On<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                    <th>Update By<i class="fa-solid fa-arrow-down px-2"></i></th>
-
-
-                                </tr>
-                            </thead>
-
-                            <tbody id="data-table">
-
-                                <?php
-                                $category = getAll("importer_details");
-
-                                if (mysqli_num_rows($category) > 0) {
-                                    $no = 1;
-                                    // while ($facth = mysqli_fetch_assoc($category))
-                                    foreach ($category as $item) {
-                                        // $no = 1;
-                                ?>
-                                        <tr>
-                                            <td>
-
-                                                <a href="add_company_code.php?deleteid=<?= $item['importer_id'] ?>" name="delete"><i class="fa-regular fa-trash-can text-danger me-1 fs-6"></i></a>
-                                                <a href="edit_company.php?editid=<?= $item['importer_id'] ?>"><i class="fa-solid fa-pen-to-square text-success  fs-6"></i></a>
-                                            </td>
-                                            <td class="font"><?= $no++; ?></td>
-                                            <td class="searchable"><?= $item['model'] ?></td>
-                                            <td class="searchable"><?= $item['company_name'] ?></td>
-                                            <td><?= $item['company_contact'] ?></td>
-                                            <td><?= $item['company_address'] ?></td>
-                                            <td><?= $item['company_city'] ?></td>
-                                            <td><?= $item['company_state'] ?></td>
-                                            <td><?= $item['company_zipcode'] ?></td>
-                                            <td><?= $item['company_telephone'] ?></td>
-                                            <td><?= $item['company_email'] ?></td>
-                                            <td><?= $item['company_direct'] ?></td>
-                                            <td><?= $item['company_port_of_entry'] ?></td>
-                                            <td><?= $item['company_vessel_detail'] ?></td>
-                                            <td><?= $item['company_trucking'] ?></td>
-                                            <td><?= $item['company_misc'] ?></td>
-                                            <td><?= $item['total_cost'] ?></td>
-                                            <td><?= $item['custom_frieght'] ?></td>
-                                            <td><?= $item['added_on'] ?></td>
-                                            <td><?= $item['added_by'] ?></td>
-                                            <td><?= $item['updated_on'] ?></td>
-                                            <td><?= $item['updated_by'] ?></td>
+                    <div class="dov ">
+                        <div class="table-wrapper">
+                            <table class="contain-table">
+                                <thead>
+                                    <tr>
+                                        <th>Action<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                        <th>S/no<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                        <!-- <th>Model<i class="fa-solid fa-arrow-down px-2"></i></th> -->
+                                        <th>Company Name<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                        <th>Contact number<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                        <th>Address <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                        <th>City <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                        <th>State <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                        <th>Zipe Code<i class="fa-solid fa-arrow-down px-2"></i>
+                                        </th>
+                                        <th>Tele Phone<i class="fa-solid fa-arrow-down px-2"></i>
+                                        </th>
+                                        <th>Email<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                        <th>Direct <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                        <th>Port Of Entry <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                        <th>Vessel Details <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                        <th>Trucking <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                        <th>Misc <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                        <th>Total Cost <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                        <th>Custom Frieght <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                        <th>Added On<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                        <th>Added By<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                        <th>Update On<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                        <th>Update By<i class="fa-solid fa-arrow-down px-2"></i></th>
 
 
-                                        </tr>
-                                <?php  }
-                                } else {
-                                    echo '
+                                    </tr>
+                                </thead>
+
+                                <tbody id="data-table">
+
+                                    <?php
+                                    $category = getAll("importer_details");
+
+                                    if (mysqli_num_rows($category) > 0) {
+                                        $no = 1;
+                                        // while ($facth = mysqli_fetch_assoc($category))
+                                        foreach ($category as $item) {
+                                            // $no = 1;
+                                    ?>
+                                            <tr>
+                                                <td>
+
+                                                    <a href="add_company_code.php?deleteid=<?= $item['importer_id'] ?>" name="delete"><i class="fa-regular fa-trash-can text-danger me-1 fs-6"></i></a>
+                                                    <a href="edit_company.php?editid=<?= $item['importer_id'] ?>"><i class="fa-solid fa-pen-to-square text-success  fs-6"></i></a>
+                                                </td>
+                                                <td class="font"><?= $no++; ?></td>
+                                                <!-- <td class="searchable"><?= $item['model'] ?></td> -->
+                                                <td class="searchable"><?= $item['company_name'] ?></td>
+                                                <td><?= $item['company_contact'] ?></td>
+                                                <td><?= $item['company_address'] ?></td>
+                                                <td><?= $item['company_city'] ?></td>
+                                                <td><?= $item['company_state'] ?></td>
+                                                <td><?= $item['company_zipcode'] ?></td>
+                                                <td><?= $item['company_telephone'] ?></td>
+                                                <td><?= $item['company_email'] ?></td>
+                                                <td><?= $item['company_direct'] ?></td>
+                                                <td><?= $item['company_port_of_entry'] ?></td>
+                                                <td><?= $item['company_vessel_detail'] ?></td>
+                                                <td><?= $item['company_trucking'] ?></td>
+                                                <td><?= $item['company_misc'] ?></td>
+                                                <td><?= $item['total_cost'] ?></td>
+                                                <td><?= $item['custom_frieght'] ?></td>
+                                                <td><?= $item['added_on'] ?></td>
+                                                <td><?= $item['added_by'] ?></td>
+                                                <td><?= $item['updated_on'] ?></td>
+                                                <td><?= $item['updated_by'] ?></td>
+
+
+                                            </tr>
+                                    <?php  }
+                                    } else {
+                                        echo '
                                         <tr>
                                         <td class="text-danger">Data not found</td></tr>
                                         ';
-                                } ?>
-                            </tbody>
-                        </table>
-                        <div id="no-data-message" class="text-danger" style="display: none; padding: 10px;">Data Not Found</div>
+                                    } ?>
+                                </tbody>
+                            </table>
+                            <div id="no-data-message" class="text-danger" style="display: none; padding: 10px;">Data Not Found</div>
 
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-</div>
-</form>
+    </form>
 </div>
 <?php
 include "./includes/footer.php";

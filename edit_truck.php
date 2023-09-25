@@ -10,6 +10,7 @@ if (isset($_GET['editid']) && $_GET['editid'] != '') {
     $check = mysqli_num_rows($res);
     if ($check > 0) {
         $row = mysqli_fetch_assoc($res);
+        $company_name = $row['company_name'];
         $make = $row['make'];
         $model = $row['model'];
         $wheelbase = $row['wheelbase'];
@@ -63,6 +64,7 @@ if (isset($_GET['editid']) && $_GET['editid'] != '') {
 
 // ===================   Update Querry   =====================
 if (isset($_POST['submit'])) {
+    $company_name = get_safe_value($conn, $_POST['company_name']);
     $make = get_safe_value($conn, $_POST['make']);
     $model = get_safe_value($conn, $_POST['model']);
     $wheelbase = get_safe_value($conn, $_POST['wheelbase']);
@@ -103,52 +105,63 @@ if (isset($_POST['submit'])) {
     $hand_Truck_Stand = get_safe_value($conn, $_POST['hand_Truck_Stand']);
     $other = get_safe_value($conn, $_POST['other']);
 
-
-    $res_model = mysqli_query($conn, "SELECT * FROM `unit_details` WHERE `model` = '$model'");
-    $check_model = mysqli_num_rows($res_model);
-    if ($check_model > 0) {
-        if (isset($_GET['editid']) && $_GET['editid'] != '') {
-            $getData = mysqli_fetch_assoc($res_model);
-            if ($id == $getData['id']) {
+    if (
+        empty($model) || empty($company_name)
+    ) {
+        if (empty($model)) {
+            $_SESSION['empty_model'] = "Please fill in the model.";
+        }
+        if (empty($company_name)) {
+            $_SESSION['empty_company_name'] = "Please fill in the Company Name.";
+        }
+        header("location:add-truck.php");
+        exit();
+    } else {
+        $res_model = mysqli_query($conn, "SELECT * FROM `unit_details` WHERE `model` = '$model'");
+        $check_model = mysqli_num_rows($res_model);
+        if ($check_model > 0) {
+            if (isset($_GET['editid']) && $_GET['editid'] != '') {
+                $getData = mysqli_fetch_assoc($res_model);
+                if ($id == $getData['id']) {
+                } else {
+                    redirect("edit_truck.php", "Model is already exist!");
+                    exit();
+                }
             } else {
                 redirect("edit_truck.php", "Model is already exist!");
                 exit();
             }
-        } else {
-            redirect("edit_truck.php", "Model is already exist!");
-            exit();
         }
-    }
 
-    if ($id == $id) {
+        if ($id == $id) {
 
-        if (isset($_GET['editid']) && $_GET['editid'] != '') {
-            $front_S_Image = '';
-            $back_S_Image = '';
-            $left_S_Image = '';
-            $right_S_Image = '';
-            // Check if the 'front_S_Image' file is provided
-            if ($_FILES['front_S_Image']['name'] != '') {
-                $front_S_Image = rand(111111111, 999999999) . '_' . $_FILES['front_S_Image']['name'];
-                move_uploaded_file($_FILES['front_S_Image']['tmp_name'], 'media/car_images/' . $front_S_Image);
-            }
-            // Check if 'back_S_Image' file is provided
-            if ($_FILES['back_S_Image']['name'] != '') {
-                $back_S_Image = rand(111111111, 999999999) . '_' . $_FILES['back_S_Image']['name'];
-                move_uploaded_file($_FILES['back_S_Image']['tmp_name'], 'media/car_images/' . $back_S_Image);
-            }
-            // Check if 'left_S_Image' file is provided
-            if ($_FILES['left_S_Image']['name'] != '') {
-                $left_S_Image = rand(111111111, 999999999) . '_' . $_FILES['left_S_Image']['name'];
-                move_uploaded_file($_FILES['left_S_Image']['tmp_name'], 'media/car_images/' . $left_S_Image);
-            }
-            // Check if 'right_S_Image' file is provided
-            if ($_FILES['right_S_Image']['name'] != '') {
-                $right_S_Image = rand(111111111, 999999999) . '_' . $_FILES['right_S_Image']['name'];
-                move_uploaded_file($_FILES['right_S_Image']['tmp_name'], 'media/car_images/' . $right_S_Image);
-            }
-            // Construct the SQL query
-            $update_sql = "UPDATE `unit_details` SET `year` = NOW(), `make` = '$make', `model` = '$model', `wheelbase` = '$wheelbase', `vin` = '$vin', `contact_Name` = '$contact_Name',
+            if (isset($_GET['editid']) && $_GET['editid'] != '') {
+                $front_S_Image = '';
+                $back_S_Image = '';
+                $left_S_Image = '';
+                $right_S_Image = '';
+                // Check if the 'front_S_Image' file is provided
+                if ($_FILES['front_S_Image']['name'] != '') {
+                    $front_S_Image = rand(111111111, 999999999) . '_' . $_FILES['front_S_Image']['name'];
+                    move_uploaded_file($_FILES['front_S_Image']['tmp_name'], 'media/car_images/' . $front_S_Image);
+                }
+                // Check if 'back_S_Image' file is provided
+                if ($_FILES['back_S_Image']['name'] != '') {
+                    $back_S_Image = rand(111111111, 999999999) . '_' . $_FILES['back_S_Image']['name'];
+                    move_uploaded_file($_FILES['back_S_Image']['tmp_name'], 'media/car_images/' . $back_S_Image);
+                }
+                // Check if 'left_S_Image' file is provided
+                if ($_FILES['left_S_Image']['name'] != '') {
+                    $left_S_Image = rand(111111111, 999999999) . '_' . $_FILES['left_S_Image']['name'];
+                    move_uploaded_file($_FILES['left_S_Image']['tmp_name'], 'media/car_images/' . $left_S_Image);
+                }
+                // Check if 'right_S_Image' file is provided
+                if ($_FILES['right_S_Image']['name'] != '') {
+                    $right_S_Image = rand(111111111, 999999999) . '_' . $_FILES['right_S_Image']['name'];
+                    move_uploaded_file($_FILES['right_S_Image']['tmp_name'], 'media/car_images/' . $right_S_Image);
+                }
+                // Construct the SQL query
+                $update_sql = "UPDATE `unit_details` SET `year` = NOW(),`company_name` = '$company_name', `make` = '$make', `model` = '$model', `wheelbase` = '$wheelbase', `vin` = '$vin', `contact_Name` = '$contact_Name',
             `contact_Num` = '$contact_Num', `fc_Unit_Cost` = '$fc_Unit_Cost', `fc_Body` = '$fc_Body', `body_Weight` = '$body_Weight', `fc_Model` = '$fc_Model',
             `exterior_Dimension` = '$exterior_Dimension', `compressor` = '$compressor', `comp_Serial` = '$comp_Serial', `voltage` = '$voltage',
             `sound_Decibel` = '$sound_Decibel', `current_FLA` = '$current_FLA', `refrigerant` = '$refrigerant', `condenser` = '$condenser', `solenoid` = '$solenoid',
@@ -158,25 +171,26 @@ if (isset($_POST['submit'])) {
             `thermostat` = '$thermostat', `misc` = '$misc', `air_Curtains` = '$air_Curtains', `back_Camera` = '$back_Camera', `body_Graphic_Warp` = '$body_Graphic_Warp', 
             `add_Unit_Carrier` = '$add_Unit_Carrier', `hand_Truck_Stand` = '$hand_Truck_Stand', `other`= '$other'";
 
-            // Add image fields to the query if they are provided
-            if (!empty($front_S_Image)) {
-                $update_sql .= ", `front_S_Image` = '$front_S_Image'";
+                // Add image fields to the query if they are provided
+                if (!empty($front_S_Image)) {
+                    $update_sql .= ", `front_S_Image` = '$front_S_Image'";
+                }
+                if (!empty($back_S_Image)) {
+                    $update_sql .= ", `back_S_Image` = '$back_S_Image'";
+                }
+                if (!empty($left_S_Image)) {
+                    $update_sql .= ", `left_S_Image` = '$left_S_Image'";
+                }
+                if (!empty($right_S_Image)) {
+                    $update_sql .= ", `right_S_Image` = '$right_S_Image'";
+                }
+                // Complete the query
+                $update_sql .= ", `updated_on` = NOW(), `updated_by` = '{$_SESSION['user_fullname']}' WHERE `id` = '$id'";
+                mysqli_query($conn, $update_sql);
             }
-            if (!empty($back_S_Image)) {
-                $update_sql .= ", `back_S_Image` = '$back_S_Image'";
-            }
-            if (!empty($left_S_Image)) {
-                $update_sql .= ", `left_S_Image` = '$left_S_Image'";
-            }
-            if (!empty($right_S_Image)) {
-                $update_sql .= ", `right_S_Image` = '$right_S_Image'";
-            }
-            // Complete the query
-            $update_sql .= ", `updated_on` = NOW(), `updated_by` = '{$_SESSION['user_fullname']}' WHERE `id` = '$id'";
-            mysqli_query($conn, $update_sql);
+            redirect("add-truck.php", "Updated Successfully!");
+            die();
         }
-        redirect("add-truck.php", "Updated Successfully!");
-        die();
     }
 }
 
@@ -204,11 +218,37 @@ include "./includes/sidebar.php";
                         <form action="" method="POST" enctype="multipart/form-data">
                             <div class="row text-dark">
                                 <div class="row my-5">
-                                    <h5 class="card-title fw-semibold">Frost Car Unit Details - Edit Model  <?php echo $model; ?></h5>
+                                    <h5 class="card-title fw-semibold">Frost Car Unit Details - Edit Model <?php echo $model; ?></h5>
                                     <hr class="p-0">
 
 
                                     <div class="col-lg-6">
+
+                                        <div class="mb-2">
+                                            <label for="company_name" class="form-label fw-semibold">Company Name</label>
+                                            <select class="w-100 inputDesign" name="company_name" id="company_name">
+                                                <option selected value="<?php if ($company_name) {
+                                                                            echo $company_name;
+                                                                        } ?>"><?php if ($company_name) {
+                                                                                    echo $company_name;
+                                                                                } else {
+                                                                                    echo 'Select Company Name';
+                                                                                } ?></option>
+                                                <?php
+                                                $res = mysqli_query($conn, "SELECT importer_id,company_name FROM importer_details ORDER BY company_name DESC");
+                                                while ($row = mysqli_fetch_assoc($res)) {
+                                                    echo "<option value=" . $row['company_name'] . ">" . $row['company_name'] . "</option>";
+                                                }
+                                                ?>
+
+                                            </select>
+                                            <?php if (isset($_SESSION['empty_company_name'])) {
+                                                echo '
+                                                <p class="text-danger">' . $_SESSION['empty_company_name'] . '</p>';
+                                                unset($_SESSION['empty_company_name']);
+                                            }
+                                            ?>
+                                        </div>
 
                                         <div class="mb-2">
                                             <label for="make" class="form-label fw-semibold">Make</label>
@@ -573,7 +613,7 @@ include "./includes/sidebar.php";
                                         </div>
                                         <div class="mb-2">
                                             <label for="left_S_Image" class="form-label fw-semibold">Left Side Image</label>
-                                            <input type="file" class="w-100 inputDesign"  id="left_S_Image" name="left_S_Image">
+                                            <input type="file" class="w-100 inputDesign" id="left_S_Image" name="left_S_Image">
                                             <img height="40px" width="40px" src="media/car_images/<?php echo $left_S_Image; ?> " alt="media/car_images/<?php echo $left_S_Image; ?>">
                                             <?php if (isset($_SESSION['empty_thermostat'])) {
                                                 echo '

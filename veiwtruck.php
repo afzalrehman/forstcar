@@ -94,7 +94,7 @@ include "./includes/sidebar.php";
 
 
                                 $sql = "SELECT * FROM `unit_details`
-                                    INNER JOIN `importer_details` ON unit_details.model = importer_details.model";
+                                    INNER JOIN `importer_details` ON unit_details.company_name = importer_details.company_name";
 
                                 $result = $conn->query($sql);
                                 $no = 1;

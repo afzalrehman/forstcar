@@ -6,6 +6,7 @@ include "./config/config.php";
 
 if (isset($_POST['add_truck_btn'])) {
     $make = get_safe_value($conn, $_POST['make']);
+    $company_name = get_safe_value($conn, $_POST['company_name']);
     $model = get_safe_value($conn, $_POST['model']);
     $wheelbase = get_safe_value($conn, $_POST['wheelbase']);
     $vin = get_safe_value($conn, $_POST['vin']);
@@ -46,10 +47,13 @@ if (isset($_POST['add_truck_btn'])) {
     $other = get_safe_value($conn, $_POST['other']);
 
     if (
-        empty($model)
+        empty($model) || empty($company_name)
     ) {
         if (empty($model)) {
             $_SESSION['empty_model'] = "Please fill in the model.";
+        }
+        if (empty($company_name)) {
+            $_SESSION['empty_company_name'] = "Please fill in the Company Name.";
         }
         header("location:add-truck.php");
         exit();
@@ -73,13 +77,13 @@ if (isset($_POST['add_truck_btn'])) {
             $right_S_Image = rand(111111111, 999999999) . '_' . $_FILES['right_S_Image']['name'];
             move_uploaded_file($_FILES['right_S_Image']['tmp_name'], 'media/car_images/' . $right_S_Image);
 
-            $sql = "INSERT INTO unit_details(`year`, `make`, `model`, `wheelbase`, `vin`, `contact_Name`, `contact_Num`, `fc_Unit_Cost`, 
+            $sql = "INSERT INTO unit_details(`year`, `company_name`, `make`, `model`, `wheelbase`, `vin`, `contact_Name`, `contact_Num`, `fc_Unit_Cost`, 
         `fc_Body`, `body_Weight`, `fc_Model`, `exterior_Dimension`, `compressor`, `comp_Serial`, `voltage`, `sound_Decibel`, `current_FLA`, 
         `refrigerant`, `condenser`, `solenoid`, `condenser_Fan`, `interior_Lights`, `control_Panel`, `circuit_Breaker`, `electric_Contactor`, 
         `part`, `eutectic_Plate`, `expansion_Valve`, `recovery_Tank`, `pressure_Control`, `sight_Glass`, `filter_Drier`, `thermostat`, `misc`, `front_S_Image`, 
         `back_S_Image`, `left_S_Image`, `right_S_Image`, `air_Curtains`, `back_Camera`, `body_Graphic_Warp`, `add_Unit_Carrier`, `hand_Truck_Stand`, `other`, 
         `added_on`, `added_by`)
-        VALUES (NOW(), '$make', '$model', '$wheelbase', '$vin', '$contact_Name', '$contact_Num', 
+        VALUES (NOW(), '$company_name', '$make', '$model', '$wheelbase', '$vin', '$contact_Name', '$contact_Num', 
         '$fc_Unit_Cost', '$fc_Body', '$body_Weight', '$fc_Model', '$exterior_Dimension', '$compressor', '$comp_Serial',
         '$voltage', '$sound_Decibel', '$current_FLA', '$refrigerant', '$condenser', '$solenoid', '$condenser_Fan', '$interior_Lights', 
         '$control_Panel', '$circuit_Breaker', '$electric_Contactor', '$part', '$eutectic_Plate', '$expansion_Valve', '$recovery_Tank',
