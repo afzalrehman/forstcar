@@ -36,6 +36,7 @@ include "./includes/sidebar.php";
                                     <!-- <th>Action<i class="fa-solid fa-arrow-down px-2"></i></th> -->
                                     <th>S/NO<i class="fa-solid fa-arrow-down px-2"></i></th>
                                     <th>Year<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                    <th>Company Name<i class="fa-solid fa-arrow-down px-2"></i></th>
                                     <th>Make<i class="fa-solid fa-arrow-down px-2"></i></th>
                                     <th>Model<i class="fa-solid fa-arrow-down px-2"></i></th>
                                     <!-- <th>front_S_Image<i class="fa-solid fa-arrow-down px-2"></i></th>
@@ -109,6 +110,7 @@ include "./includes/sidebar.php";
                                             </td> -->
                                             <td class="font"><?= $no++; ?></td>
                                             <td><?= $item['year'] ?></td>
+                                            <td><?= $item['company_name'] ?></td>
                                             <td><?= $item['make'] ?></td>
                                             <td class="searchable"><?= $item['company_name'] ?></td>
                                             <td class="searchable"><?= $item['model'] ?></td>
@@ -118,7 +120,6 @@ include "./includes/sidebar.php";
                                             <td><img height="50" width="50" src="./media/car_images/ echo  $item['right_S_Image']; ?>"></td> -->
                                             <td><?= $item['wheelbase'] ?></td>
                                             <td><?= $item['vin'] ?></td>
-                                            <td><?= $item['contact_Name'] ?></td>
                                             <td><?= $item['contact_Num'] ?></td>
                                             <!-- <td> $item['fc_Unit_Cost'] ?></td>
                                             <td> $item['fc_Body'] ?></td>
