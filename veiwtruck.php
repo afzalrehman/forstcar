@@ -110,6 +110,7 @@ include "./includes/sidebar.php";
                                             <td class="font"><?= $no++; ?></td>
                                             <td><?= $item['year'] ?></td>
                                             <td><?= $item['make'] ?></td>
+                                            <td class="searchable"><?= $item['company_name'] ?></td>
                                             <td class="searchable"><?= $item['model'] ?></td>
                                             <!-- <td><img height="50" width="50" src="./media/car_images/ echo  $item['front_S_Image']; ?>"></td>
                                             <td><img height="50" width="50" src="./media/car_images/ echo  $item['back_S_Image']; ?>"></td>
@@ -147,7 +148,7 @@ include "./includes/sidebar.php";
                                             <td> $item['thermostat'] ?></td>
                                             <td> $item['misc'] ?></td> -->
                                             <td class="text-center">
-                                                <a href="vewimore.php?model=<?= $item['model'] ?>"><i class="fa-solid fa-eye text-primary   fs-6"></i></a>
+                                                <a href="vewimore.php?company_name=<?= $item['company_name'] ?>"><i class="fa-solid fa-eye text-primary   fs-6"></i></a>
                                             </td>
                                             <td><?= $item['added_on'] ?></td>
                                             <td><?= $item['added_by'] ?></td>

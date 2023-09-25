@@ -32,15 +32,6 @@ include "./includes/sidebar.php";
                                     <div class="col-lg-6">
 
                                         <div class="in">
-                                            <input type="text" name="model" value="<?= $data['model']; ?>" class=" inputDesign w-100 py-2 mt-3" placeholder="Model">
-                                            <?php if (isset($_SESSION['empty_model'])) {
-                                                echo '
-                                        <p class="text-danger">' . $_SESSION['empty_model'] . '</p>';
-                                                unset($_SESSION['empty_model']);
-                                            }
-                                            ?>
-                                        </div>
-                                        <div class="in">
                                             <input type="hidden" name="edit" value="<?= $data['importer_id']; ?> ">
                                             <input type="text" name="company_name" value="<?= $data['company_name']; ?>" class=" inputDesign w-100 py-2 mt-3" placeholder="Company Name">
                                             <?php if (isset($_SESSION['empty_company_name'])) {

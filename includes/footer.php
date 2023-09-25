@@ -4,7 +4,7 @@
         <div class="d-flex align-items-center justify-content-between small">
             <div class="text-muted">Copyright &copy; 2023 </div>
             <div>
-                <div class="text-muted">Made by Abu Hammad &amp; Afzal</div>
+                <div class="text-muted">Forst Car Usa</div>
             </div>
         </div>
     </div>

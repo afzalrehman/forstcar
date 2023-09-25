@@ -94,10 +94,8 @@ include "./includes/sidebar.php";
                                         <th>Address <i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>City <i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>State <i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <th>Zipe Code<i class="fa-solid fa-arrow-down px-2"></i>
-                                        </th>
-                                        <th>Tele Phone<i class="fa-solid fa-arrow-down px-2"></i>
-                                        </th>
+                                        <th>Zipe Code<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                        <th>Tele Phone<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>Email<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>Direct <i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>Port Of Entry <i class="fa-solid fa-arrow-down px-2"></i></th>
@@ -106,6 +104,10 @@ include "./includes/sidebar.php";
                                         <th>Misc <i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>Total Cost <i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>Custom Frieght <i class="fa-solid fa-arrow-down px-2"></i></th>
+                                        <!-- unit_details -->
+
+
+
                                         <th>Year<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>Make<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>Model<i class="fa-solid fa-arrow-down px-2"></i></th>
@@ -116,7 +118,7 @@ include "./includes/sidebar.php";
                                         <th>Wheelbase<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>Vin #<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>Contact Name<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <th>Contact #<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                        <th>Contact # Number<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>Frost Car unit Cost<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>FC Body<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>Body Weight<i class="fa-solid fa-arrow-down px-2"></i></th>
@@ -144,8 +146,12 @@ include "./includes/sidebar.php";
                                         <th>Filter Drier<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>Thermostat<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>Misc<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <th>View more<i class="fa-solid fa-arrow-down px-2"></i></th>
-
+                                        <th>Air Curtains<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                        <th>Back Camera<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                        <th>Body Graphic Warp<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                        <th>Add Unit Carrier<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                        <th>Hand Truck Stand<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                        <th>Other<i class="fa-solid fa-arrow-down px-2"></i></th>
 
 
                                     </tr>
@@ -160,10 +166,8 @@ include "./includes/sidebar.php";
                                     //     // facth mysqli_fetch
                                     //     foreach ($category as $item) {
 
-
                                     $sql = "SELECT * FROM `unit_details`
-                                    INNER JOIN `importer_details` ON unit_details.model = importer_details.model";
-
+                                    INNER JOIN `importer_details` ON unit_details.company_name = importer_details.company_name";
                                     $result = $conn->query($sql);
                                     $no = 1;
                                     if ($result->num_rows > 0) {
@@ -172,9 +176,10 @@ include "./includes/sidebar.php";
                                     ?>
                                             <tr>
 
+
+
                                                 <td class="font"><?= $no++; ?></td>
-                                                <td class="searchable"><?= $item['company_name']?></td>
-                                                <td class="searchable"><?= $item['model'] ?></td>
+                                                <td class="searchable"><?= $item['company_name'] ?></td>
                                                 <td><?= $item['company_contact'] ?></td>
                                                 <td><?= $item['company_address'] ?></td>
                                                 <td><?= $item['company_city'] ?></td>
@@ -189,12 +194,16 @@ include "./includes/sidebar.php";
                                                 <td><?= $item['company_misc'] ?></td>
                                                 <td><?= $item['total_cost'] ?></td>
                                                 <td><?= $item['custom_frieght'] ?></td>
+                                                <!-- unit_details -->
+
+
                                                 <td><?= $item['year'] ?></td>
                                                 <td><?= $item['make'] ?></td>
-                                                <td><img height="50" width="50" src="./media/car_images/ echo  $item['front_S_Image']; ?>"></td>
-                                                <td><img height="50" width="50" src="./media/car_images/ echo  $item['back_S_Image']; ?>"></td>
-                                                <td><img height="50" width="50" src="./media/car_images/ echo  $item['left_S_Image']; ?>"></td>
-                                                <td><img height="50" width="50" src="./media/car_images/ echo  $item['right_S_Image']; ?>"></td>
+                                                <td class="searchable"><?= $item['model'] ?></td>
+                                                <td><img height="50" width="50" src="./media/car_images/<?= $item['front_S_Image']; ?>"></td>
+                                                <td><img height="50" width="50" src="./media/car_images/<?= $item['back_S_Image']; ?>"></td>
+                                                <td><img height="50" width="50" src="./media/car_images/<?= $item['left_S_Image']; ?>"></td>
+                                                <td><img height="50" width="50" src="./media/car_images/<?= $item['right_S_Image']; ?>"></td>
                                                 <td><?= $item['wheelbase'] ?></td>
                                                 <td><?= $item['vin'] ?></td>
                                                 <td><?= $item['contact_Name'] ?></td>
@@ -226,6 +235,12 @@ include "./includes/sidebar.php";
                                                 <td><?= $item['filter_Drier'] ?></td>
                                                 <td><?= $item['thermostat'] ?></td>
                                                 <td><?= $item['misc'] ?></td>
+                                                <td><?= $item['air_Curtains'] ?></td>
+                                                <td><?= $item['back_Camera'] ?></td>
+                                                <td><?= $item['body_Graphic_Warp'] ?></td>
+                                                <td><?= $item['add_Unit_Carrier'] ?></td>
+                                                <td><?= $item['hand_Truck_Stand'] ?></td>
+                                                <td><?= $item['other'] ?></td>
 
                                             </tr>
 

@@ -544,13 +544,14 @@ include "./includes/sidebar.php";
                                         <th>Action<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>S/NO<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>Year<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                        <th>Company Name<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>Make<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>Model<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>front_S_Image<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>back_S_Image<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>left_S_Image<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>right_S_Image<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <th>Wheelbase<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                        <!-- <th>Wheelbase<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>Vin #<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>Contact Name<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>Contact #<i class="fa-solid fa-arrow-down px-2"></i></th>
@@ -580,8 +581,7 @@ include "./includes/sidebar.php";
                                         <th>Sight Glass<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>Filter Drier<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>Thermostat<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <th>Misc<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <th>View more<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                        <th>Misc<i class="fa-solid fa-arrow-down px-2"></i></th> -->
                                         <th>Added ON<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>Added BY<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>Updated ON<i class="fa-solid fa-arrow-down px-2"></i></th>
@@ -617,13 +617,14 @@ include "./includes/sidebar.php";
                                                 </td>
                                                 <td class="font"><?= $no++; ?></td>
                                                 <td><?= $item['year'] ?></td>
+                                                <td><?= $item['company_name'] ?></td>
                                                 <td><?= $item['make'] ?></td>
                                                 <td class="searchable"><?= $item['model'] ?></td>
                                                 <td><img height="50" width="50" src="./media/car_images/<?= $item['front_S_Image']; ?>"></td>
                                                 <td><img height="50" width="50" src="./media/car_images/<?= $item['back_S_Image']; ?>"></td>
                                                 <td><img height="50" width="50" src="./media/car_images/<?= $item['left_S_Image']; ?>"></td>
                                                 <td><img height="50" width="50" src="./media/car_images/<?= $item['right_S_Image']; ?>"></td>
-                                                <td><?= $item['wheelbase'] ?></td>
+                                                <!-- <td><?= $item['wheelbase'] ?></td>
                                                 <td><?= $item['vin'] ?></td>
                                                 <td><?= $item['contact_Name'] ?></td>
                                                 <td><?= $item['contact_Num'] ?></td>
@@ -653,7 +654,7 @@ include "./includes/sidebar.php";
                                                 <td><?= $item['sight_Glass'] ?></td>
                                                 <td><?= $item['filter_Drier'] ?></td>
                                                 <td><?= $item['thermostat'] ?></td>
-                                                <td><?= $item['misc'] ?></td>
+                                                <td><?= $item['misc'] ?></td> -->
                                                 <!-- <td class="text-center">
                                                     <a href="vewimore.php?model=<?= $item['model'] ?>"><i class="fa-solid fa-eye text-primary   fs-6"></i></a>
                                                 </td> -->

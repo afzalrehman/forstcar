@@ -227,20 +227,16 @@ include "./includes/sidebar.php";
                                         <div class="mb-2">
                                             <label for="company_name" class="form-label fw-semibold">Company Name</label>
                                             <select class="w-100 inputDesign" name="company_name" id="company_name">
-                                                <option selected value="<?php if ($company_name) {
-                                                                            echo $company_name;
-                                                                        } ?>"><?php if ($company_name) {
-                                                                                    echo $company_name;
-                                                                                } else {
-                                                                                    echo 'Select Company Name';
-                                                                                } ?></option>
                                                 <?php
                                                 $res = mysqli_query($conn, "SELECT importer_id,company_name FROM importer_details ORDER BY company_name DESC");
                                                 while ($row = mysqli_fetch_assoc($res)) {
-                                                    echo "<option value=" . $row['company_name'] . ">" . $row['company_name'] . "</option>";
+                                                    if ($row['importer_id'] == $company_name) {
+                                                        echo "<option value=" . $company_name . ">" . $company_name . "</option>";
+                                                    } else {
+                                                        echo "<option value=" . $row['company_name'] . ">" . $row['company_name'] . "</option>";
+                                                    }
                                                 }
                                                 ?>
-
                                             </select>
                                             <?php if (isset($_SESSION['empty_company_name'])) {
                                                 echo '

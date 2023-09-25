@@ -60,17 +60,21 @@ include "./includes/sidebar.php";
 
 
 
-if (isset($_GET['model'])) {
-    $model_num = $_GET['model'];
+if (isset($_GET['company_name'])) {
+    $company_name = $_GET['company_name'];
 
     // Query the "unit_details" database
-    $select_modal = modal_chack("unit_details", "$model_num");
+    // $select_modal = modal_chack("unit_details", "$company_name");
+    $select_modal = "SELECT * FROM unit_details WHERE company_name = '$company_name'";
+    $importer_result = mysqli_query($conn, $select_modal);
 
-    if (mysqli_num_rows($select_modal) > 0) {
-        $fach = mysqli_fetch_array($select_modal);
+    if (mysqli_num_rows($importer_result) > 0) {
+        $fach = mysqli_fetch_array($importer_result);
 
         // Now, query the "importer_details" database
-        $importer_query = "SELECT * FROM importer_details WHERE model = '$model_num'";
+        $importer_query = "SELECT * FROM importer_details WHERE company_name = '$company_name'";
+        // $importer_query = modal_chack("importer_details", "$company_name");
+
         $importer_result = mysqli_query($conn, $importer_query);
 
         if (mysqli_num_rows($importer_result) > 0) {
@@ -126,7 +130,6 @@ if (isset($_GET['model'])) {
 
             // $importer_data for "importer_details" data
             $importer_id = $importer_data['importer_id'];
-            $model = $importer_data['model'];
             $company_name = $importer_data['company_name'];
             $company_contact = $importer_data['company_contact'];
             $company_address = $importer_data['company_address'];
@@ -172,14 +175,6 @@ if (isset($_GET['model'])) {
         </div>
         <div class="row px-5">
             <div class="col-lg-4">
-                <div class="mb-4">
-                    <label for="" class="fw-bold text-muted">Model:</label>
-                    <div class=" pt-2">
-                        <p><?= $model ?><?php if (empty($model)) {
-                                            echo "------";
-                                        } ?></p>
-                    </div>
-                </div>
                 <div class="mb-4">
                     <label for="" class="fw-bold text-muted">Company Name:</label>
                     <div class=" pt-2">
