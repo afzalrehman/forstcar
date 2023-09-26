@@ -195,11 +195,6 @@ if (isset($_POST['submit'])) {
 }
 
 
-
-
-
-
-
 include "./includes/header.php";
 include "./includes/serchform.php";
 include "./includes/navbar.php";
@@ -226,7 +221,7 @@ include "./includes/sidebar.php";
 
                                         <div class="mb-2">
                                             <label for="company_name" class="form-label fw-semibold">Company Name</label>
-                                            <select class="w-100 inputDesign" name="company_name" id="company_name">
+                                            <!-- <select class="w-100 inputDesign" name="company_name" id="company_name">
                                                 <?php
                                                 $res = mysqli_query($conn, "SELECT importer_id,company_name FROM importer_details ORDER BY company_name DESC");
                                                 while ($row = mysqli_fetch_assoc($res)) {
@@ -234,11 +229,22 @@ include "./includes/sidebar.php";
                                                         echo "<option value=" . $company_name . ">" . $company_name . "</option>";
                                                     } else {
                                                         echo '<option value="' . htmlspecialchars($row['company_name']) . '">' . htmlspecialchars($row['company_name']) . '</option>';
-
                                                     }
                                                 }
                                                 ?>
+                                            </select> -->
+
+                                            <select class="w-100 inputDesign" name="company_name" id="company_name">
+                                                <option value="">Select Company Name</option>
+                                                <?php
+                                                $res = mysqli_query($conn, "SELECT importer_id, company_name FROM importer_details ORDER BY company_name DESC");
+                                                while ($row = mysqli_fetch_assoc($res)) {
+                                                    $selected = ($row['company_name'] == $company_name) ? 'selected' : '';
+                                                    echo '<option value="' . htmlspecialchars($row['company_name']) . '" ' . $selected . '>' . htmlspecialchars($row['company_name']) . '</option>';
+                                                }
+                                                ?>
                                             </select>
+
                                             <?php if (isset($_SESSION['empty_company_name'])) {
                                                 echo '
                                                 <p class="text-danger">' . $_SESSION['empty_company_name'] . '</p>';
