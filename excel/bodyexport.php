@@ -15,7 +15,7 @@ if (!isset($_SESSION['user_fullname'])) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="Description" content="Enter your description here" />
 
-    <title>Title</title>
+    <title>Usa Frost Car</title>
 
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <!-- CSS -->

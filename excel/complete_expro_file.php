@@ -15,7 +15,7 @@ if (!isset($_SESSION['user_fullname'])) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="Description" content="Enter your description here" />
 
-    <title>Title</title>
+    <title>Usa Frost Car</title>
 
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <!-- CSS -->
@@ -60,7 +60,7 @@ if (!isset($_SESSION['user_fullname'])) {
                             $html = '<table class="contain-table">
             <thead>
                 <tr>
-                    <th class="fs-4" colspan="17">USA IMPORTANT Details</th>
+                    <th class="fs-4" colspan="56">USA FROST CAR DETELES</th>
                 </tr>
                 <tr>
 
@@ -87,10 +87,6 @@ if (!isset($_SESSION['user_fullname'])) {
                 <th>Year<i class="fa-solid fa-arrow-down px-2"></i></th>
                 <th>Make<i class="fa-solid fa-arrow-down px-2"></i></th>
                 <th>Model<i class="fa-solid fa-arrow-down px-2"></i></th>
-                <th>front_S_Image<i class="fa-solid fa-arrow-down px-2"></i></th>
-                <th>back_S_Image<i class="fa-solid fa-arrow-down px-2"></i></th>
-                <th>left_S_Image<i class="fa-solid fa-arrow-down px-2"></i></th>
-                <th>right_S_Image<i class="fa-solid fa-arrow-down px-2"></i></th>
                 <th>Wheelbase<i class="fa-solid fa-arrow-down px-2"></i></th>
                 <th>Vin #<i class="fa-solid fa-arrow-down px-2"></i></th>
                 <th>Contact Name<i class="fa-solid fa-arrow-down px-2"></i></th>
@@ -127,7 +123,7 @@ if (!isset($_SESSION['user_fullname'])) {
                 <th>Body Graphic Warp<i class="fa-solid fa-arrow-down px-2"></i></th>
                 <th>Add Unit Carrier<i class="fa-solid fa-arrow-down px-2"></i></th>
                 <th>Hand Truck Stand<i class="fa-solid fa-arrow-down px-2"></i></th>
-                <th>Other<i class="fa-solid fa-arrow-down px-2"></i></th>
+                <th class="last-th">Other<i class="fa-solid fa-arrow-down px-2"></i></th>
 
 
             </tr>
@@ -203,7 +199,7 @@ if (!isset($_SESSION['user_fullname'])) {
                                     $html .= '</tr>';
                                 }
                             } else {
-                                $html .= '<tr><td class="text-danger" colspan="18">Data not found</td></tr>';
+                                $html .= '<tr><td class="text-danger" colspan="57">Data not found</td></tr>';
                             }
 
                             // Close the HTML table

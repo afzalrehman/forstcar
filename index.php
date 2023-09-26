@@ -70,11 +70,11 @@ include "./includes/sidebar.php";
                 <div class="card">
                     <div class="row">
                         <div class="col-lg-3 col-md-3 text-start py-3 px-4">
-                            <p class="font student">Frost Car Usa Details</p>
+                            <p class="font student">Usa Frost Car  Details</p>
                         </div>
                         <div class="col-lg-9 col-md-9 py-3 ">
                             <div class="btn-edit-delete1 text-end px-1">
-                                <a href="./excel/bodyexport.php" id="export">
+                                <a href="./excel/complete_expro_file.php" id="export">
                                     <span class="fa-solid fa-cloud-arrow-down export export-btn"> </span>
                                 </a>
                             </div>
@@ -160,12 +160,6 @@ include "./includes/sidebar.php";
                                 <tbody id="data-table">
 
                                     <?php
-                                    // $category = getAll("unit_details");
-                                    // if (mysqli_num_rows($category) > 0) {
-                                    //     $no = 1;
-                                    //     // facth mysqli_fetch
-                                    //     foreach ($category as $item) {
-
                                     $sql = "SELECT * FROM `unit_details`
                                     INNER JOIN `importer_details` ON unit_details.company_name = importer_details.company_name";
                                     $result = $conn->query($sql);

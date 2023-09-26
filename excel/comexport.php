@@ -15,7 +15,7 @@ if (!isset($_SESSION['user_fullname'])) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="Description" content="Enter your description here" />
 
-    <title>Title</title>
+    <title>Usa Frost Car</title>
 
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <!-- CSS -->
@@ -62,7 +62,6 @@ if (!isset($_SESSION['user_fullname'])) {
                 </tr>
                 <tr>
                     <th>S/no</th>
-                    <th>Model</th>
                     <th>Company Name</th>
                     <th>Contact number</th>
                     <th>Address </th>
@@ -92,7 +91,6 @@ if (!isset($_SESSION['user_fullname'])) {
                                 while ($item = mysqli_fetch_assoc($result)) {
                                     $html .= '<tr>';
                                     $html .= '<td class="font">' . $no++ . '</td>';
-                                    $html .= '<td>' . $item['model'] . '</td>';
                                     $html .= '<td>' . $item['company_name'] . '</td>';
                                     $html .= '<td>' . $item['company_contact'] . '</td>';
                                     $html .= '<td>' . $item['company_address'] . '</td>';
