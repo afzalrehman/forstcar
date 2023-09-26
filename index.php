@@ -1,11 +1,13 @@
 <?php
 session_start();
+
 include './config/config.php';
 require './function/function.inc.php';
 include "./includes/header.php";
 include "./includes/searchbar.php";
 include "./includes/navbar.php";
 include "./includes/sidebar.php";
+
 ?>
 <div class="container-fluid px-4">
     <div class="card my-3 px-3 border-0 shadow">
@@ -70,7 +72,7 @@ include "./includes/sidebar.php";
                 <div class="card">
                     <div class="row">
                         <div class="col-lg-3 col-md-3 text-start py-3 px-4">
-                            <p class="font student">Usa Frost Car  Details</p>
+                            <p class="font student">Usa Frost Car Details</p>
                         </div>
                         <div class="col-lg-9 col-md-9 py-3 ">
                             <div class="btn-edit-delete1 text-end px-1">
