@@ -147,7 +147,7 @@ include "./includes/sidebar.php";
                                             <td> $item['thermostat'] ?></td>
                                             <td> $item['misc'] ?></td> -->
                                             <td class="text-center">
-                                                <a href="vewimore.php?company_name=<?= $item['company_name'] ?>"><i class="fa-solid fa-eye text-primary   fs-6"></i></a>
+                                                <a href="viewmore.php?id=<?= $item['id'] ?>"><i class="fa-solid fa-eye text-primary fs-6"></i></a>
                                             </td>
                                             <td><?= $item['added_on'] ?></td>
                                             <td><?= $item['added_by'] ?></td>

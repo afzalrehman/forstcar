@@ -31,7 +31,7 @@ include "./includes/sidebar.php";
 
 
                                 <div class="in">
-                                    <input type="text" name="company_contact" value="<?php echo isset($_POST['company_contact']) ? htmlspecialchars($_POST['company_contact']) : ''; ?>" class=" inputDesign w-100 py-2 mt-3" placeholder="Contact Name ">
+                                    <input type="text" name="company_contact" value="<?php echo isset($_POST['company_contact']) ? htmlspecialchars($_POST['company_contact']) : ''; ?>" class=" inputDesign w-100 py-2 mt-3" placeholder="Contact Number ">
                                     <?php if (isset($_SESSION['empty_company_contact'])) {
                                         echo '
                                         <p class="text-danger">' . $_SESSION['empty_company_contact'] . '</p>';

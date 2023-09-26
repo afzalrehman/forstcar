@@ -26,33 +26,51 @@ if (isset($_POST['add_company_btn'])) {
 
     $_SESSION['company_name'] = $company_name;
     if (
-        empty($company_name)
+        empty($company_name) || empty($company_email)
     ) {
         if (empty($company_name)) {
             $_SESSION['empty_company_name'] = "Please fill in the Company Name.";
         }
+        if (empty($company_email)) {
+            $_SESSION['empty_company_email'] = "Please fill in the Company Email.";
+        }
         header("location:company.php");
         exit();
     } else {
-        $sql = "INSERT INTO importer_details (company_name, company_contact, company_address, company_city, company_state, company_zipcode, 
+
+        $res_model = mysqli_query($conn, "SELECT * FROM importer_details WHERE `company_name` = '$company_name' AND importer_id <> '$id'");
+        $check_model = mysqli_num_rows($res_model);
+        if ($check_model > 0) {
+            redirectdelete("company.php", "Company Name Already Exit");
+
+            exit();
+        }
+        $res_model = mysqli_query($conn, "SELECT * FROM importer_details WHERE `company_email` = '$company_email' AND importer_id <> '$id'");
+        $check_model = mysqli_num_rows($res_model);
+        if ($check_model > 0) {
+            redirectdelete("company.php", "Company Email Already Exit");
+
+            exit();
+        } else {
+            $sql = "INSERT INTO importer_details (company_name, company_contact, company_address, company_city, company_state, company_zipcode, 
         company_telephone, company_email, company_direct, company_port_of_entry, company_vessel_detail, company_trucking, company_misc, total_cost, 
         custom_frieght , added_on ,added_by) VALUES ('$company_name', '$company_contact', '$company_address', '$company_city', '$company_state', '$company_zipcode', 
         '$company_telephone', '$company_email', '$company_direct', '$company_port', '$company_vessel', '$company_trucking', '$company_misc',
          '$total_cost', '$custom_freight' , NOW() , '{$_SESSION['user_fullname']}')";
 
-        $inset_qury_run = mysqli_query($conn, $sql);
+            $inset_qury_run = mysqli_query($conn, $sql);
 
-        if ($inset_qury_run) {
-            $_SESSION['company_name'] = [""];
-            redirect("company.php", "Data Insert Successfully!");
-            exit();
-            // header("location:company.php");
-        } else {
-            echo "error ";
+            if ($inset_qury_run) {
+                $_SESSION['company_name'] = [""];
+                redirect("company.php", "Data Insert Successfully!");
+                exit();
+                // header("location:company.php");
+            } else {
+                echo "error ";
+            }
         }
     }
 }
-
 
 
 
@@ -99,28 +117,37 @@ if (isset($_POST['update_company_btn'])) {
         header("location:company.php");
         exit();
     } else {
-        // $res_model = mysqli_query($conn, "SELECT * FROM importer_details WHERE importer_id <> '$id'");
-        // $check_model = mysqli_num_rows($res_model);
-        // if ($check_model > 0) {
-        //     redirectdelete("company.php", "Model Already Exit");
-        //     exit();
-        // } else {
 
-        $update = "UPDATE importer_details SET company_name='$company_name',
+        $res_model = mysqli_query($conn, "SELECT * FROM importer_details WHERE `company_name` = '$company_name' AND importer_id <> '$id'");
+        $check_model = mysqli_num_rows($res_model);
+        if ($check_model > 0) {
+            redirectdelete("company.php", "Company Name Already Exit");
+
+            exit();
+        }
+        $res_model = mysqli_query($conn, "SELECT * FROM importer_details WHERE `company_email` = '$company_email' AND importer_id <> '$id'");
+        $check_model = mysqli_num_rows($res_model);
+        if ($check_model > 0) {
+            redirectdelete("company.php", "Company Email Already Exit");
+
+            exit();
+        } else {
+
+            $update = "UPDATE importer_details SET company_name='$company_name',
         `company_contact`='$company_contact',`company_address`='$company_address',`company_city`='$company_city',
         `company_state`='$company_state',`company_zipcode`='$company_zipcode',`company_telephone`='$company_telephone',
         `company_email`='$company_email',`company_direct`='$company_direct',`company_port_of_entry`='$company_port',
         `company_vessel_detail`='$company_vessel',`company_trucking`='$company_trucking',`company_misc`='$company_misc',
         `total_cost`='$total_cost',`custom_frieght`='$custom_freight',updated_on=NOW() , updated_by='{$_SESSION['user_fullname']}'
-        WHERE importer_id='$id' ";
+        WHERE importer_id='$id'";
 
-        $qury = mysqli_query($conn, $update);
-        if ($qury) {
-            redirect("company.php", "Data Update Successfully!");
-            exit();
-        } else {
-            redirectdelete("company.php", "Data error!");
+            $qury = mysqli_query($conn, $update);
+            if ($qury) {
+                redirect("company.php", "Data Update Successfully!");
+                exit();
+            } else {
+                redirectdelete("company.php", "Data error!");
+            }
         }
     }
 }
-// }
