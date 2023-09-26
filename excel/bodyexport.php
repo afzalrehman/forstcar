@@ -17,15 +17,6 @@ if (!isset($_SESSION['user_fullname'])) {
 
     <title>Usa Frost Car</title>
 
-    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    <!-- CSS -->
-    <!-- --------------google font----------- -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-
-
     <style>
         table {
             border-collapse: collapse;
@@ -174,7 +165,7 @@ if (!isset($_SESSION['user_fullname'])) {
 
                             // Set the appropriate headers for Excel download
                             header('Content-Type: application/vnd.ms-excel');
-                            header('Content-Disposition: attachment; filename=usercompany.xls');
+                            header('Content-Disposition: attachment; filename=FrostCarUsa.xls');
 
                             // Output the HTML content
                             echo $html;
