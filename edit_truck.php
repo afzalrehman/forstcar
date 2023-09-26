@@ -233,7 +233,8 @@ include "./includes/sidebar.php";
                                                     if ($row['importer_id'] == $company_name) {
                                                         echo "<option value=" . $company_name . ">" . $company_name . "</option>";
                                                     } else {
-                                                        echo "<option value=" . $row['company_name'] . ">" . $row['company_name'] . "</option>";
+                                                        echo '<option value="' . htmlspecialchars($row['company_name']) . '">' . htmlspecialchars($row['company_name']) . '</option>';
+
                                                     }
                                                 }
                                                 ?>
