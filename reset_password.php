@@ -1,6 +1,4 @@
 <?php
-
-
 session_start();
 ob_start();
 
@@ -10,23 +8,18 @@ use PHPMailer\PHPMailer\Exception;
 require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
-
 include './config/config.php';
 require './function/function.inc.php';
 $noUpdated = false;
 $noFoundToken = false;
-
 if (isset($_POST['submit'])) {
     $newPassword = mysqli_real_escape_string($conn, $_POST['user_password']);
-
     if (empty($newPassword)) {
         $_SESSION['empty_user_password'] = "Please fill in the Password.";
     }
-
     if (strlen($newPassword) < 8) {
         $_SESSION['empty_user_password'] = "Password should be at least 8 characters long.";
     } else {
-
         $pass = password_hash($newPassword, PASSWORD_BCRYPT);
         if (isset($_GET['token'])) {
             $token = $_GET['token'];
@@ -46,10 +39,6 @@ if (isset($_POST['submit'])) {
         }
     }
 }
-
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -85,9 +74,7 @@ if (isset($_POST['submit'])) {
                                         Reset Password</p>
                                     <span class="border-bottom w-100 position-absolute start-50 z-index-5 translate-middle"></span>
                                 </div>
-
                                 <form action="" method="POST">
-
                                     <?php
                                     if ($noUpdated == true) {
                                         echo '
@@ -104,8 +91,6 @@ if (isset($_POST['submit'])) {
                                     </div>';
                                     }
                                     ?>
-
-
                                     <div class="mb-4">
                                         <label for="" class="form-label">New Password</label>
                                         <input type="password" class="form-control" id="" name="user_password" placeholder="New Password" min="8">
@@ -125,19 +110,9 @@ if (isset($_POST['submit'])) {
             </div>
         </div>
     </div>
-
-
-
-
-
-
-
-
     <!-- Bootstrap SJ -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
-
-
 </body>
 
 </html>

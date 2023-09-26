@@ -1,10 +1,7 @@
 <?php
 include './config/config.php';
-
 require './function/function.inc.php';
 session_start();
-
-
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -12,24 +9,17 @@ use PHPMailer\PHPMailer\Exception;
 require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
-
 $succses = array();
 $warning = array();
-
 if (isset($_POST['submit'])) {
     $user_email = mysqli_real_escape_string($conn, $_POST['user_email']);
-
     $emailquery = "SELECT * FROM `admin_users` WHERE `user_email` = '$user_email' ";
     $query = mysqli_query($conn, $emailquery);
-
     $emailcount = mysqli_num_rows($query);
     if ($emailcount) {
-
         $userdata = mysqli_fetch_array($query);
-
         $user_fullname = $userdata['user_fullname'];
         $token = $userdata['token'];
-
         $mail = new PHPMailer(true);
         try {
             $mail->SMTPDebug = 0;
@@ -60,9 +50,6 @@ if (isset($_POST['submit'])) {
         $warning['warning'] = "No Email Found Please Fill Properly Email";
     }
 }
-// }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -82,7 +69,6 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
-
     <!--  Body Wrapper -->
     <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed">
         <div class="position-relative overflow-hidden radial-gradient min-vh-100 d-flex align-items-center justify-content-center">
@@ -100,9 +86,7 @@ if (isset($_POST['submit'])) {
                                     <span class="border-bottom w-100 position-absolute start-50 z-index-5 translate-middle"></span>
                                 </div>
                                 <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="POST" enctype="multipart/form-data">
-
                                     <?php
-
                                     if (isset($succses['succses'])) {
                                         echo '
                                         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -118,7 +102,6 @@ if (isset($_POST['submit'])) {
                                     </div>';
                                     }
                                     ?>
-
                                     <div class="mb-3">
                                         <label for="" class="form-label">Email</label>
                                         <input type="email" class="form-control" id="" name="user_email" placeholder="User Email">
@@ -132,7 +115,6 @@ if (isset($_POST['submit'])) {
                                     <input type="submit" name="submit" value="Send Email" class="btn btn-primary w-100 py-8 mb-4 rounded-2">
                                     <p class="text-center my-3">Have an acount? <a href="./login.php" style="text-decoration: none;">Login In</a>
                                     </p>
-
                                 </form>
                             </div>
                         </div>
@@ -141,22 +123,9 @@ if (isset($_POST['submit'])) {
             </div>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
     <!-- Bootstrap SJ -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
-
-
 </body>
 
 </html>

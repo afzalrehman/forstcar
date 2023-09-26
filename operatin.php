@@ -2,14 +2,14 @@
 include './config/config.php';
 require './function/function.inc.php';
 session_start();
+if (!isset($_SESSION['login']) && $_SESSION['login'] != true) {
+    header('location: login.php');
+    exit;
+}
 if (!isset($_SESSION['user_fullname'])) {
     echo "You are logged out";
     header('location:login.php');
 }
-
-
-
-
 include "./includes/header.php";
 include "./includes/serchform.php";
 include "./includes/navbar.php";
@@ -18,6 +18,7 @@ include "./includes/sidebar.php";
 <div class="container-fluid ">
     <div class="card  mt-5 py-5">
         <div class="row mx-3 ">
+        <h3 class="text-center">OPERATING INSTRUCTIONS</h3>
                 <div class="col-lg-6 mt-4">
                     <div class="card border-0 shadow pb-1 ">
                         <div class="box p-0">

@@ -1,6 +1,9 @@
 <?php
 session_start();
-
+if (!isset($_SESSION['login']) && $_SESSION['login'] != true) {
+    header('location: login.php');
+    exit;
+}
 require './function/function.inc.php';
 include "./includes/header.php";
 include "./includes/searchbar.php";
@@ -196,16 +199,13 @@ include "./includes/sidebar.php";
                                     <tr>
                                         <th>Action<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>S/no<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <!-- <th>Model<i class="fa-solid fa-arrow-down px-2"></i></th> -->
                                         <th>Company Name<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>Contact number<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>Address <i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>City <i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>State <i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <th>Zipe Code<i class="fa-solid fa-arrow-down px-2"></i>
-                                        </th>
-                                        <th>Tele Phone<i class="fa-solid fa-arrow-down px-2"></i>
-                                        </th>
+                                        <th>Zipe Code<i class="fa-solid fa-arrow-down px-2"></i></th>
+                                        <th>Tele Phone<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>Email<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>Direct <i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>Port Of Entry <i class="fa-solid fa-arrow-down px-2"></i></th>
@@ -230,9 +230,7 @@ include "./includes/sidebar.php";
 
                                     if (mysqli_num_rows($category) > 0) {
                                         $no = 1;
-                                        // while ($facth = mysqli_fetch_assoc($category))
                                         foreach ($category as $item) {
-                                            // $no = 1;
                                     ?>
                                             <tr>
                                                 <td>
@@ -241,7 +239,6 @@ include "./includes/sidebar.php";
                                                     <a href="edit_company.php?editid=<?= $item['importer_id'] ?>"><i class="fa-solid fa-pen-to-square text-success  fs-6"></i></a>
                                                 </td>
                                                 <td class="font"><?= $no++; ?></td>
-                                                <!-- <td class="searchable"><?= $item['model'] ?></td> -->
                                                 <td class="searchable"><?= $item['company_name'] ?></td>
                                                 <td><?= $item['company_contact'] ?></td>
                                                 <td><?= $item['company_address'] ?></td>

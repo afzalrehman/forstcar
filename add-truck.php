@@ -1,10 +1,13 @@
 <?php
-include './config/config.php';
 
-require './function/function.inc.php';
 session_start();
+if (!isset($_SESSION['login']) && $_SESSION['login'] != true) {
+    header('location: login.php');
+    exit;
+}
+include './config/config.php';
+require './function/function.inc.php';
 global $conn;
-
 include "./includes/header.php";
 include "./includes/serchform.php";
 include "./includes/navbar.php";
@@ -551,37 +554,6 @@ include "./includes/sidebar.php";
                                         <th>back_S_Image<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>left_S_Image<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>right_S_Image<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <!-- <th>Wheelbase<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <th>Vin #<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <th>Contact Name<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <th>Contact #<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <th>Frost Car unit Cost<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <th>FC Body<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <th>Body Weight<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <th>FC Model<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <th>Exterior Dimension<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <th>Compressor<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <th>Comp.Serial<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <th>Voltage<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <th>Sound Decibel<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <th>Current FLA<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <th>Refrigerant<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <th>Condenser<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <th>Solenoid<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <th>Condenser Fan<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <th>Interior Lights<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <th>Control Panel<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <th>Circuit Breaker<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <th>Electric Contactor<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <th>Part #<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <th>Eutectic Plate<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <th>Expansion Valve<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <th>Recovery Tank<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <th>Pressure Control<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <th>Sight Glass<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <th>Filter Drier<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <th>Thermostat<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                        <th>Misc<i class="fa-solid fa-arrow-down px-2"></i></th> -->
                                         <th>Added ON<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>Added BY<i class="fa-solid fa-arrow-down px-2"></i></th>
                                         <th>Updated ON<i class="fa-solid fa-arrow-down px-2"></i></th>
@@ -599,16 +571,6 @@ include "./includes/sidebar.php";
                                         $no = 1;
                                         // facth mysqli_fetch
                                         foreach ($category as $item) {
-
-
-                                            // $sql = "SELECT * FROM `unit_details`
-                                            // INNER JOIN `importer_details` ON unit_details.model = importer_details.model";
-
-                                            // $result = $conn->query($sql);
-                                            // $no = 1;
-                                            // if ($result->num_rows > 0) {
-                                            //     // Output data of each row
-                                            //     while ($item = $result->fetch_assoc()) {
                                     ?>
                                             <tr>
                                                 <td>
@@ -624,46 +586,11 @@ include "./includes/sidebar.php";
                                                 <td><img height="50" width="50" src="./media/car_images/<?= $item['back_S_Image']; ?>"></td>
                                                 <td><img height="50" width="50" src="./media/car_images/<?= $item['left_S_Image']; ?>"></td>
                                                 <td><img height="50" width="50" src="./media/car_images/<?= $item['right_S_Image']; ?>"></td>
-                                                <!-- <td><?= $item['wheelbase'] ?></td>
-                                                <td><?= $item['vin'] ?></td>
-                                                <td><?= $item['contact_Name'] ?></td>
-                                                <td><?= $item['contact_Num'] ?></td>
-                                                <td><?= $item['fc_Unit_Cost'] ?></td>
-                                                <td><?= $item['fc_Body'] ?></td>
-                                                <td><?= $item['body_Weight'] ?></td>
-                                                <td><?= $item['fc_Model'] ?></td>
-                                                <td><?= $item['exterior_Dimension'] ?></td>
-                                                <td><?= $item['compressor'] ?></td>
-                                                <td><?= $item['comp_Serial'] ?></td>
-                                                <td><?= $item['voltage'] ?></td>
-                                                <td><?= $item['sound_Decibel'] ?></td>
-                                                <td><?= $item['current_FLA'] ?></td>
-                                                <td><?= $item['refrigerant'] ?></td>
-                                                <td><?= $item['condenser'] ?></td>
-                                                <td><?= $item['solenoid'] ?></td>
-                                                <td><?= $item['condenser_Fan'] ?></td>
-                                                <td><?= $item['interior_Lights'] ?></td>
-                                                <td><?= $item['control_Panel'] ?></td>
-                                                <td><?= $item['circuit_Breaker'] ?></td>
-                                                <td><?= $item['electric_Contactor'] ?></td>
-                                                <td><?= $item['part'] ?></td>
-                                                <td><?= $item['eutectic_Plate'] ?></td>
-                                                <td><?= $item['expansion_Valve'] ?></td>
-                                                <td><?= $item['recovery_Tank'] ?></td>
-                                                <td><?= $item['pressure_Control'] ?></td>
-                                                <td><?= $item['sight_Glass'] ?></td>
-                                                <td><?= $item['filter_Drier'] ?></td>
-                                                <td><?= $item['thermostat'] ?></td>
-                                                <td><?= $item['misc'] ?></td> -->
-                                                <!-- <td class="text-center">
-                                                    <a href="vewimore.php?model=<?= $item['model'] ?>"><i class="fa-solid fa-eye text-primary   fs-6"></i></a>
-                                                </td> -->
                                                 <td><?= $item['added_on'] ?></td>
                                                 <td><?= $item['added_by'] ?></td>
                                                 <td><?= $item['updated_on'] ?></td>
                                                 <td><?= $item['updated_by'] ?></td>
                                             </tr>
-
                                     <?php  }
                                     } else {
                                         echo '
@@ -671,21 +598,13 @@ include "./includes/sidebar.php";
                                 <td class="text-danger">Data not found</td></tr>
                             ';
                                     } ?>
-
-
                                 </tbody>
-
                             </table>
                             <div id="no-data-message" class="text-danger" style="display: none; padding: 10px;">Data Not Found</div>
-
                         </div>
                     </div>
                 </div>
             </div>
-
-
-
-
         </div>
     </div>
 </div>

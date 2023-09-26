@@ -1,33 +1,19 @@
 <?php
-
 session_start();
 ob_start();
-
 require './config/config.php';
-
 global $conn;
 $emailError = false;
 $passError = false;
-
-// if (isset($_SESSION['login']) && $_SESSION['login'] == true) {
-//     header('location: index.php');
-//     exit;
-// }
-
 if (isset($_POST['submit'])) {
     $user_email = $_POST['user_email'];
     $user_password = $_POST['user_password'];
-
     $email_search = "SELECT * FROM admin_users WHERE user_email = '$user_email' AND is_verified = 'active' ";
     $query = mysqli_query($conn, $email_search);
-
     $email_count = mysqli_num_rows($query);
-
     if ($email_count) {
         $email_pass = mysqli_fetch_assoc($query);
-
         $db_pass = $email_pass['user_password'];
-
         $_SESSION['user_fullname'] = $email_pass['user_fullname'];
         $_SESSION['user_email'] = $email_pass['user_email'];
         $_SESSION['user_password'] = $email_pass['user_password'];
@@ -36,14 +22,11 @@ if (isset($_POST['submit'])) {
         $_SESSION['login'] = true;
         $pass_decode = password_verify($user_password, $db_pass);
         $_SESSION['user_pass'] = $pass_decode;
-
         if ($pass_decode) {
-
             if (isset($_POST['rememberme'])) {
                 
                 setcookie('emailcookie', $user_email, time() + 86400);
                 setcookie('passwordcookie', $user_password, time() + 86400);
-
                 header('location:index.php');
             } else {
                 header('location:index.php');
@@ -55,7 +38,6 @@ if (isset($_POST['submit'])) {
         $emailError = true;
     }
 }
-
 ?>
 
 
@@ -116,7 +98,6 @@ if (isset($_POST['submit'])) {
                                         ?>
                                     </p>
                                 </div>
-
                                 <?php
                                 if ($passError == true) {
                                     echo '
@@ -125,7 +106,6 @@ if (isset($_POST['submit'])) {
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                     </div>';
                                 }
-
                                 if ($emailError == true) {
                                     echo '
                                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -134,10 +114,7 @@ if (isset($_POST['submit'])) {
                                 </div>';
                                 }
                                 ?>
-
-
                                 <form action="" method="POST">
-
                                     <div class="mb-3">
                                         <label for="" class="form-label">Email</label>
                                         <input type="email" class="w-100 inputDesign" id="" name="user_email" placeholder="User Email" value="<?php
@@ -172,21 +149,9 @@ if (isset($_POST['submit'])) {
             </div>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
     <!-- Bootstrap SJ -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
-
 
 </body>
 

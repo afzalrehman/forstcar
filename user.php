@@ -1,17 +1,16 @@
 <?php
 session_start();
-
-global $conn;
-include 'config/config.php';
-
-
+if (!isset($_SESSION['login']) && $_SESSION['login'] != true) {
+    header('location: login.php');
+    exit;
+}
 if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] != "Admin") {
     header('location: index.php'); // Redirect to your login page if not logged in
     exit;
 }
-
+include 'config/config.php';
+global $conn;
 require './function/function.inc.php';
-
 include "./includes/header.php";
 include "./includes/serchform.php";
 include "./includes/navbar.php";
@@ -32,7 +31,6 @@ include "./includes/sidebar.php";
             <div class="row my-5 ">
                 <div class="col-lg-6">
                     <form action="user_code.php" method="POST" enctype="multipart/form-data">
-
                         <div class="in mb-3">
                             <label class="form-label fw-semibold">Full Name</label>
                             <input type="text" name="user_fullname" id="name" class=" inputDesign w-100 py-2" placeholder="Enter Your Full Name">
@@ -43,7 +41,6 @@ include "./includes/sidebar.php";
                             }
                             ?>
                         </div>
-
                         <div class="in mb-3">
                             <label class="form-label fw-semibold">Email</label>
                             <input type="email" name="user_email" id="name" class=" inputDesign w-100 py-2" placeholder="Enter Your Email">
@@ -54,11 +51,9 @@ include "./includes/sidebar.php";
                             }
                             ?>
                         </div>
-
                         <div class="in mb-3">
                             <label class="form-label fw-semibold">Password</label>
                             <input type="password" name="user_password" class=" inputDesign w-100 py-2" placeholder="Enter Your Password">
-
                             <?php if (isset($_SESSION['empty_user_password'])) {
                                 echo '
                                         <p class="text-danger">' . $_SESSION['empty_user_password'] . '</p>';
@@ -82,7 +77,6 @@ include "./includes/sidebar.php";
                         }
                         ?>
                     </div>
-
                     <div class="in mb-3">
                         <label class="form-label fw-semibold">Contact Number</label>
                         <input type="text" name="user_contact" id="name" class=" inputDesign w-100 py-2" placeholder="Enter Your Contact Number">
@@ -97,24 +91,14 @@ include "./includes/sidebar.php";
                     <div class="in">
                         <label class="form-label fw-semibold">Image</label>
                         <input type="file" name="user_image" id="image" class="inputDesign w-100 py-2">
-
                     </div>
-
                 </div>
-
-
                 <button type="submit" name="submit" class="save py-2">Save</button>
                 </form>
-
             </div>
         </div>
-
-
-
     </div>
 </div>
-
-
 <?php
 include "./includes/footer.php";
 

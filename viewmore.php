@@ -1,84 +1,20 @@
 <?php
-include './config/config.php';
-
-require './function/function.inc.php';
 session_start();
-
+if (!isset($_SESSION['login']) && $_SESSION['login'] != true) {
+    header('location: login.php');
+    exit;
+}
+include './config/config.php';
+require './function/function.inc.php';
 include "./includes/header.php";
+include "./includes/serchform.php";
 include "./includes/navbar.php";
 include "./includes/sidebar.php";
-
-// if (isset($_GET['model'])) {
-//     $model_num = $_GET['model'];
-//     $select_modal =  modal_chack("unit_details", "$model_num");
-//     if (mysqli_num_rows($select_modal) > 0) {
-//         $fach = mysqli_fetch_array($select_modal);
-
-//         $id = $fach['id'];
-//         $year = $fach['year'];
-//         $make = $fach['make'];
-//         $model = $fach['model'];
-//         $wheelbase = $fach['wheelbase'];
-//         $vin = $fach['vin'];
-//         $contact_Name = $fach['contact_Name'];
-//         $contact_Num = $fach['contact_Num'];
-//         $fc_Unit_Cost = $fach['fc_Unit_Cost'];
-//         $fc_Body = $fach['fc_Body'];
-//         $body_Weight = $fach['body_Weight'];
-//         $fc_Model = $fach['fc_Model'];
-//         $exterior_Dimension = $fach['exterior_Dimension'];
-//         $compressor = $fach['compressor'];
-//         $comp_Serial = $fach['comp_Serial'];
-//         $voltage = $fach['voltage'];
-//         $sound_Decibel = $fach['sound_Decibel'];
-//         $current_FLA = $fach['current_FLA'];
-//         $refrigerant = $fach['refrigerant'];
-//         $condenser = $fach['condenser'];
-//         $solenoid = $fach['solenoid'];
-//         $condenser_Fan = $fach['condenser_Fan'];
-//         $interior_Lights = $fach['interior_Lights'];
-//         $control_Panel = $fach['control_Panel'];
-//         $circuit_Breaker = $fach['circuit_Breaker'];
-//         $electric_Contactor = $fach['electric_Contactor'];
-//         $part = $fach['part'];
-//         $eutectic_Plate = $fach['eutectic_Plate'];
-//         $expansion_Valve = $fach['expansion_Valve'];
-//         $recovery_Tank = $fach['recovery_Tank'];
-//         $pressure_Control = $fach['pressure_Control'];
-//         $sight_Glass = $fach['sight_Glass'];
-//         $filter_Drier = $fach['filter_Drier'];
-//         $thermostat = $fach['thermostat'];
-//         $misc = $fach['misc'];
-//         $fron_image = $fach['front_S_Image'];
-//         $back_S_Image = $fach['back_S_Image'];
-//         $left_S_Image = $fach['left_S_Image'];
-//         $right_S_Image = $fach['right_S_Image'];
-//     }
-// } else {
-//     echo "Something Went Wrong";
-// }
-
 
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
-    // Query the "unit_details" database
-    // $select_modal = modal_chack("unit_details", "$company_name");
-    // $select_modal = "SELECT * FROM unit_details WHERE company_name = '$company_name'";
-    // $importer_result = mysqli_query($conn, $select_modal);
-
-    // if (mysqli_num_rows($importer_result) > 0) {
-    //     $fach = mysqli_fetch_array($importer_result);
-
-    //     // Now, query the "importer_details" database
-    //     $importer_query = "SELECT * FROM importer_details WHERE company_name = '$company_name'";
-    //     // $importer_query = modal_chack("importer_details", "$company_name");
-
-    //     $importer_result = mysqli_query($conn, $importer_query);
-
-    //     if (mysqli_num_rows($importer_result) > 0) {
-    //         $importer_data = mysqli_fetch_array($importer_result);
     $sql = "SELECT * FROM `unit_details`
     INNER JOIN `importer_details` ON unit_details.company_name = importer_details.company_name
     WHERE unit_details.id = $id";
@@ -136,7 +72,6 @@ if (isset($_GET['id'])) {
         $back_S_Image = $fach['back_S_Image'];
         $left_S_Image = $fach['left_S_Image'];
         $right_S_Image = $fach['right_S_Image'];
-
         // $importer_data for "importer_details" data
         $importer_id = $fach['importer_id'];
         $company_name = $fach['company_name'];

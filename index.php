@@ -1,6 +1,9 @@
 <?php
 session_start();
-
+if (!isset($_SESSION['login']) && $_SESSION['login'] != true) {
+    header('location: login.php');
+    exit;
+}
 include './config/config.php';
 require './function/function.inc.php';
 include "./includes/header.php";

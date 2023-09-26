@@ -1,8 +1,12 @@
 <?php
+session_start();
+if (!isset($_SESSION['login']) && $_SESSION['login'] != true) {
+    header('location: login.php');
+    exit;
+}
 include './config/config.php';
 
 require './function/function.inc.php';
-session_start();
 
 if (isset($_GET['editid']) && $_GET['editid'] != '') {
     $id = get_safe_value($conn, $_GET['editid']);
@@ -708,17 +712,8 @@ include "./includes/sidebar.php";
                                             ?>
                                         </div>
                                     </div>
-
-
                                     <button type="submit" name="submit" class="save py-2">Update</button>
-
-
-
                                 </div>
-                                <!-- End 2. Wakl-in/Rear-door Body -->
-
-
-
                             </div>
                         </form>
                     </div>

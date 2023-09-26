@@ -1,9 +1,12 @@
 <?php
+session_start();
+if (!isset($_SESSION['login']) && $_SESSION['login'] != true) {
+    header('location: login.php');
+    exit;
+}
 include 'config/config.php';
 
 require './function/function.inc.php';
-session_start();
-
 
 if (isset($_GET['editid']) && $_GET['editid'] != '') {
     $id = get_safe_value($conn, $_GET['editid']); // Use $_GET to get 'id' parameter
@@ -80,26 +83,15 @@ include "./includes/sidebar.php";
                             <button type="submit" name="update" class="btn btn-primary py-2">Update Profile</button>
                         </div>
                     </div>
-
                     <div class="col-lg-6">
-
-
                         <div class="in">
                             <label class="form-label fw-semibold">Image</label>
                             <input type="file" name="user_image" id="image" class="inputDesign w-100 py-2">
                         </div>
-                         
-                       
                     </div>
-
-
             </form>
-
         </div>
     </div>
-
-
-
 </div>
 </div>
 

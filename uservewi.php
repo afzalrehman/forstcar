@@ -1,36 +1,30 @@
 <?php
 session_start();
 global $conn;
-include './config/config.php';
+if (!isset($_SESSION['login']) && $_SESSION['login'] != true) {
+    header('location: login.php');
+    exit;
+}
 if ($_SESSION['user_type'] !== "Admin") {
     header("location:index.php");
 }
-
+include './config/config.php';
 require './function/function.inc.php';
-
 include "./includes/header.php";
 include "./includes/searchbar.php";
 include "./includes/navbar.php";
 include "./includes/sidebar.php";
-
-
-
 ?>
 <div class="container-fluid">
     <div class="row my-5">
-
-
-
         <div class="col-lg-12 ">
             <div class="card">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 text-start py-3 px-4">
                         <p class="font student"> User Vewi Details</p>
                     </div>
-
                 </div>
                 <hr class="m-0 ">
-
                 <div class="dov ">
                     <div class="table-wrapper">
                         <table class="contain-table">
@@ -49,18 +43,14 @@ include "./includes/sidebar.php";
                                     <th>Updated By<i class="fa-solid fa-arrow-down px-2"></i></th>
                                     <th>Updated On<i class="fa-solid fa-arrow-down px-2"></i></th>
                                     <th>Is Verified<i class="fa-solid fa-arrow-down px-2"></i></th>
-
-
                                 </tr>
                             </thead>
-
                             <tbody id="data-table">
                                 <!-- ==============select qurey============ -->
                                 <?php
                                 $select = "SELECT * FROM `admin_users`";
                                 $result = mysqli_query($conn, $select);
                                 if ($res_num = mysqli_num_rows($result) > 0){
-
                                 $no = 1;
                                 while ($row = mysqli_fetch_assoc($result)) {
                                 ?>
@@ -70,7 +60,6 @@ include "./includes/sidebar.php";
                                             echo "<a href='user_code.php?deleteid=" . $row['user_id'] . "'><i class='fa-regular fa-trash-can text-danger me-1 fs-6'></i></a>";
                                             ?>
                                             <a href="edit_user.php?editid=<?= $row['user_id'] ?>" name="edit"><i class="fa-solid fa-pen-to-square text-success  fs-6"></i></a>
-
                                         </td>
                                         <td class="font"><?php echo $no; ?></td>
                                         <td><?php echo $row['user_fullname']; ?></td>
@@ -85,11 +74,9 @@ include "./includes/sidebar.php";
                                         <td><?php echo $row['updated_on']; ?></td>
                                         <td><?php echo $row['is_verified']; ?></td>
                                     </tr>
-
                                 <?php
                                     $no = $no + 1;
                                 }
-                           
                                 }
                                 else{
                                     echo '
@@ -101,8 +88,6 @@ include "./includes/sidebar.php";
                             </tbody>
                         </table>
                         <div id="no-data-message" class="text-danger" style="display: none; padding: 10px;">Data Not Found</div>
-
-
                     </div>
                 </div>
             </div>

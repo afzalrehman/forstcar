@@ -1,21 +1,20 @@
 <?php
 session_start();
-include 'config/config.php';
-require './function/function.inc.php';
+if (!isset($_SESSION['login']) && $_SESSION['login'] != true) {
+    header('location: login.php');
+    exit;
+}
 if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] != "Admin") {
     header('location: index.php');
     exit;
 }
-
-
-
+include 'config/config.php';
+require './function/function.inc.php';
 global $conn;
 $name = '';
 $user_email = '';
 $user_type = '';
 $user_contact = '';
-
-
 if (isset($_GET['editid']) && $_GET['editid'] != '') {
     $id = get_safe_value($conn, $_GET['editid']); // Use $_GET to get 'id' parameter
     $res = mysqli_query($conn, "SELECT * FROM `admin_users` WHERE user_id = '$id'");
@@ -31,8 +30,6 @@ if (isset($_GET['editid']) && $_GET['editid'] != '') {
         exit();
     }
 }
-
-
 
 // ===================   Update Querry   =====================
 if (isset($_POST['update'])) {
@@ -165,8 +162,6 @@ include "./includes/sidebar.php";
                         </div>
                 </div>
                 <div class="col-lg-6">
-
-
                     <div class="in mb-3">
                         <label class="form-label fw-semibold">Contact Number</label>
                         <input type="text" name="user_contact" id="name" class=" inputDesign w-100 py-2" placeholder="Enter Your Contact Number" value="<?php if (isset($_GET['editid'])) {
@@ -182,30 +177,14 @@ include "./includes/sidebar.php";
                     <div class="in">
                         <label class="form-label fw-semibold">Image</label>
                         <input type="file" name="user_image" id="image" class="inputDesign w-100 py-2">
-                        <?php 
-                        // if (isset($_SESSION['empty_make'])) {
-                        //     echo '
-                        //                 <p class="text-danger">' . $_SESSION['empty_make'] . '</p>';
-                        //     unset($_SESSION['empty_make']);
-                        // }
-
-                        ?>
                     </div>
-
                 </div>
-
-
                 <button type="submit" name="update" class="save py-2">Save</button>
                 </form>
-
             </div>
         </div>
-
-
-
     </div>
 </div>
-
 <?php
 include "./includes/footer.php";
 
