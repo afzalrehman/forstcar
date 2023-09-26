@@ -46,7 +46,6 @@ include "./includes/sidebar.php";
                                     <th>Wheelbase<i class="fa-solid fa-arrow-down px-2"></i></th>
                                     <th>Vin #<i class="fa-solid fa-arrow-down px-2"></i></th>
                                     <th>Contact Name<i class="fa-solid fa-arrow-down px-2"></i></th>
-                                    <th>Contact #<i class="fa-solid fa-arrow-down px-2"></i></th>
                                     <!-- <th>Frost Car unit Cost<i class="fa-solid fa-arrow-down px-2"></i></th>
                                     <th>FC Body<i class="fa-solid fa-arrow-down px-2"></i></th>
                                     <th>Body Weight<i class="fa-solid fa-arrow-down px-2"></i></th> -->
@@ -112,7 +111,6 @@ include "./includes/sidebar.php";
                                             <td><?= $item['year'] ?></td>
                                             <td><?= $item['company_name'] ?></td>
                                             <td><?= $item['make'] ?></td>
-                                            <td class="searchable"><?= $item['company_name'] ?></td>
                                             <td class="searchable"><?= $item['model'] ?></td>
                                             <!-- <td><img height="50" width="50" src="./media/car_images/ echo  $item['front_S_Image']; ?>"></td>
                                             <td><img height="50" width="50" src="./media/car_images/ echo  $item['back_S_Image']; ?>"></td>
