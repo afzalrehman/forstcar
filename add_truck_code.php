@@ -6,7 +6,7 @@ include "./config/config.php";
 
 if (isset($_POST['add_truck_btn'])) {
     $make = get_safe_value($conn, $_POST['make']);
-    $company_name = get_safe_value($conn, $_POST['company_name']);
+    $company_name = mysqli_real_escape_string($conn, $_POST['company_name']);
     $model = get_safe_value($conn, $_POST['model']);
     $wheelbase = get_safe_value($conn, $_POST['wheelbase']);
     $vin = get_safe_value($conn, $_POST['vin']);

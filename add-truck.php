@@ -46,7 +46,7 @@ include "./includes/sidebar.php";
                                                 <?php
                                                 $res = mysqli_query($conn, "SELECT importer_id,company_name FROM importer_details ORDER BY company_name DESC");
                                                 while ($row = mysqli_fetch_assoc($res)) {
-                                                    echo "<option value=" . $row['company_name'] . ">" . $row['company_name'] . "</option>";
+                                                    echo '<option value="' . htmlspecialchars($row['company_name']) . '">' . htmlspecialchars($row['company_name']) . '</option>';
                                                 }
                                                 ?>
 
