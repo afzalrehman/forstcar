@@ -9,10 +9,10 @@ global $conn;
 $emailError = false;
 $passError = false;
 
-// if (isset($_SESSION['login']) && $_SESSION['login'] == true) {
-//     header('location: index.php');
-//     exit;
-// }
+if (isset($_SESSION['login']) && $_SESSION['login'] == true) {
+    header('location: index.php');
+    exit;
+}
 
 if (isset($_POST['submit'])) {
     $user_email = $_POST['user_email'];
