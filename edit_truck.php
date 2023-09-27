@@ -15,6 +15,7 @@ if (isset($_GET['editid']) && $_GET['editid'] != '') {
     if ($check > 0) {
         $row = mysqli_fetch_assoc($res);
         $company_name = $row['company_name'];
+        $year = $row['year'];
         $make = $row['make'];
         $model = $row['model'];
         $wheelbase = $row['wheelbase'];
@@ -69,6 +70,7 @@ if (isset($_GET['editid']) && $_GET['editid'] != '') {
 // ===================   Update Querry   =====================
 if (isset($_POST['submit'])) {
     $company_name = get_safe_value($conn, $_POST['company_name']);
+    $year = get_safe_value($conn, $_POST['year']);
     $make = get_safe_value($conn, $_POST['make']);
     $model = get_safe_value($conn, $_POST['model']);
     $wheelbase = get_safe_value($conn, $_POST['wheelbase']);
@@ -110,10 +112,13 @@ if (isset($_POST['submit'])) {
     $other = get_safe_value($conn, $_POST['other']);
 
     if (
-        empty($model) || empty($company_name)
+        empty($model) || empty($company_name)|| empty($year)
     ) {
         if (empty($model)) {
             $_SESSION['empty_model'] = "Please fill in the model.";
+        }
+        if (empty($year)) {
+            $_SESSION['empty_year'] = "Please fill in the Year.";
         }
         if (empty($company_name)) {
             $_SESSION['empty_company_name'] = "Please fill in the Company Name.";
@@ -165,7 +170,7 @@ if (isset($_POST['submit'])) {
                     move_uploaded_file($_FILES['right_S_Image']['tmp_name'], 'media/car_images/' . $right_S_Image);
                 }
                 // Construct the SQL query
-                $update_sql = "UPDATE `unit_details` SET `year` = NOW(),`company_name` = '$company_name', `make` = '$make', `model` = '$model', `wheelbase` = '$wheelbase', `vin` = '$vin', `contact_Name` = '$contact_Name',
+                $update_sql = "UPDATE `unit_details` SET `year` = '$year',`company_name` = '$company_name', `make` = '$make', `model` = '$model', `wheelbase` = '$wheelbase', `vin` = '$vin', `contact_Name` = '$contact_Name',
             `contact_Num` = '$contact_Num', `fc_Unit_Cost` = '$fc_Unit_Cost', `fc_Body` = '$fc_Body', `body_Weight` = '$body_Weight', `fc_Model` = '$fc_Model',
             `exterior_Dimension` = '$exterior_Dimension', `compressor` = '$compressor', `comp_Serial` = '$comp_Serial', `voltage` = '$voltage',
             `sound_Decibel` = '$sound_Decibel', `current_FLA` = '$current_FLA', `refrigerant` = '$refrigerant', `condenser` = '$condenser', `solenoid` = '$solenoid',
@@ -253,6 +258,17 @@ include "./includes/sidebar.php";
                                                 echo '
                                                 <p class="text-danger">' . $_SESSION['empty_company_name'] . '</p>';
                                                 unset($_SESSION['empty_company_name']);
+                                            }
+                                            ?>
+                                        </div>
+
+                                        <div class="mb-2">
+                                            <label for="year" class="form-label fw-semibold">Year</label>
+                                            <input type="date" class="form-control" id="year" name="year"  value="<?php echo $year; ?>">
+                                            <?php if (isset($_SESSION['empty_year'])) {
+                                                echo '
+                                        <p class="text-danger">' . $_SESSION['empty_year'] . '</p>';
+                                                unset($_SESSION['empty_year']);
                                             }
                                             ?>
                                         </div>

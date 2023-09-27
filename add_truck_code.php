@@ -10,6 +10,7 @@ include "./config/config.php";
 
 
 if (isset($_POST['add_truck_btn'])) {
+    $year = get_safe_value($conn, $_POST['year']);
     $make = get_safe_value($conn, $_POST['make']);
     $company_name = mysqli_real_escape_string($conn, $_POST['company_name']);
     $model = get_safe_value($conn, $_POST['model']);
@@ -52,8 +53,11 @@ if (isset($_POST['add_truck_btn'])) {
     $other = get_safe_value($conn, $_POST['other']);
 
     if (
-        empty($model) || empty($company_name)
+        empty($model) || empty($company_name )|| empty($year)
     ) {
+        if (empty($year)) {
+            $_SESSION['empty_model'] = "Please fill in the model.";
+        }
         if (empty($model)) {
             $_SESSION['empty_model'] = "Please fill in the model.";
         }
@@ -88,7 +92,7 @@ if (isset($_POST['add_truck_btn'])) {
         `part`, `eutectic_Plate`, `expansion_Valve`, `recovery_Tank`, `pressure_Control`, `sight_Glass`, `filter_Drier`, `thermostat`, `misc`, `front_S_Image`, 
         `back_S_Image`, `left_S_Image`, `right_S_Image`, `air_Curtains`, `back_Camera`, `body_Graphic_Warp`, `add_Unit_Carrier`, `hand_Truck_Stand`, `other`, 
         `added_on`, `added_by`)
-        VALUES (NOW(), '$company_name', '$make', '$model', '$wheelbase', '$vin', '$contact_Name', '$contact_Num', 
+        VALUES ('$year', '$company_name', '$make', '$model', '$wheelbase', '$vin', '$contact_Name', '$contact_Num', 
         '$fc_Unit_Cost', '$fc_Body', '$body_Weight', '$fc_Model', '$exterior_Dimension', '$compressor', '$comp_Serial',
         '$voltage', '$sound_Decibel', '$current_FLA', '$refrigerant', '$condenser', '$solenoid', '$condenser_Fan', '$interior_Lights', 
         '$control_Panel', '$circuit_Breaker', '$electric_Contactor', '$part', '$eutectic_Plate', '$expansion_Valve', '$recovery_Tank',

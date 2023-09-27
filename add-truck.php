@@ -28,20 +28,7 @@ include "./includes/sidebar.php";
 
                                     <div class="col-lg-6">
 
-                                        <div class="mb-2">
-                                            <label for="make" class="form-label fw-semibold">Make</label>
-                                            <input type="text" class="w-100 inputDesign" id="make" name="make" placeholder="make" value="<?php
-                                                                                                                                            if (isset($_POST['add_truck_btn'])) {
-                                                                                                                                                echo $make;
-                                                                                                                                            }
-                                                                                                                                            unset($make); ?>">
-                                            <?php if (isset($_SESSION['empty_make'])) {
-                                                echo '
-                                        <p class="text-danger">' . $_SESSION['empty_make'] . '</p>';
-                                                unset($_SESSION['empty_make']);
-                                            }
-                                            ?>
-                                        </div>
+                                  
                                         <div class="mb-2">
                                             <label for="company_name" class="form-label fw-semibold">Company Name</label>
                                             <select class="w-100 inputDesign" name="company_name" id="company_name">
@@ -61,6 +48,22 @@ include "./includes/sidebar.php";
                                             }
                                             ?>
                                         </div>
+                                        <div class="mb-2">
+                                            <label for="make" class="form-label fw-semibold">Make</label>
+                                            <input type="text" class="w-100 inputDesign" id="make" name="make" placeholder="make" value="<?php
+                                                                                                                                            if (isset($_POST['add_truck_btn'])) {
+                                                                                                                                                echo $make;
+                                                                                                                                            }
+                                                                                                                                            unset($make); ?>">
+                                            <?php if (isset($_SESSION['empty_make'])) {
+                                                echo '
+                                        <p class="text-danger">' . $_SESSION['empty_make'] . '</p>';
+                                                unset($_SESSION['empty_make']);
+                                            }
+                                            ?>
+                                        </div>
+
+
 
                                         <div class="mb-2">
                                             <label for="model" class="form-label fw-semibold">Model</label>
@@ -249,6 +252,16 @@ include "./includes/sidebar.php";
                                     </div>
 
                                     <div class="col-lg-6">
+                                        <div class="mb-2">
+                                            <label for="year" class="form-label fw-semibold">Year</label>
+                                            <input type="date" class="form-control" id="year" name="year" value="<?php echo $year; ?>">
+                                            <?php if (isset($_SESSION['empty_year'])) {
+                                                echo '
+                                        <p class="text-danger">' . $_SESSION['empty_year'] . '</p>';
+                                                unset($_SESSION['empty_year']);
+                                            }
+                                            ?>
+                                        </div>
 
                                         <div class="mb-2">
                                             <label for="condenser" class="form-label fw-semibold">Condenser</label>
