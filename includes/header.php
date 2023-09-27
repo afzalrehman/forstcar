@@ -8,12 +8,9 @@ if (!isset($_SESSION['login']) && $_SESSION['login'] != true) {
     header('location: login.php');
     exit;
 }
-// if (isset($_SESSION['login']) && $_SESSION['login'] == true) {
-//     header('location:index.php');
-//     exit;
-// } else {
-//     header('location:login.php');
-// }
+
+
+
 
 ?>
 
